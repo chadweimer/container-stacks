@@ -1,0 +1,70 @@
+name: traefik
+networks:
+  default:
+    name: traefik-internal
+  traefik:
+    external: True
+services:
+  docker-proxy:
+    environment:
+      CONTAINERS: '1'
+      NETWORKS: '1'
+    image: lscr.io/linuxserver/socket-proxy:latest
+    networks:
+      - default
+    pull_policy: always
+    read_only: True
+    restart: unless-stopped
+    tmpfs:
+      - /run
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  traefik:
+    command:
+      # - '--log.level=DEBUG'
+      - '--api.insecure=true'
+      - '--metrics.prometheus=true'
+      - '--providers.docker=true'
+      - '--providers.docker.endpoint=tcp://docker-proxy:2375'
+      - '--providers.docker.network=traefik'
+      - '--providers.docker.exposedbydefault=false'
+      - '--providers.file.directory=/app'
+      - '--providers.file.watch=true'
+      - '--entryPoints.web.address=:80'
+      - '--entryPoints.websecure.address=:443'
+      - '--certificatesresolvers.myresolver.acme.dnschallenge=true'
+      - '--certificatesresolvers.myresolver.acme.dnschallenge.provider=${DNS_PROVIDER}'
+      - '--certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53'
+      - '--certificatesresolvers.myresolver.acme.email=${EMAIL_ADDRESS}'
+      - '--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json'
+      - '--serverstransport.insecureskipverify=true'
+    container_name: traefik
+    depends_on:
+      - docker-proxy
+    environment:
+      CF_DNS_API_TOKEN: ${API_TOKEN}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    image: traefik:v3
+    labels:
+      homepage.group: Network
+      homepage.href: http://${IP_ADDRESS}:8080
+      homepage.icon: traefik.png
+      homepage.name: Traefik
+      homepage.widget.type: traefik
+      homepage.widget.url: http://host.docker.internal:8080
+      prometheus.label.instance: truenas-server
+      prometheus.port: 8080
+      prometheus.scrape: True
+    networks:
+      - default
+      - traefik
+    ports:
+      - '80:80'
+      - '443:443'
+      - '8080:8080'
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/traefik/config:/app
+      - /mnt/pool0/apps/traefik/le:/letsencrypt
