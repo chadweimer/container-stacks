@@ -1,0 +1,41 @@
+name: homepage
+networks:
+  default:
+    name: homepage
+  traefik:
+    external: True
+services:
+  homepage:
+    container_name: homepage
+    depends_on:
+      - docker-proxy
+    environment:
+      PGID: 568
+      PUID: 568
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    image: ghcr.io/gethomepage/homepage:latest
+    labels:
+      traefik.enable: true
+      traefik.http.routers.homepage.rule: Host(`${HOST}`)
+      traefik.http.routers.homepage.tls.certresolver: myresolver
+    networks:
+      - default
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/homepage:/app/config
+  docker-proxy:
+    environment:
+      CONTAINERS: '1'
+    image: lscr.io/linuxserver/socket-proxy:latest
+    networks:
+      - default
+    pull_policy: always
+    read_only: True
+    restart: unless-stopped
+    tmpfs:
+      - /run
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
