@@ -1,0 +1,24 @@
+name: vaultwarden
+networks:
+  traefik:
+    external: True
+services:
+  vaultwarden:
+    container_name: vaultwarden
+    environment:
+      DOMAIN: https://${HOST}
+    image: vaultwarden/server:1.32.5
+    labels:
+      homepage.group: Other
+      homepage.name: Bitwarden
+      homepage.href: https://${HOST}
+      homepage.icon: bitwarden.png
+      traefik.enable: true
+      traefik.http.routers.vaultwarden.rule: Host(`${HOST}`)
+      traefik.http.routers.vaultwarden.tls.certresolver: myresolver
+    networks:
+      - traefik
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/pool0/apps/vault:/data
