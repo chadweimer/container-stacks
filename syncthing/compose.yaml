@@ -1,0 +1,44 @@
+name: syncthing
+networks:
+  traefik:
+    external: True
+services:
+  syncthing:
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETFCAP
+      - SETGID
+      - SETPCAP
+      - SETUID
+      - SYS_ADMIN
+    container_name: syncthing
+    environment:
+      PGID: '1000'
+      PUID: '1000'
+      STNOUPGRADE: 'true'
+    image: syncthing/syncthing:1
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST}
+      homepage.icon: syncthing.png
+      homepage.name: Syncthing
+      homepage.showStats: 'true'
+      prometheus.label.instance: truenas-server
+      prometheus.port: 8384
+      prometheus.scrape: True
+      traefik.enable: True
+      traefik.http.routers.syncthing.rule: Host(`${HOST}`)
+      traefik.http.routers.syncthing.tls.certresolver: myresolver
+    networks:
+      - traefik
+    ports:
+      - 20978:22000/tcp
+      - 20979:22000/udp
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/backups:/mnt/backups
+      - /mnt/pool0/tmp:/mnt/tmp
+      - /mnt/pool0/apps/syncthing:/var/syncthing
