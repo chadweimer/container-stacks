@@ -1,0 +1,29 @@
+name: filebrowser
+networks:
+  traefik:
+    external: True
+services:
+  filebrowser:
+    container_name: filebrowser
+    environment:
+      FB_DATABASE: /app/filebrowser.db
+      FB_CONFIG: /app/filebrowser.json
+    image: filebrowser/filebrowser:latest
+    labels:
+      homepage.group: Network
+      homepage.name: Files
+      homepage.href: https://${HOST}
+      homepage.icon: filebrowser.png
+      homepage.showStats: true
+      traefik.enable: true
+      traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
+      traefik.http.routers.filebrowser.tls.certresolver: myresolver
+    networks:
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    user: "568:568"
+    volumes:
+      - /mnt/pool0/apps/filebrowser:/app
+      - /mnt/pool0:/srv/pool0
+      - /mnt/pool1:/srv/pool1
