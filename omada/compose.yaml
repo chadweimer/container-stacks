@@ -1,0 +1,39 @@
+name: omada
+services:
+  omada:
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - SETGID
+      - SETUID
+    container_name: omada
+    environment:
+      MANAGE_HTTPS_PORT: '30077'
+      MANAGE_HTTP_PORT: '30076'
+      PGID: '568'
+      PORTAL_HTTPS_PORT: '30079'
+      PORTAL_HTTP_PORT: '30078'
+      PUID: '568'
+      TZ: America/Los_Angeles
+    image: mbentley/omada-controller:5.15
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST}
+      homepage.icon: omada.png
+      homepage.name: Omada Controller
+      homepage.widget.password: ${PASSWORD}
+      homepage.widget.site: Home
+      homepage.widget.type: omada
+      homepage.widget.url: https://host.docker.internal:30077
+      homepage.widget.username: ${USERNAME}
+      traefik.enable: True
+      traefik.http.routers.omada.rule: Host(`${HOST}`)
+      traefik.http.routers.omada.tls.certresolver: myresolver
+      traefik.http.services.omada.loadbalancer.server.port: 30077
+      traefik.http.services.omada.loadbalancer.server.scheme: https
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/omada/data:/opt/tplink/EAPController/data
+      - /mnt/pool0/apps/omada/config:/opt/tplink/EAPController/logs
