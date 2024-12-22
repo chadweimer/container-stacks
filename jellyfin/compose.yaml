@@ -1,0 +1,36 @@
+name: jellyfin
+networks:
+  traefik:
+    external: True
+services:
+  jellyfin:
+    container_name: jellyfin
+    environment:
+      JELLYFIN_PublishedServerUrl: https://${HOST}
+      TZ: America/Los_Angeles
+    image: jellyfin/jellyfin:latest
+    labels:
+      homepage.group: Media
+      homepage.name: Jellyfin
+      homepage.href: https://${HOST}
+      homepage.icon: jellyfin.png
+      homepage.widget.type: jellyfin
+      homepage.widget.url: http://jellyfin:8096
+      homepage.widget.key: ${API_KEY}
+      homepage.widget.enableBlocks: true
+      homepage.widget.enableNowPlaying: false
+      traefik.enable: true
+      traefik.http.routers.jellyfin.rule: Host(`${HOST}`)
+      traefik.http.routers.jellyfin.tls.certresolver: myresolver
+    networks:
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    user: "568:568"
+    volumes:
+      - /mnt/pool1/media/fitness:/media-fitness
+      - /mnt/pool1/media/movies:/media-movies
+      - /mnt/pool1/media/pictures:/media-pictures
+      - /mnt/pool1/media/shows:/media-shows
+      - /mnt/pool0/apps/jellyfin/cache:/cache
+      - /mnt/pool0/apps/jellyfin:/config
