@@ -15,9 +15,9 @@ services:
       IS_DEVELOPMENT: 1
     image: ghcr.io/chadweimer/gomp:${IMAGE_TAG}
     labels:
-      traefik.enable: true
-      traefik.http.routers.wineandcats-${STAGE}.rule: Host(`${HOST}`)
-      traefik.http.routers.wineandcats-${STAGE}.tls.certresolver: myresolver
+      - traefik.enable=true
+      - traefik.http.routers.wineandcats-${STAGE}.rule=Host(`${HOST}`)
+      - traefik.http.routers.wineandcats-${STAGE}.tls.certresolver=myresolver
     networks:
       - default
       - traefik
