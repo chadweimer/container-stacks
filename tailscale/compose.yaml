@@ -18,7 +18,7 @@ services:
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: 'false'
       TZ: America/Los_Angeles
-    image: tailscale/tailscale:latest
+    image: ghcr.io/tailscale/tailscale:latest
     labels:
       homepage.group: Network
       homepage.href: https://login.tailscale.com
