@@ -548,6 +548,50 @@
                     "description": "The Cloudflare Tunnel Token to use for the tunnel connection."
                 }
             ]
+        },
+        {
+            "id": 17,
+            "type": 3,
+            "title": "Tailscale",
+            "description": "Tailscale daemon",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "tailscale/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOSTNAME",
+                    "label": "Hostname",
+                    "description": "The hostname to use with Tailscale."
+                },
+                {
+                    "name": "TS_AUTHKEY",
+                    "label": "Auth Key",
+                    "description": "The tailscale auth key to authenticate the node."
+                },
+                {
+                    "name": "TS_EXTRA_ARGS",
+                    "label": "Cloudflare Tunnel ID",
+                    "description": "The Cloudflare Tunnel ID to use for the homepage widget.",
+                    "default": "--advertise-exit-node --advertise-routes=192.168.0.0/16"
+                },
+                {
+                    "name": "DEVIDE_ID",
+                    "label": "Devide ID",
+                    "description": "The ID of this device in tailscale to use for the homepage widget. Must be filled in after initial provisioning.",
+                    "default": "ChangeMe",
+                    "preset": true
+                },
+                {
+                    "name": "API_ACCESS_TOKEN",
+                    "label": "Access Token",
+                    "description": "The tailscale access token to use for the homepage widget."
+                }
+            ]
         }
     ]
 }

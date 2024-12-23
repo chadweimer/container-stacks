@@ -1,0 +1,36 @@
+services:
+  tailscale:
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_MODULE
+    container_name: tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      TS_AUTHKEY: ${TS_AUTHKEY}
+      TS_AUTH_ONCE: 'true'
+      TS_EXTRA_ARGS: '${TS_EXTRA_ARGS}'
+      TS_HOSTNAME: ${HOSTNAME}
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: 'false'
+      TZ: America/Los_Angeles
+    image: tailscale/tailscale:latest
+    labels:
+      homepage.group: Network
+      homepage.href: https://login.tailscale.com
+      homepage.icon: tailscale.png
+      homepage.name: Tailscale
+      homepage.widget.deviceid: ${DEVIDE_ID}
+      homepage.widget.key: ${API_ACCESS_TOKEN}
+      homepage.widget.type: tailscale
+    network_mode: host
+    pull_policy: always
+    restart: unless-stopped
+    tmpfs:
+      - /var/run/tailscale:mode=755
+    volumes:
+      - /mnt/pool0/apps/tailscale:/var/lib/tailscale
