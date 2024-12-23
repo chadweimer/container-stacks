@@ -73,6 +73,82 @@
                     "description": "The password to use for the homepage widget for this app."
                 }
             ]
+        },
+        {
+            "id": 4,
+            "type": 3,
+            "title": "*Arrs",
+            "description": "A collection of *arr applications",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "arrs/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "BAZARR_HOST",
+                    "label": "Bazarr Host Address",
+                    "description": "The host address (domain) to expose Bazarr."
+                },
+                {
+                    "name": "BAZARR_API_KEY",
+                    "label": "Bazarr API Key",
+                    "description": "The API key to use for the homepage widget for Bazarr."
+                },
+                {
+                    "name": "JELLYSEERR_HOST",
+                    "label": "Jellyseerr Host Address",
+                    "description": "The host address (domain) to expose Jellyseerr."
+                },
+                {
+                    "name": "JELLYSEERR_API_KEY",
+                    "label": "Jellyseerr API Key",
+                    "description": "The API key to use for the homepage widget for Jellyseerr."
+                },
+                {
+                    "name": "PROWLARR_HOST",
+                    "label": "Prowlarr Host Address",
+                    "description": "The host address (domain) to expose Prowlarr."
+                },
+                {
+                    "name": "PROWLARR_API_KEY",
+                    "label": "Prowlarr API Key",
+                    "description": "The API key to use for the homepage widget for Prowlarr."
+                },
+                {
+                    "name": "RADARR_HOST",
+                    "label": "Radarr Host Address",
+                    "description": "The host address (domain) to expose Radarr."
+                },
+                {
+                    "name": "RADARR_API_KEY",
+                    "label": "Radarr API Key",
+                    "description": "The API key to use for the homepage widget for Radarr."
+                },
+                {
+                    "name": "READARR_HOST",
+                    "label": "Readarr Host Address",
+                    "description": "The host address (domain) to expose Readarr."
+                },
+                {
+                    "name": "READARR_API_KEY",
+                    "label": "Readarr API Key",
+                    "description": "The API key to use for the homepage widget for Readarr."
+                },
+                {
+                    "name": "SONARR_HOST",
+                    "label": "Sonarr Host Address",
+                    "description": "The host address (domain) to expose Sonarr."
+                },
+                {
+                    "name": "SONARR_API_KEY",
+                    "label": "Sonarr API Key",
+                    "description": "The API key to use for the homepage widget for Sonarr."
+                }
+            ]
         }
     ]
 }
