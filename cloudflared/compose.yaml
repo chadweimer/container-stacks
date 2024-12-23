@@ -1,0 +1,24 @@
+services:
+  cloudflared:
+    command:
+      - tunnel
+      - '--no-autoupdate'
+      - run
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN}
+    healthcheck:
+      disable: true
+    image: cloudflare/cloudflared:latest
+    labels:
+      homepage.group: Network
+      homepage.href: https://one.dash.cloudflare.com
+      homepage.icon: cloudflare.png
+      homepage.name: Cloudflare Tunnel
+      homepage.widget.accountid: ${ACCOUNT_ID}
+      homepage.widget.key: ${API_TOKEN}
+      homepage.widget.tunnelid: ${TUNNEL_ID}
+      homepage.widget.type: cloudflared
+    network_mode: host
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'

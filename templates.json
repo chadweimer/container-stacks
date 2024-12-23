@@ -512,6 +512,42 @@
                     "description": "The secure key to use (e.g., for JWT signing)."
                 }
             ]
+        },
+        {
+            "id": 16,
+            "type": 3,
+            "title": "Cloudflared",
+            "description": "Cloudflare Tunnel daemon",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "cloudflared/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "ACCOUNT_ID",
+                    "label": "Cloudflare Account ID",
+                    "description": "The Cloudflare Zero Trust Account ID to use for the homepage widget."
+                },
+                {
+                    "name": "API_TOKEN",
+                    "label": "Cloudflare API Token",
+                    "description": "The Cloudflare Zero Trust API Token to use for the homepage widget."
+                },
+                {
+                    "name": "TUNNEL_ID",
+                    "label": "Cloudflare Tunnel ID",
+                    "description": "The Cloudflare Tunnel ID to use for the homepage widget."
+                },
+                {
+                    "name": "TUNNEL_TOKEN",
+                    "label": "Cloudflare Tunnel Token",
+                    "description": "The Cloudflare Tunnel Token to use for the tunnel connection."
+                }
+            ]
         }
     ]
 }
