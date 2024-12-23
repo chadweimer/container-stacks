@@ -4,6 +4,7 @@ services:
       - tunnel
       - '--no-autoupdate'
       - run
+    container_name: cloudflared
     environment:
       TUNNEL_TOKEN: ${TUNNEL_TOKEN}
     healthcheck:
