@@ -1,0 +1,26 @@
+{
+    "version": "2",
+    "templates": [
+        {
+            "type": 3,
+            "title": "File Browser",
+            "description": "Web File Browser",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "filebrowser/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application.",
+                    "default": "filebrowser.example.com"
+                }
+            ]
+        }
+    ]
+}
