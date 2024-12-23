@@ -38,7 +38,7 @@ services:
     image: fallenbagel/jellyseerr:latest
     labels:
       homepage.group: Media
-      homepage.name: Jellyseerr
+      homepage.name: Jellyseerr (Requests)
       homepage.href: https://${JELLYSEERR_HOST}
       homepage.icon: jellyseerr.png
       homepage.widget.type: jellyseerr
