@@ -284,8 +284,8 @@
                 },
                 {
                     "name": "OMADA_HOST",
-                    "label": "Omada Controller Host",
-                    "description": "The host address of the Omada Controller, for scraping."
+                    "label": "Omada Controller URL",
+                    "description": "The url of the Omada Controller, including scheme, for scraping."
                 },
                 {
                     "name": "OMADA_USER",
