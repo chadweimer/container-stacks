@@ -1,0 +1,159 @@
+name: arrs
+networks:
+  traefik:
+    external: True
+services:
+  bazarr:
+    container_name: bazarr
+    environment:
+      PUID: 568
+      PGID: 568
+      TZ: America/Los_Angeles
+    image: lscr.io/linuxserver/bazarr:latest
+    labels:
+      homepage.group: Media
+      homepage.name: Bazarr (Subtitles)
+      homepage.href: https://${BAZARR_HOST}
+      homepage.icon: bazarr.png
+      homepage.widget.type: bazarr
+      homepage.widget.url: http://bazarr:6767
+      homepage.widget.key: ${BAZARR_API_KEY}
+      traefik.enable: true
+      traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST}`)
+      traefik.http.routers.bazarr.tls.certresolver: myresolver
+    networks:
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/bazarr:/config
+      - /mnt/pool1/media/shows:/media-shows
+      - /mnt/pool1/media/movies:/media-movies
+  jellyseerr:
+    container_name: jellyseerr
+    environment:
+      PUID: 568
+      PGID: 568
+      TZ: America/Los_Angeles
+    image: fallenbagel/jellyseerr:latest
+    labels:
+      homepage.group: Media
+      homepage.name: Jellyseerr
+      homepage.href: https://${JELLYSEERR_HOST}
+      homepage.icon: jellyseerr.png
+      homepage.widget.type: jellyseerr
+      homepage.widget.url: http://jellyseerr:5055
+      homepage.widget.key: ${JELLYSEERR_API_KEY}
+      traefik.enable: true
+      traefik.http.routers.jellyseerr.rule: Host(`${JELLYSEERR_HOST}`)
+      traefik.http.routers.jellyseerr.tls.certresolver: myresolver
+    networks:
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/jellyseerr:/app/config
+  prowlarr:
+    container_name: prowlarr
+    environment:
+      PUID: 568
+      PGID: 568
+      TZ: America/Los_Angeles
+    image: lscr.io/linuxserver/prowlarr:latest
+    labels:
+      homepage.group: Media
+      homepage.name: Prowlarr (Indexers)
+      homepage.href: https://${PROWLARR_HOST}
+      homepage.icon: prowlarr.png
+      homepage.widget.type: prowlarr
+      homepage.widget.url: http://prowlarr:9696
+      homepage.widget.key: ${PROWLARR_API_KEY}
+      traefik.enable: true
+      traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST}`)
+      traefik.http.routers.prowlarr.tls.certresolver: myresolver
+    networks:
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/prowlarr:/config
+  radarr:
+    container_name: radarr
+    environment:
+      PUID: 568
+      PGID: 568
+      TZ: America/Los_Angeles
+    image: lscr.io/linuxserver/radarr:latest
+    labels:
+      homepage.group: Media
+      homepage.name: Radarr (Movies)
+      homepage.href: https://${RADARR_HOST}
+      homepage.icon: radarr.png
+      homepage.widget.type: radarr
+      homepage.widget.url: http://radarr:7878
+      homepage.widget.key: ${RADARR_API_KEY}
+      homepage.widget.enableQueue: true
+      traefik.enable: true
+      traefik.http.routers.radarr.rule: Host(`${RADARR_HOST}`)
+      traefik.http.routers.radarr.tls.certresolver: myresolver
+    networks:
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/radarr:/config
+      - /mnt/pool1/media/movies:/media-movies
+      - /mnt/pool0/tmp/downloads:/downloads
+  readarr:
+    container_name: readarr
+    environment:
+      PUID: 568
+      PGID: 568
+      TZ: America/Los_Angeles
+    image: lscr.io/linuxserver/readarr:develop
+    labels:
+      homepage.group: Media
+      homepage.name: Readarr (Books)
+      homepage.href: https://${READARR_HOST}
+      homepage.icon: readarr.png
+      homepage.widget.type: readarr
+      homepage.widget.url: http://readarr:8787
+      homepage.widget.key: ${READARR_API_KEY}
+      traefik.enable: true
+      traefik.http.routers.readarr.rule: Host(`${READARR_HOST}`)
+      traefik.http.routers.readarr.tls.certresolver: myresolver
+    networks:
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/readarr:/config
+      - /mnt/pool1/media/books:/media-books
+      - /mnt/pool0/tmp/downloads:/downloads
+  sonarr:
+    container_name: sonarr
+    environment:
+      PUID: 568
+      PGID: 568
+      TZ: America/Los_Angeles
+    image: lscr.io/linuxserver/sonarr:latest
+    labels:
+      homepage.group: Media
+      homepage.name: Sonarr (Shows)
+      homepage.href: https://${SONARR_HOST}
+      homepage.icon: sonarr.png
+      homepage.widget.type: sonarr
+      homepage.widget.url: http://sonarr:8989
+      homepage.widget.key: ${SONARR_API_KEY}
+      homepage.widget.enableQueue: true
+      traefik.enable: true
+      traefik.http.routers.sonarr.rule: Host(`${SONARR_HOST}`)
+      traefik.http.routers.sonarr.tls.certresolver: myresolver
+    networks:
+      - traefik
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/apps/sonarr:/config
+      - /mnt/pool1/media/shows:/media-shows
+      - /mnt/pool0/tmp/downloads:/downloads
