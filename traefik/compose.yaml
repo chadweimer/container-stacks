@@ -33,7 +33,7 @@ services:
       - '--entryPoints.web.address=:80'
       - '--entryPoints.websecure.address=:443'
       - '--certificatesresolvers.myresolver.acme.dnschallenge=true'
-      - '--certificatesresolvers.myresolver.acme.dnschallenge.provider=${DNS_PROVIDER}'
+      - '--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare'
       - '--certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53'
       - '--certificatesresolvers.myresolver.acme.email=${EMAIL_ADDRESS}'
       - '--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json'
