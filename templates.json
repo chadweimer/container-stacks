@@ -18,8 +18,28 @@
                 {
                     "name": "HOST",
                     "label": "Host Address",
-                    "description": "The host address (domain) to expose the application.",
-                    "default": "filebrowser.example.com"
+                    "description": "The host address (domain) to expose the application."
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "type": 3,
+            "title": "Homepage",
+            "description": "A modern, fully static, fast, secure fully proxied, highly customizable application dashboard",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "homepage/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
                 }
             ]
         }
