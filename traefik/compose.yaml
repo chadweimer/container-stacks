@@ -35,20 +35,20 @@ services:
       - '--certificatesresolvers.myresolver.acme.dnschallenge=true'
       - '--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare'
       - '--certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53'
-      - '--certificatesresolvers.myresolver.acme.email=${EMAIL_ADDRESS}'
+      - '--certificatesresolvers.myresolver.acme.email=${ACME_EMAIL_ADDRESS}'
       - '--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json'
       - '--serverstransport.insecureskipverify=true'
     container_name: traefik
     depends_on:
       - docker-proxy
     environment:
-      CF_DNS_API_TOKEN: ${API_TOKEN}
+      CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
     extra_hosts:
       - host.docker.internal:host-gateway
     image: traefik:v3
     labels:
       homepage.group: Network
-      homepage.href: http://${IP_ADDRESS}:8080
+      homepage.href: http://${HOST}:8080
       homepage.icon: traefik.png
       homepage.name: Traefik
       homepage.widget.type: traefik

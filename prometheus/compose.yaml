@@ -21,10 +21,10 @@ configs:
               action: labelmap
         - job_name: machines
           static_configs:
-            - targets: ["${DESKTOP_IP_ADDRESS}:9100", "${DESKTOP_IP_ADDRESS}:9882"]
+            - targets: ["${DESKTOP_HOST}:9100", "${DESKTOP_HOST}:9882"]
               labels:
                 instance: "desktop"
-            - targets: ["${SERVER_IP_ADDRESS}:9100", "${SERVER_IP_ADDRESS}:9882"]
+            - targets: ["${SERVER_HOST}:9100", "${SERVER_HOST}:9882"]
               labels:
                 instance: "docker-prod-1"
         - job_name: "pikvm"
@@ -34,7 +34,7 @@ configs:
             password: "${KVM_PASSWORD}"
           scheme: https
           static_configs:
-            - targets: ["${KVM_IP_ADDRESS}"]
+            - targets: ["${KVM_HOST}"]
               labels:
                 instance: "truenas-server"
           tls_config:

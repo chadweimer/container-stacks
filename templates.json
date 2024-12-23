@@ -237,6 +237,281 @@
                     "description": "The password to use for the homepage widget for this app."
                 }
             ]
+        },
+        {
+            "id": 8,
+            "type": 3,
+            "title": "Promethues",
+            "description": "Prometheus and several exporters.",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "prometheus/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
+                },
+                {
+                    "name": "DESKTOP_HOST",
+                    "label": "Desktop Scrape Host",
+                    "description": "The host address of my desktop computer, for scraping."
+                },
+                {
+                    "name": "SERVER_HOST",
+                    "label": "Server Scrape Host",
+                    "description": "The host address of docker-prod-1, for scraping."
+                },
+                {
+                    "name": "KVM_HOST",
+                    "label": "KVM Scrape Host",
+                    "description": "The host address of the NAS kvm, for scraping."
+                },
+                {
+                    "name": "KVM_USERNAME",
+                    "label": "KVM Username",
+                    "description": "The username to authenticate with the NAS kvm, for scraping."
+                },
+                {
+                    "name": "KVM_PASSWORD",
+                    "label": "KVM Password",
+                    "description": "The password to authenticate with the NAS kvm, for scraping."
+                },
+                {
+                    "name": "OMADA_HOST",
+                    "label": "Omada Controller Host",
+                    "description": "The host address of the Omada Controller, for scraping."
+                },
+                {
+                    "name": "OMADA_USER",
+                    "label": "Omada Controller Username",
+                    "description": "The username to authenticate with the Omada Controller, for scraping."
+                },
+                {
+                    "name": "OMADA_PASS",
+                    "label": "Omada Controller Password",
+                    "description": "The password to authenticate with the Omada Controller, for scraping."
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "type": 3,
+            "title": "Syncthing",
+            "description": "Syncthing is a continuous file synchronization program",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "syncthing/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "type": 3,
+            "title": "Traefik",
+            "description": "The Cloud Native Application Proxy",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "traefik/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
+                },
+                {
+                    "name": "CF_DNS_API_TOKEN",
+                    "label": "Cloudflare API Token",
+                    "description": "The API token to authenticate with Cloudflare."
+                },
+                {
+                    "name": "ACME_EMAIL_ADDRESS",
+                    "label": "ACME Email Address",
+                    "description": "The email address to use for the ACME protocol TLS provisioning."
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "type": 3,
+            "title": "Transmission",
+            "description": "Transmission is a fast, easy, and free BitTorrent client",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "transmission/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
+                },
+                {
+                    "name": "VPN_SERVICE_PROVIDER",
+                    "label": "VPN Service Provider",
+                    "description": "VPN service provider"
+                },
+                {
+                    "name": "OPENVPN_USER",
+                    "label": "VPN Username",
+                    "description": "The username to authenticate with the VPN service provider."
+                },
+                {
+                    "name": "OPENVPN_PASSWORD",
+                    "label": "VPN Password",
+                    "description": "The password to authenticate with the VPN service provider."
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "type": 3,
+            "title": "Uptime Kuma",
+            "description": "A fancy self-hosted monitoring tool",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "uptime-kuma/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "type": 3,
+            "title": "Vaultwarden",
+            "description": "Unofficial Bitwarden compatible server written in Rust",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "vaultwarden/compose.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "type": 3,
+            "title": "Wine & Cats (Dev Environments)",
+            "description": "Dev environment stack for Wine & Cats",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "wineandcats/compose.dev.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
+                },
+                {
+                    "name": "IMAGE_TAG",
+                    "label": "Image Tag",
+                    "description": "The container image tag to use.",
+                    "default": "latest"
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "label": "Database Password",
+                    "description": "The database password."
+                },
+                {
+                    "name": "SECURE_KEY",
+                    "label": "Secure Key",
+                    "description": "The secure key to use (e.g., for JWT signing)."
+                },
+                {
+                    "name": "STAGE",
+                    "label": "Stage",
+                    "description": "The environment stage.",
+                    "select": [
+                        {
+                            "text": "Development",
+                            "value": "dev",
+                            "default": true
+                        },
+                        {
+                            "text": "Staging",
+                            "value": "staging"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "type": 3,
+            "title": "Wine & Cats (Prod)",
+            "description": "Prod environment stack for Wine & Cats",
+            "categories": [
+                "app"
+            ],
+            "platform": "linux",
+            "repository": {
+                "url": "https://github.com/chadweimer/container-stacks",
+                "stackfile": "wineandcats/compose.prod.yaml"
+            },
+            "env": [
+                {
+                    "name": "HOST",
+                    "label": "Host Address",
+                    "description": "The host address (domain) to expose the application."
+                },
+                {
+                    "name": "DB_PASSWORD",
+                    "label": "Database Password",
+                    "description": "The database password."
+                },
+                {
+                    "name": "SECURE_KEY",
+                    "label": "Secure Key",
+                    "description": "The secure key to use (e.g., for JWT signing)."
+                }
+            ]
         }
     ]
 }
