@@ -14,16 +14,15 @@ services:
       homepage.widget.env: '3'
       homepage.widget.key: ${ACCESS_TOKEN}
       homepage.widget.type: portainer
-      homepage.widget.url: https://portainer:9443
+      homepage.widget.url: http://portainer:9000
       traefik.enable: True
       traefik.http.routers.portainer.rule: Host(`${HOST}`)
       traefik.http.routers.portainer.tls.certresolver: myresolver
-      traefik.http.services.portainer.loadbalancer.server.port: 9443
-      traefik.http.services.portainer.loadbalancer.server.scheme: https
+      traefik.http.services.portainer.loadbalancer.server.port: 9000
     networks:
       - traefik
     ports:
-      - 9443:9443 # For access when traefik is not up
+      - 9000:9000 # For access when traefik is not up
     restart: unless-stopped
     volumes:
       - /mnt/pool0/apps/portainer:/data
