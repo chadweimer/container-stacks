@@ -46,6 +46,25 @@ networks:
   traefik:
     external: True
 services:
+  cadvisor:
+    command:
+      - --housekeeping_interval=5s
+      - --docker_only=true
+    container_name: cadvisor
+    image: gcr.io/cadvisor/cadvisor:latest
+    labels:
+      prometheus.label.instance: truenas-server
+      prometheus.port: 8080
+      prometheus.scrape: True
+    networks:
+      - default
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
   docker-proxy:
     environment:
       CONTAINERS: '1'
