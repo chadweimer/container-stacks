@@ -78,9 +78,12 @@ configs:
           docker_sd_configs:
             - host: tcp://docker-proxy:2375
           relabel_configs:
-            - source_labels: ['__meta_docker_container_name']
+            - source_labels: [__meta_docker_container_name]
               regex: '/(.*)'
-              target_label: 'container'
+              target_label: container
+            - source_labels: [__meta_docker_container_label_com_docker_compose_project]
+              regex: '(.+)'
+              target_label: stack
 name: prometheus
 networks:
   prometheus:
@@ -143,8 +146,7 @@ services:
     image: grafana/loki:latest
     networks:
       - prometheus
-    ports:
-      - '3100:3100'
+      - traefik
     pull_policy: always
     restart: unless-stopped
     user: '568:568'
