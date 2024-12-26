@@ -33,7 +33,7 @@ services:
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: gomp
-    image: postgres:16-alpine
+    image: postgres:16
     networks:
       - default
     pull_policy: always
