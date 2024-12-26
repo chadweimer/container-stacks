@@ -1,4 +1,29 @@
 configs:
+  loki_config:
+    content: |
+      auth_enabled: false
+      server:
+        http_listen_port: 3100
+      common:
+        instance_addr: 127.0.0.1
+        path_prefix: /loki
+        storage:
+          filesystem:
+            chunks_directory: /loki/chunks
+            rules_directory: /loki/rules
+        replication_factor: 1
+        ring:
+          kvstore:
+            store: inmemory
+      schema_config:
+        configs:
+          - from: 2020-01-01
+            store: tsdb
+            object_store: filesystem
+            schema: v13
+            index:
+              prefix: index_
+              period: 24h
   prometheus_config:
     content: |
       global:
@@ -8,10 +33,10 @@ configs:
         - job_name: docker
           docker_sd_configs:
             - host: tcp://docker-proxy:2375
+              filters:
+                - name: label
+                  values: ["prometheus.scrape"]
           relabel_configs:
-            - source_labels: [__meta_docker_container_label_prometheus_scrape]
-              action: keep
-              regex: true
             - source_labels: [__meta_docker_container_label_com_docker_compose_service,__meta_docker_container_label_prometheus_port]
               target_label: __address__
               separator: '@'
@@ -39,10 +64,35 @@ configs:
                 instance: "truenas-server"
           tls_config:
             insecure_skip_verify: true # For self-signed certificate
+  promtail_config:
+    content: |
+      server:
+        http_listen_port: 9080
+        grpc_listen_port: 0
+
+      positions:
+        filename: /promtail/positions.yaml
+
+      clients:
+        - url: http://loki:3100/loki/api/v1/push
+
+      scrape_configs:
+        - job_name: docker
+          docker_sd_configs:
+            - host: tcp://docker-proxy:2375
+              filters:
+                - name: label
+                  values: ["promtail.scrape"]
+          relabel_configs:
+            - source_labels: ['__meta_docker_container_name']
+              regex: '/(.*)'
+              target_label: 'container'
 name: prometheus
 networks:
-  default:
+  prometheus:
     name: prometheus
+  promtail:
+    external: True
   traefik:
     external: True
 services:
@@ -57,7 +107,7 @@ services:
       prometheus.port: 8080
       prometheus.scrape: True
     networks:
-      - default
+      - prometheus
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -71,7 +121,7 @@ services:
       NETWORKS: '1'
     image: lscr.io/linuxserver/socket-proxy:latest
     networks:
-      - default
+      - prometheus
     pull_policy: always
     read_only: True
     restart: unless-stopped
@@ -87,11 +137,27 @@ services:
       prometheus.port: 9108
       prometheus.scrape: True
     networks:
-      - default
+      - prometheus
     ports:
       - '9109:9109'
     pull_policy: always
     restart: unless-stopped
+  loki:
+    command: -config.file=/etc/loki/config.yaml
+    configs:
+      - source: loki_config
+        target: /etc/loki/config.yaml
+    container_name: loki
+    image: grafana/loki:latest
+    networks:
+      - prometheus
+    ports:
+      - '3100:3100'
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/pool0/apps/loki:/loki
   nut:
     command:
       - '--nut.server=host.docker.internal'
@@ -122,7 +188,7 @@ services:
       prometheus.port: 9199
       prometheus.scrape: True
     networks:
-      - default
+      - prometheus
     pull_policy: always
     restart: unless-stopped
   omada:
@@ -138,7 +204,7 @@ services:
       prometheus.port: 9202
       prometheus.scrape: True
     networks:
-      - default
+      - prometheus
     pull_policy: always
     restart: unless-stopped
   prometheus:
@@ -159,17 +225,35 @@ services:
       prometheus.label.instance: truenas-server
       prometheus.port: 9090
       prometheus.scrape: True
+      promtail.scrape: True
       traefik.enable: True
       traefik.http.routers.prometheus.rule: Host(`${HOST}`)
       traefik.http.routers.prometheus.tls.certresolver: myresolver
     networks:
-      - default
+      - prometheus
       - traefik
     pull_policy: always
     restart: unless-stopped
     user: '568:568'
     volumes:
       - /mnt/pool0/apps/prometheus:/prometheus
+  promtail:
+    command: -config.file=/etc/promtail/config.yaml
+    configs:
+      - source: promtail_config
+        target: /etc/promtail/config.yaml
+    container_name: promtail
+    depends_on:
+      - loki
+    image: grafana/promtail:latest
+    networks:
+      - promtail
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/.ix-apps/docker/containers:/var/lib/docker/containers:ro
+      - /mnt/pool0/apps/promtail:/promtail
   speedtest:
     container_name: speedtest-exporter
     healthcheck:
@@ -193,6 +277,6 @@ services:
       prometheus.port: 9798
       prometheus.scrape: True
     networks:
-      - default
+      - prometheus
     pull_policy: always
     restart: unless-stopped
