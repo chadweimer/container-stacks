@@ -69,20 +69,14 @@ configs:
       server:
         http_listen_port: 9080
         grpc_listen_port: 0
-
       positions:
         filename: /promtail/positions.yaml
-
       clients:
         - url: http://loki:3100/loki/api/v1/push
-
       scrape_configs:
         - job_name: docker
           docker_sd_configs:
             - host: tcp://docker-proxy:2375
-              filters:
-                - name: label
-                  values: ["promtail.scrape"]
           relabel_configs:
             - source_labels: ['__meta_docker_container_name']
               regex: '/(.*)'
@@ -91,8 +85,6 @@ name: prometheus
 networks:
   prometheus:
     name: prometheus
-  promtail:
-    external: True
   traefik:
     external: True
 services:
@@ -225,7 +217,6 @@ services:
       prometheus.label.instance: truenas-server
       prometheus.port: 9090
       prometheus.scrape: True
-      promtail.scrape: True
       traefik.enable: True
       traefik.http.routers.prometheus.rule: Host(`${HOST}`)
       traefik.http.routers.prometheus.tls.certresolver: myresolver
@@ -247,7 +238,7 @@ services:
       - loki
     image: grafana/promtail:latest
     networks:
-      - promtail
+      - prometheus
     pull_policy: always
     restart: unless-stopped
     user: '568:568'
