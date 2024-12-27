@@ -73,6 +73,7 @@ services:
   docker-proxy:
     environment:
       CONTAINERS: '1'
+      NETWORKS: '1'
     image: lscr.io/linuxserver/socket-proxy:latest
     networks:
       - loki
