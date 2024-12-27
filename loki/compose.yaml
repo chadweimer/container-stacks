@@ -112,7 +112,6 @@ services:
       homepage.href: https://${PROMTAIL_HOST}
       homepage.icon: promtail.png
       homepage.name: Promtail
-      prometheus.port: 80
       traefik.enable: True
       traefik.http.routers.prometheus.rule: Host(`${PROMTAIL_HOST}`)
       traefik.http.routers.prometheus.tls.certresolver: myresolver
