@@ -55,7 +55,6 @@ services:
       homepage.widget.url: http://host.docker.internal:8080
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
-      prometheus.scrape: True
     networks:
       - default
       - traefik

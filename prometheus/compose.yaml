@@ -27,15 +27,14 @@ configs:
   prometheus_config:
     content: |
       global:
-        scrape_interval: 10s
-        evaluation_interval: 10s
+        scrape_interval: 15s
       scrape_configs:
         - job_name: docker
           docker_sd_configs:
             - host: tcp://docker-proxy:2375
               filters:
                 - name: label
-                  values: ["prometheus.scrape"]
+                  values: ["prometheus.port"]
           relabel_configs:
             - source_labels: [__meta_docker_container_label_com_docker_compose_service,__meta_docker_container_label_prometheus_port]
               target_label: __address__
@@ -66,9 +65,6 @@ configs:
             insecure_skip_verify: true # For self-signed certificate
   promtail_config:
     content: |
-      server:
-        http_listen_port: 9080
-        grpc_listen_port: 0
       positions:
         filename: /promtail/positions.yaml
       clients:
@@ -122,7 +118,6 @@ services:
     labels:
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
-      prometheus.scrape: True
     networks:
       - prometheus
     pull_policy: always
@@ -152,7 +147,6 @@ services:
     labels:
       prometheus.label.instance: truenas-server
       prometheus.port: 9108
-      prometheus.scrape: True
     networks:
       - prometheus
     ports:
@@ -202,7 +196,6 @@ services:
       prometheus.label.__metrics_path__: /ups_metrics
       prometheus.label.__param_ups: ups
       prometheus.port: 9199
-      prometheus.scrape: True
     networks:
       - prometheus
     pull_policy: always
@@ -218,7 +211,6 @@ services:
     labels:
       prometheus.label.instance: omada
       prometheus.port: 9202
-      prometheus.scrape: True
     networks:
       - prometheus
     pull_policy: always
@@ -240,7 +232,6 @@ services:
       homepage.widget.url: http://prometheus:9090
       prometheus.label.instance: truenas-server
       prometheus.port: 9090
-      prometheus.scrape: True
       traefik.enable: True
       traefik.http.routers.prometheus.rule: Host(`${HOST}`)
       traefik.http.routers.prometheus.tls.certresolver: myresolver
@@ -292,7 +283,6 @@ services:
       prometheus.label.__scrape_interval__: 1h
       prometheus.label.__scrape_timeout__: 2m
       prometheus.port: 9798
-      prometheus.scrape: True
     networks:
       - prometheus
     pull_policy: always

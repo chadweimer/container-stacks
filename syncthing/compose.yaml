@@ -27,7 +27,6 @@ services:
       homepage.showStats: 'true'
       prometheus.label.instance: truenas-server
       prometheus.port: 8384
-      prometheus.scrape: True
       traefik.enable: True
       traefik.http.routers.syncthing.rule: Host(`${HOST}`)
       traefik.http.routers.syncthing.tls.certresolver: myresolver
