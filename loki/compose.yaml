@@ -90,6 +90,9 @@ services:
         target: /etc/loki/config.yaml
     container_name: loki
     image: grafana/loki:latest
+    labels:
+      prometheus.label.instance: truenas-server
+      prometheus.port: 3100
     networks:
       - loki
       - traefik
@@ -110,13 +113,18 @@ services:
     labels:
       homepage.group: Network
       homepage.href: https://${PROMTAIL_HOST}
-      homepage.icon: promtail.png
+      homepage.icon: loki.png
       homepage.name: Promtail
+      homepage.showStats: true
+      prometheus.label.instance: truenas-server
+      prometheus.port: 80
       traefik.enable: True
-      traefik.http.routers.prometheus.rule: Host(`${PROMTAIL_HOST}`)
-      traefik.http.routers.prometheus.tls.certresolver: myresolver
+      traefik.http.routers.promtail.rule: Host(`${PROMTAIL_HOST}`)
+      traefik.http.routers.promtail.tls.certresolver: myresolver
+      traefik.http.services.promtail.loadbalancer.server.port: 80
     networks:
       - loki
+      - traefik
     ports:
       - '1514:1514'
     pull_policy: always

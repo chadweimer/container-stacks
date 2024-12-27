@@ -1,29 +1,4 @@
 configs:
-  loki_config:
-    content: |
-      auth_enabled: false
-      server:
-        http_listen_port: 3100
-      common:
-        instance_addr: 127.0.0.1
-        path_prefix: /loki
-        storage:
-          filesystem:
-            chunks_directory: /loki/chunks
-            rules_directory: /loki/rules
-        replication_factor: 1
-        ring:
-          kvstore:
-            store: inmemory
-      schema_config:
-        configs:
-          - from: 2020-01-01
-            store: tsdb
-            object_store: filesystem
-            schema: v13
-            index:
-              prefix: index_
-              period: 24h
   prometheus_config:
     content: |
       global:
@@ -63,45 +38,6 @@ configs:
                 instance: "truenas-server"
           tls_config:
             insecure_skip_verify: true # For self-signed certificate
-  promtail_config:
-    content: |
-      positions:
-        filename: /promtail/positions.yaml
-      clients:
-        - url: http://loki:3100/loki/api/v1/push
-      scrape_configs:
-        - job_name: docker
-          docker_sd_configs:
-            - host: tcp://docker-proxy:2375
-          relabel_configs:
-            - source_labels: [__meta_docker_container_name]
-              regex: '/(.*)'
-              target_label: container
-            - source_labels: [__meta_docker_container_label_com_docker_compose_project]
-              regex: '(.+)'
-              target_label: stack
-        - job_name: syslog
-          syslog:
-            listen_address: 0.0.0.0:1514
-            labels:
-              job: syslog
-          relabel_configs:
-            - source_labels: [__syslog_message_hostname]
-              target_label: host
-            - source_labels: [__syslog_message_hostname]
-              target_label: hostname
-            - source_labels: [__syslog_message_hostname]
-              target_label: instance
-              regex: ^nas$
-              replacement: truenas-server
-            - source_labels: [__syslog_message_severity]
-              target_label: level
-            - source_labels: [__syslog_message_app_name]
-              target_label: application
-            - source_labels: [__syslog_message_facility]
-              target_label: facility
-            - source_labels: [__syslog_connection_hostname]
-              target_label: connection_hostname
 name: prometheus
 networks:
   prometheus:
@@ -153,21 +89,6 @@ services:
       - '9109:9109'
     pull_policy: always
     restart: unless-stopped
-  loki:
-    command: -config.file=/etc/loki/config.yaml
-    configs:
-      - source: loki_config
-        target: /etc/loki/config.yaml
-    container_name: loki
-    image: grafana/loki:latest
-    networks:
-      - prometheus
-      - traefik
-    pull_policy: always
-    restart: unless-stopped
-    user: '568:568'
-    volumes:
-      - /mnt/pool0/apps/loki:/loki
   nut:
     command:
       - '--nut.server=host.docker.internal'
@@ -243,25 +164,6 @@ services:
     user: '568:568'
     volumes:
       - /mnt/pool0/apps/prometheus:/prometheus
-  promtail:
-    command: -config.file=/etc/promtail/config.yaml
-    configs:
-      - source: promtail_config
-        target: /etc/promtail/config.yaml
-    container_name: promtail
-    depends_on:
-      - loki
-    image: grafana/promtail:latest
-    networks:
-      - prometheus
-    ports:
-      - '1514:1514'
-    pull_policy: always
-    restart: unless-stopped
-    user: '568:568'
-    volumes:
-      - /mnt/.ix-apps/docker/containers:/var/lib/docker/containers:ro
-      - /mnt/pool0/apps/promtail:/promtail
   speedtest:
     container_name: speedtest-exporter
     healthcheck:
