@@ -84,6 +84,28 @@ configs:
             - source_labels: [__meta_docker_container_label_com_docker_compose_project]
               regex: '(.+)'
               target_label: stack
+        - job_name: syslog
+          syslog:
+            listen_address: 0.0.0.0:1514
+            labels:
+              job: syslog
+          relabel_configs:
+            - source_labels: [__syslog_message_hostname]
+              target_label: host
+            - source_labels: [__syslog_message_hostname]
+              target_label: hostname
+            - source_labels: [__syslog_message_hostname]
+              target_label: instance
+              regex: ^nas$
+              replacement: truenas-server
+            - source_labels: [__syslog_message_severity]
+              target_label: level
+            - source_labels: [__syslog_message_app_name]
+              target_label: application
+            - source_labels: [__syslog_message_facility]
+              target_label: facility
+            - source_labels: [__syslog_connection_hostname]
+              target_label: connection_hostname
 name: prometheus
 networks:
   prometheus:
@@ -241,6 +263,8 @@ services:
     image: grafana/promtail:latest
     networks:
       - prometheus
+    ports:
+      - '1514:1514'
     pull_policy: always
     restart: unless-stopped
     user: '568:568'
