@@ -592,6 +592,27 @@
           "description": "The tailscale access token to use for the homepage widget."
         }
       ]
+    },
+    {
+      "id": 18,
+      "type": 3,
+      "title": "Loki",
+      "description": "Grafana Loki is a set of open source components that can be composed into a fully featured logging stack.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "loki/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "PROMTAIL_HOST",
+          "label": "Promtail Host Address",
+          "description": "The host address (domain) to expose the promtail server."
+        }
+      ]
     }
   ]
 }
