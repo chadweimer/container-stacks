@@ -108,6 +108,7 @@ services:
         target: /etc/promtail/config.yaml
     container_name: promtail
     depends_on:
+      - docker-proxy
       - loki
     image: grafana/promtail:latest
     labels:

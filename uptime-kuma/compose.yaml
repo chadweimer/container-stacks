@@ -1,10 +1,27 @@
 name: uptime-kuma
 networks:
+  uptime-kuma:
+    name: uptime-kuma
   traefik:
     external: True
 services:
+  docker-proxy:
+    environment:
+      CONTAINERS: '1'
+    image: lscr.io/linuxserver/socket-proxy:latest
+    networks:
+      - uptime-kuma
+    pull_policy: always
+    read_only: True
+    restart: unless-stopped
+    tmpfs:
+      - /run
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
   uptime-kuma:
     container_name: uptime-kuma
+    depends_on:
+      - docker-proxy
     image: louislam/uptime-kuma:1
     labels:
       homepage.group: Network
@@ -20,6 +37,7 @@ services:
       traefik.http.routers.uptime.tls.certresolver: myresolver
     networks:
       - traefik
+      - uptime-kuma
     pull_policy: always
     restart: unless-stopped
     volumes:
