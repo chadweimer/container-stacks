@@ -27,8 +27,7 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/apps/bazarr:/config
-      - /mnt/pool1/media/shows:/media-shows
-      - /mnt/pool1/media/movies:/media-movies
+      - /mnt/pool1/media:/data
   jellyseerr:
     container_name: jellyseerr
     environment:
@@ -102,8 +101,7 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/apps/radarr:/config
-      - /mnt/pool1/media/movies:/media-movies
-      - /mnt/pool1/media/torrents:/downloads
+      - /mnt/pool1/media:/data
   readarr:
     container_name: readarr
     environment:
@@ -128,8 +126,7 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/apps/readarr:/config
-      - /mnt/pool1/media/library/books:/media-books
-      - /mnt/pool1/media/torrents:/downloads
+      - /mnt/pool1/media:/data
   sonarr:
     container_name: sonarr
     environment:
@@ -155,5 +152,4 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/apps/sonarr:/config
-      - /mnt/pool1/media/shows:/media-shows
-      - /mnt/pool1/media/torrents:/downloads
+      - /mnt/pool1/media:/data

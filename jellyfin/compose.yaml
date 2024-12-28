@@ -29,7 +29,7 @@ services:
     user: "568:568"
     volumes:
       - /mnt/pool1/media/library/fitness:/media-fitness
-      - /mnt/pool1/media/movies:/media-movies
-      - /mnt/pool1/media/shows:/media-shows
+      - /mnt/pool1/media/library/movies:/media-movies
+      - /mnt/pool1/media/library/shows:/media-shows
       - /mnt/pool0/apps/jellyfin/cache:/cache
       - /mnt/pool0/apps/jellyfin:/config
