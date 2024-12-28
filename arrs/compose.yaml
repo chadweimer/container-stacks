@@ -103,7 +103,7 @@ services:
     volumes:
       - /mnt/pool0/apps/radarr:/config
       - /mnt/pool1/media/movies:/media-movies
-      - /mnt/pool0/tmp/downloads:/downloads
+      - /mnt/pool1/media/torrents:/downloads
   readarr:
     container_name: readarr
     environment:
@@ -128,8 +128,8 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/apps/readarr:/config
-      - /mnt/pool1/media/books:/media-books
-      - /mnt/pool0/tmp/downloads:/downloads
+      - /mnt/pool1/media/library/books:/media-books
+      - /mnt/pool1/media/torrents:/downloads
   sonarr:
     container_name: sonarr
     environment:
@@ -156,4 +156,4 @@ services:
     volumes:
       - /mnt/pool0/apps/sonarr:/config
       - /mnt/pool1/media/shows:/media-shows
-      - /mnt/pool0/tmp/downloads:/downloads
+      - /mnt/pool1/media/torrents:/downloads

@@ -26,4 +26,4 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/apps/kavita:/kavita/config
-      - /mnt/pool1/media/books:/media-books
+      - /mnt/pool1/media/library/books:/media-books

@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/apps/transmission:/config
-      - /mnt/pool0/tmp/downloads:/downloads
+      - /mnt/pool1/media/torrents:/downloads
   vpn:
     cap_add:
       - NET_ADMIN

@@ -28,9 +28,8 @@ services:
     restart: unless-stopped
     user: "568:568"
     volumes:
-      - /mnt/pool1/media/fitness:/media-fitness
+      - /mnt/pool1/media/library/fitness:/media-fitness
       - /mnt/pool1/media/movies:/media-movies
-      - /mnt/pool1/media/pictures:/media-pictures
       - /mnt/pool1/media/shows:/media-shows
       - /mnt/pool0/apps/jellyfin/cache:/cache
       - /mnt/pool0/apps/jellyfin:/config
