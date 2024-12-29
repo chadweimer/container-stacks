@@ -41,4 +41,4 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/uptime:/app/data
+      - /mnt/pool0/containers/uptime-kuma:/app/data

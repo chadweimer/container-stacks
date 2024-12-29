@@ -27,4 +27,4 @@ services:
     restart: unless-stopped
     user: "568:568"
     volumes:
-      - /mnt/pool0/apps/grafana:/var/lib/grafana
+      - /mnt/pool0/containers/grafana:/var/lib/grafana

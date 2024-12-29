@@ -25,7 +25,7 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/homepage:/app/config
+      - /mnt/pool0/containers/homepage:/app/config
   docker-proxy:
     environment:
       CONTAINERS: '1'

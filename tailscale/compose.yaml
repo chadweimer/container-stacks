@@ -33,4 +33,4 @@ services:
     tmpfs:
       - /var/run/tailscale:mode=755
     volumes:
-      - /mnt/pool0/apps/tailscale:/var/lib/tailscale
+      - /mnt/pool0/containers/tailscale:/var/lib/tailscale

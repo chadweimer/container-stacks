@@ -31,5 +31,5 @@ services:
       - /mnt/pool1/media/library/fitness:/media-fitness
       - /mnt/pool1/media/library/movies:/media-movies
       - /mnt/pool1/media/library/shows:/media-shows
-      - /mnt/pool0/apps/jellyfin/cache:/cache
-      - /mnt/pool0/apps/jellyfin:/config
+      - /mnt/pool0/containers/jellyfin/cache:/cache
+      - /mnt/pool0/containers/jellyfin:/config

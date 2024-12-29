@@ -25,5 +25,5 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/kavita:/kavita/config
+      - /mnt/pool0/containers/kavita:/kavita/config
       - /mnt/pool1/media/library/books:/media-books
