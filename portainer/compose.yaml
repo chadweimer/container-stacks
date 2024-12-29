@@ -25,5 +25,5 @@ services:
       - 9000:9000 # For access when traefik is not up
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/portainer:/data
+      - /mnt/pool0/containers/portainer:/data
       - /var/run/docker.sock:/var/run/docker.sock
