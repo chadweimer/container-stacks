@@ -39,5 +39,5 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/backups:/mnt/backups
-      - /mnt/pool0/tmp:/mnt/tmp
+      - /mnt/pool1/share/sync:/mnt/tmp/sync
       - /mnt/pool0/containers/syncthing:/var/syncthing
