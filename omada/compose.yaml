@@ -35,5 +35,5 @@ services:
     network_mode: host
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/omada/data:/opt/tplink/EAPController/data
-      - /mnt/pool0/apps/omada/config:/opt/tplink/EAPController/logs
+      - /mnt/pool0/containers/omada/data:/opt/tplink/EAPController/data
+      - /mnt/pool0/containers/omada/config:/opt/tplink/EAPController/logs

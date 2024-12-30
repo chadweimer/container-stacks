@@ -64,6 +64,7 @@ services:
       - '8080:8080'
     pull_policy: always
     restart: unless-stopped
+    user: '568:568'
     volumes:
-      - /mnt/pool0/apps/traefik/config:/app
-      - /mnt/pool0/apps/traefik/le:/letsencrypt
+      - /mnt/pool0/containers/traefik/config:/app
+      - /mnt/pool0/containers/traefik/le:/letsencrypt

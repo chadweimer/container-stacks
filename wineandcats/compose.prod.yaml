@@ -27,7 +27,7 @@ services:
     restart: unless-stopped
     user: "568:568"
     volumes:
-      - /mnt/pool0/apps/wineandcats-com/app:/var/app/gomp/data
+      - /mnt/pool0/containers/wineandcats-prod/app:/var/app/gomp/data
   db:
     container_name: wineandcats-prod-db
     environment:
@@ -39,4 +39,4 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/wineandcats-com/pg16/data:/var/lib/postgresql/data
+      - /mnt/pool0/containers/wineandcats-prod/pg16/data:/var/lib/postgresql/data
