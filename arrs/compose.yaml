@@ -26,7 +26,7 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/bazarr:/config
+      - /mnt/pool0/containers/bazarr:/config
       - /mnt/pool1/media:/data
   jellyseerr:
     container_name: jellyseerr
@@ -51,7 +51,7 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/jellyseerr:/app/config
+      - /mnt/pool0/containers/jellyseerr:/app/config
   prowlarr:
     container_name: prowlarr
     environment:
@@ -75,7 +75,7 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/prowlarr:/config
+      - /mnt/pool0/containers/prowlarr:/config
   radarr:
     container_name: radarr
     environment:
@@ -100,7 +100,7 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/radarr:/config
+      - /mnt/pool0/containers/radarr:/config
       - /mnt/pool1/media:/data
   readarr:
     container_name: readarr
@@ -125,7 +125,7 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/readarr:/config
+      - /mnt/pool0/containers/readarr:/config
       - /mnt/pool1/media:/data
   sonarr:
     container_name: sonarr
@@ -151,5 +151,5 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/apps/sonarr:/config
+      - /mnt/pool0/containers/sonarr:/config
       - /mnt/pool1/media:/data
