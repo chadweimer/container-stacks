@@ -352,20 +352,6 @@
           "preset": true
         },
         {
-          "name": "ACME_EAB_KID",
-          "label": "EAB KID",
-          "description": "Key identifier from External CA",
-          "default": "",
-          "preset": true
-        },
-        {
-          "name": "ACME_EAB_HMAC",
-          "label": "EAB HMAC (Encoded)",
-          "description": "HMAC key from External CA, should be in Base64 URL Encoding without padding format",
-          "default": "",
-          "preset": true
-        },
-        {
           "name": "ACME_EMAIL_ADDRESS",
           "label": "ACME Email Address",
           "description": "The email address to use for the ACME protocol TLS provisioning."
