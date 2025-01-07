@@ -323,7 +323,7 @@
     {
       "id": 10,
       "type": 3,
-      "title": "Traefik",
+      "title": "Traefik (Let's Encrypt)",
       "description": "The Cloud Native Application Proxy",
       "categories": [
         "app"
@@ -343,6 +343,27 @@
           "name": "CF_DNS_API_TOKEN",
           "label": "Cloudflare API Token",
           "description": "The API token to authenticate with Cloudflare."
+        },
+        {
+          "name": "ACME_CA_SERVER",
+          "label": "ACME CA Server",
+          "description": "The URL of the CA Server to use that supports the ACME protocol",
+          "default": "https://acme-v02.api.letsencrypt.org/directory",
+          "preset": true
+        },
+        {
+          "name": "ACME_EAB_KID",
+          "label": "EAB KID",
+          "description": "Key identifier from External CA",
+          "default": "",
+          "preset": true
+        },
+        {
+          "name": "ACME_EAB_HMAC",
+          "label": "EAB HMAC (Encoded)",
+          "description": "HMAC key from External CA, should be in Base64 URL Encoding without padding format",
+          "default": "",
+          "preset": true
         },
         {
           "name": "ACME_EMAIL_ADDRESS",
@@ -611,6 +632,53 @@
           "name": "PROMTAIL_HOST",
           "label": "Promtail Host Address",
           "description": "The host address (domain) to expose the promtail server."
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": 3,
+      "title": "Traefik (w/ EAB)",
+      "description": "The Cloud Native Application Proxy",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "traefik/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "CF_DNS_API_TOKEN",
+          "label": "Cloudflare API Token",
+          "description": "The API token to authenticate with Cloudflare."
+        },
+        {
+          "name": "ACME_CA_SERVER",
+          "label": "ACME CA Server",
+          "description": "The URL of the CA Server to use that supports the ACME protocol",
+          "default": "https://acme-v02.api.letsencrypt.org/directory"
+        },
+        {
+          "name": "ACME_EAB_KID",
+          "label": "EAB KID",
+          "description": "Key identifier from External CA"
+        },
+        {
+          "name": "ACME_EAB_HMAC",
+          "label": "EAB HMAC (Encoded)",
+          "description": "HMAC key from External CA, should be in Base64 URL Encoding without padding format"
+        },
+        {
+          "name": "ACME_EMAIL_ADDRESS",
+          "label": "ACME Email Address",
+          "description": "The email address to use for the ACME protocol TLS provisioning."
         }
       ]
     }
