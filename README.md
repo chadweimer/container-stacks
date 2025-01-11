@@ -6,12 +6,12 @@ My personal container stacks
 
 The typical way to bootstrap a system for these stacks is the following:
 
-- Create [docker networks](#docker-networks)
-- Bring up [Portainer](portainer/compose.yaml), and use the exposed port to access it to proceed with the next steps
-- Bring up the following stacks, in this order
-  1. [Docker Proxy](docker-proxy/compose.yaml)
-  1. [Traefik](traefik/compose.yaml)
-- Bring up any other stacks desired
+1. Create [docker networks](#docker-networks)
+1. Bring up [Portainer](portainer/compose.yaml), and use the exposed port to access it to proceed with the next steps
+1. Bring up the following stacks, in this order
+   1. [Docker Proxy](docker-proxy/compose.yaml)
+   1. [Traefik](traefik/compose.yaml)
+1. Bring up any other stacks desired
 
 ### Docker networks
 
