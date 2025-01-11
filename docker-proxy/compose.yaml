@@ -1,0 +1,19 @@
+name: docker-proxy
+networks:
+  docker-proxy:
+    external: True
+services:
+  docker-proxy:
+    environment:
+      CONTAINERS: '1'
+      NETWORKS: '1'
+    image: lscr.io/linuxserver/socket-proxy:latest
+    networks:
+      - docker-proxy
+    pull_policy: always
+    read_only: True
+    restart: unless-stopped
+    tmpfs:
+      - /run
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
