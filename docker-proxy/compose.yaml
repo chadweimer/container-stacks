@@ -4,6 +4,7 @@ networks:
     external: True
 services:
   docker-proxy:
+    container_name: docker-proxy
     environment:
       CONTAINERS: '1'
       NETWORKS: '1'
