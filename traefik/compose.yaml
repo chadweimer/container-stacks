@@ -1,26 +1,12 @@
 name: traefik
 networks:
-  traefik:
-    name: traefik
+  docker-proxy:
+    external: True
   ingress:
     external: True
   observe:
     external: True
 services:
-  docker-proxy:
-    environment:
-      CONTAINERS: '1'
-      NETWORKS: '1'
-    image: lscr.io/linuxserver/socket-proxy:latest
-    networks:
-      - traefik
-    pull_policy: always
-    read_only: True
-    restart: unless-stopped
-    tmpfs:
-      - /run
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
   traefik:
     command:
       # - '--log.level=DEBUG'
@@ -44,8 +30,6 @@ services:
       - '--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json'
       - '--serverstransport.insecureskipverify=true'
     container_name: traefik
-    depends_on:
-      - docker-proxy
     environment:
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
     extra_hosts:
@@ -61,9 +45,9 @@ services:
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
     networks:
+      - docker-proxy
       - ingress
       - observe
-      - traefik
     ports:
       - '80:80'
       - '443:443'

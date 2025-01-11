@@ -1,14 +1,12 @@
 name: homepage
 networks:
-  homepage:
-    name: homepage
+  docker-proxy:
+    external: True
   ingress:
     external: True
 services:
   homepage:
     container_name: homepage
-    depends_on:
-      - docker-proxy
     environment:
       PGID: 568
       PUID: 568
@@ -20,22 +18,9 @@ services:
       traefik.http.routers.homepage.rule: Host(`${HOST}`)
       traefik.http.routers.homepage.tls.certresolver: myresolver
     networks:
-      - homepage
+      - docker-proxy
       - ingress
     pull_policy: always
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/homepage:/app/config
-  docker-proxy:
-    environment:
-      CONTAINERS: '1'
-    image: lscr.io/linuxserver/socket-proxy:latest
-    networks:
-      - homepage
-    pull_policy: always
-    read_only: True
-    restart: unless-stopped
-    tmpfs:
-      - /run
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro

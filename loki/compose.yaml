@@ -65,27 +65,13 @@ configs:
               target_label: connection_hostname
 name: loki
 networks:
-  loki:
-    name: loki
+  docker-proxy:
+    external: True
   ingress:
     external: True
   observe:
     external: True
 services:
-  docker-proxy:
-    environment:
-      CONTAINERS: '1'
-      NETWORKS: '1'
-    image: lscr.io/linuxserver/socket-proxy:latest
-    networks:
-      - loki
-    pull_policy: always
-    read_only: True
-    restart: unless-stopped
-    tmpfs:
-      - /run
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
   loki:
     command: -config.file=/etc/loki/config.yaml
     configs:
@@ -97,7 +83,6 @@ services:
       prometheus.label.instance: truenas-server
       prometheus.port: 3100
     networks:
-      - loki
       - observe
     pull_policy: always
     restart: unless-stopped
@@ -111,7 +96,6 @@ services:
         target: /etc/promtail/config.yaml
     container_name: promtail
     depends_on:
-      - docker-proxy
       - loki
     image: grafana/promtail:latest
     labels:
@@ -127,7 +111,7 @@ services:
       traefik.http.routers.promtail.tls.certresolver: myresolver
       traefik.http.services.promtail.loadbalancer.server.port: 80
     networks:
-      - loki
+      - docker-proxy
       - ingress
       - observe
     ports:
