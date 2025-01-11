@@ -1,6 +1,8 @@
 name: grafana
 networks:
-  traefik:
+  ingress:
+    external: True
+  observe:
     external: True
 services:
   grafana:
@@ -22,7 +24,8 @@ services:
       traefik.http.routers.grafana.rule: Host(`${HOST}`)
       traefik.http.routers.grafana.tls.certresolver: myresolver
     networks:
-      - traefik
+      - ingress
+      - observe
     pull_policy: always
     restart: unless-stopped
     user: "568:568"

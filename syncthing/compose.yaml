@@ -1,6 +1,8 @@
 name: syncthing
 networks:
-  traefik:
+  ingress:
+    external: True
+  observe:
     external: True
 services:
   syncthing:
@@ -31,7 +33,8 @@ services:
       traefik.http.routers.syncthing.rule: Host(`${HOST}`)
       traefik.http.routers.syncthing.tls.certresolver: myresolver
     networks:
-      - traefik
+      - ingress
+      - observe
     ports:
       - 20978:22000/tcp
       - 20979:22000/udp

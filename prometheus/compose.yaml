@@ -42,7 +42,9 @@ name: prometheus
 networks:
   prometheus:
     name: prometheus
-  traefik:
+  ingress:
+    external: True
+  observe:
     external: True
 services:
   cadvisor:
@@ -55,7 +57,7 @@ services:
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
     networks:
-      - prometheus
+      - observe
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -84,7 +86,7 @@ services:
       prometheus.label.instance: truenas-server
       prometheus.port: 9108
     networks:
-      - prometheus
+      - observe
     ports:
       - '9109:9109'
     pull_policy: always
@@ -118,7 +120,7 @@ services:
       prometheus.label.__param_ups: ups
       prometheus.port: 9199
     networks:
-      - prometheus
+      - observe
     pull_policy: always
     restart: unless-stopped
   omada:
@@ -133,7 +135,7 @@ services:
       prometheus.label.instance: omada
       prometheus.port: 9202
     networks:
-      - prometheus
+      - observe
     pull_policy: always
     restart: unless-stopped
   prometheus:
@@ -158,7 +160,8 @@ services:
       traefik.http.routers.prometheus.tls.certresolver: myresolver
     networks:
       - prometheus
-      - traefik
+      - ingress
+      - observe
     pull_policy: always
     restart: unless-stopped
     user: '568:568'
@@ -186,6 +189,6 @@ services:
       prometheus.label.__scrape_timeout__: 2m
       prometheus.port: 9798
     networks:
-      - prometheus
+      - observe
     pull_policy: always
     restart: unless-stopped

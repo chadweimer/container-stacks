@@ -1,6 +1,6 @@
 name: arrs
 networks:
-  traefik:
+  ingress:
     external: True
 services:
   bazarr:
@@ -22,7 +22,7 @@ services:
       traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST}`)
       traefik.http.routers.bazarr.tls.certresolver: myresolver
     networks:
-      - traefik
+      - ingress
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -47,7 +47,7 @@ services:
       traefik.http.routers.jellyseerr.rule: Host(`${JELLYSEERR_HOST}`)
       traefik.http.routers.jellyseerr.tls.certresolver: myresolver
     networks:
-      - traefik
+      - ingress
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -71,7 +71,7 @@ services:
       traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST}`)
       traefik.http.routers.prowlarr.tls.certresolver: myresolver
     networks:
-      - traefik
+      - ingress
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -96,7 +96,7 @@ services:
       traefik.http.routers.radarr.rule: Host(`${RADARR_HOST}`)
       traefik.http.routers.radarr.tls.certresolver: myresolver
     networks:
-      - traefik
+      - ingress
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -121,7 +121,7 @@ services:
       traefik.http.routers.readarr.rule: Host(`${READARR_HOST}`)
       traefik.http.routers.readarr.tls.certresolver: myresolver
     networks:
-      - traefik
+      - ingress
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -147,7 +147,7 @@ services:
       traefik.http.routers.sonarr.rule: Host(`${SONARR_HOST}`)
       traefik.http.routers.sonarr.tls.certresolver: myresolver
     networks:
-      - traefik
+      - ingress
     pull_policy: always
     restart: unless-stopped
     volumes:

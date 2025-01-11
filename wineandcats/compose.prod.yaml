@@ -2,7 +2,7 @@ name: wineandcats-prod
 networks:
   default:
     name: wineandcats-prod
-  traefik:
+  ingress:
     external: True
 services:
   app:
@@ -23,7 +23,7 @@ services:
     image: ghcr.io/chadweimer/gomp:3.9.2
     networks:
       - default
-      - traefik
+      - ingress
     restart: unless-stopped
     user: "568:568"
     volumes:

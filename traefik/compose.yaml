@@ -1,8 +1,10 @@
 name: traefik
 networks:
-  default:
-    name: traefik-internal
   traefik:
+    name: traefik
+  ingress:
+    external: True
+  observe:
     external: True
 services:
   docker-proxy:
@@ -11,7 +13,7 @@ services:
       NETWORKS: '1'
     image: lscr.io/linuxserver/socket-proxy:latest
     networks:
-      - default
+      - traefik
     pull_policy: always
     read_only: True
     restart: unless-stopped
@@ -26,7 +28,7 @@ services:
       - '--metrics.prometheus=true'
       - '--providers.docker=true'
       - '--providers.docker.endpoint=tcp://docker-proxy:2375'
-      - '--providers.docker.network=traefik'
+      - '--providers.docker.network=ingress'
       - '--providers.docker.exposedbydefault=false'
       - '--providers.file.directory=/app'
       - '--providers.file.watch=true'
@@ -59,7 +61,8 @@ services:
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
     networks:
-      - default
+      - ingress
+      - observe
       - traefik
     ports:
       - '80:80'

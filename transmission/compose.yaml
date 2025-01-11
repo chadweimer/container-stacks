@@ -1,6 +1,6 @@
 name: transmission
 networks:
-  traefik:
+  ingress:
     external: True
 services:
   transmission:
@@ -43,7 +43,7 @@ services:
       traefik.http.routers.transmission.tls.certresolver: myresolver
       traefik.http.services.transmission.loadbalancer.server.port: 9091
     networks:
-      - traefik
+      - ingress
     ports:
       # - 9091:9091 # Transmission UI
       - 51413:51413 # Transmission service

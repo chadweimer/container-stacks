@@ -2,7 +2,7 @@ name: wineandcats-${STAGE}
 networks:
   default:
     name: wineandcats-${STAGE}
-  traefik:
+  ingress:
     external: True
 services:
   app:
@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.wineandcats-${STAGE}.tls.certresolver=myresolver
     networks:
       - default
-      - traefik
+      - ingress
     pull_policy: always
     restart: unless-stopped
     user: "568:568"
