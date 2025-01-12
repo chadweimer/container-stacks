@@ -1,4 +1,30 @@
 name: grafana
+configs:
+  loki_config:
+    content: |
+      auth_enabled: false
+      server:
+        http_listen_port: 3100
+      common:
+        instance_addr: 127.0.0.1
+        path_prefix: /loki
+        storage:
+          filesystem:
+            chunks_directory: /loki/chunks
+            rules_directory: /loki/rules
+        replication_factor: 1
+        ring:
+          kvstore:
+            store: inmemory
+      schema_config:
+        configs:
+          - from: 2020-01-01
+            store: tsdb
+            object_store: filesystem
+            schema: v13
+            index:
+              prefix: index_
+              period: 24h
 networks:
   ingress:
     external: True
@@ -31,3 +57,20 @@ services:
     user: "568:568"
     volumes:
       - /mnt/pool0/containers/grafana:/var/lib/grafana
+  loki:
+    command: -config.file=/etc/loki/config.yaml
+    configs:
+      - source: loki_config
+        target: /etc/loki/config.yaml
+    container_name: loki
+    image: grafana/loki:latest
+    labels:
+      prometheus.label.instance: truenas-server
+      prometheus.port: 3100
+    networks:
+      - observe
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/pool0/containers/loki:/loki
