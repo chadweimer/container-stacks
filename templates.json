@@ -241,21 +241,21 @@
     {
       "id": 8,
       "type": 3,
-      "title": "Promethues",
-      "description": "Prometheus and several exporters.",
+      "title": "Grafana Alloy",
+      "description": "Grafana Alloy and several exporters.",
       "categories": [
         "app"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "prometheus/compose.yaml"
+        "stackfile": "alloy/compose.yaml"
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
+          "name": "ALLOY_HOST",
+          "label": "Alloy Host Address",
+          "description": "The host address (domain) to expose the Grafana Alloy service."
         },
         {
           "name": "DESKTOP_HOST",
@@ -597,27 +597,6 @@
           "name": "API_ACCESS_TOKEN",
           "label": "Access Token",
           "description": "The tailscale access token to use for the homepage widget."
-        }
-      ]
-    },
-    {
-      "id": 18,
-      "type": 3,
-      "title": "Loki",
-      "description": "Grafana Loki is a set of open source components that can be composed into a fully featured logging stack.",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "loki/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "PROMTAIL_HOST",
-          "label": "Promtail Host Address",
-          "description": "The host address (domain) to expose the promtail server."
         }
       ]
     },

@@ -25,6 +25,10 @@ configs:
             index:
               prefix: index_
               period: 24h
+  prometheus_config:
+    content: |
+      global:
+        scrape_interval: 15s
 networks:
   ingress:
     external: True
@@ -74,3 +78,23 @@ services:
     user: '568:568'
     volumes:
       - /mnt/pool0/containers/loki:/loki
+  prometheus:
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-remote-write-receiver'
+    configs:
+      - source: prometheus_config
+        target: /etc/prometheus/prometheus.yml
+    container_name: prometheus
+    image: prom/prometheus:latest
+    labels:
+      prometheus.label.instance: truenas-server
+      prometheus.port: 9090
+    networks:
+      - observe
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/pool0/containers/prometheus:/prometheus
