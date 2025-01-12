@@ -52,14 +52,6 @@ configs:
             __address__ = "${DESKTOP_HOST}:9882",
             instance    = "desktop",
           }],
-          [{
-            __address__ = "${SERVER_HOST}:9100",
-            instance    = "docker-prod-1",
-          }],
-          [{
-            __address__ = "${SERVER_HOST}:9882",
-            instance    = "docker-prod-1",
-          }],
         )
         forward_to      = [prometheus.remote_write.default.receiver]
         job_name        = "machines"

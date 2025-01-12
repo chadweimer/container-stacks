@@ -263,11 +263,6 @@
           "description": "The host address of my desktop computer, for scraping."
         },
         {
-          "name": "SERVER_HOST",
-          "label": "Server Scrape Host",
-          "description": "The host address of docker-prod-1, for scraping."
-        },
-        {
           "name": "KVM_HOST",
           "label": "KVM Scrape Host",
           "description": "The host address of the NAS kvm, for scraping."
