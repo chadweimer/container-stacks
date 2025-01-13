@@ -211,7 +211,7 @@ services:
       - ingress
       - observe
     ports:
-      - '1514:1514'
+      - '127.0.0.1:1514:1514'
     pull_policy: always
     restart: unless-stopped
     user: "568:568"
@@ -244,7 +244,7 @@ services:
     networks:
       - observe
     ports:
-      - '9109:9109'
+      - '127.0.0.1:9109:9109'
     pull_policy: always
     restart: unless-stopped
   nut:
