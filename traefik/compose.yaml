@@ -9,7 +9,8 @@ networks:
 services:
   traefik:
     command:
-      # - '--log.level=DEBUG'
+      - '--log.level=INFO'
+      - '--log.format=json'
       - '--api.insecure=true'
       - '--metrics.prometheus=true'
       - '--providers.docker=true'
