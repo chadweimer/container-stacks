@@ -4,6 +4,8 @@ networks:
     external: True
   ingress:
     external: True
+  observe:
+    external: True
 services:
   homepage:
     container_name: homepage
@@ -20,6 +22,7 @@ services:
     networks:
       - docker-proxy
       - ingress
+      - observe
     pull_policy: always
     restart: unless-stopped
     volumes:
