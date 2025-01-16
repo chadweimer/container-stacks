@@ -28,7 +28,7 @@ configs:
   prometheus_config:
     content: |
       global:
-        scrape_interval: 15s
+        scrape_interval: 1m
 networks:
   ingress:
     external: True
