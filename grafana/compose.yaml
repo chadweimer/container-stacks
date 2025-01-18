@@ -69,6 +69,7 @@ services:
     container_name: loki
     image: grafana/loki:latest
     labels:
+      com.centurylinklabs.watchtower.enable: false # See https://github.com/containrrr/watchtower/issues/1988
       prometheus.label.instance: truenas-server
       prometheus.port: 3100
     networks:
@@ -89,6 +90,7 @@ services:
     container_name: prometheus
     image: prom/prometheus:latest
     labels:
+      com.centurylinklabs.watchtower.enable: false # See https://github.com/containrrr/watchtower/issues/1988
       prometheus.label.instance: truenas-server
       prometheus.port: 9090
     networks:

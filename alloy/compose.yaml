@@ -194,6 +194,7 @@ services:
     container_name: alloy
     image: grafana/alloy:latest
     labels:
+      com.centurylinklabs.watchtower.enable: false # See https://github.com/containrrr/watchtower/issues/1988
       homepage.group: Network
       homepage.name: Alloy
       homepage.href: https://${ALLOY_HOST}
