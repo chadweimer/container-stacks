@@ -7,6 +7,7 @@ services:
     container_name: portainer
     image: portainer/portainer-ee:2.25.1
     labels:
+      com.centurylinklabs.watchtower.enable: false
       homepage.group: Network
       homepage.href: https://${HOST}
       homepage.icon: portainer.png
