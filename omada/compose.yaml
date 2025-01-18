@@ -18,6 +18,7 @@ services:
       TZ: America/Los_Angeles
     image: mbentley/omada-controller:5.15
     labels:
+      com.centurylinklabs.watchtower.enable: false
       homepage.group: Network
       homepage.href: https://${HOST}
       homepage.icon: omada.png

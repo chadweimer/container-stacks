@@ -321,7 +321,7 @@
       "title": "Traefik (Let's Encrypt)",
       "description": "The Cloud Native Application Proxy",
       "categories": [
-        "app"
+        "infra"
       ],
       "platform": "linux",
       "repository": {
@@ -521,7 +521,7 @@
       "title": "Cloudflared",
       "description": "Cloudflare Tunnel daemon",
       "categories": [
-        "app"
+        "infra"
       ],
       "platform": "linux",
       "repository": {
@@ -557,7 +557,7 @@
       "title": "Tailscale",
       "description": "Tailscale daemon",
       "categories": [
-        "app"
+        "infra"
       ],
       "platform": "linux",
       "repository": {
@@ -601,7 +601,7 @@
       "title": "Traefik (w/ EAB)",
       "description": "The Cloud Native Application Proxy",
       "categories": [
-        "app"
+        "infra"
       ],
       "platform": "linux",
       "repository": {
@@ -654,6 +654,20 @@
       "repository": {
         "url": "https://github.com/chadweimer/container-stacks",
         "stackfile": "docker-proxy/compose.yaml"
+      }
+    },
+    {
+      "id": 21,
+      "type": 3,
+      "title": "Watchtower",
+      "description": "A container-based solution for automating Docker container base image updates.",
+      "categories": [
+        "infra"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "watchtower/compose.yaml"
       }
     }
   ]
