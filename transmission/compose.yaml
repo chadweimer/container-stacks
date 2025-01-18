@@ -6,7 +6,8 @@ services:
   transmission:
     container_name: transmission
     depends_on:
-      - vpn
+      vpn:
+        condition: service_healthy
     environment:
       TZ: America/Los_Angeles
     image: lscr.io/linuxserver/transmission:latest
