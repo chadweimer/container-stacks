@@ -9,7 +9,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: lscr.io/linuxserver/bazarr:latest
+    image: ghcr.io/linuxserver/bazarr:latest
     labels:
       homepage.group: Media
       homepage.name: Bazarr (Subtitles)
@@ -21,6 +21,8 @@ services:
       traefik.enable: true
       traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST}`)
       traefik.http.routers.bazarr.tls.certresolver: myresolver
+      wud.tag.include: latest
+      wud.watch: true
     networks:
       - ingress
     pull_policy: always
@@ -46,6 +48,8 @@ services:
       traefik.enable: true
       traefik.http.routers.jellyseerr.rule: Host(`${JELLYSEERR_HOST}`)
       traefik.http.routers.jellyseerr.tls.certresolver: myresolver
+      wud.tag.include: latest
+      wud.watch: true
     networks:
       - ingress
     pull_policy: always
@@ -58,7 +62,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: lscr.io/linuxserver/prowlarr:latest
+    image: ghcr.io/linuxserver/prowlarr:latest
     labels:
       homepage.group: Media
       homepage.name: Prowlarr (Indexers)
@@ -70,6 +74,8 @@ services:
       traefik.enable: true
       traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST}`)
       traefik.http.routers.prowlarr.tls.certresolver: myresolver
+      wud.tag.include: latest
+      wud.watch: true
     networks:
       - ingress
     pull_policy: always
@@ -82,7 +88,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: lscr.io/linuxserver/radarr:latest
+    image: ghcr.io/linuxserver/radarr:latest
     labels:
       homepage.group: Media
       homepage.name: Radarr (Movies)
@@ -95,6 +101,8 @@ services:
       traefik.enable: true
       traefik.http.routers.radarr.rule: Host(`${RADARR_HOST}`)
       traefik.http.routers.radarr.tls.certresolver: myresolver
+      wud.tag.include: latest
+      wud.watch: true
     networks:
       - ingress
     pull_policy: always
@@ -108,7 +116,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: lscr.io/linuxserver/readarr:develop
+    image: ghcr.io/linuxserver/readarr:develop
     labels:
       homepage.group: Media
       homepage.name: Readarr (Books)
@@ -120,6 +128,8 @@ services:
       traefik.enable: true
       traefik.http.routers.readarr.rule: Host(`${READARR_HOST}`)
       traefik.http.routers.readarr.tls.certresolver: myresolver
+      wud.tag.include: develop
+      wud.watch: true
     networks:
       - ingress
     pull_policy: always
@@ -133,7 +143,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: lscr.io/linuxserver/sonarr:latest
+    image: ghcr.io/linuxserver/sonarr:latest
     labels:
       homepage.group: Media
       homepage.name: Sonarr (Shows)
@@ -146,6 +156,8 @@ services:
       traefik.enable: true
       traefik.http.routers.sonarr.rule: Host(`${SONARR_HOST}`)
       traefik.http.routers.sonarr.tls.certresolver: myresolver
+      wud.tag.include: latest
+      wud.watch: true
     networks:
       - ingress
     pull_policy: always

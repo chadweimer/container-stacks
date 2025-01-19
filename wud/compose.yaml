@@ -6,12 +6,6 @@ services:
       WUD_TRIGGER_DOCKER_LOCAL_PRUNE: true
       WUD_WATCHER_LOCAL_CRON: 0 5 * * *
       WUD_WATCHER_LOCAL_WATCHBYDEFAULT: false
-    healthcheck:
-      test: wget --no-verbose --tries=1 --no-check-certificate --spider http://localhost:3000
-      interval: 10s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
     image: getwud/wud:latest
     labels:
       com.centurylinklabs.watchtower.enable: false
