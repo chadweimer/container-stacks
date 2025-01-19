@@ -1,4 +1,3 @@
-name: syncthing
 networks:
   ingress:
     external: True
@@ -20,7 +19,7 @@ services:
       PGID: '1000'
       PUID: '1000'
       STNOUPGRADE: 'true'
-    image: syncthing/syncthing:1
+    image: ghcr.io/syncthing/syncthing:1
     labels:
       homepage.group: Network
       homepage.href: https://${HOST}
@@ -32,6 +31,8 @@ services:
       traefik.enable: True
       traefik.http.routers.syncthing.rule: Host(`${HOST}`)
       traefik.http.routers.syncthing.tls.certresolver: myresolver
+      wud.tag.include: '1'
+      wud.watch: true
     networks:
       - ingress
       - observe

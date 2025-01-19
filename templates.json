@@ -657,20 +657,6 @@
       }
     },
     {
-      "id": 21,
-      "type": 3,
-      "title": "Watchtower",
-      "description": "A container-based solution for automating Docker container base image updates.",
-      "categories": [
-        "infra"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "watchtower/compose.yaml"
-      }
-    },
-    {
       "id": 22,
       "type": 3,
       "title": "What's Up Docker?",
@@ -682,7 +668,17 @@
       "repository": {
         "url": "https://github.com/chadweimer/container-stacks",
         "stackfile": "wud/compose.yaml"
-      }
+      },
+      "env": [
+        {
+          "name": "DOCKER_HUB_USERNAME",
+          "label": "Docker Hub Username"
+        },
+        {
+          "name": "DOCKER_HUB_TOKEN",
+          "label": "Docker Hub Token"
+        }
+      ]
     }
   ]
 }

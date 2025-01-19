@@ -3,12 +3,13 @@ services:
     container_name: wud
     environment:
       TZ: America/Los_Angeles
+      WUD_REGISTRY_HUB_PUBLIC_LOGIN: ${DOCKER_HUB_USERNAME}
+      WUD_REGISTRY_HUB_PUBLIC_PASSWORD: ${DOCKER_HUB_TOKEN}
       WUD_TRIGGER_DOCKER_LOCAL_PRUNE: true
       WUD_WATCHER_LOCAL_CRON: 0 5 * * *
       WUD_WATCHER_LOCAL_WATCHBYDEFAULT: false
     image: getwud/wud:latest
     labels:
-      com.centurylinklabs.watchtower.enable: false
       wud.tag.include: latest
       wud.watch: true
     volumes:

@@ -1,4 +1,3 @@
-name: docker-proxy
 networks:
   docker-proxy:
     external: True
@@ -8,7 +7,10 @@ services:
     environment:
       CONTAINERS: '1'
       NETWORKS: '1'
-    image: lscr.io/linuxserver/socket-proxy:latest
+    image: ghcr.io/linuxserver/socket-proxy:latest
+    labels:
+      wud.tag.include: latest
+      wud.watch: true
     networks:
       - docker-proxy
     pull_policy: always

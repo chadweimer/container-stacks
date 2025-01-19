@@ -1,4 +1,3 @@
-name: kavita
 networks:
   ingress:
     external: true
@@ -20,6 +19,8 @@ services:
       traefik.enable: true
       traefik.http.routers.kavita.rule: Host(`${HOST}`)
       traefik.http.routers.kavita.tls.certresolver: myresolver
+      wud.tag.include: latest
+      wud.watch: true
     networks:
       - ingress
     pull_policy: always

@@ -1,4 +1,3 @@
-name: uptime-kuma
 networks:
   docker-proxy:
     external: True
@@ -22,6 +21,8 @@ services:
       traefik.enable: true
       traefik.http.routers.uptime.rule: Host(`${HOST}`)
       traefik.http.routers.uptime.tls.certresolver: myresolver
+      wud.tag.include: '1'
+      wud.watch: true
     networks:
       - docker-proxy
       - ingress

@@ -1,4 +1,3 @@
-name: transmission
 networks:
   ingress:
     external: True
@@ -10,7 +9,7 @@ services:
         condition: service_healthy
     environment:
       TZ: America/Los_Angeles
-    image: lscr.io/linuxserver/transmission:latest
+    image: ghcr.io/linuxserver/transmission:latest
     labels:
       homepage.group: Media
       homepage.name: Transmission (Downloads)
@@ -18,6 +17,8 @@ services:
       homepage.icon: transmission.png
       homepage.widget.type: transmission
       homepage.widget.url: http://transmission-vpn:9091
+      wud.tag.include: latest
+      wud.watch: true
     network_mode: 'service:vpn'
     pull_policy: always
     restart: unless-stopped
@@ -37,12 +38,14 @@ services:
       OPENVPN_PASSWORD: ${OPENVPN_PASSWORD}
       SERVER_COUNTRIES: United States
       TZ: America/Los_Angeles
-    image: docker.io/qmcgaw/gluetun:latest
+    image: qmcgaw/gluetun:latest
     labels:
       traefik.enable: true
       traefik.http.routers.transmission.rule: Host(`${HOST}`)
       traefik.http.routers.transmission.tls.certresolver: myresolver
       traefik.http.services.transmission.loadbalancer.server.port: 9091
+      wud.tag.include: latest
+      wud.watch: true
     networks:
       - ingress
     # ports:
