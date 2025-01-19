@@ -44,7 +44,7 @@ services:
       homepage.widget.url: http://host.docker.internal:8080
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
-      wud.tag.include: v3
+      wud.tag.include: ^v3$$
       wud.watch: true
     networks:
       - docker-proxy

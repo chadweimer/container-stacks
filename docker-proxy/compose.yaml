@@ -9,7 +9,7 @@ services:
       NETWORKS: '1'
     image: ghcr.io/linuxserver/socket-proxy:latest
     labels:
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     networks:
       - docker-proxy

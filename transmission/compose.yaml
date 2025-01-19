@@ -17,7 +17,7 @@ services:
       homepage.icon: transmission.png
       homepage.widget.type: transmission
       homepage.widget.url: http://transmission-vpn:9091
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     network_mode: 'service:vpn'
     pull_policy: always
@@ -44,7 +44,7 @@ services:
       traefik.http.routers.transmission.rule: Host(`${HOST}`)
       traefik.http.routers.transmission.tls.certresolver: myresolver
       traefik.http.services.transmission.loadbalancer.server.port: 9091
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     networks:
       - ingress

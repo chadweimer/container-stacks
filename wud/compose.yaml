@@ -8,9 +8,10 @@ services:
       WUD_TRIGGER_DOCKER_LOCAL_PRUNE: true
       WUD_WATCHER_LOCAL_CRON: 0 5 * * *
       WUD_WATCHER_LOCAL_WATCHBYDEFAULT: false
-    image: getwud/wud:latest
+      WUD_WATCHER_LOCAL_WATCHEVENTS: false
+    image: ghcr.io/getwud/wud:latest
     labels:
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock

@@ -21,7 +21,7 @@ services:
       traefik.enable: true
       traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST}`)
       traefik.http.routers.bazarr.tls.certresolver: myresolver
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     networks:
       - ingress
@@ -36,7 +36,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: fallenbagel/jellyseerr:latest
+    image: ghcr.io/fallenbagel/jellyseerr:latest
     labels:
       homepage.group: Media
       homepage.name: Jellyseerr (Requests)
@@ -48,7 +48,7 @@ services:
       traefik.enable: true
       traefik.http.routers.jellyseerr.rule: Host(`${JELLYSEERR_HOST}`)
       traefik.http.routers.jellyseerr.tls.certresolver: myresolver
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     networks:
       - ingress
@@ -74,7 +74,7 @@ services:
       traefik.enable: true
       traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST}`)
       traefik.http.routers.prowlarr.tls.certresolver: myresolver
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     networks:
       - ingress
@@ -101,7 +101,7 @@ services:
       traefik.enable: true
       traefik.http.routers.radarr.rule: Host(`${RADARR_HOST}`)
       traefik.http.routers.radarr.tls.certresolver: myresolver
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     networks:
       - ingress
@@ -128,7 +128,7 @@ services:
       traefik.enable: true
       traefik.http.routers.readarr.rule: Host(`${READARR_HOST}`)
       traefik.http.routers.readarr.tls.certresolver: myresolver
-      wud.tag.include: develop
+      wud.tag.include: ^develop$$
       wud.watch: true
     networks:
       - ingress
@@ -156,7 +156,7 @@ services:
       traefik.enable: true
       traefik.http.routers.sonarr.rule: Host(`${SONARR_HOST}`)
       traefik.http.routers.sonarr.tls.certresolver: myresolver
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     networks:
       - ingress

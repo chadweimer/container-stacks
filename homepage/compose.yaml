@@ -18,7 +18,7 @@ services:
       traefik.enable: true
       traefik.http.routers.homepage.rule: Host(`${HOST}`)
       traefik.http.routers.homepage.tls.certresolver: myresolver
-      wud.tag.include: latest
+      wud.tag.include: ^latest$$
       wud.watch: true
     networks:
       - docker-proxy
