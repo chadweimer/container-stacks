@@ -669,6 +669,20 @@
         "url": "https://github.com/chadweimer/container-stacks",
         "stackfile": "watchtower/compose.yaml"
       }
+    },
+    {
+      "id": 22,
+      "type": 3,
+      "title": "What's Up Docker?",
+      "description": "Keep your containers up-to-date!",
+      "categories": [
+        "infra"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "wud/compose.yaml"
+      }
     }
   ]
 }
