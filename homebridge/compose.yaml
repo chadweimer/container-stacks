@@ -1,0 +1,42 @@
+networks:
+  homekit:
+    driver: macvlan
+    driver_opts:
+      parent: ${NETWORK_INTERFACE}
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24
+          gateway: 192.168.1.1
+  ingress:
+    external: True
+services:
+  homebridge:
+    container_name: homebridge
+    environment:
+      PGID: 568
+      PUID: 568
+      TZ: America/Los_Angeles
+    image: homebridge/homebridge:latest
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST}
+      homepage.icon: homebridge.png
+      homepage.name: Homebridge
+      homepage.widget.password: ${PASSWORD}
+      homepage.widget.type: homebridge
+      homepage.widget.username: ${USERNAME}
+      homepage.widget.url: http://homebridge:8581
+      traefik.enable: True
+      traefik.http.routers.homebridge.rule: Host(`${HOST}`)
+      traefik.http.routers.homebridge.tls.certresolver: myresolver
+      traefik.http.services.homebridge.loadbalancer.server.port: 8581
+      wud.tag.include: ^latest$$
+      wud.watch: true
+    networks:
+      homekit:
+        ipv4_address: ${IPV4_ADDRESS}
+        mac_address: ${MAC_ADDRESS}
+      ingress:
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/homebridge:/homebridge
