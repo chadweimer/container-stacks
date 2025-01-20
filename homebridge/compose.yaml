@@ -10,7 +10,7 @@ services:
       PGID: 568
       PUID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/homebridge/homebridge:latest
+    image: homebridge/homebridge:latest
     labels:
       homepage.group: Network
       homepage.href: https://${HOST}
