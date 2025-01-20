@@ -16,7 +16,7 @@ services:
       PGID: 568
       PUID: 568
       TZ: America/Los_Angeles
-    image: homebridge/homebridge:latest
+    image: ghcr.io/homebridge/homebridge:latest
     labels:
       homepage.group: Network
       homepage.href: https://${HOST}
@@ -37,6 +37,7 @@ services:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
       ingress:
+    pull_policy: always
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/homebridge:/homebridge

@@ -13,5 +13,7 @@ services:
     labels:
       wud.tag.include: ^latest$$
       wud.watch: true
+    pull_policy: always
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
