@@ -1,13 +1,7 @@
 networks:
-  homekit:
-    driver: macvlan
-    driver_opts:
-      parent: ${NETWORK_INTERFACE}
-    ipam:
-      config:
-        - subnet: 192.168.1.0/24
-          gateway: 192.168.1.1
   ingress:
+    external: True
+  lan:
     external: True
 services:
   homebridge:
@@ -33,7 +27,7 @@ services:
       wud.tag.include: ^latest$$
       wud.watch: true
     networks:
-      homekit:
+      lan:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
       ingress:

@@ -708,11 +708,6 @@
           "label": "MAC Address"
         },
         {
-          "name": "NETWORK_INTERFACE",
-          "label": "Network Interface",
-          "default": "eth0"
-        },
-        {
           "name": "USERNAME",
           "label": "Homepage Widget Username",
           "description": "The username to use for the homepage widget for this app."
