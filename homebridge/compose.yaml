@@ -40,4 +40,5 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
+      - /mnt/pool0/backups/homebridge:/backups
       - /mnt/pool0/containers/homebridge:/homebridge
