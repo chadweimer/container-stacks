@@ -8,11 +8,7 @@ services:
       - SETUID
     container_name: omada
     environment:
-      MANAGE_HTTPS_PORT: '30077'
-      MANAGE_HTTP_PORT: '30076'
       PGID: '568'
-      PORTAL_HTTPS_PORT: '30079'
-      PORTAL_HTTP_PORT: '30078'
       PUID: '568'
       TZ: America/Los_Angeles
     image: mbentley/omada-controller:5.15
@@ -24,15 +20,15 @@ services:
       homepage.widget.password: ${PASSWORD}
       homepage.widget.site: Home
       homepage.widget.type: omada
-      homepage.widget.url: https://host.docker.internal:30077
+      homepage.widget.url: https://host.docker.internal:8088
       homepage.widget.username: ${USERNAME}
       traefik.enable: True
       traefik.http.routers.omada.rule: Host(`${HOST}`)
       traefik.http.routers.omada.tls.certresolver: myresolver
-      traefik.http.services.omada.loadbalancer.server.port: 30077
-      traefik.http.services.omada.loadbalancer.server.scheme: https
+      traefik.http.services.omada.loadbalancer.server.port: 8088
     network_mode: host
     restart: unless-stopped
+    stop_grace_period: 60s
     volumes:
       - /mnt/pool0/containers/omada/data:/opt/tplink/EAPController/data
       - /mnt/pool0/containers/omada/config:/opt/tplink/EAPController/logs
