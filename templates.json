@@ -481,6 +481,12 @@
               "value": "staging"
             }
           ]
+        },
+        {
+          "name": "PG_VERSION",
+          "label": "PostgreSQL Version",
+          "description": "The version of PostgreSQL to use.",
+          "default": "16"
         }
       ]
     },
@@ -512,6 +518,12 @@
           "name": "SECURE_KEY",
           "label": "Secure Key",
           "description": "The secure key to use (e.g., for JWT signing)."
+        },
+        {
+          "name": "PG_VERSION",
+          "label": "PostgreSQL Version",
+          "description": "The version of PostgreSQL to use.",
+          "default": "16"
         }
       ]
     },

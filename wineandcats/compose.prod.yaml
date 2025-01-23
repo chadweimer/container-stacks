@@ -39,10 +39,10 @@ services:
       interval: 10s
       timeout: 30s
       retries: 5
-    image: postgres:16
+    image: postgres:${PG_VERSION}
     networks:
       - default
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/wineandcats-prod/pg16/data:/var/lib/postgresql/data
+      - /mnt/pool0/containers/wineandcats-prod/pg${PG_VERSION}/data:/var/lib/postgresql/data

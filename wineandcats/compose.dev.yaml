@@ -37,10 +37,13 @@ services:
       interval: 10s
       timeout: 30s
       retries: 5
-    image: postgres:16
+    image: postgres:${PG_VERSION}
+    labels:
+      - wud.tag.include=^${PG_VERSION}$$
+      - wud.watch=true
     networks:
       - default
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/wineandcats-${STAGE}/pg16/data:/var/lib/postgresql/data
+      - /mnt/pool0/containers/wineandcats-${STAGE}/pg${PG_VERSION}/data:/var/lib/postgresql/data
