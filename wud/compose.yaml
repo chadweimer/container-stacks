@@ -3,6 +3,7 @@ services:
     container_name: wud
     environment:
       TZ: America/Los_Angeles
+      WUD_LOG_FORMAT: json
       WUD_REGISTRY_HUB_PUBLIC_LOGIN: ${DOCKER_HUB_USERNAME}
       WUD_REGISTRY_HUB_PUBLIC_PASSWORD: ${DOCKER_HUB_TOKEN}
       WUD_TRIGGER_DOCKER_LOCAL_MODE: batch
