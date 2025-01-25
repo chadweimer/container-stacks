@@ -227,6 +227,11 @@
           "description": "The host address (domain) to expose the application."
         },
         {
+          "name": "IMAGE_TAG",
+          "label": "IMAGE_TAG",
+          "description": "The container image tag to use."
+        },
+        {
           "name": "USERNAME",
           "label": "Homepage Widget Username",
           "description": "The username to use for the homepage widget for this app."
@@ -430,9 +435,10 @@
           "description": "The host address (domain) to expose the application."
         },
         {
-          "name": "VERSION",
-          "label": "Version",
-          "description": "Version of Vaultwaren to use."
+          "name": "IMAGE_TAG",
+          "label": "Image Tag",
+          "description": "The container image tag to use.",
+          "default": "latest"
         }
       ]
     },
@@ -513,6 +519,12 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "IMAGE_TAG",
+          "label": "Image Tag",
+          "description": "The container image tag to use.",
+          "default": "latest"
         },
         {
           "name": "DB_PASSWORD",

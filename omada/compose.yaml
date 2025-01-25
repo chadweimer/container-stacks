@@ -11,7 +11,7 @@ services:
       PGID: '568'
       PUID: '568'
       TZ: America/Los_Angeles
-    image: mbentley/omada-controller:5.15
+    image: mbentley/omada-controller:${IMAGE_TAG}
     labels:
       homepage.group: Network
       homepage.href: https://${HOST}

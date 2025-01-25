@@ -6,7 +6,7 @@ services:
     container_name: vaultwarden
     environment:
       DOMAIN: https://${HOST}
-    image: ghcr.io/dani-garcia/vaultwarden:${VERSION}
+    image: ghcr.io/dani-garcia/vaultwarden:${IMAGE_TAG}
     labels:
       homepage.group: Other
       homepage.name: Bitwarden

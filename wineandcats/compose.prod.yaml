@@ -21,7 +21,7 @@ services:
       traefik.enable: true
       traefik.http.routers.wineandcats-prod.rule: Host(`${HOST}`)
       traefik.http.routers.wineandcats-prod.tls.certresolver: myresolver
-    image: ghcr.io/chadweimer/gomp:3.9.2
+    image: ghcr.io/chadweimer/gomp:${IMAGE_TAG}
     networks:
       - default
       - ingress
