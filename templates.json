@@ -428,6 +428,11 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "VERSION",
+          "label": "Version",
+          "description": "Version of Vaultwaren to use."
         }
       ]
     },
