@@ -228,7 +228,7 @@
         },
         {
           "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
+          "label": "Image Tag",
           "description": "The container image tag to use."
         },
         {
