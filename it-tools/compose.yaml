@@ -1,0 +1,22 @@
+networks:
+  ingress:
+    external: True
+services:
+  app:
+    container_name: it-tools
+    image: ghcr.io/corentinth/it-tools:latest
+    labels:
+      homepage.group: Network
+      homepage.name: IT-Tools
+      homepage.href: https://${HOST}
+      homepage.icon: it-tools.png
+      homepage.showStats: true
+      traefik.enable: true
+      traefik.http.routers.it-tools.rule: Host(`${HOST}`)
+      traefik.http.routers.it-tools.tls.certresolver: myresolver
+      wud.tag.include: ^latest$$
+      wud.watch: true
+    networks:
+      - ingress
+    pull_policy: always
+    restart: unless-stopped

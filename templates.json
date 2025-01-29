@@ -747,6 +747,27 @@
           "description": "The password to use for the homepage widget for this app."
         }
       ]
+    },
+   {
+      "id": 24,
+      "type": 3,
+      "title": "IT-Tools",
+      "description": "Handy tools for developers",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "it-tools/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        }
+      ]
     }
   ]
 }
