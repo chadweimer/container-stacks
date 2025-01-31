@@ -36,9 +36,9 @@ configs:
       }
 
       prometheus.scrape "docker" {
-        targets         = discovery.relabel.docker_prometheus.output
-        forward_to      = [prometheus.remote_write.default.receiver]
-        job_name        = "docker"
+        targets    = discovery.relabel.docker_prometheus.output
+        forward_to = [prometheus.remote_write.default.receiver]
+        job_name   = "docker"
       }
 
       prometheus.scrape "machines" {
@@ -52,8 +52,8 @@ configs:
             instance    = "desktop",
           }],
         )
-        forward_to      = [prometheus.remote_write.default.receiver]
-        job_name        = "machines"
+        forward_to = [prometheus.remote_write.default.receiver]
+        job_name   = "machines"
       }
 
       prometheus.scrape "pikvm" {
@@ -61,10 +61,10 @@ configs:
           __address__ = "${KVM_HOST}",
           instance    = "truenas-server",
         }]
-        forward_to      = [prometheus.remote_write.default.receiver]
-        job_name        = "pikvm"
-        metrics_path    = "/api/export/prometheus/metrics"
-        scheme          = "https"
+        forward_to   = [prometheus.remote_write.default.receiver]
+        job_name     = "pikvm"
+        metrics_path = "/api/export/prometheus/metrics"
+        scheme       = "https"
 
         basic_auth {
           username = "${KVM_USERNAME}"
