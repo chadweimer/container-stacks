@@ -748,7 +748,7 @@
         }
       ]
     },
-   {
+    {
       "id": 24,
       "type": 3,
       "title": "IT-Tools",
@@ -766,6 +766,32 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        }
+      ]
+    },
+    {
+      "id": 25,
+      "type": 3,
+      "title": "ntopng",
+      "description": "ntopng is a web-based application that provides 360° network visibility by gathering traffic information from various sources.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "ntopng/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "NETWORK_INTERFACE",
+          "label": "Network Interface (NIC)",
+          "description": "TThe network interface to monitor."
         }
       ]
     }

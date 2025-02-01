@@ -1,0 +1,21 @@
+services:
+  ntopng:
+    command: -i ${NETWORK_INTERFACE}
+    container_name: ntopng
+    image: ntop/ntopng:latest
+    labels:
+      homepage.group: Network
+      homepage.name: ntopng
+      homepage.href: https://${HOST}
+      homepage.icon: ntopng.png
+      homepage.showStats: true
+      traefik.enable: true
+      traefik.http.routers.ntopng.rule: Host(`${HOST}`)
+      traefik.http.routers.ntopng.tls.certresolver: myresolver
+      traefik.http.services.ntopng.loadbalancer.server.port: 3000
+    network_mode: host
+    privileged: true
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/ntopng:/var/lib/ntopng
