@@ -26,8 +26,9 @@ configs:
               period: 24h
   prometheus_config:
     content: |
-      global:
-        scrape_interval: 1m
+      storage:
+        tsdb:
+          out_of_order_time_window: 1h
 networks:
   ingress:
     external: True
