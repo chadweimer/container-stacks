@@ -686,30 +686,6 @@
       }
     },
     {
-      "id": 22,
-      "type": 3,
-      "title": "What's Up Docker?",
-      "description": "Keep your containers up-to-date!",
-      "categories": [
-        "infra"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "wud/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "DOCKER_HUB_USERNAME",
-          "label": "Docker Hub Username"
-        },
-        {
-          "name": "DOCKER_HUB_TOKEN",
-          "label": "Docker Hub Token"
-        }
-      ]
-    },
-    {
       "id": 23,
       "type": 3,
       "title": "Homebridge",
@@ -766,32 +742,6 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
-        }
-      ]
-    },
-    {
-      "id": 25,
-      "type": 3,
-      "title": "ntopng",
-      "description": "ntopng is a web-based application that provides 360° network visibility by gathering traffic information from various sources.",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "ntopng/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
-        },
-        {
-          "name": "NETWORK_INTERFACE",
-          "label": "Network Interface (NIC)",
-          "description": "TThe network interface to monitor."
         }
       ]
     }
