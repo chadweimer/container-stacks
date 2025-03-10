@@ -13,8 +13,8 @@ services:
       homepage.icon: wallos.png
       homepage.showStats: true
       traefik.enable: true
-      traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
-      traefik.http.routers.filebrowser.tls.certresolver: myresolver
+      traefik.http.routers.wallos.rule: Host(`${HOST}`)
+      traefik.http.routers.wallos.tls.certresolver: myresolver
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/wallos/db:/var/www/html/db
