@@ -744,6 +744,27 @@
           "description": "The host address (domain) to expose the application."
         }
       ]
+    },
+    {
+      "id": 25,
+      "type": 3,
+      "title": "Wallos",
+      "description": "Open-Source Personal Subscription Tracker",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "wallos/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        }
+      ]
     }
   ]
 }
