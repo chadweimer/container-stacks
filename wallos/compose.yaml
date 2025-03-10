@@ -1,0 +1,10 @@
+services:
+  wallos:
+    container_name: wallos
+    environment:
+      TZ: America/Los_Angeles
+    image: bellamy/wallos:latest
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/wallos/db:/var/www/html/db
+      - /mnt/pool0/containers/wallos/logos:/var/www/html/images/uploads/logos
