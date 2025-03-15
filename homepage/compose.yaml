@@ -9,6 +9,7 @@ services:
   homepage:
     container_name: homepage
     environment:
+      HOMEPAGE_ALLOWED_HOSTS: ${HOST}
       PGID: 568
       PUID: 568
     extra_hosts:
