@@ -35,6 +35,27 @@ configs:
         }
       }
 
+      prometheus.exporter.unix "host" {
+        procfs_path = "/host/proc"
+        rootfs_path = "/host"
+        sysfs_path  = "/host/sys"
+      }
+
+      prometheus.scrape "host" {
+        targets    = prometheus.exporter.unix.host.targets
+        forward_to = [prometheus.relabel.host.receiver]
+        job_name   = "host"
+      }
+
+      prometheus.relabel "host" {
+        rule {
+          target_label = "instance"
+          replacement  = "truenas-server"
+        }
+
+        forward_to = [prometheus.remote_write.default.receiver]
+      }
+
       prometheus.scrape "docker" {
         targets    = discovery.relabel.docker_prometheus.output
         forward_to = [prometheus.remote_write.default.receiver]
@@ -212,6 +233,7 @@ services:
     restart: unless-stopped
     user: "568:568"
     volumes:
+      - /:/host:ro
       - /mnt/pool0/containers/alloy:/var/lib/alloy
   cadvisor:
     command:
