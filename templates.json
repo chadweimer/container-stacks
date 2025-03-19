@@ -765,6 +765,32 @@
           "description": "The host address (domain) to expose the application."
         }
       ]
+    },
+    {
+      "id": 26,
+      "type": 3,
+      "title": "Authelia",
+      "description": "Open-source authentication and authorization server and portal.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "authelia/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "COOKIE_DOMAIN",
+          "label": "Cookie Domain",
+          "description": "The domain the session cookie is assigned to protect."
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,57 @@
+configs:
+  authelia_config:
+    content: |
+      session:
+        cookies:
+          - domain: '${COOKIE_DOMAIN}'
+            authelia_url: 'https://${HOST}'
+      notifier:
+        disable_startup_check: false
+        filesystem:
+          filename: '/config/notification.txt'
+networks:
+  ingress:
+    external: True
+secrets:
+  JWT_SECRET:
+    file: /mnt/pool0/containers/authelia/secrets/JWT_SECRET
+  SESSION_SECRET:
+    file: /mnt/pool0/containers/authelia/secrets/SESSION_SECRET
+  STORAGE_ENCRYPTION_KEY:
+    file: /mnt/pool0/containers/authelia/secrets/STORAGE_ENCRYPTION_KEY
+services:
+  authelia:
+    configs:
+      - source: authelia_config
+        target: /config/configuration.yml
+    container_name: authelia
+    environment:
+      AUTHELIA_ACCESS_CONTROL_DEFAULT_POLICY: one_factor
+      AUTHELIA_AUTHENTICATION_BACKEND_FILE_PATH: /config/users_database.yml
+      AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: /run/secrets/JWT_SECRET
+      AUTHELIA_SESSION_SECRET_FILE: /run/secrets/SESSION_SECRET
+      AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: /run/secrets/STORAGE_ENCRYPTION_KEY
+      AUTHELIA_STORAGE_LOCAL_PATH: /config/db.sqlite3
+      PGID: 568
+      PUID: 568
+      TZ: America/Los_Angeles
+    healthcheck:
+      disable: true
+    image: ghcr.io/authelia/authelia:4
+    labels:
+      traefik.enable: true
+      traefik.http.routers.authelia.rule: Host(`${HOST}`)
+      traefik.http.routers.authelia.tls.certresolver: myresolver
+      traefik.http.services.authelia.loadbalancer.server.port: 9091
+      traefik.http.middlewares.authelia.forwardauth.address: http://authelia:9091/api/authz/forward-auth
+      traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: true
+      traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: Remote-User,Remote-Groups,Remote-Name,Remote-Email
+    networks:
+      - ingress
+    restart: unless-stopped
+    secrets:
+      - JWT_SECRET
+      - SESSION_SECRET
+      - STORAGE_ENCRYPTION_KEY
+    volumes:
+      - /mnt/pool0/containers/authelia/config:/config
