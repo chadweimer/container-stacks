@@ -1,12 +1,23 @@
+configs:
+  fb_config:
+    content: |
+      address: 0.0.0.0
+      port: 80
+      database: /app/filebrowser.db
+      auth:
+        method: proxy
+        header: Remote-User
 networks:
   ingress:
     external: True
 services:
   filebrowser:
+    configs:
+      - source: fb_config
+        target: /etc/filebrowser/.filebrowser.yaml
+    command:
+      - '--config=/etc/filebrowser/.filebrowser.yaml'
     container_name: filebrowser
-    environment:
-      FB_DATABASE: /app/filebrowser.db
-      FB_CONFIG: /app/filebrowser.json
     image: filebrowser/filebrowser:latest
     labels:
       homepage.group: Network
@@ -17,8 +28,7 @@ services:
       traefik.enable: true
       traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
       traefik.http.routers.filebrowser.tls.certresolver: myresolver
-      wud.tag.include: ^latest$$
-      wud.watch: true
+      traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always
