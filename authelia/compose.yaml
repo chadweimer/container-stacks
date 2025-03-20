@@ -5,16 +5,18 @@ configs:
         cookies:
           - domain: '${COOKIE_DOMAIN}'
             authelia_url: 'https://${HOST}'
-      notifier:
-        disable_startup_check: false
-        filesystem:
-          filename: '/config/notification.txt'
+      identity_providers:
+        oidc:
+          jwks:
+            - key: {{ secret "/run/secrets/OIDC_JWK_KEY" | mindent 10 "|" | msquote }}
 networks:
   ingress:
     external: True
 secrets:
   JWT_SECRET:
     file: /mnt/pool0/containers/authelia/secrets/JWT_SECRET
+  OIDC_JWK_KEY:
+    file: /mnt/pool0/containers/authelia/secrets/oidc.jwks.rsa.2048.pem
   SESSION_SECRET:
     file: /mnt/pool0/containers/authelia/secrets/SESSION_SECRET
   STORAGE_ENCRYPTION_KEY:
@@ -29,12 +31,16 @@ services:
       AUTHELIA_ACCESS_CONTROL_DEFAULT_POLICY: one_factor
       AUTHELIA_AUTHENTICATION_BACKEND_FILE_PATH: /config/users_database.yml
       AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: /run/secrets/JWT_SECRET
+      AUTHELIA_NOTIFIER_DISABLE_STARTUP_CHECK: false
+      AUTHELIA_NOTIFIER_FILESYSTEM_FILENAME: /config/notification.txt
       AUTHELIA_SESSION_SECRET_FILE: /run/secrets/SESSION_SECRET
       AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: /run/secrets/STORAGE_ENCRYPTION_KEY
       AUTHELIA_STORAGE_LOCAL_PATH: /config/db.sqlite3
       PGID: 568
       PUID: 568
       TZ: America/Los_Angeles
+      X_AUTHELIA_CONFIG: /config/configuration.yml,/config/oidc_clients.yml
+      X_AUTHELIA_CONFIG_FILTERS: template
     healthcheck:
       disable: true
     image: ghcr.io/authelia/authelia:4
@@ -51,6 +57,7 @@ services:
     restart: unless-stopped
     secrets:
       - JWT_SECRET
+      - OIDC_JWK_KEY
       - SESSION_SECRET
       - STORAGE_ENCRYPTION_KEY
     volumes:
