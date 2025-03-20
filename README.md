@@ -7,8 +7,8 @@ My personal container stacks
 The typical way to bootstrap a system for these stacks is the following:
 
 1. Create [docker networks](#docker-networks)
-1. Bring up [Portainer](portainer/compose.yaml), and use the exposed port to access it to proceed with the next steps
 1. Create [Authelia secrets](#authelia-secrets)
+1. Bring up [Portainer](portainer/compose.yaml), and use the exposed port to access it to proceed with the next steps
 1. Bring up the following stacks, in this order
    1. [Docker Proxy](docker-proxy/compose.yaml)
    1. [Traefik](traefik/compose.yaml)
@@ -36,9 +36,21 @@ docker network create -d macvlan \
 docker network create observe
 ```
 
-## Authelia Secrets
+### Authelia Secrets
 
-TODO
+Execute the following in the `./secrets` directory below the base authelia bind mount location:
+
+```bash
+openssl rand -hex 64 > JWT_SECRET
+openssl rand -hex 64 > SESSION_SECRET
+openssl rand -hex 64 > STORAGE_ENCRYPTION_KEY
+openssl genrsa -out oidc.jwks.rsa.2048.pem 2048
+```
+
+Create the `./config/oidc_clients.yml` file below the base authelia bind mount location, and populate it with the [desired OIDC client configuration](https://www.authelia.com/integration/openid-connect/introduction/).
+
+- To generate OIDC client IDs, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-alphanumeric-string), but use length 32 instead of 64 if using the openssl command due to character length restrictions.
+- To generate OIDC client secrets, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-password-hash).
 
 ### Variables
 
