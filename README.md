@@ -38,19 +38,30 @@ docker network create observe
 
 ### Authelia Secrets
 
-Execute the following in the `./secrets` directory below the base authelia bind mount location:
+In this section, all file/folder paths are relative to the base authelia bind mount location.
 
-```bash
-openssl rand -hex 64 > JWT_SECRET
-openssl rand -hex 64 > SESSION_SECRET
-openssl rand -hex 64 > STORAGE_ENCRYPTION_KEY
-openssl genrsa -out oidc.jwks.rsa.2048.pem 2048
-```
-
-Create the `./config/oidc_clients.yml` file below the base authelia bind mount location, and populate it with the [desired OIDC client configuration](https://www.authelia.com/integration/openid-connect/introduction/).
-
-- To generate OIDC client IDs, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-alphanumeric-string), but use length 32 instead of 64 if using the openssl command due to character length restrictions.
-- To generate OIDC client secrets, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-password-hash).
+1. Define users in `./config/users_database.yml`. E.g.,
+   ```yaml
+   users:
+     some-username:
+       disabled: false
+       displayname: 'Full Name'
+       password: 'password_hash'
+       email: 'email@example.com'
+       groups:
+         - 'admins'
+         - 'dev'
+   ```
+1. Execute the following in the `./secrets` directory below the base authelia bind mount location:
+   ```bash
+   openssl rand -hex 64 > JWT_SECRET
+   openssl rand -hex 64 > SESSION_SECRET
+   openssl rand -hex 64 > STORAGE_ENCRYPTION_KEY
+   openssl genrsa -out oidc.jwks.rsa.2048.pem 2048
+   ```
+1. Create the `./config/oidc_clients.yml` file below the base authelia bind mount location, and populate it with the [desired OIDC client configuration](https://www.authelia.com/integration/openid-connect/introduction/).
+   - To generate OIDC client IDs, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-alphanumeric-string), but use length 32 instead of 64 if using the openssl command due to character length restrictions.
+   - To generate OIDC client secrets, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-password-hash).
 
 ### Variables
 
