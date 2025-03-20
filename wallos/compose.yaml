@@ -17,6 +17,7 @@ services:
       traefik.enable: true
       traefik.http.routers.wallos.rule: Host(`${HOST}`)
       traefik.http.routers.wallos.tls.certresolver: myresolver
+      traefik.http.routers.wallos.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always
