@@ -222,6 +222,7 @@ services:
       traefik.enable: true
       traefik.http.routers.alloy.rule: Host(`${ALLOY_HOST}`)
       traefik.http.routers.alloy.tls.certresolver: myresolver
+      traefik.http.routers.alloy.middlewares: 'authelia@docker'
       traefik.http.services.alloy.loadbalancer.server.port: 80
     networks:
       - docker-proxy
