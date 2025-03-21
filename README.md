@@ -52,6 +52,7 @@ In this section, all file/folder paths are relative to the base authelia bind mo
          - 'admins'
          - 'dev'
    ```
+   - To generate password hashes, follow this [guide from Authelia](https://www.authelia.com/reference/guides/passwords/#passwords).
 1. Execute the following in the `./secrets` directory below the base authelia bind mount location:
    ```bash
    openssl rand -hex 64 > JWT_SECRET

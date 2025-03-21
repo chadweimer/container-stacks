@@ -40,6 +40,7 @@ services:
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: true
       GF_SECURITY_ALLOW_EMBEDDING: true
+      GF_SERVER_ROOT_URL: https://${HOST}
     image: grafana/grafana-oss:latest
     labels:
       homepage.group: Network
