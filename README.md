@@ -56,6 +56,7 @@ In this section, all file/folder paths are relative to the base authelia bind mo
 1. Execute the following in the `./secrets` directory below the base authelia bind mount location:
    ```bash
    openssl rand -hex 64 > JWT_SECRET
+   openssl rand -hex 64 > OIDC_HMAC_SECRET
    openssl rand -hex 64 > SESSION_SECRET
    openssl rand -hex 64 > STORAGE_ENCRYPTION_KEY
    openssl genrsa -out oidc.jwks.rsa.2048.pem 2048

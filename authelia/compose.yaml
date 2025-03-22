@@ -15,6 +15,8 @@ networks:
 secrets:
   JWT_SECRET:
     file: /mnt/pool0/containers/authelia/secrets/JWT_SECRET
+  OIDC_HMAC_SECRET:
+    file: /mnt/pool0/containers/authelia/secrets/OIDC_HMAC_SECRET
   OIDC_JWK_KEY:
     file: /mnt/pool0/containers/authelia/secrets/oidc.jwks.rsa.2048.pem
   SESSION_SECRET:
@@ -31,6 +33,7 @@ services:
       AUTHELIA_ACCESS_CONTROL_DEFAULT_POLICY: one_factor
       AUTHELIA_AUTHENTICATION_BACKEND_FILE_PATH: /config/users_database.yml
       AUTHELIA_AUTHENTICATION_BACKEND_FILE_WATCH: true
+      AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE: /run/secrets/OIDC_HMAC_SECRET
       AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: /run/secrets/JWT_SECRET
       AUTHELIA_NOTIFIER_DISABLE_STARTUP_CHECK: false
       AUTHELIA_NOTIFIER_FILESYSTEM_FILENAME: /config/notification.txt
@@ -58,6 +61,7 @@ services:
     restart: unless-stopped
     secrets:
       - JWT_SECRET
+      - OIDC_HMAC_SECRET
       - OIDC_JWK_KEY
       - SESSION_SECRET
       - STORAGE_ENCRYPTION_KEY
