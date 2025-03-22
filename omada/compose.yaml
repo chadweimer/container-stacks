@@ -20,12 +20,13 @@ services:
       homepage.widget.password: ${PASSWORD}
       homepage.widget.site: Home
       homepage.widget.type: omada
-      homepage.widget.url: https://host.docker.internal:8088
+      homepage.widget.url: https://host.docker.internal:8043
       homepage.widget.username: ${USERNAME}
       traefik.enable: True
       traefik.http.routers.omada.rule: Host(`${HOST}`)
       traefik.http.routers.omada.tls.certresolver: myresolver
-      traefik.http.services.omada.loadbalancer.server.port: 8088
+      traefik.http.services.omada.loadbalancer.server.port: 8043
+      traefik.http.services.omada.loadbalancer.server.scheme: https
     network_mode: host
     restart: unless-stopped
     stop_grace_period: 60s
