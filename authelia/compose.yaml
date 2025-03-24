@@ -12,6 +12,8 @@ configs:
 networks:
   ingress:
     external: True
+  observe:
+    external: True
 secrets:
   JWT_SECRET:
     file: /mnt/pool0/containers/authelia/secrets/JWT_SECRET
@@ -49,6 +51,10 @@ services:
       disable: true
     image: ghcr.io/authelia/authelia:4
     labels:
+      homepage.group: Other
+      homepage.name: Authelia
+      homepage.href: https://${HOST}
+      homepage.icon: authelia.png
       prometheus.label.instance: truenas-server
       prometheus.port: 9959
       traefik.enable: true
@@ -60,6 +66,7 @@ services:
       traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: Remote-User,Remote-Groups,Remote-Name,Remote-Email
     networks:
       - ingress
+      - observe
     restart: unless-stopped
     secrets:
       - JWT_SECRET
