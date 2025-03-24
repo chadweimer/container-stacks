@@ -6,11 +6,10 @@ services:
     container_name: it-tools
     image: ghcr.io/corentinth/it-tools:latest
     labels:
-      homepage.group: Network
+      homepage.group: Other
       homepage.name: IT-Tools
       homepage.href: https://${HOST}
       homepage.icon: it-tools.png
-      homepage.showStats: true
       traefik.enable: true
       traefik.http.routers.it-tools.rule: Host(`${HOST}`)
       traefik.http.routers.it-tools.tls.certresolver: myresolver

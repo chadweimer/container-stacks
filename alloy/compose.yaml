@@ -218,7 +218,6 @@ services:
       homepage.name: Alloy
       homepage.href: https://${ALLOY_HOST}
       homepage.icon: alloy.png
-      homepage.showStats: true
       traefik.enable: true
       traefik.http.routers.alloy.rule: Host(`${ALLOY_HOST}`)
       traefik.http.routers.alloy.tls.certresolver: myresolver

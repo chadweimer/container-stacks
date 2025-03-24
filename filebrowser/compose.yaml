@@ -20,11 +20,10 @@ services:
     container_name: filebrowser
     image: filebrowser/filebrowser:latest
     labels:
-      homepage.group: Network
+      homepage.group: NAS
       homepage.name: Files
       homepage.href: https://${HOST}
       homepage.icon: filebrowser.png
-      homepage.showStats: true
       traefik.enable: true
       traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
       traefik.http.routers.filebrowser.tls.certresolver: myresolver

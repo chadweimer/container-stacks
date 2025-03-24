@@ -51,7 +51,7 @@ services:
       disable: true
     image: ghcr.io/authelia/authelia:4
     labels:
-      homepage.group: Other
+      homepage.group: Network
       homepage.name: Authelia
       homepage.href: https://${HOST}
       homepage.icon: authelia.png

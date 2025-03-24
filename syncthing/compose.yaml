@@ -21,11 +21,10 @@ services:
       STNOUPGRADE: 'true'
     image: ghcr.io/syncthing/syncthing:1
     labels:
-      homepage.group: Network
+      homepage.group: NAS
       homepage.href: https://${HOST}
       homepage.icon: syncthing.png
       homepage.name: Syncthing
-      homepage.showStats: 'true'
       prometheus.label.instance: truenas-server
       prometheus.port: 8384
       traefik.enable: True
