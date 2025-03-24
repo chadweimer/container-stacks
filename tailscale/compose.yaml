@@ -27,8 +27,6 @@ services:
       homepage.widget.deviceid: ${DEVIDE_ID}
       homepage.widget.key: ${API_ACCESS_TOKEN}
       homepage.widget.type: tailscale
-      wud.tag.include: ^latest$$
-      wud.watch: true
     network_mode: host
     pull_policy: always
     restart: unless-stopped

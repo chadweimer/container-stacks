@@ -17,8 +17,6 @@ services:
       homepage.icon: transmission.png
       homepage.widget.type: transmission
       homepage.widget.url: http://transmission-vpn:9091
-      wud.tag.include: ^latest$$
-      wud.watch: true
     network_mode: 'service:vpn'
     pull_policy: always
     restart: unless-stopped

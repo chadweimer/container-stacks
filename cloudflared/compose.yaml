@@ -19,8 +19,6 @@ services:
       homepage.widget.key: ${API_TOKEN}
       homepage.widget.tunnelid: ${TUNNEL_ID}
       homepage.widget.type: cloudflared
-      wud.tag.include: ^latest$$
-      wud.watch: true
     network_mode: host
     pull_policy: always
     restart: unless-stopped

@@ -245,8 +245,6 @@ services:
     labels:
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
-      wud.tag.include: ^latest$$
-      wud.watch: true
     networks:
       - observe
     pull_policy: always
@@ -262,8 +260,6 @@ services:
     labels:
       prometheus.label.instance: truenas-server
       prometheus.port: 9108
-      wud.tag.include: ^latest$$
-      wud.watch: true
     networks:
       - observe
     ports:
@@ -298,8 +294,6 @@ services:
       prometheus.label.__metrics_path__: /ups_metrics
       prometheus.label.__param_ups: ups
       prometheus.port: 9199
-      wud.tag.include: ^latest$$
-      wud.watch: true
     networks:
       - observe
     pull_policy: always
@@ -315,8 +309,6 @@ services:
     labels:
       prometheus.label.instance: omada
       prometheus.port: 9202
-      wud.tag.include: ^latest$$
-      wud.watch: true
     networks:
       - observe
     pull_policy: always
@@ -342,8 +334,6 @@ services:
       prometheus.label.__scrape_interval__: 1h
       prometheus.label.__scrape_timeout__: 2m
       prometheus.port: 9798
-      wud.tag.include: ^latest$$
-      wud.watch: true
     networks:
       - observe
     pull_policy: always
