@@ -19,6 +19,8 @@ services:
       - '--providers.file.directory=/app'
       - '--providers.file.watch=true'
       - '--entryPoints.web.address=:80'
+      - '--entryPoints.web.http.redirections.entryPoint.to=websecure'
+      - '--entryPoints.web.http.redirections.entryPoint.scheme=https'
       - '--entryPoints.websecure.address=:443'
       - '--certificatesresolvers.myresolver.acme.caserver=${ACME_CA_SERVER}'
       - '--certificatesresolvers.myresolver.acme.eab.kid=${ACME_EAB_KID}'
