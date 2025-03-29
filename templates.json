@@ -791,6 +791,27 @@
           "description": "The domain the session cookie is assigned to protect."
         }
       ]
+    },
+    {
+      "id": 27,
+      "type": 3,
+      "title": "Serge",
+      "description": "Serge is a chat interface crafted with llama.cpp for running LLM models.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "serge/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        }
+      ]
     }
   ]
 }

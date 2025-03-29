@@ -1,0 +1,23 @@
+networks:
+  ingress:
+    external: True
+services:
+  serge:
+    container_name: serge
+    image: ghcr.io/serge-chat/serge:latest
+    labels:
+      homepage.group: Other
+      homepage.name: Serge
+      homepage.href: https://${HOST}
+      homepage.icon: serge.png
+      traefik.enable: True
+      traefik.http.routers.serge.rule: Host(`${HOST}`)
+      traefik.http.routers.serge.tls.certresolver: myresolver
+      traefik.http.services.serge.loadbalancer.server.port: 8008
+    networks:
+      - ingress
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/serge/weights:/usr/src/app/weights
+      - /mnt/pool0/containers/serge/db:/data/db
