@@ -812,6 +812,35 @@
           "description": "The host address (domain) to expose the application."
         }
       ]
+    },
+    {
+      "id": 28,
+      "type": 3,
+      "title": "Frigate",
+      "description": "Frigate is an open source NVR built around real-time AI object detection.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "frigate/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "FRIGATE_MQTT_PASSWORD",
+          "label": "MQTT Server Password"
+        },
+        {
+          "name": "FRIGATE_RTSP_PASSWORD",
+          "label": "Camera Account Password"
+        }
+      ]
     }
   ]
 }

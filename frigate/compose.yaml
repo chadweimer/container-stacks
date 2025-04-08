@@ -1,0 +1,42 @@
+networks:
+  ingress:
+    external: True
+services:
+  frigate:
+    container_name: frigate
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+      - /dev/dri/renderD128:/dev/dri/renderD128
+    environment:
+      FRIGATE_MQTT_PASSWORD: ${FRIGATE_MQTT_PASSWORD}
+      FRIGATE_RTSP_PASSWORD: ${FRIGATE_RTSP_PASSWORD}
+      TZ: America/Log_Angeles
+    image: ghcr.io/blakeblackshear/frigate:stable
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST}
+      homepage.icon: frigate.png
+      homepage.name: Frigate
+      traefik.enable: True
+      traefik.http.routers.frigate.rule: Host(`${HOST}`)
+      traefik.http.routers.frigate.tls.certresolver: myresolver
+      traefik.http.services.frigate.loadbalancer.server.port: 5000
+      traefik.http.routers.frigate.middlewares: 'authelia@docker'
+    networks:
+      - ingress
+    ports:
+      - "8971:8971"
+      - "8554:8554" # RTSP feeds
+      - "8555:8555/tcp" # WebRTC over tcp
+      - "8555:8555/udp" # WebRTC over udp
+    privileged: true
+    restart: unless-stopped
+    shm_size: "1024mb"
+    stop_grace_period: 30s
+    volumes:
+      - /mnt/pool0/containers/frigate/config:/config
+      - /mnt/pool0/containers/frigate/storage:/media/frigate
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
