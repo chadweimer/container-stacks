@@ -839,6 +839,10 @@
         {
           "name": "FRIGATE_RTSP_PASSWORD",
           "label": "Camera Account Password"
+        },
+        {
+          "name": "PLUS_API_KEY",
+          "label": "Frigate+ API Key"
         }
       ]
     }
