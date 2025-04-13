@@ -23,7 +23,8 @@ services:
       traefik.enable: True
       traefik.http.routers.frigate.rule: Host(`${HOST}`)
       traefik.http.routers.frigate.tls.certresolver: myresolver
-      traefik.http.services.frigate.loadbalancer.server.port: 5000
+      traefik.http.services.frigate.loadbalancer.server.port: 8971
+      traefik.http.services.frigate.loadbalancer.server.scheme: https
       traefik.http.routers.frigate.middlewares: 'authelia@docker'
     networks:
       - ingress
