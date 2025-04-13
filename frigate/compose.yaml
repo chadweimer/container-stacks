@@ -3,6 +3,8 @@ networks:
     external: True
 services:
   frigate:
+    cap_add:
+      - CAP_PERFMON
     container_name: frigate
     devices:
       - /dev/bus/usb:/dev/bus/usb
@@ -31,7 +33,6 @@ services:
       - "8554:8554" # RTSP feeds
       - "8555:8555/tcp" # WebRTC over tcp
       - "8555:8555/udp" # WebRTC over udp
-    privileged: true
     restart: unless-stopped
     shm_size: "1024mb"
     stop_grace_period: 30s
