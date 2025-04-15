@@ -30,12 +30,12 @@ services:
       traefik.http.services.frigate.loadbalancer.server.scheme: https
     networks:
       - ingress
-    ports:
-      #- "8971:8971"
-      #- "5000:5000"
-      - "8554:8554" # RTSP feeds
-      - "8555:8555/tcp" # WebRTC over tcp
-      - "8555:8555/udp" # WebRTC over udp
+    #ports:
+    #  - "8971:8971"
+    #  - "5000:5000"
+    #  - "8554:8554" # RTSP feeds
+    #  - "8555:8555/tcp" # WebRTC over tcp
+    #  - "8555:8555/udp" # WebRTC over udp
     restart: unless-stopped
     shm_size: "1024mb"
     stop_grace_period: 30s
