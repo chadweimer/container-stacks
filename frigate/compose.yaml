@@ -16,10 +16,13 @@ services:
       TZ: America/Los_Angeles
     image: ghcr.io/blakeblackshear/frigate:stable
     labels:
-      homepage.group: Network
+      homepage.group: Smart Home
       homepage.href: https://${HOST}
       homepage.icon: frigate.png
       homepage.name: Frigate
+      homepage.widget.type: frigate
+      homepage.widget.url: http://frigate:5000
+      homepage.widget.enableRecentEvents: true
       traefik.enable: True
       traefik.http.routers.frigate.rule: Host(`${HOST}`)
       traefik.http.routers.frigate.tls.certresolver: myresolver

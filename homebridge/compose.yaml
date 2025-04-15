@@ -12,7 +12,7 @@ services:
       TZ: America/Los_Angeles
     image: homebridge/homebridge:latest
     labels:
-      homepage.group: Network
+      homepage.group: Smart Home
       homepage.href: https://${HOST}
       homepage.icon: homebridge.png
       homepage.name: Homebridge

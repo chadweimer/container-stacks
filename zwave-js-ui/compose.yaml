@@ -11,7 +11,7 @@ services:
       TZ: America/Los_Angeles
     image: ghcr.io/zwave-js/zwave-js-ui:10
     labels:
-      homepage.group: Network
+      homepage.group: Smart Home
       homepage.name: Z-Wave JS UI
       homepage.href: https://${HOST}
       homepage.icon: z-wave-js-ui.png
