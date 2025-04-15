@@ -38,5 +38,6 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/homeassistant:/config
+      - /mnt/pool0/backups/home-assistant:/config/backups
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
