@@ -25,7 +25,7 @@ services:
       homepage.widget.custom[2].label: lights on
       traefik.enable: true
       traefik.http.routers.hass.rule: Host(`${HOST}`) || Host(`${HOST2}`)
-      raefik.http.routers.hass.tls.certresolver: myresolver
+      traefik.http.routers.hass.tls.certresolver: myresolver
       traefik.http.services.hass.loadbalancer.server.port: 8123
     networks:
       lan:
