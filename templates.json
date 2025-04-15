@@ -890,6 +890,45 @@
           "label": "Path to Z-Wave Device on Host (e.g., /dev/ttyUSB0)"
         }
       ]
+    },
+    {
+      "id": 31,
+      "type": 3,
+      "title": "Home Assistant",
+      "description": "Open source home automation that puts local control and privacy first.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "homeassistant/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "HOST2",
+          "label": "Host Address (Additional)",
+          "description": "The additional host address (domain) to expose the application."
+        },
+        {
+          "name": "IPV4_ADDRESS",
+          "label": "IPv4 Address"
+        },
+        {
+          "name": "MAC_ADDRESS",
+          "label": "MAC Address"
+        },
+        {
+          "name": "ACCESS_TOKEN",
+          "label": "Homepage Access Token",
+          "description": "The Access Token to use for the homepage widget."
+        }
+      ]
     }
   ]
 }

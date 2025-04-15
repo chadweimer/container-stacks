@@ -1,0 +1,42 @@
+networks:
+  lan:
+    external: true
+  ingress:
+    external: true
+services:
+  hass:
+    container_name: hass
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    image: ghcr.io/home-assistant/home-assistant:stable
+    labels:
+      homepage.group: Smart Home
+      homepage.name: Home Assistant
+      homepage.href: https://${HOST}
+      homepage.icon: home-assistant.png
+      homepage.widget.type: homeassistant
+      homepage.widget.url: http://hass:8123
+      homepage.widget.key: ${ACCESS_TOKEN}
+      homepage.widget.custom[0].template: "{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|selectattr('state','eq','locked')|list|length }}/{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|list|length }}"
+      homepage.widget.custom[0].label: doors locked
+      homepage.widget.custom[1].template: "{{ states.binary_sensor|selectattr('attributes.device_class','eq','window')|selectattr('attributes.friendly_name','ne','Windows')|selectattr('state','eq','off')|list|length }}/{{ states.binary_sensor|selectattr('attributes.device_class','eq','window')|selectattr('attributes.friendly_name','ne','Windows')|list|length }}"
+      homepage.widget.custom[1].label: windows closed
+      homepage.widget.custom[2].template: "{{ states.light|selectattr('state','eq','on')|list|length }}/{{ states.light|list|length }}"
+      homepage.widget.custom[2].label: lights on
+      traefik.enable: true
+      traefik.http.routers.hass.rule: Host(`${HOST}`) || Host(`${HOST2}`)
+      raefik.http.routers.hass.tls.certresolver: myresolver
+      traefik.http.services.hass.loadbalancer.server.port: 8123
+    networks:
+      lan:
+        ipv4_address: ${IPV4_ADDRESS}
+        mac_address: ${MAC_ADDRESS}
+      ingress:
+    #ports:
+    #  - 8123:8123
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro

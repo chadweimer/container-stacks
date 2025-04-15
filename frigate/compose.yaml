@@ -28,12 +28,11 @@ services:
       traefik.http.routers.frigate.tls.certresolver: myresolver
       traefik.http.services.frigate.loadbalancer.server.port: 8971
       traefik.http.services.frigate.loadbalancer.server.scheme: https
-      traefik.http.routers.frigate.middlewares: 'authelia@docker'
     networks:
       - ingress
     ports:
       #- "8971:8971"
-      - "5000:5000"
+      #- "5000:5000"
       - "8554:8554" # RTSP feeds
       - "8555:8555/tcp" # WebRTC over tcp
       - "8555:8555/udp" # WebRTC over udp
