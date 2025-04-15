@@ -1,0 +1,25 @@
+configs:
+  mosquitto_config:
+    content: |
+      listener 1883
+      persistence true
+      persistence_location /mosquitto/data/
+      log_dest stdout
+      allow_anonymous true
+networks:
+  ingress:
+    external: True
+services:
+  mosquitto:
+    configs:
+      - source: mosquitto_config
+        target: /mosquitto/config/mosquitto.conf
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest
+    networks:
+      - ingress
+    ports:
+      - 1883:1883
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/mosquitto/data:/mosquitto/data

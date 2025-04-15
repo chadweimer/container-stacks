@@ -772,7 +772,8 @@
       "title": "Authelia",
       "description": "Open-source authentication and authorization server and portal.",
       "categories": [
-        "app"
+        "app",
+        "infra"
       ],
       "platform": "linux",
       "repository": {
@@ -843,6 +844,50 @@
         {
           "name": "PLUS_API_KEY",
           "label": "Frigate+ API Key"
+        }
+      ]
+    },
+    {
+      "id": 29,
+      "type": 3,
+      "title": "Mosquitto",
+      "description": "Eclipse Mosquitto is an open source (EPL/EDL licensed) message broker that implements the MQTT protocol versions 5.0, 3.1.1 and 3.1.",
+      "categories": [
+        "infra"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "mosquitto/compose.yaml"
+      }
+    },
+    {
+      "id": 30,
+      "type": 3,
+      "title": "Z-Wave JS UI",
+      "description": "Full featured Z-Wave Control Panel and MQTT Gateway.",
+      "categories": [
+        "app",
+        "infra"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "zwave-js-ui/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "SESSION_SECRET",
+          "label": "Session Secret"
+        },
+        {
+          "name": "ZWAVE_DEVICE_PATH",
+          "label": "Path to Z-Wave Device on Host (e.g., /dev/ttyUSB0)"
         }
       ]
     }

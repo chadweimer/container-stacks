@@ -1,0 +1,32 @@
+networks:
+  ingress:
+    external: True
+services:
+  zwave-js-ui:
+    container_name: zwave-js-ui
+    devices:
+      - ${ZWAVE_DEVICE_PATH}:/dev/zwave
+    environment:
+      SESSION_SECRET: ${SESSION_SECRET}
+      TZ: America/Los_Angeles
+    image: ghcr.io/zwave-js/zwave-js-ui:10
+    labels:
+      homepage.group: Network
+      homepage.name: Z-Wave JS UI
+      homepage.href: https://${HOST}
+      homepage.icon: z-wave-js-ui.png
+      traefik.enable: true
+      traefik.http.routers.zwavejsui.rule: Host(`${HOST}`)
+      traefik.http.routers.zwavejsui.tls.certresolver: myresolver
+      traefik.http.routers.zwavejsui.middlewares: 'authelia@docker'
+      traefik.http.services.zwavejsui.loadbalancer.server.port: 8091
+    networks:
+      - ingress
+    ports:
+      #- 8091:8091
+      - 3000:3000
+    restart: unless-stopped
+    stop_signal: SIGINT
+    tty: true
+    volumes:
+      - /mnt/pool0/containers/zwave-js-ui:/usr/src/app/store
