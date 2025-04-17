@@ -4,8 +4,8 @@ networks:
   ingress:
     external: true
 services:
-  hass:
-    container_name: hass
+  homeassistant:
+    container_name: homeassistant
     extra_hosts:
       - host.docker.internal:host-gateway
     image: ghcr.io/home-assistant/home-assistant:stable
@@ -15,7 +15,7 @@ services:
       homepage.href: https://${HOST}
       homepage.icon: home-assistant.png
       homepage.widget.type: homeassistant
-      homepage.widget.url: http://hass:8123
+      homepage.widget.url: http://homeassistant:8123
       homepage.widget.key: ${ACCESS_TOKEN}
       homepage.widget.custom[0].template: "{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|selectattr('state','eq','locked')|list|length }}/{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|list|length }}"
       homepage.widget.custom[0].label: doors locked
