@@ -1,0 +1,160 @@
+configs:
+  authelia_config:
+    content: |
+      session:
+        cookies:
+          - domain: '${AUTHELIA_COOKIE_DOMAIN}'
+            authelia_url: 'https://${AUTHELIA_HOST}'
+      identity_providers:
+        oidc:
+          jwks:
+            - key: {{ secret "/run/secrets/AUTHELIA_OIDC_JWK_KEY" | mindent 10 "|" | msquote }}
+
+networks:
+  docker-proxy:
+    external: True
+  ingress:
+    external: True
+  observe:
+    external: True
+
+secrets:
+  AUTHELIA_JWT_SECRET:
+    file: /mnt/pool0/containers/authelia/secrets/JWT_SECRET
+  AUTHELIA_OIDC_HMAC_SECRET:
+    file: /mnt/pool0/containers/authelia/secrets/OIDC_HMAC_SECRET
+  AUTHELIA_OIDC_JWK_KEY:
+    file: /mnt/pool0/containers/authelia/secrets/oidc.jwks.rsa.2048.pem
+  AUTHELIA_SESSION_SECRET:
+    file: /mnt/pool0/containers/authelia/secrets/SESSION_SECRET
+  AUTHELIA_STORAGE_ENCRYPTION_KEY:
+    file: /mnt/pool0/containers/authelia/secrets/STORAGE_ENCRYPTION_KEY
+
+services:
+  authelia:
+    configs:
+      - source: authelia_config
+        target: /config/configuration.yml
+    container_name: authelia
+    environment:
+      AUTHELIA_ACCESS_CONTROL_DEFAULT_POLICY: one_factor
+      AUTHELIA_AUTHENTICATION_BACKEND_FILE_PATH: /config/users_database.yml
+      AUTHELIA_AUTHENTICATION_BACKEND_FILE_WATCH: true
+      AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE: /run/secrets/AUTHELIA_OIDC_HMAC_SECRET
+      AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: /run/secrets/AUTHELIA_JWT_SECRET
+      AUTHELIA_NOTIFIER_FILESYSTEM_FILENAME: /config/notification.txt
+      AUTHELIA_SESSION_SECRET_FILE: /run/secrets/AUTHELIA_SESSION_SECRET
+      AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: /run/secrets/AUTHELIA_STORAGE_ENCRYPTION_KEY
+      AUTHELIA_STORAGE_LOCAL_PATH: /config/db.sqlite3
+      AUTHELIA_TELEMETRY_METRICS_ENABLED: true
+      PGID: 568
+      PUID: 568
+      TZ: America/Los_Angeles
+      X_AUTHELIA_CONFIG: /config/configuration.yml,/config/oidc_clients.yml
+      X_AUTHELIA_CONFIG_FILTERS: template
+    healthcheck:
+      disable: true
+    image: ghcr.io/authelia/authelia:4
+    labels:
+      homepage.group: Network
+      homepage.name: Authelia
+      homepage.href: https://${AUTHELIA_HOST}
+      homepage.icon: authelia.png
+      prometheus.label.instance: truenas-server
+      prometheus.port: 9959
+      traefik.enable: true
+      traefik.http.routers.authelia.rule: Host(`${AUTHELIA_HOST}`)
+      traefik.http.routers.authelia.tls.certresolver: myresolver
+      traefik.http.services.authelia.loadbalancer.server.port: 9091
+      traefik.http.middlewares.authelia.forwardauth.address: http://authelia:9091/api/authz/forward-auth
+      traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: true
+      traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: Remote-User,Remote-Groups,Remote-Name,Remote-Email
+    networks:
+      - ingress
+      - observe
+    restart: unless-stopped
+    secrets:
+      - AUTHELIA_JWT_SECRET
+      - AUTHELIA_OIDC_HMAC_SECRET
+      - AUTHELIA_OIDC_JWK_KEY
+      - AUTHELIA_SESSION_SECRET
+      - AUTHELIA_STORAGE_ENCRYPTION_KEY
+    volumes:
+      - /mnt/pool0/containers/authelia/config:/config
+
+  docker-proxy:
+    container_name: docker-proxy
+    environment:
+      CONTAINERS: '1'
+      NETWORKS: '1'
+    image: ghcr.io/linuxserver/socket-proxy:latest
+    networks:
+      - docker-proxy
+    pull_policy: always
+    read_only: True
+    restart: unless-stopped
+    tmpfs:
+      - /run
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  traefik:
+    command:
+      - '--log.level=INFO'
+      - '--log.format=json'
+      - '--api.insecure=true'
+      - '--metrics.prometheus=true'
+      - '--providers.docker=true'
+      - '--providers.docker.endpoint=tcp://docker-proxy:2375'
+      - '--providers.docker.network=ingress'
+      - '--providers.docker.exposedbydefault=false'
+      - '--providers.file.directory=/app'
+      - '--providers.file.watch=true'
+      - '--entryPoints.web.address=:80'
+      - '--entryPoints.web.http.redirections.entryPoint.to=websecure'
+      - '--entryPoints.web.http.redirections.entryPoint.scheme=https'
+      - '--entryPoints.websecure.address=:443'
+      - '--certificatesresolvers.myresolver.acme.caserver=${ACME_CA_SERVER}'
+      - '--certificatesresolvers.myresolver.acme.eab.kid=${ACME_EAB_KID}'
+      - '--certificatesresolvers.myresolver.acme.eab.hmacencoded=${ACME_EAB_HMAC}'
+      - '--certificatesresolvers.myresolver.acme.dnschallenge=true'
+      - '--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare'
+      - '--certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53'
+      - '--certificatesresolvers.myresolver.acme.email=${ACME_EMAIL_ADDRESS}'
+      - '--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json'
+      - '--serverstransport.insecureskipverify=true'
+    container_name: traefik
+    depends_on:
+      - docker-proxy
+    environment:
+      CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    image: traefik:v3
+    labels:
+      homepage.group: Network
+      homepage.href: https://${TRAEFIK_HOST}
+      homepage.icon: traefik.png
+      homepage.name: Traefik
+      homepage.widget.type: traefik
+      homepage.widget.url: http://traefik:8080
+      prometheus.label.instance: truenas-server
+      prometheus.port: 8080
+      traefik.enable: 'true'
+      traefik.http.routers.api.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.api.tls.certresolver: myresolver
+      traefik.http.routers.api.service: 'api@internal'
+      traefik.http.routers.api.middlewares: 'authelia@docker'
+    networks:
+      - docker-proxy
+      - ingress
+      - observe
+    ports:
+      - '80:80'
+      - '443:443'
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/pool0/containers/traefik/config:/app
+      - /mnt/pool0/containers/traefik/le:/letsencrypt

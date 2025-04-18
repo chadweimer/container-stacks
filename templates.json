@@ -323,21 +323,21 @@
     {
       "id": 10,
       "type": 3,
-      "title": "Traefik (Let's Encrypt)",
-      "description": "The Cloud Native Application Proxy",
+      "title": "Proxy w/ Let's Encrypt",
+      "description": "Traefik proxy configured to use Let's Encrypt for TLS provisioning, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
       "categories": [
         "infra"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "traefik/compose.yaml"
+        "stackfile": "proxy/compose.yaml"
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
+          "name": "TRAEFIK_HOST",
+          "label": "Traefik Host Address",
+          "description": "The host address (domain) to expose the traefik web interface."
         },
         {
           "name": "CF_DNS_API_TOKEN",
@@ -355,6 +355,16 @@
           "name": "ACME_EMAIL_ADDRESS",
           "label": "ACME Email Address",
           "description": "The email address to use for the ACME protocol TLS provisioning."
+        },
+        {
+          "name": "AUTHELIA_HOST",
+          "label": "Authelia Host Address",
+          "description": "The host address (domain) to expose authelia."
+        },
+        {
+          "name": "AUTHELIA_COOKIE_DOMAIN",
+          "label": "Authelia Cookie Domain",
+          "description": "The domain the session cookie is assigned to protect."
         }
       ]
     },
@@ -627,21 +637,21 @@
     {
       "id": 19,
       "type": 3,
-      "title": "Traefik (w/ EAB)",
-      "description": "The Cloud Native Application Proxy",
+      "title": "Proxy w/ EAB",
+      "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
       "categories": [
         "infra"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "traefik/compose.yaml"
+        "stackfile": "proxy/compose.yaml"
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
+          "name": "TRAEFIK_HOST",
+          "label": "Traefik Host Address",
+          "description": "The host address (domain) to expose the traefik web interface."
         },
         {
           "name": "CF_DNS_API_TOKEN",
@@ -668,22 +678,18 @@
           "name": "ACME_EMAIL_ADDRESS",
           "label": "ACME Email Address",
           "description": "The email address to use for the ACME protocol TLS provisioning."
+        },
+        {
+          "name": "AUTHELIA_HOST",
+          "label": "Authelia Host Address",
+          "description": "The host address (domain) to expose authelia."
+        },
+        {
+          "name": "AUTHELIA_COOKIE_DOMAIN",
+          "label": "Authelia Cookie Domain",
+          "description": "The domain the session cookie is assigned to protect."
         }
       ]
-    },
-    {
-      "id": 20,
-      "type": 3,
-      "title": "Docker Proxy",
-      "description": "The Socket Proxy is a security-enhanced proxy which allows you to apply access rules to the Docker socket, limiting the attack surface for containers such as watchtower or Traefik that need to use it.",
-      "categories": [
-        "infra"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "docker-proxy/compose.yaml"
-      }
     },
     {
       "id": 23,
@@ -763,33 +769,6 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
-        }
-      ]
-    },
-    {
-      "id": 26,
-      "type": 3,
-      "title": "Authelia",
-      "description": "Open-source authentication and authorization server and portal.",
-      "categories": [
-        "app",
-        "infra"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "authelia/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
-        },
-        {
-          "name": "COOKIE_DOMAIN",
-          "label": "Cookie Domain",
-          "description": "The domain the session cookie is assigned to protect."
         }
       ]
     },

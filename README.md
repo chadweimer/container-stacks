@@ -9,10 +9,7 @@ The typical way to bootstrap a system for these stacks is the following:
 1. Create [docker networks](#docker-networks)
 1. Create [Authelia secrets](#authelia-secrets)
 1. Bring up [Portainer](portainer/compose.yaml), and use the exposed port to access it to proceed with the next steps
-1. Bring up the following stacks, in this order
-   1. [Docker Proxy](docker-proxy/compose.yaml)
-   1. [Traefik](traefik/compose.yaml)
-   1. [Authelia](authelia/compose.yaml)
+1. Bring up the [Proxy](proxy/compose.yaml) stack
 1. Bring up any other stacks desired
 
 ### Docker networks
