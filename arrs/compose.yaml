@@ -193,7 +193,7 @@ services:
       OPENVPN_PASSWORD: ${OPENVPN_PASSWORD}
       SERVER_COUNTRIES: United States
       TZ: America/Los_Angeles
-    image: qmcgaw/gluetun:latest
+    image: ghcr.io/qdm12/gluetun:latest
     labels:
       traefik.enable: true
       traefik.http.routers.transmission.rule: Host(`${TRANSMISSION_HOST}`)
