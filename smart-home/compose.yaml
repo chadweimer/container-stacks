@@ -98,7 +98,7 @@ services:
       PGID: 568
       PUID: 568
       TZ: America/Los_Angeles
-    image: homebridge/homebridge:latest
+    image: ghcr.io/homebridge/homebridge:latest
     labels:
       homepage.group: Smart Home
       homepage.href: https://${HOMEBRIDGE_HOST}
