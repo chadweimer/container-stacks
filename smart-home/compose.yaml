@@ -1,0 +1,163 @@
+configs:
+  mosquitto_config:
+    content: |
+      listener 1883
+      persistence true
+      persistence_location /mosquitto/data/
+      log_dest stdout
+      allow_anonymous true
+
+networks:
+  lan:
+    external: true
+  ingress:
+    external: true
+  mqtt:
+    name: mqtt
+
+services:
+  frigate:
+    cap_add:
+      - CAP_PERFMON
+    container_name: frigate
+    devices:
+      - /dev/bus/usb:/dev/bus/usb
+      - /dev/dri/renderD128:/dev/dri/renderD128
+    environment:
+      FRIGATE_RTSP_PASSWORD: ${FRIGATE_RTSP_PASSWORD}
+      PLUS_API_KEY: ${FRIGATE_PLUS_API_KEY}
+      TZ: America/Los_Angeles
+    image: ghcr.io/blakeblackshear/frigate:stable
+    labels:
+      homepage.group: Smart Home
+      homepage.href: https://${FRIGATE_HOST}
+      homepage.icon: frigate.png
+      homepage.name: Frigate
+      homepage.widget.type: frigate
+      homepage.widget.url: http://frigate:5000
+      homepage.widget.enableRecentEvents: true
+      traefik.enable: True
+      traefik.http.routers.frigate.rule: Host(`${FRIGATE_HOST}`)
+      traefik.http.routers.frigate.tls.certresolver: myresolver
+      traefik.http.services.frigate.loadbalancer.server.port: 8971
+      traefik.http.services.frigate.loadbalancer.server.scheme: https
+    networks:
+      - ingress
+      - mqtt
+    restart: unless-stopped
+    shm_size: "1024mb"
+    stop_grace_period: 30s
+    volumes:
+      - /mnt/pool0/containers/frigate/config:/config
+      - /mnt/pool0/containers/frigate/storage:/media/frigate
+      - type: tmpfs
+        target: /tmp/cache
+        tmpfs:
+          size: 1000000000
+
+  homeassistant:
+    container_name: homeassistant
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    image: ghcr.io/home-assistant/home-assistant:stable
+    labels:
+      homepage.group: Smart Home
+      homepage.name: Home Assistant
+      homepage.href: https://${HASS_HOST}
+      homepage.icon: home-assistant.png
+      homepage.widget.type: homeassistant
+      homepage.widget.url: http://homeassistant:8123
+      homepage.widget.key: ${HASS_ACCESS_TOKEN}
+      homepage.widget.custom[0].template: "{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|selectattr('state','eq','locked')|list|length }}/{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|list|length }}"
+      homepage.widget.custom[0].label: doors locked
+      homepage.widget.custom[1].template: "{{ states.binary_sensor|selectattr('attributes.device_class','eq','window')|selectattr('attributes.friendly_name','ne','Windows')|selectattr('state','eq','off')|list|length }}/{{ states.binary_sensor|selectattr('attributes.device_class','eq','window')|selectattr('attributes.friendly_name','ne','Windows')|list|length }}"
+      homepage.widget.custom[1].label: windows closed
+      homepage.widget.custom[2].template: "{{ states.light|selectattr('state','eq','on')|list|length }}/{{ states.light|list|length }}"
+      homepage.widget.custom[2].label: lights on
+      traefik.enable: true
+      traefik.http.routers.hass.rule: Host(`${HASS_HOST}`) || Host(`${HASS_HOST2}`)
+      traefik.http.routers.hass.tls.certresolver: myresolver
+      traefik.http.services.hass.loadbalancer.server.port: 8123
+    networks:
+      lan:
+        ipv4_address: ${HASS_IPV4_ADDRESS}
+        mac_address: ${HASS_MAC_ADDRESS}
+      ingress:
+      mqtt:
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/homeassistant:/config
+      - /mnt/pool0/backups/home-assistant:/config/backups
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+
+  homebridge:
+    container_name: homebridge
+    environment:
+      PGID: 568
+      PUID: 568
+      TZ: America/Los_Angeles
+    image: homebridge/homebridge:latest
+    labels:
+      homepage.group: Smart Home
+      homepage.href: https://${HOMEBRIDGE_HOST}
+      homepage.icon: homebridge.png
+      homepage.name: Homebridge
+      homepage.widget.password: ${HOMEBRIDGE_PASSWORD}
+      homepage.widget.type: homebridge
+      homepage.widget.username: ${HOMEBRIDGE_USERNAME}
+      homepage.widget.url: http://homebridge:8581
+      traefik.enable: True
+      traefik.http.routers.homebridge.rule: Host(`${HOMEBRIDGE_HOST}`)
+      traefik.http.routers.homebridge.tls.certresolver: myresolver
+      traefik.http.routers.homebridge.middlewares: 'authelia@docker'
+      traefik.http.services.homebridge.loadbalancer.server.port: 8581
+    networks:
+      lan:
+        ipv4_address: ${HOMEBRIDGE_IPV4_ADDRESS}
+        mac_address: ${HOMEBRIDGE_MAC_ADDRESS}
+      ingress:
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/backups/homebridge:/backups
+      - /mnt/pool0/containers/homebridge:/homebridge
+
+  mosquitto:
+    configs:
+      - source: mosquitto_config
+        target: /mosquitto/config/mosquitto.conf
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest
+    networks:
+      - mqtt
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/mosquitto/data:/mosquitto/data
+
+  zwave-js-ui:
+    container_name: zwave-js-ui
+    devices:
+      - ${ZWAVE_DEVICE_PATH}:/dev/zwave
+    environment:
+      SESSION_SECRET: ${ZWAVE_SESSION_SECRET}
+      TZ: America/Los_Angeles
+    image: ghcr.io/zwave-js/zwave-js-ui:10
+    labels:
+      homepage.group: Smart Home
+      homepage.name: Z-Wave JS UI
+      homepage.href: https://${ZWAVE_HOST}
+      homepage.icon: z-wave-js-ui.png
+      traefik.enable: true
+      traefik.http.routers.zwavejsui.rule: Host(`${ZWAVE_HOST}`)
+      traefik.http.routers.zwavejsui.tls.certresolver: myresolver
+      traefik.http.routers.zwavejsui.middlewares: 'authelia@docker'
+      traefik.http.services.zwavejsui.loadbalancer.server.port: 8091
+    networks:
+      - ingress
+    restart: unless-stopped
+    stop_signal: SIGINT
+    tty: true
+    volumes:
+      - /mnt/pool0/containers/zwave-js-ui:/usr/src/app/store

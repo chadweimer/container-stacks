@@ -692,45 +692,6 @@
       ]
     },
     {
-      "id": 23,
-      "type": 3,
-      "title": "Homebridge",
-      "description": "Homebridge allows you to integrate with smart home devices that do not natively support HomeKit.",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "homebridge/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
-        },
-        {
-          "name": "IPV4_ADDRESS",
-          "label": "IPv4 Address"
-        },
-        {
-          "name": "MAC_ADDRESS",
-          "label": "MAC Address"
-        },
-        {
-          "name": "USERNAME",
-          "label": "Homepage Widget Username",
-          "description": "The username to use for the homepage widget for this app."
-        },
-        {
-          "name": "PASSWORD",
-          "label": "Homepage Widget Password",
-          "description": "The password to use for the homepage widget for this app."
-        }
-      ]
-    },
-    {
       "id": 24,
       "type": 3,
       "title": "IT-Tools",
@@ -794,118 +755,82 @@
       ]
     },
     {
-      "id": 28,
+      "id": 31,
       "type": 3,
-      "title": "Frigate",
-      "description": "Frigate is an open source NVR built around real-time AI object detection.",
+      "title": "Smart Home",
+      "description": "Home Assistant, Homebridge, Mosquitto MQTT Broker, Z-Wave JS UI, and Frigate NVR.",
       "categories": [
         "app"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "frigate/compose.yaml"
+        "stackfile": "smart-home/compose.yaml"
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
-        },
-        {
-          "name": "FRIGATE_MQTT_PASSWORD",
-          "label": "MQTT Server Password"
+          "name": "FRIGATE_HOST",
+          "label": "Frigate Host Address"
         },
         {
           "name": "FRIGATE_RTSP_PASSWORD",
           "label": "Camera Account Password"
         },
         {
-          "name": "PLUS_API_KEY",
+          "name": "FRIGATE_PLUS_API_KEY",
           "label": "Frigate+ API Key"
-        }
-      ]
-    },
-    {
-      "id": 29,
-      "type": 3,
-      "title": "Mosquitto",
-      "description": "Eclipse Mosquitto is an open source (EPL/EDL licensed) message broker that implements the MQTT protocol versions 5.0, 3.1.1 and 3.1.",
-      "categories": [
-        "infra"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "mosquitto/compose.yaml"
-      }
-    },
-    {
-      "id": 30,
-      "type": 3,
-      "title": "Z-Wave JS UI",
-      "description": "Full featured Z-Wave Control Panel and MQTT Gateway.",
-      "categories": [
-        "app",
-        "infra"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "zwave-js-ui/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
         },
         {
-          "name": "SESSION_SECRET",
-          "label": "Session Secret"
+          "name": "HASS_HOST",
+          "label": "Home Assisant Host Address"
+        },
+        {
+          "name": "HASS_HOST2",
+          "label": "Home Assisant Host Address (Additional)"
+        },
+        {
+          "name": "HASS_IPV4_ADDRESS",
+          "label": "Home Assisant IPv4 Address"
+        },
+        {
+          "name": "HASS_MAC_ADDRESS",
+          "label": "Home Assisant MAC Address"
+        },
+        {
+          "name": "HASS_ACCESS_TOKEN",
+          "label": "Home Assisant Homepage Access Token"
+        },
+        {
+          "name": "HOMEBRIDGE_HOST",
+          "label": "Homebridge Host Address"
+        },
+        {
+          "name": "HOMEBRIDGE_IPV4_ADDRESS",
+          "label": "Homebridge IPv4 Address"
+        },
+        {
+          "name": "HOMEBRIDGE_MAC_ADDRESS",
+          "label": "Homebridge MAC Address"
+        },
+        {
+          "name": "HOMEBRIDGE_USERNAME",
+          "label": "Homebridge Homepage Widget Username"
+        },
+        {
+          "name": "HOMEBRIDGE_PASSWORD",
+          "label": "Homebridge Homepage Widget Password"
+        },
+        {
+          "name": "ZWAVE_HOST",
+          "label": "Z-Wave JS UI Host Address"
+        },
+        {
+          "name": "ZWAVE_SESSION_SECRET",
+          "label": "Z-Wave JS UI Session Secret"
         },
         {
           "name": "ZWAVE_DEVICE_PATH",
           "label": "Path to Z-Wave Device on Host (e.g., /dev/ttyUSB0)"
-        }
-      ]
-    },
-    {
-      "id": 31,
-      "type": 3,
-      "title": "Home Assistant",
-      "description": "Open source home automation that puts local control and privacy first.",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "homeassistant/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
-        },
-        {
-          "name": "HOST2",
-          "label": "Host Address (Additional)",
-          "description": "The additional host address (domain) to expose the application."
-        },
-        {
-          "name": "IPV4_ADDRESS",
-          "label": "IPv4 Address"
-        },
-        {
-          "name": "MAC_ADDRESS",
-          "label": "MAC Address"
-        },
-        {
-          "name": "ACCESS_TOKEN",
-          "label": "Homepage Access Token",
-          "description": "The Access Token to use for the homepage widget."
         }
       ]
     }
