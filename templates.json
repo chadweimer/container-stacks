@@ -147,6 +147,26 @@
           "name": "SONARR_API_KEY",
           "label": "Sonarr API Key",
           "description": "The API key to use for the homepage widget for Sonarr."
+        },
+        {
+          "name": "TRANSMISSION_HOST",
+          "label": "Transmission Host Address",
+          "description": "The host address (domain) to expose Transmission."
+        },
+        {
+          "name": "VPN_SERVICE_PROVIDER",
+          "label": "VPN Service Provider",
+          "description": "VPN service provider"
+        },
+        {
+          "name": "OPENVPN_USER",
+          "label": "VPN Username",
+          "description": "The username to authenticate with the VPN service provider."
+        },
+        {
+          "name": "OPENVPN_PASSWORD",
+          "label": "VPN Password",
+          "description": "The password to authenticate with the VPN service provider."
         }
       ]
     },
@@ -365,42 +385,6 @@
           "name": "AUTHELIA_COOKIE_DOMAIN",
           "label": "Authelia Cookie Domain",
           "description": "The domain the session cookie is assigned to protect."
-        }
-      ]
-    },
-    {
-      "id": 11,
-      "type": 3,
-      "title": "Transmission",
-      "description": "Transmission is a fast, easy, and free BitTorrent client",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "transmission/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
-        },
-        {
-          "name": "VPN_SERVICE_PROVIDER",
-          "label": "VPN Service Provider",
-          "description": "VPN service provider"
-        },
-        {
-          "name": "OPENVPN_USER",
-          "label": "VPN Username",
-          "description": "The username to authenticate with the VPN service provider."
-        },
-        {
-          "name": "OPENVPN_PASSWORD",
-          "label": "VPN Password",
-          "description": "The password to authenticate with the VPN service provider."
         }
       ]
     },
