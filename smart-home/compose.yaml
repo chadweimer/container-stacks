@@ -27,7 +27,7 @@ services:
       FRIGATE_RTSP_PASSWORD: ${FRIGATE_RTSP_PASSWORD}
       PLUS_API_KEY: ${FRIGATE_PLUS_API_KEY}
       TZ: America/Los_Angeles
-    image: ghcr.io/blakeblackshear/frigate:stable
+    image: ghcr.io/blakeblackshear/frigate:${FRIGATE_IMAGE_TAG:-stable}
     labels:
       homepage.group: Smart Home
       homepage.href: https://${FRIGATE_HOST}
@@ -59,7 +59,7 @@ services:
     container_name: homeassistant
     extra_hosts:
       - host.docker.internal:host-gateway
-    image: ghcr.io/home-assistant/home-assistant:stable
+    image: ghcr.io/home-assistant/home-assistant:${HASS_IMAGE_TAG:-stable}
     labels:
       homepage.group: Smart Home
       homepage.name: Home Assistant
@@ -98,7 +98,7 @@ services:
       PGID: 568
       PUID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/homebridge/homebridge:latest
+    image: ghcr.io/homebridge/homebridge:${HOMEBRIDGE_IMAGE_TAG:-latest}
     labels:
       homepage.group: Smart Home
       homepage.href: https://${HOMEBRIDGE_HOST}
@@ -129,7 +129,7 @@ services:
       - source: mosquitto_config
         target: /mosquitto/config/mosquitto.conf
     container_name: mosquitto
-    image: eclipse-mosquitto:latest
+    image: eclipse-mosquitto:${MOSQUITTO_IMAGE_TAG:-latest}
     networks:
       - mqtt
     restart: unless-stopped
@@ -143,7 +143,7 @@ services:
     environment:
       SESSION_SECRET: ${ZWAVE_SESSION_SECRET}
       TZ: America/Los_Angeles
-    image: ghcr.io/zwave-js/zwave-js-ui:10
+    image: ghcr.io/zwave-js/zwave-js-ui:${ZWAVE_IMAGE_TAG:-10}
     labels:
       homepage.group: Smart Home
       homepage.name: Z-Wave JS UI

@@ -4,7 +4,7 @@ networks:
 services:
   portainer:
     container_name: portainer
-    image: portainer/portainer-ee:${IMAGE_TAG}
+    image: portainer/portainer-ee:${IMAGE_TAG:-sts}
     labels:
       homepage.group: Network
       homepage.href: https://${HOST}

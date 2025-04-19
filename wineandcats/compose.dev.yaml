@@ -14,7 +14,7 @@ services:
       DATABASE_URL: postgres://gomp:${DB_PASSWORD}@db/gomp?sslmode=disable
       SECURE_KEY: ${SECURE_KEY}
       IS_DEVELOPMENT: 1
-    image: ghcr.io/chadweimer/gomp:${IMAGE_TAG}
+    image: ghcr.io/chadweimer/gomp:${IMAGE_TAG:-beta}
     labels:
       - traefik.enable=true
       - traefik.http.routers.wineandcats-${STAGE}.rule=Host(`${HOST}`)
