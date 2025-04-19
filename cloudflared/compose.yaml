@@ -9,7 +9,7 @@ services:
       TUNNEL_TOKEN: ${TUNNEL_TOKEN}
     healthcheck:
       disable: true
-    image: cloudflare/cloudflared:latest
+    image: cloudflare/cloudflared:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
       homepage.href: https://one.dash.cloudflare.com
