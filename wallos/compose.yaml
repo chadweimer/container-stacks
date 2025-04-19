@@ -8,7 +8,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/ellite/wallos:latest
+    image: ghcr.io/ellite/wallos:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Other
       homepage.name: Wallos (Subscriptions)

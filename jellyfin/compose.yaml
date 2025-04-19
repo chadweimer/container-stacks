@@ -7,7 +7,7 @@ services:
     environment:
       JELLYFIN_PublishedServerUrl: https://${HOST}
       TZ: America/Los_Angeles
-    image: ghcr.io/jellyfin/jellyfin:latest
+    image: ghcr.io/jellyfin/jellyfin:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Jellyfin

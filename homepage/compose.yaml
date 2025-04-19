@@ -14,7 +14,7 @@ services:
       PUID: 568
     extra_hosts:
       - host.docker.internal:host-gateway
-    image: ghcr.io/gethomepage/homepage:latest
+    image: ghcr.io/gethomepage/homepage:${IMAGE_TAG:-latest}
     labels:
       traefik.enable: true
       traefik.http.routers.homepage.rule: Host(`${HOST}`)

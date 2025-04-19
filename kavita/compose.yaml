@@ -6,7 +6,7 @@ services:
     container_name: kavita
     environment:
       TZ: America/Los_Angeles
-    image: ghcr.io/kareadita/kavita:latest
+    image: ghcr.io/kareadita/kavita:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Kavita (Reading)
