@@ -65,7 +65,7 @@ In this section, all file/folder paths are relative to the base authelia bind mo
 ### Variables
 
 These stacks are designed to be used with [Portainer](https://portainer.io) with supplied environment variables, or `.env` files when used with docker compose directly.
-Refer to the `stack.env.example` file in each directory for the list of environment variables that are expected.
+Refer to the `example.env` file in each directory for the list of environment variables that are expected.
 
 ### Portainer Templates
 
