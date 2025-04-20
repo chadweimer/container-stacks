@@ -60,7 +60,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/linuxserver/prowlarr:$PROWLARR_IMAGE_TAG:-latest}
+    image: ghcr.io/linuxserver/prowlarr:${PROWLARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Prowlarr (Indexers)
