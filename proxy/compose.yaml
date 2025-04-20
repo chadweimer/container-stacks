@@ -54,7 +54,7 @@ services:
       X_AUTHELIA_CONFIG_FILTERS: template
     healthcheck:
       disable: true
-    image: ghcr.io/authelia/authelia:4
+    image: ghcr.io/authelia/authelia:${AUTHELIA_IMAGE_TAG:-4}
     labels:
       homepage.group: Network
       homepage.name: Authelia
@@ -87,7 +87,7 @@ services:
     environment:
       CONTAINERS: '1'
       NETWORKS: '1'
-    image: ghcr.io/linuxserver/socket-proxy:latest
+    image: ghcr.io/linuxserver/socket-proxy:${DOCKER_PROXY_IMAGE_TAG:-latest}
     networks:
       - docker-proxy
     pull_policy: always
@@ -130,7 +130,7 @@ services:
       CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
     extra_hosts:
       - host.docker.internal:host-gateway
-    image: traefik:v3
+    image: traefik:${TRAEFIK_IMAGE_TAG:-v3}
     labels:
       homepage.group: Network
       homepage.href: https://${TRAEFIK_HOST}

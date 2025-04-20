@@ -212,7 +212,7 @@ services:
       - source: alloy_config
         target: /etc/alloy/config.alloy
     container_name: alloy
-    image: grafana/alloy:latest
+    image: grafana/alloy:${ALLOY_IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
       homepage.name: Alloy
@@ -240,7 +240,7 @@ services:
       - --housekeeping_interval=5s
       - --docker_only=true
     container_name: cadvisor
-    image: gcr.io/cadvisor/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor:${CADVISOR_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
@@ -255,7 +255,7 @@ services:
       - /var/lib/docker/:/var/lib/docker:ro
   graphite:
     container_name: graphite-exporter
-    image: ghcr.io/supporterino/truenas-graphite-to-prometheus:latest
+    image: ghcr.io/supporterino/truenas-graphite-to-prometheus:${GRAPHITE_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server
       prometheus.port: 9108
@@ -272,7 +272,7 @@ services:
     container_name: nut-exporter
     extra_hosts:
       - host.docker.internal:host-gateway
-    image: ghcr.io/druggeri/nut_exporter:latest
+    image: ghcr.io/druggeri/nut_exporter:${NUT_IMAGE_TAG:-latest}
     labels:
       homepage.group: Status
       homepage.icon: nut.png
@@ -304,7 +304,7 @@ services:
       OMADA_PASS: ${OMADA_PASS}
       OMADA_SITE: Home
       OMADA_USER: ${OMADA_USER}
-    image: ghcr.io/charlie-haley/omada_exporter:latest
+    image: ghcr.io/charlie-haley/omada_exporter:${OMADA_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: omada
       prometheus.port: 9202
@@ -316,7 +316,7 @@ services:
     container_name: speedtest-exporter
     healthcheck:
       disable: True
-    image: ghcr.io/miguelndecarvalho/speedtest-exporter:latest
+    image: ghcr.io/miguelndecarvalho/speedtest-exporter:${SPEEDTEST_IMAGE_TAG:-latest}
     labels:
       homepage.group: Status
       homepage.icon: myspeed.png

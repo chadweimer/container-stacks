@@ -41,7 +41,7 @@ services:
       GF_AUTH_ANONYMOUS_ENABLED: true
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SERVER_ROOT_URL: https://${HOST}
-    image: grafana/grafana-oss:latest
+    image: grafana/grafana-oss:${GRAFANA_IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
       homepage.name: Grafana
@@ -68,7 +68,7 @@ services:
       - source: loki_config
         target: /etc/loki/config.yaml
     container_name: loki
-    image: grafana/loki:latest
+    image: grafana/loki:${LOKI_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server
       prometheus.port: 3100
@@ -88,7 +88,7 @@ services:
       - source: prometheus_config
         target: /etc/prometheus/prometheus.yml
     container_name: prometheus
-    image: prom/prometheus:latest
+    image: prom/prometheus:${PROMETHEUS_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server
       prometheus.port: 9090

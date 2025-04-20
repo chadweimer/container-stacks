@@ -38,9 +38,6 @@ services:
       timeout: 30s
       retries: 5
     image: postgres:${PG_VERSION}
-    labels:
-      - wud.tag.include=^${PG_VERSION}$$
-      - wud.watch=true
     networks:
       - default
     pull_policy: always

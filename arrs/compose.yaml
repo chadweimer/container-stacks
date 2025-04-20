@@ -9,7 +9,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/linuxserver/bazarr:latest
+    image: ghcr.io/linuxserver/bazarr:${BAZARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Bazarr (Subtitles)
@@ -35,7 +35,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/fallenbagel/jellyseerr:latest
+    image: ghcr.io/fallenbagel/jellyseerr:${JELLYSEERR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Jellyseerr (Requests)
@@ -60,7 +60,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/linuxserver/prowlarr:latest
+    image: ghcr.io/linuxserver/prowlarr:$PROWLARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Prowlarr (Indexers)
@@ -85,7 +85,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/linuxserver/radarr:latest
+    image: ghcr.io/linuxserver/radarr:${RADARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Radarr (Movies)
@@ -112,7 +112,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/linuxserver/readarr:develop
+    image: ghcr.io/linuxserver/readarr:${READARR_IMAGE_TAG:-develop}
     labels:
       homepage.group: Media
       homepage.name: Readarr (Books)
@@ -138,7 +138,7 @@ services:
       PUID: 568
       PGID: 568
       TZ: America/Los_Angeles
-    image: ghcr.io/linuxserver/sonarr:latest
+    image: ghcr.io/linuxserver/sonarr:${SONARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Sonarr (Shows)
@@ -166,7 +166,7 @@ services:
         condition: service_healthy
     environment:
       TZ: America/Los_Angeles
-    image: ghcr.io/linuxserver/transmission:latest
+    image: ghcr.io/linuxserver/transmission:${TRANSMISSION_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
       homepage.name: Transmission (Downloads)
@@ -193,7 +193,7 @@ services:
       OPENVPN_PASSWORD: ${OPENVPN_PASSWORD}
       SERVER_COUNTRIES: United States
       TZ: America/Los_Angeles
-    image: ghcr.io/qdm12/gluetun:latest
+    image: ghcr.io/qdm12/gluetun:${GLUETUN_IMAGE_TAG:-latest}
     labels:
       traefik.enable: true
       traefik.http.routers.transmission.rule: Host(`${TRANSMISSION_HOST}`)

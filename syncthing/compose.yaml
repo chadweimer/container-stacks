@@ -19,7 +19,7 @@ services:
       PGID: '1000'
       PUID: '1000'
       STNOUPGRADE: 'true'
-    image: ghcr.io/syncthing/syncthing:1
+    image: ghcr.io/syncthing/syncthing:${IMAGE_TAG:-1}
     labels:
       homepage.group: NAS
       homepage.href: https://${HOST}
