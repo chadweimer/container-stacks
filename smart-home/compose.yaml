@@ -133,6 +133,7 @@ services:
     networks:
       - mqtt
     restart: unless-stopped
+    user: '568:568'
     volumes:
       - /mnt/pool0/containers/mosquitto/data:/mosquitto/data
 
