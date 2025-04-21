@@ -12,10 +12,11 @@ networks:
     name: aaa_lan # Named so that it will be "first priority" network in docker
     driver: macvlan
     driver_opts:
-      parent: ${LAN_PARENT_NIC}
+      parent: ${LAN_PARENT_NIC:-br1}
     ipam:
       config:
-        - subnet: 192.168.0.0/23
+        - subnet: ${LAN_SUBNET:-192.168.0.0/23}
+          gateway: ${LAN_GATEWAY:-192.168.1.1}
   ingress:
     external: true
   mqtt:
