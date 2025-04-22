@@ -815,6 +815,21 @@
         {
           "name": "ZWAVE_DEVICE_PATH",
           "label": "Path to Z-Wave Device on Host (e.g., /dev/ttyUSB0)"
+        },
+        {
+          "name": "LAN_PARENT_NIC",
+          "label": "MacVLAN Parent NIC",
+          "default": "br1"
+        },
+        {
+          "name": "LAN_SUBNET",
+          "label": "MacVLAN Subnet",
+          "default": "192.168.0.0/23"
+        },
+        {
+          "name": "LAN_GATEWAY",
+          "label": "MacVLAN Gateway",
+          "default": "192.168.1.1"
         }
       ]
     }
