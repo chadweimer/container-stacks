@@ -832,6 +832,37 @@
           "default": "192.168.1.1"
         }
       ]
+    },
+    {
+      "id": 32,
+      "type": 3,
+      "title": "Gotify",
+      "description": "A simple server for sending and receiving messages.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "gotify/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "GOTIFY_CLIENT_TOKEN",
+          "label": "Homepage Client Token"
+        },
+        {
+          "name": "IMAGE_TAG",
+          "label": "Image Tag",
+          "description": "The container image tag to use.",
+          "default": "latest"
+        }
+      ]
     }
   ]
 }

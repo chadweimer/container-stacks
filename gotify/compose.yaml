@@ -1,0 +1,29 @@
+networks:
+  ingress:
+    external: true
+
+services:
+  gotify:
+    container_name: gotify
+    environment:
+      GOTIFY_SERVER_TRUSTEDPROXIES: '[172.16.0.0/16,192.168.1.0/24]'
+      TZ: America/Los_Angeles
+    image: ghcr.io/gotify/server:${IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST}
+      homepage.icon: gotify.png
+      homepage.name: Gotify
+      homepage.widget.type: gotify
+      homepage.widget.url: http://gotify
+      homepage.widget.key: ${GOTIFY_CLIENT_TOKEN}
+      traefik.enable: True
+      traefik.http.routers.gotify.rule: Host(`${HOST}`)
+      traefik.http.routers.gotify.tls.certresolver: myresolver
+    networks:
+      - ingress
+    user: "568:568"
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/gotify:/app/data
