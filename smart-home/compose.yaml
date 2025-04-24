@@ -51,6 +51,7 @@ services:
     networks:
       - ingress
       - mqtt
+    pull_policy: always
     restart: unless-stopped
     shm_size: "1024mb"
     stop_grace_period: 30s
@@ -92,6 +93,7 @@ services:
       ingress:
       mqtt:
     privileged: true
+    pull_policy: always
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/homeassistant:/config
@@ -139,6 +141,7 @@ services:
     image: eclipse-mosquitto:${MOSQUITTO_IMAGE_TAG:-latest}
     networks:
       - mqtt
+    pull_policy: always
     restart: unless-stopped
     user: '568:568'
     volumes:
@@ -164,6 +167,7 @@ services:
       traefik.http.services.zwavejsui.loadbalancer.server.port: 8091
     networks:
       - ingress
+    pull_policy: always
     restart: unless-stopped
     stop_signal: SIGINT
     tty: true
