@@ -1,20 +1,4 @@
 configs:
-  frigate_notify_config:
-    content: |
-      app:
-        mode: events
-      frigate:
-        server: http://frigate:5000
-        public_url: https://${FRIGATE_HOST}
-        mqtt:
-          enabled: true
-          server: mosquitto
-          port: 1883
-      alerts:
-        gotify:
-          enabled: true
-          server: http://gotify
-          token: ${FRIGATE_GOTIFY_TOKEN}
   mosquitto_config:
     content: |
       listener 1883
@@ -78,23 +62,6 @@ services:
         target: /tmp/cache
         tmpfs:
           size: 1000000000
-
-  frigate-notify:
-    configs:
-      - source: frigate_notify_config
-        target: /app/config.yml
-    container_name: frigate-notify
-    environment:
-      TZ: America/Los_Angeles
-    image: ghcr.io/0x2142/frigate-notify:latest
-    networks:
-      - ingress
-      - mqtt
-    pull_policy: always
-    restart: unless-stopped
-    tmpfs:
-      - /app/log:mode=755,uid=568,gid=568
-    user: '568:568'
 
   homeassistant:
     container_name: homeassistant
