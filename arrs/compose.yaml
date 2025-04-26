@@ -1,7 +1,5 @@
 name: arrs
 networks:
-  flaresolverr:
-    name: flaresolverr
   ingress:
     external: True
 services:
@@ -31,15 +29,6 @@ services:
     volumes:
       - /mnt/pool0/containers/bazarr:/config
       - /mnt/pool1/media:/data
-  flaresolverr:
-    container_name: flaresolverr
-    environment:
-      TZ: America/Los_Angeles
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    networks:
-      - flaresolverr
-    pull_policy: always
-    restart: unless-stopped
   jellyseerr:
     container_name: jellyseerr
     environment:
@@ -85,7 +74,6 @@ services:
       traefik.http.routers.prowlarr.tls.certresolver: myresolver
       traefik.http.routers.prowlarr.middlewares: 'authelia@docker'
     networks:
-      - flaresolverr
       - ingress
     pull_policy: always
     restart: unless-stopped
