@@ -52,8 +52,6 @@ services:
       TZ: America/Los_Angeles
       X_AUTHELIA_CONFIG: /config/configuration.yml,/config/oidc_clients.yml
       X_AUTHELIA_CONFIG_FILTERS: template
-    healthcheck:
-      disable: true
     image: ghcr.io/authelia/authelia:${AUTHELIA_IMAGE_TAG:-4}
     labels:
       homepage.group: Network

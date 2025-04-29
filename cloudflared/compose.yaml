@@ -7,8 +7,6 @@ services:
     container_name: cloudflared
     environment:
       TUNNEL_TOKEN: ${TUNNEL_TOKEN}
-    healthcheck:
-      disable: true
     image: cloudflare/cloudflared:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
