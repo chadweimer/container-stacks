@@ -42,7 +42,6 @@ services:
       homepage.name: Frigate
       homepage.widget.type: frigate
       homepage.widget.url: http://frigate:5000
-      homepage.widget.enableRecentEvents: true
       traefik.enable: True
       traefik.http.routers.frigate.rule: Host(`${FRIGATE_HOST}`)
       traefik.http.routers.frigate.tls.certresolver: myresolver
