@@ -36,15 +36,43 @@ configs:
       }
 
       prometheus.exporter.unix "host" {
-        procfs_path = "/host/proc"
-        rootfs_path = "/host"
-        sysfs_path  = "/host/sys"
+        procfs_path = "/rootfs/proc"
+        rootfs_path = "/rootfs"
+        sysfs_path  = "/rootfs/sys"
+
+        filesystem {
+          // Exclude filesystem types that aren't relevant for monitoring
+          fs_types_exclude     = "^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|tmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$"
+          // Exclude mount points that aren't relevant for monitoring
+          mount_points_exclude = "^/(dev|proc|run/credentials/.+|sys|var/lib/docker/.+)($|/)"
+        }
+
+        netclass {
+          // Ignore virtual and container network interfaces
+          ignored_devices = "^(veth.*|cali.*|[a-f0-9]{15})$"
+        }
+
+        netdev {
+          // Exclude virtual and container network interfaces from device metrics
+          device_exclude = "^(veth.*|cali.*|[a-f0-9]{15})$"
+        }
       }
 
       prometheus.scrape "host" {
         targets    = prometheus.exporter.unix.host.targets
         forward_to = [prometheus.relabel.host.receiver]
         job_name   = "host"
+      }
+
+      prometheus.exporter.cadvisor "docker" {
+        docker_host = "tcp://docker-proxy:2375"
+        docker_only = true
+      }
+
+      prometheus.scrape "cadvisor" {
+        targets    = prometheus.exporter.cadvisor.docker.targets
+        forward_to = [prometheus.relabel.host.receiver]
+        job_name   = "cadvisor"
       }
 
       prometheus.relabel "host" {
@@ -231,28 +259,10 @@ services:
       - '127.0.0.1:1514:1514'
     pull_policy: always
     restart: unless-stopped
-    user: "568:568"
-    volumes:
-      - /:/host:ro
-      - /mnt/pool0/containers/alloy:/var/lib/alloy
-  cadvisor:
-    command:
-      - --housekeeping_interval=5s
-      - --docker_only=true
-    container_name: cadvisor
-    image: gcr.io/cadvisor/cadvisor:${CADVISOR_IMAGE_TAG:-latest}
-    labels:
-      prometheus.label.instance: truenas-server
-      prometheus.port: 8080
-    networks:
-      - observe
-    pull_policy: always
-    restart: unless-stopped
     volumes:
       - /:/rootfs:ro
-      - /var/run:/var/run:ro
       - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
+      - /mnt/pool0/containers/alloy:/var/lib/alloy
   graphite:
     container_name: graphite-exporter
     image: ghcr.io/supporterino/truenas-graphite-to-prometheus:${GRAPHITE_IMAGE_TAG:-latest}

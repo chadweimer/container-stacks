@@ -84,6 +84,7 @@ services:
     container_name: docker-proxy
     environment:
       CONTAINERS: '1'
+      INFO: '1'
       NETWORKS: '1'
     image: ghcr.io/linuxserver/socket-proxy:${DOCKER_PROXY_IMAGE_TAG:-latest}
     networks:
