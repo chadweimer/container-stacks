@@ -56,7 +56,7 @@ services:
     stop_grace_period: 30s
     volumes:
       - /mnt/pool0/containers/frigate/config:/config
-      - /mnt/pool0/containers/frigate/storage:/media/frigate
+      - /mnt/pool1/media/nvr:/media/frigate
       - type: tmpfs
         target: /tmp/cache
         tmpfs:
