@@ -1,22 +1,13 @@
-configs:
-  fb_config:
-    content: |
-      address: 0.0.0.0
-      port: 80
-      database: /app/filebrowser.db
-      auth:
-        method: proxy
-        header: Remote-User
 networks:
   ingress:
     external: True
 services:
   filebrowser:
-    configs:
-      - source: fb_config
-        target: /etc/filebrowser/.filebrowser.yaml
     command:
-      - '--config=/etc/filebrowser/.filebrowser.yaml'
+      - 'filebrowser'
+      - '--config'
+      - '/config/settings.json'
+      - '--noauth'
     container_name: filebrowser
     image: filebrowser/filebrowser:${IMAGE_TAG:-latest}
     labels:
@@ -34,6 +25,7 @@ services:
     restart: unless-stopped
     user: "568:568"
     volumes:
-      - /mnt/pool0/containers/filebrowser:/app
+      - /mnt/pool0/containers/filebrowser:/config
+      - /mnt/pool0/containers/filebrowser:/database
       - /mnt/pool0:/srv/pool0
       - /mnt/pool1:/srv/pool1
