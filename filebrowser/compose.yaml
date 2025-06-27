@@ -4,9 +4,6 @@ networks:
 services:
   filebrowser:
     command:
-      - 'filebrowser'
-      - '--config'
-      - '/config/settings.json'
       - '--noauth'
     container_name: filebrowser
     image: filebrowser/filebrowser:${IMAGE_TAG:-latest}
