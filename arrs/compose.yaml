@@ -106,32 +106,6 @@ services:
     volumes:
       - /mnt/pool0/containers/radarr:/config
       - /mnt/pool1/media:/data
-  readarr:
-    container_name: readarr
-    environment:
-      PUID: 568
-      PGID: 568
-      TZ: America/Los_Angeles
-    image: ghcr.io/linuxserver/readarr:${READARR_IMAGE_TAG:-develop}
-    labels:
-      homepage.group: Media
-      homepage.name: Readarr (Books)
-      homepage.href: https://${READARR_HOST}
-      homepage.icon: readarr.png
-      homepage.widget.type: readarr
-      homepage.widget.url: http://readarr:8787
-      homepage.widget.key: ${READARR_API_KEY}
-      traefik.enable: true
-      traefik.http.routers.readarr.rule: Host(`${READARR_HOST}`)
-      traefik.http.routers.readarr.tls.certresolver: myresolver
-      traefik.http.routers.readarr.middlewares: 'authelia@docker'
-    networks:
-      - ingress
-    pull_policy: always
-    restart: unless-stopped
-    volumes:
-      - /mnt/pool0/containers/readarr:/config
-      - /mnt/pool1/media:/data
   sonarr:
     container_name: sonarr
     environment:
