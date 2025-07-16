@@ -129,16 +129,6 @@
           "description": "The API key to use for the homepage widget for Radarr."
         },
         {
-          "name": "READARR_HOST",
-          "label": "Readarr Host Address",
-          "description": "The host address (domain) to expose Readarr."
-        },
-        {
-          "name": "READARR_API_KEY",
-          "label": "Readarr API Key",
-          "description": "The API key to use for the homepage widget for Readarr."
-        },
-        {
           "name": "SONARR_HOST",
           "label": "Sonarr Host Address",
           "description": "The host address (domain) to expose Sonarr."
