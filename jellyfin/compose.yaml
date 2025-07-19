@@ -4,9 +4,14 @@ networks:
 services:
   jellyfin:
     container_name: jellyfin
+    devices:
+      - /dev/dri:/dev/dri
     environment:
       JELLYFIN_PublishedServerUrl: https://${HOST}
       TZ: America/Los_Angeles
+    group_add:
+      - 107 # render
+      - 44 # video
     image: ghcr.io/jellyfin/jellyfin:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
