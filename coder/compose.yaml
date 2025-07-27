@@ -1,0 +1,27 @@
+networks:
+  ingress:
+    external: True
+services:
+  code-server:
+    command: --auth none --disable-telemetry
+    container_name: code-server
+    image: ghcr.io/coder/code-server:${IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Other
+      homepage.name: Coder
+      homepage.href: https://${HOST}
+      homepage.icon: code.png
+      traefik.enable: true
+      traefik.http.routers.coder.rule: Host(`${HOST}`)
+      traefik.http.routers.coder.tls.certresolver: myresolver
+      traefik.http.routers.coder.middlewares: 'authelia@docker'
+    networks:
+      - ingress
+    pull_policy: always
+    restart: unless-stopped
+    user: "568:568"
+    volumes:
+      - /mnt/pool0/containers/coder/.config:/home/coder/.config
+      - /mnt/pool0/containers/coder/.local:/home/coder/.local
+      - /mnt/pool0:/mnt/pool0
+      - /mnt/pool1:/mnt/pool1

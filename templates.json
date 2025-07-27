@@ -832,6 +832,27 @@
           "default": "latest"
         }
       ]
+    },
+    {
+      "id": 33,
+      "type": 3,
+      "title": "Code Server",
+      "description": "VS Code in the browser",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "coder/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        }
+      ]
     }
   ]
 }
