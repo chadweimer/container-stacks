@@ -14,6 +14,10 @@ services:
       homepage.name: Wallos (Subscriptions)
       homepage.href: https://${HOST}
       homepage.icon: wallos.png
+      homepage.widget.type: wallos
+      homepage.widget.url: http://wallos
+      homepage.widget.key: ${API_KEY}
+      homepage.widget.fields: '["activeSubscriptions", "thisMonthlyCost", "nextMonthlyCost"]'
       traefik.enable: true
       traefik.http.routers.wallos.rule: Host(`${HOST}`)
       traefik.http.routers.wallos.tls.certresolver: myresolver
