@@ -48,6 +48,7 @@ services:
       homepage.href: https://${HOST}
       homepage.icon: grafana.png
       homepage.widget.type: grafana
+      homepage.widget.version: 2
       homepage.widget.url: http://grafana:3000
       homepage.widget.username: ${USERNAME}
       homepage.widget.password: ${PASSWORD}
