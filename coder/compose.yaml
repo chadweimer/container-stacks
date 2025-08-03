@@ -7,7 +7,7 @@ services:
     container_name: code-server
     image: ghcr.io/coder/code-server:${IMAGE_TAG:-latest}
     labels:
-      homepage.group: Other
+      homepage.group: NAS
       homepage.name: Coder
       homepage.href: https://${HOST}
       homepage.icon: code.png
