@@ -1,5 +1,13 @@
 name: arrs
 networks:
+  bitmagnet:
+    name: bitmagnet
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.55.0/24
+          gateway: 192.168.55.1
   ingress:
     external: True
 services:
@@ -29,6 +37,91 @@ services:
     volumes:
       - /mnt/pool0/containers/bazarr:/config
       - /mnt/pool1/media:/data
+  bitmagnet:
+    command:
+      - worker
+      - run
+      - --all
+    container_name: bitmagnet
+    depends_on:
+      bitmagnet-db:
+        condition: service_healthy
+      bitmagnet-vpn:
+        condition: service_healthy
+    image: ghcr.io/bitmagnet-io/bitmagnet:${BITMAGNET_IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Media
+      homepage.name: bitmagnet
+      homepage.href: https://${BITMAGNET_HOST}
+      homepage.icon: bitmagnet.png
+    environment:
+      POSTGRES_HOST: bitmagnet-db
+      POSTGRES_PASSWORD: ${BITMAGNET_DB_PASSWORD}
+      TMDB_API_KEY: ${TMDB_API_KEY}
+    network_mode: 'service:bitmagnet-vpn'
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/bitmagnet/config:/root/.config/bitmagnet
+  bitmagnet-db:
+    container_name: bitmagnet-db
+    environment:
+      POSTGRES_PASSWORD: ${BITMAGNET_DB_PASSWORD}
+      POSTGRES_DB: bitmagnet
+      PGUSER: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-d", "bitmagnet"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
+    image: postgres:${BITMAGNET_PG_VERSION}
+    networks:
+      bitmagnet:
+        ipv4_address: 192.168.55.11
+    # ports:
+    #   - 5432:5432
+    pull_policy: always
+    restart: unless-stopped
+    shm_size: 1g
+    volumes:
+      - /mnt/pool0/containers/bitmagnet/pg${BITMAGNET_PG_VERSION}:/var/lib/postgresql/data
+  bitmagnet-vpn:
+    cap_add:
+      - NET_ADMIN
+    container_name: bitmagnet-vpn
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
+      VPN_TYPE: openvpn
+      OPENVPN_USER: ${OPENVPN_USER}
+      OPENVPN_PASSWORD: ${OPENVPN_PASSWORD}
+      SERVER_COUNTRIES: United States
+      TZ: America/Los_Angeles
+    image: ghcr.io/qdm12/gluetun:${GLUETUN_IMAGE_TAG:-latest}
+    labels:
+      traefik.enable: true
+      traefik.http.routers.bitmagnet.rule: Host(`${BITMAGNET_HOST}`)
+      traefik.http.routers.bitmagnet.tls.certresolver: myresolver
+      traefik.http.routers.bitmagnet.middlewares: 'authelia@docker'
+      traefik.http.services.bitmagnet.loadbalancer.server.port: 3333
+    # Host names must be manually mapped here for bitmagnet to resolve them:
+    extra_hosts:
+      - "bitmagnet-db:192.168.55.11"
+    networks:
+      bitmagnet:
+        ipv4_address: 192.168.55.10
+      ingress:
+    # ports:
+    #   # The bitmagnet ports must be exposed by the gluetun container:
+    #   - "3333:3333"
+    #   # BitTorrent ports:
+    #   - "3334:3334/tcp"
+    #   - "3334:3334/udp"
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/bitmagnet/gluetun:/gluetun
   jellyseerr:
     container_name: jellyseerr
     environment:
@@ -136,7 +229,7 @@ services:
   transmission:
     container_name: transmission
     depends_on:
-      vpn:
+      transmission-vpn:
         condition: service_healthy
     environment:
       TZ: America/Los_Angeles
@@ -148,13 +241,13 @@ services:
       homepage.icon: transmission.png
       homepage.widget.type: transmission
       homepage.widget.url: http://transmission-vpn:9091
-    network_mode: 'service:vpn'
+    network_mode: 'service:transmission-vpn'
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/transmission:/config
+      - /mnt/pool0/containers/transmission/config:/config
       - /mnt/pool1/media/torrents:/data/torrents
-  vpn:
+  transmission-vpn:
     cap_add:
       - NET_ADMIN
     container_name: transmission-vpn
@@ -183,4 +276,4 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/gluetun:/gluetun
+      - /mnt/pool0/containers/transmission/gluetun:/gluetun
