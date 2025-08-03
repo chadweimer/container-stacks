@@ -55,8 +55,10 @@ services:
       homepage.href: https://${BITMAGNET_HOST}
       homepage.icon: bitmagnet.png
     environment:
+      CLASSIFIER_DELETE_XXX: 'true'
       POSTGRES_HOST: bitmagnet-db
       POSTGRES_PASSWORD: ${BITMAGNET_DB_PASSWORD}
+      PROCESSOR_CONCURRENCY: 2
       TMDB_API_KEY: ${TMDB_API_KEY}
     network_mode: 'service:bitmagnet-vpn'
     pull_policy: always
