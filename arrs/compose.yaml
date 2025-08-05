@@ -10,6 +10,8 @@ networks:
           gateway: 192.168.55.1
   ingress:
     external: True
+  observe:
+    external: True
 services:
   bazarr:
     container_name: bazarr
@@ -102,6 +104,7 @@ services:
       TZ: America/Los_Angeles
     image: ghcr.io/qdm12/gluetun:${GLUETUN_IMAGE_TAG:-latest}
     labels:
+      prometheus.port: 3333
       traefik.enable: true
       traefik.http.routers.bitmagnet.rule: Host(`${BITMAGNET_HOST}`)
       traefik.http.routers.bitmagnet.tls.certresolver: myresolver
@@ -114,6 +117,7 @@ services:
       bitmagnet:
         ipv4_address: 192.168.55.10
       ingress:
+      observe:
     # ports:
     #   # The bitmagnet ports must be exposed by the gluetun container:
     #   - "3333:3333"
