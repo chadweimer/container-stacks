@@ -154,6 +154,29 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/jellyseerr:/app/config
+  lazylibrarian:
+    container_name: lazylibrarian
+    environment:
+      PUID: 568
+      PGID: 568
+      TZ: America/Los_Angeles
+    image: ghcr.io/linuxserver/lazylibrarian:${LAZYLIBRARIAN_IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Media
+      homepage.name: Lazylibrarian (Books)
+      homepage.href: https://${LAZYLIBRARIAN_HOST}
+      homepage.icon: lazylibrarian.png
+      traefik.enable: true
+      traefik.http.routers.lazylibrarian.rule: Host(`${LAZYLIBRARIAN_HOST}`)
+      traefik.http.routers.lazylibrarian.tls.certresolver: myresolver
+      traefik.http.routers.lazylibrarian.middlewares: 'authelia@docker'
+    networks:
+      - ingress
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/lazylibrarian:/config
+      - /mnt/pool1/media:/data
   prowlarr:
     container_name: prowlarr
     environment:
