@@ -25,6 +25,8 @@ networks:
 services:
   frigate:
     cap_add:
+      - CAP_NET_ADMIN
+      - CAP_NET_RAW
       - CAP_PERFMON
     container_name: frigate
     devices:
