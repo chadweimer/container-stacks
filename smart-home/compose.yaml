@@ -42,6 +42,8 @@ services:
       homepage.name: Frigate
       homepage.widget.type: frigate
       homepage.widget.url: http://frigate:5000
+      prometheus.label.instance: truenas-server
+      prometheus.port: 5000
       traefik.enable: True
       traefik.http.routers.frigate.rule: Host(`${FRIGATE_HOST}`)
       traefik.http.routers.frigate.tls.certresolver: myresolver
