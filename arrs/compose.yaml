@@ -58,6 +58,7 @@ services:
       homepage.icon: bitmagnet.png
     environment:
       CLASSIFIER_DELETE_XXX: 'true'
+      DHT_CRAWLER_SCALING_FACTOR: 5
       LOG_JSON: 'true'
       POSTGRES_HOST: bitmagnet-db
       POSTGRES_PASSWORD: ${BITMAGNET_DB_PASSWORD}
