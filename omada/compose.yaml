@@ -1,3 +1,6 @@
+networks:
+  observe:
+    external: true
 services:
   omada:
     cap_add:
@@ -22,7 +25,7 @@ services:
       homepage.widget.type: omada
       homepage.widget.url: https://host.docker.internal:8043
       homepage.widget.username: ${USERNAME}
-      traefik.enable: True
+      traefik.enable: true
       traefik.http.routers.omada.rule: Host(`${HOST}`)
       traefik.http.routers.omada.tls.certresolver: myresolver
       traefik.http.services.omada.loadbalancer.server.port: 8043
@@ -33,3 +36,18 @@ services:
     volumes:
       - /mnt/pool0/containers/omada/data:/opt/tplink/EAPController/data
       - /mnt/pool0/containers/omada/config:/opt/tplink/EAPController/logs
+  exporter:
+    container_name: omada-exporter
+    environment:
+      OMADA_HOST: https://${HOST}
+      OMADA_PASS: ${PASSWORD}
+      OMADA_SITE: Home
+      OMADA_USER: ${USERNAME}
+    image: ghcr.io/charlie-haley/omada_exporter:${EXPORTER_IMAGE_TAG:-latest}
+    labels:
+      prometheus.label.instance: omada
+      prometheus.port: 9202
+    networks:
+      - observe
+    pull_policy: always
+    restart: unless-stopped

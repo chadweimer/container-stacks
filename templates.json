@@ -243,13 +243,13 @@
         },
         {
           "name": "USERNAME",
-          "label": "Homepage Widget Username",
-          "description": "The username to use for the homepage widget for this app."
+          "label": "Omada Controller Username",
+          "description": "The username to authenticate with the Omada Controller, for scraping and Homepage."
         },
         {
           "name": "PASSWORD",
-          "label": "Homepage Widget Password",
-          "description": "The password to use for the homepage widget for this app."
+          "label": "Omada Controller Password",
+          "description": "The password to authenticate with the Omada Controller, for scraping and Homepage."
         }
       ]
     },
@@ -291,21 +291,6 @@
           "name": "KVM_PASSWORD",
           "label": "KVM Password",
           "description": "The password to authenticate with the NAS kvm, for scraping."
-        },
-        {
-          "name": "OMADA_HOST",
-          "label": "Omada Controller URL",
-          "description": "The url of the Omada Controller, including scheme, for scraping."
-        },
-        {
-          "name": "OMADA_USER",
-          "label": "Omada Controller Username",
-          "description": "The username to authenticate with the Omada Controller, for scraping."
-        },
-        {
-          "name": "OMADA_PASS",
-          "label": "Omada Controller Password",
-          "description": "The password to authenticate with the Omada Controller, for scraping."
         }
       ]
     },

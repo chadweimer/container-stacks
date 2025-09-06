@@ -307,21 +307,6 @@ services:
       - observe
     pull_policy: always
     restart: unless-stopped
-  omada:
-    container_name: omada-exporter
-    environment:
-      OMADA_HOST: ${OMADA_HOST}
-      OMADA_PASS: ${OMADA_PASS}
-      OMADA_SITE: Home
-      OMADA_USER: ${OMADA_USER}
-    image: ghcr.io/charlie-haley/omada_exporter:${OMADA_IMAGE_TAG:-latest}
-    labels:
-      prometheus.label.instance: omada
-      prometheus.port: 9202
-    networks:
-      - observe
-    pull_policy: always
-    restart: unless-stopped
   speedtest:
     container_name: speedtest-exporter
     healthcheck:
