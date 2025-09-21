@@ -113,7 +113,7 @@ services:
       LLDAP_KEY_SEED: ${LLDAP_KEY_SEED}
       LLDAP_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN}
       LLDAP_LDAP_USER_PASS: ${LLDAP_LDAP_USER_PASS}
-    image: lldap/lldap:${LLDAP_IMAGE_TAG:-stable}
+    image: ghcr.io/lldap/lldap:${LLDAP_IMAGE_TAG:-stable}
     labels:
       homepage.group: Network
       homepage.name: lldap
