@@ -27,23 +27,11 @@ docker network create ingress
 docker network create observe
 ```
 
-### Authelia Secrets
+### Authelia Setup
 
 In this section, all file/folder paths are relative to the base authelia bind mount location.
 
-1. Define users in `./config/users_database.yml`. E.g.,
-   ```yaml
-   users:
-     some-username:
-       disabled: false
-       displayname: 'Full Name'
-       password: 'password_hash'
-       email: 'email@example.com'
-       groups:
-         - 'admins'
-         - 'dev'
-   ```
-   - To generate password hashes, follow this [guide from Authelia](https://www.authelia.com/reference/guides/passwords/#passwords).
+1. Define users in lldap
 1. Execute the following in the `./secrets` directory below the base authelia bind mount location:
    ```bash
    openssl rand -hex 64 > JWT_SECRET

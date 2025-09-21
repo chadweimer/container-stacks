@@ -36,10 +36,16 @@ services:
       - source: authelia_config
         target: /config/configuration.yml
     container_name: authelia
+    depends_on:
+      lldap:
+        condition: service_healthy
     environment:
       AUTHELIA_ACCESS_CONTROL_DEFAULT_POLICY: one_factor
-      AUTHELIA_AUTHENTICATION_BACKEND_FILE_PATH: /config/users_database.yml
-      AUTHELIA_AUTHENTICATION_BACKEND_FILE_WATCH: true
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_IMPLEMENTATION: lldap
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_ADDRESS: ldap://lldap:3890
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN}
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USER: uid=authelia,ou=people,${LLDAP_LDAP_BASE_DN}
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD: ${AUTHELIA_LLDAP_USER_PASS}
       AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE: /run/secrets/AUTHELIA_OIDC_HMAC_SECRET
       AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: /run/secrets/AUTHELIA_JWT_SECRET
       AUTHELIA_NOTIFIER_FILESYSTEM_FILENAME: /config/notification.txt
@@ -96,6 +102,31 @@ services:
       - /run
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  lldap:
+    container_name: lldap
+    environment:
+      UID: 568
+      GID: 568
+      TZ: America/Los_Angeles
+      LLDAP_JWT_SECRET: ${LLDAP_JWT_SECRET}
+      LLDAP_KEY_SEED: ${LLDAP_KEY_SEED}
+      LLDAP_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN}
+      LLDAP_LDAP_USER_PASS: ${LLDAP_LDAP_USER_PASS}
+    image: lldap/lldap:${LLDAP_IMAGE_TAG:-stable}
+    labels:
+      homepage.group: Network
+      homepage.name: lldap
+      homepage.href: https://${LLDAP_HOST}
+      homepage.icon: lldap.png
+      traefik.enable: true
+      traefik.http.routers.lldap.rule: Host(`${LLDAP_HOST}`)
+      traefik.http.routers.lldap.tls.certresolver: myresolver
+      traefik.http.services.lldap.loadbalancer.server.port: 17170
+    networks:
+      - ingress
+    volumes:
+      - /mnt/pool0/containers/lldap:/data
 
   traefik:
     command:
