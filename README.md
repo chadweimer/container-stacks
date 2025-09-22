@@ -31,7 +31,6 @@ docker network create observe
 
 In this section, all file/folder paths are relative to the base authelia bind mount location.
 
-1. Define users in lldap
 1. Execute the following in the `./secrets` directory below the base authelia bind mount location:
    ```bash
    openssl rand -hex 64 > JWT_SECRET
@@ -43,6 +42,7 @@ In this section, all file/folder paths are relative to the base authelia bind mo
 1. Create the `./config/oidc_clients.yml` file below the base authelia bind mount location, and populate it with the [desired OIDC client configuration](https://www.authelia.com/integration/openid-connect/introduction/).
    - To generate OIDC client IDs, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-alphanumeric-string), but use length 32 instead of 64 if using the openssl command due to character length restrictions.
    - To generate OIDC client secrets, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-password-hash).
+1. After starting the proxy stack, define users in lldap to use to log in to other services
 
 ### Variables
 
