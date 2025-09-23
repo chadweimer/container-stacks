@@ -362,11 +362,6 @@
           "description": "The domain the session cookie is assigned to protect."
         },
         {
-          "name": "AUTHELIA_LLDAP_USER_PASS",
-          "label": "Authelia LDAP Password",
-          "description": "The password for the LDAP user used by Authelia."
-        },
-        {
           "name": "LLDAP_HOST",
           "label": "LLDAP Host Address",
           "description": "The host address (domain) to expose lldap."
@@ -677,6 +672,31 @@
           "name": "AUTHELIA_COOKIE_DOMAIN",
           "label": "Authelia Cookie Domain",
           "description": "The domain the session cookie is assigned to protect."
+        },
+        {
+          "name": "LLDAP_HOST",
+          "label": "LLDAP Host Address",
+          "description": "The host address (domain) to expose lldap."
+        },
+        {
+          "name": "LLDAP_LDAP_BASE_DN",
+          "label": "LDAP Base DN",
+          "description": "The base DN for the LDAP directory."
+        },
+        {
+          "name": "LLDAP_LDAP_USER_PASS",
+          "label": "LDAP Admin User Password",
+          "description": "The password for the LDAP admin user."
+        },
+        {
+          "name": "LLDAP_JWT_SECRET",
+          "label": "LLDAP JWT Secret",
+          "description": "The JWT secret used by lldap."
+        },
+        {
+          "name": "LLDAP_KEY_SEED",
+          "label": "LLDAP Key Seed",
+          "description": "The key seed used by lldap."
         }
       ]
     },
