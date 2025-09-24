@@ -370,17 +370,7 @@
           "name": "LLDAP_LDAP_BASE_DN",
           "label": "LDAP Base DN",
           "description": "The base DN for the LDAP directory."
-        },
-        {
-          "name": "LLDAP_LDAP_USER_PASS",
-          "label": "LDAP Admin User Password",
-          "description": "The password for the LDAP admin user."
-        },
-        {
-          "name": "LLDAP_JWT_SECRET",
-          "label": "LLDAP JWT Secret",
-          "description": "The JWT secret used by lldap."
-        },
+        }
         {
           "name": "LLDAP_KEY_SEED",
           "label": "LLDAP Key Seed",
@@ -682,16 +672,6 @@
           "name": "LLDAP_LDAP_BASE_DN",
           "label": "LDAP Base DN",
           "description": "The base DN for the LDAP directory."
-        },
-        {
-          "name": "LLDAP_LDAP_USER_PASS",
-          "label": "LDAP Admin User Password",
-          "description": "The password for the LDAP admin user."
-        },
-        {
-          "name": "LLDAP_JWT_SECRET",
-          "label": "LLDAP JWT Secret",
-          "description": "The JWT secret used by lldap."
         },
         {
           "name": "LLDAP_KEY_SEED",
