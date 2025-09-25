@@ -319,7 +319,7 @@
       "id": 10,
       "type": 3,
       "title": "Proxy w/ Let's Encrypt",
-      "description": "Traefik proxy configured to use Let's Encrypt for TLS provisioning, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
+      "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
       "categories": [
         "infra"
       ],
@@ -335,16 +335,10 @@
           "description": "The host address (domain) to expose the traefik web interface."
         },
         {
-          "name": "CF_DNS_API_TOKEN",
-          "label": "Cloudflare API Token",
-          "description": "The API token to authenticate with Cloudflare."
-        },
-        {
           "name": "ACME_CA_SERVER",
           "label": "ACME CA Server",
           "description": "The URL of the CA Server to use that supports the ACME protocol",
-          "default": "https://acme-v02.api.letsencrypt.org/directory",
-          "preset": true
+          "default": "https://acme-v02.api.letsencrypt.org/directory"
         },
         {
           "name": "ACME_EMAIL_ADDRESS",
@@ -370,7 +364,7 @@
           "name": "LLDAP_LDAP_BASE_DN",
           "label": "LDAP Base DN",
           "description": "The base DN for the LDAP directory."
-        }
+        },
         {
           "name": "LLDAP_KEY_SEED",
           "label": "LLDAP Key Seed",
@@ -605,78 +599,6 @@
           "name": "API_ACCESS_TOKEN",
           "label": "Access Token",
           "description": "The tailscale access token to use for the homepage widget."
-        }
-      ]
-    },
-    {
-      "id": 19,
-      "type": 3,
-      "title": "Proxy w/ EAB",
-      "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
-      "categories": [
-        "infra"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "proxy/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "TRAEFIK_HOST",
-          "label": "Traefik Host Address",
-          "description": "The host address (domain) to expose the traefik web interface."
-        },
-        {
-          "name": "CF_DNS_API_TOKEN",
-          "label": "Cloudflare API Token",
-          "description": "The API token to authenticate with Cloudflare."
-        },
-        {
-          "name": "ACME_CA_SERVER",
-          "label": "ACME CA Server",
-          "description": "The URL of the CA Server to use that supports the ACME protocol",
-          "default": "https://acme-v02.api.letsencrypt.org/directory"
-        },
-        {
-          "name": "ACME_EAB_KID",
-          "label": "EAB KID",
-          "description": "Key identifier from External CA"
-        },
-        {
-          "name": "ACME_EAB_HMAC",
-          "label": "EAB HMAC (Encoded)",
-          "description": "HMAC key from External CA, should be in Base64 URL Encoding without padding format"
-        },
-        {
-          "name": "ACME_EMAIL_ADDRESS",
-          "label": "ACME Email Address",
-          "description": "The email address to use for the ACME protocol TLS provisioning."
-        },
-        {
-          "name": "AUTHELIA_HOST",
-          "label": "Authelia Host Address",
-          "description": "The host address (domain) to expose authelia."
-        },
-        {
-          "name": "AUTHELIA_COOKIE_DOMAIN",
-          "label": "Authelia Cookie Domain",
-          "description": "The domain the session cookie is assigned to protect."
-        },
-        {
-          "name": "LLDAP_HOST",
-          "label": "LLDAP Host Address",
-          "description": "The host address (domain) to expose lldap."
-        },
-        {
-          "name": "LLDAP_LDAP_BASE_DN",
-          "label": "LDAP Base DN",
-          "description": "The base DN for the LDAP directory."
-        },
-        {
-          "name": "LLDAP_KEY_SEED",
-          "label": "LLDAP Key Seed",
-          "description": "The key seed used by lldap."
         }
       ]
     },
