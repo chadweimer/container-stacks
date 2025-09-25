@@ -364,11 +364,6 @@
           "name": "LLDAP_LDAP_BASE_DN",
           "label": "LDAP Base DN",
           "description": "The base DN for the LDAP directory."
-        },
-        {
-          "name": "LLDAP_KEY_SEED",
-          "label": "LLDAP Key Seed",
-          "description": "The key seed used by lldap."
         }
       ]
     },

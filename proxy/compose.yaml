@@ -39,6 +39,8 @@ secrets:
     file: /mnt/pool0/containers/traefik/secrets/CF_DNS_API_TOKEN
   LLDAP_JWT_SECRET:
     file: /mnt/pool0/containers/lldap/secrets/LLDAP_JWT_SECRET
+  LLDAP_KEY_SEED:
+    file: /mnt/pool0/containers/lldap/secrets/LLDAP_KEY_SEED
   LLDAP_LDAP_USER_PASS:
     file: /mnt/pool0/containers/lldap/secrets/LLDAP_LDAP_USER_PASS
 
@@ -123,7 +125,7 @@ services:
       GID: 568
       TZ: America/Los_Angeles
       LLDAP_JWT_SECRET_FILE: /run/secrets/LLDAP_JWT_SECRET
-      LLDAP_KEY_SEED: ${LLDAP_KEY_SEED}
+      LLDAP_KEY_SEED_FILE: /run/secrets/LLDAP_KEY_SEED
       LLDAP_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN}
       LLDAP_LDAP_USER_PASS_FILE: /run/secrets/LLDAP_LDAP_USER_PASS
     image: ghcr.io/lldap/lldap:${LLDAP_IMAGE_TAG:-stable}
@@ -140,6 +142,7 @@ services:
       - ingress
     secrets:
       - LLDAP_JWT_SECRET
+      - LLDAP_KEY_SEED
       - LLDAP_LDAP_USER_PASS
     volumes:
       - /mnt/pool0/containers/lldap/data:/data

@@ -18,6 +18,7 @@ echo 'the-token' > CF_DNS_API_TOKEN
 Execute the following in the `./secrets` directory of the lldap config mount, replacing `admin-user-password` with the desired password:
 ```bash
 echo $(LC_ALL=C tr -dc 'A-Za-z0-9!#%&'\''()*+,-./:;<=>?@[\]^_{|}~' </dev/urandom | head -c 32) > LLDAP_JWT_SECRET
+echo $(LC_ALL=C tr -dc 'A-Za-z0-9!#%&'\''()*+,-./:;<=>?@[\]^_{|}~' </dev/urandom | head -c 32) > LLDAP_KEY_SEED
 echo 'admin-user-password' > LLDAP_LDAP_USER_PASS
 ```
 
