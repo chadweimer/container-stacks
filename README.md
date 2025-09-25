@@ -7,7 +7,7 @@ My personal container stacks
 The typical way to bootstrap a system for these stacks is the following:
 
 1. Create [docker networks](#docker-networks)
-1. Create [Authelia secrets](#authelia-secrets)
+1. Follow the setup steps of the [proxy](proxy/README.md) stack
 1. Bring up [Portainer](portainer/compose.yaml), and use the exposed port to access it to proceed with the next steps
 1. Bring up the [Proxy](proxy/compose.yaml) stack
 1. Bring up any other stacks desired
@@ -26,36 +26,6 @@ docker network create docker-proxy
 docker network create ingress
 docker network create observe
 ```
-
-### lldap Setup
-
-In this section, all file/folder paths are relative to the base lldap bind mount location.
-
-1. Execute the following in the `./secrets` directory:
-   ```bash
-   echo $(LC_ALL=C tr -dc 'A-Za-z0-9!#%&'\''()*+,-./:;<=>?@[\]^_{|}~' </dev/urandom | head -c 32) > LLDAP_JWT_SECRET
-   echo 'admin-user-password' > LLDAP_LDAP_USER_PASS
-   ```
-1. After starting the proxy stack:
-   1. Define a user named "authelia" with the same password as used for the "bind-user-password" below
-   1. Define the users to use to log in to other services
-
-### Authelia Setup
-
-In this section, all file/folder paths are relative to the base authelia bind mount location.
-
-1. Execute the following in the `./secrets` directory:
-   ```bash
-   openssl rand -hex 64 > JWT_SECRET
-   openssl rand -hex 64 > OIDC_HMAC_SECRET
-   openssl rand -hex 64 > SESSION_SECRET
-   openssl rand -hex 64 > STORAGE_ENCRYPTION_KEY
-   openssl genrsa -out oidc.jwks.rsa.2048.pem 2048
-   echo 'bind-user-password' > LDAP_PASSWORD
-   ```
-1. Create the `./config/oidc_clients.yml` file, and populate it with the [desired OIDC client configuration](https://www.authelia.com/integration/openid-connect/introduction/).
-   - To generate OIDC client IDs, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-alphanumeric-string), but use length 32 instead of 64 if using the openssl command due to character length restrictions.
-   - To generate OIDC client secrets, follow this [guide from Authelia](https://www.authelia.com/reference/guides/generating-secure-values/#generating-a-random-password-hash).
 
 ### Variables
 
