@@ -31,6 +31,12 @@ secrets:
     file: /mnt/pool0/containers/authelia/secrets/SESSION_SECRET
   AUTHELIA_STORAGE_ENCRYPTION_KEY:
     file: /mnt/pool0/containers/authelia/secrets/STORAGE_ENCRYPTION_KEY
+  ACME_EAB_KID:
+    file: /mnt/pool0/containers/traefik/secrets/ACME_EAB_KID
+  ACME_EAB_HMAC:
+    file: /mnt/pool0/containers/traefik/secrets/ACME_EAB_HMAC
+  CF_DNS_API_TOKEN:
+    file: /mnt/pool0/containers/traefik/secrets/CF_DNS_API_TOKEN
   LLDAP_JWT_SECRET:
     file: /mnt/pool0/containers/lldap/secrets/LLDAP_JWT_SECRET
   LLDAP_LDAP_USER_PASS:
@@ -155,8 +161,8 @@ services:
       - '--entryPoints.web.http.redirections.entryPoint.scheme=https'
       - '--entryPoints.websecure.address=:443'
       - '--certificatesresolvers.myresolver.acme.caserver=${ACME_CA_SERVER}'
-      - '--certificatesresolvers.myresolver.acme.eab.kid=${ACME_EAB_KID}'
-      - '--certificatesresolvers.myresolver.acme.eab.hmacencoded=${ACME_EAB_HMAC}'
+      - '--certificatesresolvers.myresolver.acme.eab.kid=$$(cat /run/secrets/ACME_EAB_KID)'
+      - '--certificatesresolvers.myresolver.acme.eab.hmacencoded=$$(cat /run/secrets/ACME_EAB_HMAC)'
       - '--certificatesresolvers.myresolver.acme.dnschallenge=true'
       - '--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare'
       - '--certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53'
@@ -167,7 +173,7 @@ services:
     depends_on:
       - docker-proxy
     environment:
-      CF_DNS_API_TOKEN: ${CF_DNS_API_TOKEN}
+      CF_DNS_API_TOKEN_FILE: /run/secrets/CF_DNS_API_TOKEN
     extra_hosts:
       - host.docker.internal:host-gateway
     image: traefik:${TRAEFIK_IMAGE_TAG:-v3}
@@ -194,6 +200,10 @@ services:
       - '443:443'
     pull_policy: always
     restart: unless-stopped
+    secrets:
+      - ACME_EAB_KID
+      - ACME_EAB_HMAC
+      - CF_DNS_API_TOKEN
     user: '568:568'
     volumes:
       - /mnt/pool0/containers/traefik/config:/app

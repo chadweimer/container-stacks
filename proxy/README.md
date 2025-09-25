@@ -4,6 +4,15 @@
 
 ### Secrets
 
+#### traefik
+
+Execute the following in the `./secrets` directory of the traefik mount, replacing values with those acquired from Cloudflare and the ACME provider:
+```bash
+echo 'the-kid' > ACME_EAB_KID
+echo 'the-hmac' > ACME_EAB_HMAC
+echo 'the-token' > CF_DNS_API_TOKEN
+```
+
 #### lldap
 
 Execute the following in the `./secrets` directory of the lldap config mount, replacing `admin-user-password` with the desired password:
