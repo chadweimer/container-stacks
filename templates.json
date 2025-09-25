@@ -318,7 +318,7 @@
     {
       "id": 10,
       "type": 3,
-      "title": "Proxy w/ Let's Encrypt",
+      "title": "Proxy",
       "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
       "categories": [
         "infra"
