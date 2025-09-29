@@ -91,16 +91,10 @@ configs:
       }
 
       prometheus.scrape "machines" {
-        targets = array.concat(
-          [{
-            __address__ = "${DESKTOP_HOST}:9100",
-            instance    = "desktop",
-          }],
-          [{
-            __address__ = "${DESKTOP_HOST}:9882",
-            instance    = "desktop",
-          }],
-        )
+        targets = [{
+          __address__ = "${DESKTOP_HOST}:9100",
+          instance    = "desktop",
+        }],
         forward_to = [prometheus.remote_write.default.receiver]
         job_name   = "machines"
       }
@@ -310,7 +304,7 @@ services:
   speedtest:
     container_name: speedtest-exporter
     healthcheck:
-      test: "wget --no-verbose --tries=1 --spider http://0.0.0.0:9798/"
+      test: 'wget --no-verbose --tries=1 --spider http://0.0.0.0:9798/'
       timeout: 10s
     image: ghcr.io/miguelndecarvalho/speedtest-exporter:${SPEEDTEST_IMAGE_TAG:-latest}
     labels:
