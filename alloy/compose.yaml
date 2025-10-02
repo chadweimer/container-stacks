@@ -94,7 +94,7 @@ configs:
         targets = [{
           __address__ = "${DESKTOP_HOST}:9100",
           instance    = "desktop",
-        }],
+        }]
         forward_to = [prometheus.remote_write.default.receiver]
         job_name   = "machines"
       }
