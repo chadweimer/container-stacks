@@ -189,7 +189,7 @@ services:
       homepage.widget.url: http://traefik:8080
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
-      traefik.enable: 'true'
+      traefik.enable: true
       traefik.http.routers.api.middlewares: 'authelia@docker'
       traefik.http.routers.api.rule: Host(`${TRAEFIK_HOST}`)
       traefik.http.routers.api.service: 'api@internal'

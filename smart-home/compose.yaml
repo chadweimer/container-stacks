@@ -8,17 +8,17 @@ configs:
       allow_anonymous true
 
 networks:
+  ingress:
+    external: true
   lan:
-    name: aaa_lan # Named so that it will be "first priority" network in docker
     driver: macvlan
     driver_opts:
       parent: ${LAN_PARENT_NIC:-br1}
     ipam:
       config:
-        - subnet: ${LAN_SUBNET:-192.168.0.0/23}
-          gateway: ${LAN_GATEWAY:-192.168.1.1}
-  ingress:
-    external: true
+        - gateway: ${LAN_GATEWAY:-192.168.1.1}
+          subnet: ${LAN_SUBNET:-192.168.0.0/23}
+    name: aaa_lan # Named so that it will be "first priority" network in docker
   mqtt:
     name: mqtt
 
@@ -44,13 +44,13 @@ services:
       homepage.name: Frigate
       homepage.widget.type: frigate
       homepage.widget.url: http://frigate:5000
-      prometheus.label.instance: truenas-server
       prometheus.label.__metrics_path__: /api/metrics
+      prometheus.label.instance: truenas-server
       prometheus.port: 5000
-      traefik.enable: True
+      traefik.enable: true
+      traefik.http.routers.frigate.middlewares: 'authelia@docker'
       traefik.http.routers.frigate.rule: Host(`${FRIGATE_HOST}`)
       traefik.http.routers.frigate.tls.certresolver: myresolver
-      traefik.http.routers.frigate.middlewares: 'authelia@docker'
       traefik.http.services.frigate.loadbalancer.server.port: 8971
       traefik.http.services.frigate.loadbalancer.server.scheme: https
     networks:
@@ -58,15 +58,15 @@ services:
       - mqtt
     pull_policy: always
     restart: unless-stopped
-    shm_size: "1024mb"
+    shm_size: '1024mb'
     stop_grace_period: 30s
     volumes:
       - /mnt/pool0/containers/frigate/config:/config
       - /mnt/pool1/media/nvr:/media/frigate
-      - type: tmpfs
-        target: /tmp/cache
+      - target: /tmp/cache
         tmpfs:
           size: 1000000000
+        type: tmpfs
 
   homeassistant:
     container_name: homeassistant
@@ -75,18 +75,18 @@ services:
     image: ghcr.io/home-assistant/home-assistant:${HASS_IMAGE_TAG:-stable}
     labels:
       homepage.group: Smart Home
-      homepage.name: Home Assistant
       homepage.href: https://${HASS_HOST}
       homepage.icon: home-assistant.png
+      homepage.name: Home Assistant
+      homepage.widget.custom[0].label: doors locked
+      homepage.widget.custom[0].template: "{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|selectattr('state','eq','locked')|list|length }}/{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|list|length }}"
+      homepage.widget.custom[1].label: windows closed
+      homepage.widget.custom[1].template: "{{ states.binary_sensor|selectattr('attributes.device_class','eq','window')|selectattr('attributes.friendly_name','ne','Windows')|selectattr('state','eq','off')|list|length }}/{{ states.binary_sensor|selectattr('attributes.device_class','eq','window')|selectattr('attributes.friendly_name','ne','Windows')|list|length }}"
+      homepage.widget.custom[2].label: lights on
+      homepage.widget.custom[2].template: "{{ states.light|selectattr('state','eq','on')|list|length }}/{{ states.light|list|length }}"
+      homepage.widget.key: ${HASS_ACCESS_TOKEN}
       homepage.widget.type: homeassistant
       homepage.widget.url: http://homeassistant:8123
-      homepage.widget.key: ${HASS_ACCESS_TOKEN}
-      homepage.widget.custom[0].template: "{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|selectattr('state','eq','locked')|list|length }}/{{ states.lock|selectattr('attributes.friendly_name','ne','Door Locks')|selectattr('attributes.friendly_name','ne','Garage Door Remotes')|list|length }}"
-      homepage.widget.custom[0].label: doors locked
-      homepage.widget.custom[1].template: "{{ states.binary_sensor|selectattr('attributes.device_class','eq','window')|selectattr('attributes.friendly_name','ne','Windows')|selectattr('state','eq','off')|list|length }}/{{ states.binary_sensor|selectattr('attributes.device_class','eq','window')|selectattr('attributes.friendly_name','ne','Windows')|list|length }}"
-      homepage.widget.custom[1].label: windows closed
-      homepage.widget.custom[2].template: "{{ states.light|selectattr('state','eq','on')|list|length }}/{{ states.light|list|length }}"
-      homepage.widget.custom[2].label: lights on
       traefik.enable: true
       traefik.http.routers.hass.rule: Host(`${HASS_HOST}`) || Host(`${HASS_HOST2}`)
       traefik.http.routers.hass.tls.certresolver: myresolver
@@ -120,12 +120,12 @@ services:
       homepage.name: Homebridge
       homepage.widget.password: ${HOMEBRIDGE_PASSWORD}
       homepage.widget.type: homebridge
-      homepage.widget.username: ${HOMEBRIDGE_USERNAME}
       homepage.widget.url: http://homebridge:8581
-      traefik.enable: True
+      homepage.widget.username: ${HOMEBRIDGE_USERNAME}
+      traefik.enable: true
+      traefik.http.routers.homebridge.middlewares: 'authelia@docker'
       traefik.http.routers.homebridge.rule: Host(`${HOMEBRIDGE_HOST}`)
       traefik.http.routers.homebridge.tls.certresolver: myresolver
-      traefik.http.routers.homebridge.middlewares: 'authelia@docker'
       traefik.http.services.homebridge.loadbalancer.server.port: 8581
     networks:
       lan:
@@ -162,13 +162,13 @@ services:
     image: ghcr.io/zwave-js/zwave-js-ui:${ZWAVE_IMAGE_TAG:-10}
     labels:
       homepage.group: Smart Home
-      homepage.name: Z-Wave JS UI
       homepage.href: https://${ZWAVE_HOST}
       homepage.icon: z-wave-js-ui.png
+      homepage.name: Z-Wave JS UI
       traefik.enable: true
+      traefik.http.routers.zwavejsui.middlewares: 'authelia@docker'
       traefik.http.routers.zwavejsui.rule: Host(`${ZWAVE_HOST}`)
       traefik.http.routers.zwavejsui.tls.certresolver: myresolver
-      traefik.http.routers.zwavejsui.middlewares: 'authelia@docker'
       traefik.http.services.zwavejsui.loadbalancer.server.port: 8091
     networks:
       - ingress

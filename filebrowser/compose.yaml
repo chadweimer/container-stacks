@@ -1,6 +1,6 @@
 networks:
   ingress:
-    external: True
+    external: true
 services:
   filebrowser:
     command:
@@ -9,18 +9,18 @@ services:
     image: filebrowser/filebrowser:${IMAGE_TAG:-latest}
     labels:
       homepage.group: NAS
-      homepage.name: Files
       homepage.href: https://${HOST}
       homepage.icon: filebrowser.png
+      homepage.name: Files
       traefik.enable: true
+      traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
       traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
       traefik.http.routers.filebrowser.tls.certresolver: myresolver
-      traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always
     restart: unless-stopped
-    user: "568:568"
+    user: '568:568'
     volumes:
       - /mnt/pool0/containers/filebrowser:/config
       - /mnt/pool0/containers/filebrowser:/database

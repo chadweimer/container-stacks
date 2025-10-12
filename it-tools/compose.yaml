@@ -1,15 +1,15 @@
 networks:
   ingress:
-    external: True
+    external: true
 services:
   app:
     container_name: it-tools
     image: ghcr.io/corentinth/it-tools:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Other
-      homepage.name: IT-Tools
       homepage.href: https://${HOST}
       homepage.icon: it-tools.png
+      homepage.name: IT-Tools
       traefik.enable: true
       traefik.http.routers.it-tools.rule: Host(`${HOST}`)
       traefik.http.routers.it-tools.tls.certresolver: myresolver

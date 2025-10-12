@@ -1,37 +1,37 @@
 name: arrs
 networks:
   bitmagnet:
-    name: bitmagnet
     driver: bridge
     ipam:
-      driver: default
       config:
-        - subnet: 192.168.55.0/24
-          gateway: 192.168.55.1
+        - gateway: 192.168.55.1
+          subnet: 192.168.55.0/24
+      driver: default
+    name: bitmagnet
   ingress:
-    external: True
+    external: true
   observe:
-    external: True
+    external: true
 services:
   bazarr:
     container_name: bazarr
     environment:
-      PUID: 568
       PGID: 568
+      PUID: 568
       TZ: America/Los_Angeles
     image: ghcr.io/linuxserver/bazarr:${BAZARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.name: Bazarr (Subtitles)
       homepage.href: https://${BAZARR_HOST}
       homepage.icon: bazarr.png
+      homepage.name: Bazarr (Subtitles)
+      homepage.widget.key: ${BAZARR_API_KEY}
       homepage.widget.type: bazarr
       homepage.widget.url: http://bazarr:6767
-      homepage.widget.key: ${BAZARR_API_KEY}
       traefik.enable: true
+      traefik.http.routers.bazarr.middlewares: 'authelia@docker'
       traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST}`)
       traefik.http.routers.bazarr.tls.certresolver: myresolver
-      traefik.http.routers.bazarr.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always
@@ -50,12 +50,6 @@ services:
         condition: service_healthy
       bitmagnet-vpn:
         condition: service_healthy
-    image: ghcr.io/bitmagnet-io/bitmagnet:${BITMAGNET_IMAGE_TAG:-latest}
-    labels:
-      homepage.group: Media
-      homepage.name: bitmagnet
-      homepage.href: https://${BITMAGNET_HOST}
-      homepage.icon: bitmagnet.png
     environment:
       CLASSIFIER_DELETE_XXX: 'true'
       DHT_CRAWLER_SCALING_FACTOR: 5
@@ -64,6 +58,12 @@ services:
       POSTGRES_PASSWORD: ${BITMAGNET_DB_PASSWORD}
       PROCESSOR_CONCURRENCY: 2
       TMDB_API_KEY: ${TMDB_API_KEY}
+    image: ghcr.io/bitmagnet-io/bitmagnet:${BITMAGNET_IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Media
+      homepage.href: https://${BITMAGNET_HOST}
+      homepage.icon: bitmagnet.png
+      homepage.name: bitmagnet
     network_mode: 'service:bitmagnet-vpn'
     pull_policy: always
     restart: unless-stopped
@@ -72,14 +72,14 @@ services:
   bitmagnet-db:
     container_name: bitmagnet-db
     environment:
-      POSTGRES_PASSWORD: ${BITMAGNET_DB_PASSWORD}
-      POSTGRES_DB: bitmagnet
       PGUSER: postgres
+      POSTGRES_DB: bitmagnet
+      POSTGRES_PASSWORD: ${BITMAGNET_DB_PASSWORD}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready", "-d", "bitmagnet"]
       interval: 10s
-      timeout: 30s
       retries: 5
+      test: ['CMD-SHELL', 'pg_isready', '-d', 'bitmagnet']
+      timeout: 30s
     image: postgres:${BITMAGNET_PG_VERSION}
     networks:
       bitmagnet:
@@ -98,23 +98,23 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
-      VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
-      VPN_TYPE: openvpn
-      OPENVPN_USER: ${OPENVPN_USER}
       OPENVPN_PASSWORD: ${OPENVPN_PASSWORD}
+      OPENVPN_USER: ${OPENVPN_USER}
       SERVER_COUNTRIES: United States
       TZ: America/Los_Angeles
+      VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
+      VPN_TYPE: openvpn
+    # Host names must be manually mapped here for bitmagnet to resolve them:
+    extra_hosts:
+      - 'bitmagnet-db:192.168.55.11'
     image: ghcr.io/qdm12/gluetun:${GLUETUN_IMAGE_TAG:-latest}
     labels:
       prometheus.port: 3333
       traefik.enable: true
+      traefik.http.routers.bitmagnet.middlewares: 'authelia@docker'
       traefik.http.routers.bitmagnet.rule: Host(`${BITMAGNET_HOST}`)
       traefik.http.routers.bitmagnet.tls.certresolver: myresolver
-      traefik.http.routers.bitmagnet.middlewares: 'authelia@docker'
       traefik.http.services.bitmagnet.loadbalancer.server.port: 3333
-    # Host names must be manually mapped here for bitmagnet to resolve them:
-    extra_hosts:
-      - "bitmagnet-db:192.168.55.11"
     networks:
       bitmagnet:
         ipv4_address: 192.168.55.10
@@ -133,22 +133,22 @@ services:
   jellyseerr:
     container_name: jellyseerr
     environment:
-      PUID: 568
       PGID: 568
+      PUID: 568
       TZ: America/Los_Angeles
     image: ghcr.io/fallenbagel/jellyseerr:${JELLYSEERR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.name: Jellyseerr (Requests)
       homepage.href: https://${JELLYSEERR_HOST}
       homepage.icon: jellyseerr.png
+      homepage.name: Jellyseerr (Requests)
+      homepage.widget.key: ${JELLYSEERR_API_KEY}
       homepage.widget.type: jellyseerr
       homepage.widget.url: http://jellyseerr:5055
-      homepage.widget.key: ${JELLYSEERR_API_KEY}
       traefik.enable: true
+      traefik.http.routers.jellyseerr.middlewares: 'authelia@docker'
       traefik.http.routers.jellyseerr.rule: Host(`${JELLYSEERR_HOST}`)
       traefik.http.routers.jellyseerr.tls.certresolver: myresolver
-      traefik.http.routers.jellyseerr.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always
@@ -158,22 +158,22 @@ services:
   prowlarr:
     container_name: prowlarr
     environment:
-      PUID: 568
       PGID: 568
+      PUID: 568
       TZ: America/Los_Angeles
     image: ghcr.io/linuxserver/prowlarr:${PROWLARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.name: Prowlarr (Indexers)
       homepage.href: https://${PROWLARR_HOST}
       homepage.icon: prowlarr.png
+      homepage.name: Prowlarr (Indexers)
+      homepage.widget.key: ${PROWLARR_API_KEY}
       homepage.widget.type: prowlarr
       homepage.widget.url: http://prowlarr:9696
-      homepage.widget.key: ${PROWLARR_API_KEY}
       traefik.enable: true
+      traefik.http.routers.prowlarr.middlewares: 'authelia@docker'
       traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST}`)
       traefik.http.routers.prowlarr.tls.certresolver: myresolver
-      traefik.http.routers.prowlarr.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always
@@ -183,23 +183,23 @@ services:
   radarr:
     container_name: radarr
     environment:
-      PUID: 568
       PGID: 568
+      PUID: 568
       TZ: America/Los_Angeles
     image: ghcr.io/linuxserver/radarr:${RADARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.name: Radarr (Movies)
       homepage.href: https://${RADARR_HOST}
       homepage.icon: radarr.png
+      homepage.name: Radarr (Movies)
+      homepage.widget.enableQueue: true
+      homepage.widget.key: ${RADARR_API_KEY}
       homepage.widget.type: radarr
       homepage.widget.url: http://radarr:7878
-      homepage.widget.key: ${RADARR_API_KEY}
-      homepage.widget.enableQueue: true
       traefik.enable: true
+      traefik.http.routers.radarr.middlewares: 'authelia@docker'
       traefik.http.routers.radarr.rule: Host(`${RADARR_HOST}`)
       traefik.http.routers.radarr.tls.certresolver: myresolver
-      traefik.http.routers.radarr.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always
@@ -210,23 +210,23 @@ services:
   sonarr:
     container_name: sonarr
     environment:
-      PUID: 568
       PGID: 568
+      PUID: 568
       TZ: America/Los_Angeles
     image: ghcr.io/linuxserver/sonarr:${SONARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.name: Sonarr (Shows)
       homepage.href: https://${SONARR_HOST}
       homepage.icon: sonarr.png
+      homepage.name: Sonarr (Shows)
+      homepage.widget.enableQueue: true
+      homepage.widget.key: ${SONARR_API_KEY}
       homepage.widget.type: sonarr
       homepage.widget.url: http://sonarr:8989
-      homepage.widget.key: ${SONARR_API_KEY}
-      homepage.widget.enableQueue: true
       traefik.enable: true
+      traefik.http.routers.sonarr.middlewares: 'authelia@docker'
       traefik.http.routers.sonarr.rule: Host(`${SONARR_HOST}`)
       traefik.http.routers.sonarr.tls.certresolver: myresolver
-      traefik.http.routers.sonarr.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always
@@ -244,9 +244,9 @@ services:
     image: ghcr.io/linuxserver/transmission:${TRANSMISSION_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.name: Transmission (Downloads)
       homepage.href: https://${TRANSMISSION_HOST}
       homepage.icon: transmission.png
+      homepage.name: Transmission (Downloads)
       homepage.widget.type: transmission
       homepage.widget.url: http://transmission-vpn:9091
     network_mode: 'service:transmission-vpn'
@@ -262,18 +262,18 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
-      VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
-      VPN_TYPE: openvpn
-      OPENVPN_USER: ${OPENVPN_USER}
       OPENVPN_PASSWORD: ${OPENVPN_PASSWORD}
+      OPENVPN_USER: ${OPENVPN_USER}
       SERVER_COUNTRIES: United States
       TZ: America/Los_Angeles
+      VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
+      VPN_TYPE: openvpn
     image: ghcr.io/qdm12/gluetun:${GLUETUN_IMAGE_TAG:-latest}
     labels:
       traefik.enable: true
+      traefik.http.routers.transmission.middlewares: 'authelia@docker'
       traefik.http.routers.transmission.rule: Host(`${TRANSMISSION_HOST}`)
       traefik.http.routers.transmission.tls.certresolver: myresolver
-      traefik.http.routers.transmission.middlewares: 'authelia@docker'
       traefik.http.services.transmission.loadbalancer.server.port: 9091
     networks:
       - ingress

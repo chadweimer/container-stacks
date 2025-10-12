@@ -16,7 +16,7 @@ configs:
               defaultEnabled: true
 networks:
   ingress:
-    external: True
+    external: true
 services:
   filebrowser:
     configs:
@@ -30,13 +30,13 @@ services:
     image: ghcr.io/gtsteffaniak/filebrowser:${IMAGE_TAG:-latest}
     labels:
       homepage.group: NAS
-      homepage.name: Files
       homepage.href: https://${HOST}
       homepage.icon: files.png
+      homepage.name: Files
       traefik.enable: true
+      traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
       traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
       traefik.http.routers.filebrowser.tls.certresolver: myresolver
-      traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
     networks:
       - ingress
     pull_policy: always

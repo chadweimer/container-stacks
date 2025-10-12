@@ -1,8 +1,8 @@
 networks:
   ingress:
-    external: True
+    external: true
   observe:
-    external: True
+    external: true
 services:
   syncthing:
     cap_add:
@@ -27,10 +27,10 @@ services:
       homepage.name: Syncthing
       prometheus.label.instance: truenas-server
       prometheus.port: 8384
-      traefik.enable: True
+      traefik.enable: true
+      traefik.http.routers.syncthing.middlewares: 'authelia@docker'
       traefik.http.routers.syncthing.rule: Host(`${HOST}`)
       traefik.http.routers.syncthing.tls.certresolver: myresolver
-      traefik.http.routers.syncthing.middlewares: 'authelia@docker'
     networks:
       - ingress
       - observe

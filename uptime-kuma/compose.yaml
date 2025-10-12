@@ -1,27 +1,27 @@
 networks:
   docker-proxy:
-    external: True
+    external: true
   ingress:
-    external: True
+    external: true
   observe:
-    external: True
+    external: true
 services:
   uptime-kuma:
     container_name: uptime-kuma
     image: louislam/uptime-kuma:${IMAGE_TAG:-1}
     labels:
       homepage.group: Network
-      homepage.name: Home Status
       homepage.href: https://${HOST}
       homepage.icon: uptime-kuma.png
+      homepage.name: Home Status
+      homepage.widget.slug: home
       homepage.widget.type: uptimekuma
       homepage.widget.url: http://uptime-kuma:3001
-      homepage.widget.slug: home
       prometheus.port: 3001
       traefik.enable: true
+      traefik.http.routers.uptime.middlewares: 'authelia@docker'
       traefik.http.routers.uptime.rule: Host(`${HOST}`)
       traefik.http.routers.uptime.tls.certresolver: myresolver
-      traefik.http.routers.uptime.middlewares: 'authelia@docker'
     networks:
       - docker-proxy
       - ingress

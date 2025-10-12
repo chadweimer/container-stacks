@@ -31,9 +31,9 @@ configs:
           out_of_order_time_window: 1h
 networks:
   ingress:
-    external: True
+    external: true
   observe:
-    external: True
+    external: true
 services:
   grafana:
     container_name: grafana
@@ -44,14 +44,14 @@ services:
     image: grafana/grafana-oss:${GRAFANA_IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
-      homepage.name: Grafana
       homepage.href: https://${HOST}
       homepage.icon: grafana.png
+      homepage.name: Grafana
+      homepage.widget.password: ${PASSWORD}
       homepage.widget.type: grafana
-      homepage.widget.version: 2
       homepage.widget.url: http://grafana:3000
       homepage.widget.username: ${USERNAME}
-      homepage.widget.password: ${PASSWORD}
+      homepage.widget.version: 2
       traefik.enable: true
       traefik.http.routers.grafana.rule: Host(`${HOST}`)
       traefik.http.routers.grafana.tls.certresolver: myresolver
@@ -60,7 +60,7 @@ services:
       - observe
     pull_policy: always
     restart: unless-stopped
-    user: "568:568"
+    user: '568:568'
     volumes:
       - /mnt/pool0/containers/grafana:/var/lib/grafana
   loki:

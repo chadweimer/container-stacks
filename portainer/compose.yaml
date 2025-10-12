@@ -1,6 +1,6 @@
 networks:
   ingress:
-    external: True
+    external: true
 services:
   portainer:
     container_name: portainer
@@ -14,7 +14,7 @@ services:
       homepage.widget.key: ${ACCESS_TOKEN}
       homepage.widget.type: portainer
       homepage.widget.url: http://portainer:9000
-      traefik.enable: True
+      traefik.enable: true
       traefik.http.routers.portainer.rule: Host(`${HOST}`)
       traefik.http.routers.portainer.tls.certresolver: myresolver
       traefik.http.services.portainer.loadbalancer.server.port: 9000

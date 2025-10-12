@@ -218,11 +218,11 @@ configs:
       }
 networks:
   docker-proxy:
-    external: True
+    external: true
   ingress:
-    external: True
+    external: true
   observe:
-    external: True
+    external: true
 services:
   alloy:
     command:
@@ -237,13 +237,13 @@ services:
     image: grafana/alloy:${ALLOY_IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
-      homepage.name: Alloy
       homepage.href: https://${ALLOY_HOST}
       homepage.icon: alloy.png
+      homepage.name: Alloy
       traefik.enable: true
+      traefik.http.routers.alloy.middlewares: 'authelia@docker'
       traefik.http.routers.alloy.rule: Host(`${ALLOY_HOST}`)
       traefik.http.routers.alloy.tls.certresolver: myresolver
-      traefik.http.routers.alloy.middlewares: 'authelia@docker'
       traefik.http.services.alloy.loadbalancer.server.port: 80
     networks:
       - docker-proxy
@@ -293,9 +293,9 @@ services:
       homepage.widget.metrics[2].query: network_ups_tools_battery_runtime
       homepage.widget.type: prometheusmetric
       homepage.widget.url: http://prometheus:9090
-      prometheus.label.instance: ups
       prometheus.label.__metrics_path__: /ups_metrics
       prometheus.label.__param_ups: ups
+      prometheus.label.instance: ups
       prometheus.port: 9199
     networks:
       - observe
@@ -319,9 +319,9 @@ services:
       homepage.widget.metrics[1].query: last_over_time(speedtest_upload_bits_per_second[24h])
       homepage.widget.type: prometheusmetric
       homepage.widget.url: http://prometheus:9090
-      prometheus.label.instance: truenas-server
       prometheus.label.__scrape_interval__: 1h
       prometheus.label.__scrape_timeout__: 2m
+      prometheus.label.instance: truenas-server
       prometheus.port: 9798
     networks:
       - observe

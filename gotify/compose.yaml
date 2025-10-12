@@ -14,16 +14,16 @@ services:
       homepage.href: https://${HOST}
       homepage.icon: gotify.png
       homepage.name: Gotify
+      homepage.widget.key: ${GOTIFY_CLIENT_TOKEN}
       homepage.widget.type: gotify
       homepage.widget.url: http://gotify
-      homepage.widget.key: ${GOTIFY_CLIENT_TOKEN}
-      traefik.enable: True
+      traefik.enable: true
       traefik.http.routers.gotify.rule: Host(`${HOST}`)
       traefik.http.routers.gotify.tls.certresolver: myresolver
     networks:
       - ingress
-    user: "568:568"
     pull_policy: always
     restart: unless-stopped
+    user: '568:568'
     volumes:
       - /mnt/pool0/containers/gotify:/app/data

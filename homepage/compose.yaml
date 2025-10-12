@@ -1,10 +1,10 @@
 networks:
   docker-proxy:
-    external: True
+    external: true
   ingress:
-    external: True
+    external: true
   observe:
-    external: True
+    external: true
 services:
   homepage:
     container_name: homepage

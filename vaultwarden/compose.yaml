@@ -1,6 +1,6 @@
 networks:
   ingress:
-    external: True
+    external: true
 services:
   vaultwarden:
     container_name: vaultwarden
@@ -9,9 +9,9 @@ services:
     image: ghcr.io/dani-garcia/vaultwarden:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Other
-      homepage.name: Bitwarden
       homepage.href: https://${HOST}
       homepage.icon: bitwarden.png
+      homepage.name: Bitwarden
       traefik.enable: true
       traefik.http.routers.vaultwarden.rule: Host(`${HOST}`)
       traefik.http.routers.vaultwarden.tls.certresolver: myresolver
