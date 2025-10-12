@@ -12,13 +12,17 @@ configs:
 
 networks:
   docker-proxy:
-    external: True
+    external: true
   ingress:
-    external: True
+    external: true
   observe:
-    external: True
+    external: true
 
 secrets:
+  ACME_EAB_HMAC:
+    file: /mnt/pool0/containers/traefik/secrets/ACME_EAB_HMAC
+  ACME_EAB_KID:
+    file: /mnt/pool0/containers/traefik/secrets/ACME_EAB_KID
   AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD:
     file: /mnt/pool0/containers/authelia/secrets/LDAP_PASSWORD
   AUTHELIA_JWT_SECRET:
@@ -31,10 +35,6 @@ secrets:
     file: /mnt/pool0/containers/authelia/secrets/SESSION_SECRET
   AUTHELIA_STORAGE_ENCRYPTION_KEY:
     file: /mnt/pool0/containers/authelia/secrets/STORAGE_ENCRYPTION_KEY
-  ACME_EAB_KID:
-    file: /mnt/pool0/containers/traefik/secrets/ACME_EAB_KID
-  ACME_EAB_HMAC:
-    file: /mnt/pool0/containers/traefik/secrets/ACME_EAB_HMAC
   CF_DNS_API_TOKEN:
     file: /mnt/pool0/containers/traefik/secrets/CF_DNS_API_TOKEN
   LLDAP_JWT_SECRET:
@@ -55,11 +55,11 @@ services:
         condition: service_healthy
     environment:
       AUTHELIA_ACCESS_CONTROL_DEFAULT_POLICY: one_factor
-      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_IMPLEMENTATION: lldap
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_ADDRESS: ldap://lldap:3890
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN}
-      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USER: uid=authelia,ou=people,${LLDAP_LDAP_BASE_DN}
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_IMPLEMENTATION: lldap
       AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE: /run/secrets/AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD
+      AUTHELIA_AUTHENTICATION_BACKEND_LDAP_USER: uid=authelia,ou=people,${LLDAP_LDAP_BASE_DN}
       AUTHELIA_IDENTITY_PROVIDERS_OIDC_HMAC_SECRET_FILE: /run/secrets/AUTHELIA_OIDC_HMAC_SECRET
       AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: /run/secrets/AUTHELIA_JWT_SECRET
       AUTHELIA_NOTIFIER_FILESYSTEM_FILENAME: /config/notification.txt
@@ -75,18 +75,18 @@ services:
     image: ghcr.io/authelia/authelia:${AUTHELIA_IMAGE_TAG:-4}
     labels:
       homepage.group: Network
-      homepage.name: Authelia
       homepage.href: https://${AUTHELIA_HOST}
       homepage.icon: authelia.png
+      homepage.name: Authelia
       prometheus.label.instance: truenas-server
       prometheus.port: 9959
       traefik.enable: true
+      traefik.http.middlewares.authelia.forwardauth.address: http://authelia:9091/api/authz/forward-auth
+      traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: Remote-User,Remote-Groups,Remote-Name,Remote-Email
+      traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: true
       traefik.http.routers.authelia.rule: Host(`${AUTHELIA_HOST}`)
       traefik.http.routers.authelia.tls.certresolver: myresolver
       traefik.http.services.authelia.loadbalancer.server.port: 9091
-      traefik.http.middlewares.authelia.forwardauth.address: http://authelia:9091/api/authz/forward-auth
-      traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: true
-      traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: Remote-User,Remote-Groups,Remote-Name,Remote-Email
     networks:
       - ingress
       - observe
@@ -111,7 +111,7 @@ services:
     networks:
       - docker-proxy
     pull_policy: always
-    read_only: True
+    read_only: true
     restart: unless-stopped
     tmpfs:
       - /run
@@ -121,19 +121,19 @@ services:
   lldap:
     container_name: lldap
     environment:
-      UID: 568
       GID: 568
-      TZ: America/Los_Angeles
       LLDAP_JWT_SECRET_FILE: /run/secrets/LLDAP_JWT_SECRET
       LLDAP_KEY_SEED_FILE: /run/secrets/LLDAP_KEY_SEED
       LLDAP_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN}
       LLDAP_LDAP_USER_PASS_FILE: /run/secrets/LLDAP_LDAP_USER_PASS
+      TZ: America/Los_Angeles
+      UID: 568
     image: ghcr.io/lldap/lldap:${LLDAP_IMAGE_TAG:-stable}
     labels:
       homepage.group: Network
-      homepage.name: lldap
       homepage.href: https://${LLDAP_HOST}
       homepage.icon: lldap.png
+      homepage.name: lldap
       traefik.enable: true
       traefik.http.routers.lldap.rule: Host(`${LLDAP_HOST}`)
       traefik.http.routers.lldap.tls.certresolver: myresolver
@@ -149,28 +149,28 @@ services:
 
   traefik:
     command:
-      - '--log.level=INFO'
-      - '--log.format=json'
       - '--api.insecure=true'
-      - '--metrics.prometheus=true'
-      - '--providers.docker=true'
-      - '--providers.docker.endpoint=tcp://docker-proxy:2375'
-      - '--providers.docker.network=ingress'
-      - '--providers.docker.exposedbydefault=false'
-      - '--providers.file.directory=/app'
-      - '--providers.file.watch=true'
-      - '--entryPoints.web.address=:80'
-      - '--entryPoints.web.http.redirections.entryPoint.to=websecure'
-      - '--entryPoints.web.http.redirections.entryPoint.scheme=https'
-      - '--entryPoints.websecure.address=:443'
       - '--certificatesresolvers.myresolver.acme.caserver=${ACME_CA_SERVER}'
-      - '--certificatesresolvers.myresolver.acme.eab.kid=$$(cat /run/secrets/ACME_EAB_KID)'
       - '--certificatesresolvers.myresolver.acme.eab.hmacencoded=$$(cat /run/secrets/ACME_EAB_HMAC)'
+      - '--certificatesresolvers.myresolver.acme.eab.kid=$$(cat /run/secrets/ACME_EAB_KID)'
       - '--certificatesresolvers.myresolver.acme.dnschallenge=true'
       - '--certificatesresolvers.myresolver.acme.dnschallenge.provider=cloudflare'
       - '--certificatesresolvers.myresolver.acme.dnschallenge.resolvers=1.1.1.1:53,8.8.8.8:53'
       - '--certificatesresolvers.myresolver.acme.email=${ACME_EMAIL_ADDRESS}'
       - '--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json'
+      - '--entryPoints.web.address=:80'
+      - '--entryPoints.web.http.redirections.entryPoint.scheme=https'
+      - '--entryPoints.web.http.redirections.entryPoint.to=websecure'
+      - '--entryPoints.websecure.address=:443'
+      - '--log.format=json'
+      - '--log.level=INFO'
+      - '--metrics.prometheus=true'
+      - '--providers.docker=true'
+      - '--providers.docker.endpoint=tcp://docker-proxy:2375'
+      - '--providers.docker.exposedbydefault=false'
+      - '--providers.docker.network=ingress'
+      - '--providers.file.directory=/app'
+      - '--providers.file.watch=true'
       - '--serverstransport.insecureskipverify=true'
     container_name: traefik
     depends_on:
@@ -190,10 +190,10 @@ services:
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
       traefik.enable: 'true'
-      traefik.http.routers.api.rule: Host(`${TRAEFIK_HOST}`)
-      traefik.http.routers.api.tls.certresolver: myresolver
-      traefik.http.routers.api.service: 'api@internal'
       traefik.http.routers.api.middlewares: 'authelia@docker'
+      traefik.http.routers.api.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.api.service: 'api@internal'
+      traefik.http.routers.api.tls.certresolver: myresolver
     networks:
       - docker-proxy
       - ingress
