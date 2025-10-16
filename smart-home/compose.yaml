@@ -29,6 +29,9 @@ services:
       - CAP_NET_RAW
       - CAP_PERFMON
     container_name: frigate
+    depends_on:
+      mosquitto:
+        condition: service_healthy
     devices:
       - /dev/bus/usb:/dev/bus/usb
       - /dev/dri/renderD128:/dev/dri/renderD128
@@ -70,6 +73,9 @@ services:
 
   homeassistant:
     container_name: homeassistant
+    depends_on:
+      mosquitto:
+        condition: service_healthy
     extra_hosts:
       - host.docker.internal:host-gateway
     image: ghcr.io/home-assistant/home-assistant:${HASS_IMAGE_TAG:-stable}
@@ -143,6 +149,12 @@ services:
       - source: mosquitto_config
         target: /mosquitto/config/mosquitto.conf
     container_name: mosquitto
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      test: ['CMD', 'sh', '-c', 'nc -z localhost 1883']
+      timeout: 5s
     image: eclipse-mosquitto:${MOSQUITTO_IMAGE_TAG:-latest}
     networks:
       - mqtt
