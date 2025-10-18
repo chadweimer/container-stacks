@@ -153,7 +153,7 @@ services:
       interval: 10s
       retries: 5
       start_period: 5s
-      test: ['CMD', 'sh', '-c', 'nc -z localhost 1883']
+      test: ['CMD', 'nc', '-z', 'localhost', '1883']
       timeout: 5s
     image: eclipse-mosquitto:${MOSQUITTO_IMAGE_TAG:-latest}
     networks:
