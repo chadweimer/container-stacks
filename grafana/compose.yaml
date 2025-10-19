@@ -41,6 +41,12 @@ services:
       GF_AUTH_ANONYMOUS_ENABLED: true
       GF_SECURITY_ALLOW_EMBEDDING: true
       GF_SERVER_ROOT_URL: https://${HOST}
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://localhost:3000'
+      timeout: 5s
     image: grafana/grafana-oss:${GRAFANA_IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
@@ -69,6 +75,12 @@ services:
       - source: loki_config
         target: /etc/loki/config.yaml
     container_name: loki
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://localhost:3100/ready'
+      timeout: 5s
     image: grafana/loki:${LOKI_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server
@@ -89,6 +101,12 @@ services:
       - source: prometheus_config
         target: /etc/prometheus/prometheus.yml
     container_name: prometheus
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://localhost:9090/-/ready'
+      timeout: 5s
     image: prom/prometheus:${PROMETHEUS_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server

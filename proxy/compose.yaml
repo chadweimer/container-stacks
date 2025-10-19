@@ -107,6 +107,12 @@ services:
       CONTAINERS: '1'
       INFO: '1'
       NETWORKS: '1'
+    healthcheck:
+      interval: 30s
+      retries: 5
+      start_period: 5s
+      test: 'wget --spider -q --tries=1 http://localhost:2375/_ping'
+      timeout: 10s
     image: ghcr.io/linuxserver/socket-proxy:${DOCKER_PROXY_IMAGE_TAG:-latest}
     networks:
       - docker-proxy
@@ -174,11 +180,18 @@ services:
       - '--serverstransport.insecureskipverify=true'
     container_name: traefik
     depends_on:
-      - docker-proxy
+      docker-proxy:
+        condition: service_healthy
     environment:
       CF_DNS_API_TOKEN_FILE: /run/secrets/CF_DNS_API_TOKEN
     extra_hosts:
       - host.docker.internal:host-gateway
+    healthcheck:
+      interval: 30s
+      retries: 5
+      start_period: 5s
+      test: 'wget --spider -q --tries=1 http://localhost:8080'
+      timeout: 10s
     image: traefik:${TRAEFIK_IMAGE_TAG:-v3}
     labels:
       homepage.group: Network
