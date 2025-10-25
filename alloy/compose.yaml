@@ -259,6 +259,12 @@ services:
       - /mnt/pool0/containers/alloy:/var/lib/alloy
   graphite:
     container_name: graphite-exporter
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      test: ['CMD', 'nc', '-z', 'localhost', '9109']
+      timeout: 10s
     image: ghcr.io/supporterino/truenas-graphite-to-prometheus:${GRAPHITE_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server

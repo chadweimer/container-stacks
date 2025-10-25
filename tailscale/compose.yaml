@@ -11,13 +11,20 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
-      TS_AUTHKEY: ${TS_AUTHKEY}
       TS_AUTH_ONCE: 'true'
+      TS_AUTHKEY: ${TS_AUTHKEY}
+      TS_ENABLE_HEALTH_CHECK: true
       TS_EXTRA_ARGS: '${TS_EXTRA_ARGS}'
       TS_HOSTNAME: ${HOSTNAME}
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: 'false'
       TZ: America/Los_Angeles
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://127.0.0.1:9002/healthz'
+      timeout: 30s
     image: ghcr.io/tailscale/tailscale:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Network

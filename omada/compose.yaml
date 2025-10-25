@@ -43,6 +43,12 @@ services:
       OMADA_PASS: ${PASSWORD}
       OMADA_SITE: Home
       OMADA_USER: ${USERNAME}
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://localhost:9202/metrics'
+      timeout: 5s
     image: ghcr.io/charlie-haley/omada_exporter:${EXPORTER_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: omada
