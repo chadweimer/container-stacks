@@ -8,7 +8,7 @@ networks:
 services:
   uptime-kuma:
     container_name: uptime-kuma
-    image: ghcr.io/louislam/uptime-kuma:${IMAGE_TAG:-2}
+    image: ghcr.io/louislam/uptime-kuma:${IMAGE_TAG:-2}-slim
     labels:
       homepage.group: Network
       homepage.href: https://${HOST}
