@@ -50,6 +50,7 @@ services:
       test: 'wget --spider -q --tries=1 http://0.0.0.0:5055/status'
       timeout: 30s
     image: ghcr.io/fallenbagel/jellyseerr:${JELLYSEERR_IMAGE_TAG:-latest}
+    init: true
     labels:
       homepage.group: Media
       homepage.href: https://${JELLYSEERR_HOST}
