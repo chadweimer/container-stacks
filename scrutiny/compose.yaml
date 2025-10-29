@@ -62,7 +62,7 @@ services:
       timeout: 10s
     image: ghcr.io/analogj/scrutiny:${IMAGE_TAG:-master}-web
     labels:
-      homepage.group: Network
+      homepage.group: NAS
       homepage.href: https://${HOST}
       homepage.icon: scrutiny.png
       homepage.name: scrutiny
