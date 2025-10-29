@@ -811,6 +811,39 @@
           "description": "The host address (domain) to expose the application."
         }
       ]
+    },
+    {
+      "id": 35,
+      "type": 3,
+      "title": "Scrutiny",
+      "description": "Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "scrutiny/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "IMAGE_TAG",
+          "label": "Image Tag",
+          "description": "The container image tag to use.",
+          "default": "master"
+        },
+        {
+          "name": "INFLUXDB_IMAGE_TAG",
+          "label": "InfluxDBImage Tag",
+          "description": "The container image tag to use for InfluxDB.",
+          "default": "2"
+        }
+      ]
     }
   ]
 }

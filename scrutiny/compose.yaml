@@ -1,0 +1,79 @@
+networks:
+  scrutiny:
+  ingress:
+    external: true
+
+services:
+  collector:
+    cap_add:
+      - SYS_RAWIO
+    container_name: scrutiny-collector
+    depends_on:
+      web:
+        condition: service_healthy
+    devices:
+      - '/dev/sda'
+      - '/dev/sdb'
+      - '/dev/sdc'
+      - '/dev/sdd'
+      - '/dev/sde'
+      - '/dev/sdf'
+      - '/dev/sdg'
+      - '/dev/sdh'
+      - '/dev/sdi'
+      - '/dev/nvme0'
+    environment:
+      COLLECTOR_API_ENDPOINT: 'http://web:8080'
+      COLLECTOR_HOST_ID: 'scrutiny-collector'
+      COLLECTOR_RUN_STARTUP: true
+    image: ghcr.io/analogj/scrutiny:${IMAGE_TAG:-master}-collector
+    networks:
+      - scrutiny
+    restart: unless-stopped
+    volumes:
+      - '/run/udev:/run/udev:ro'
+
+  influxdb:
+    container_name: scrutiny-influxdb
+    healthcheck:
+      interval: 5s
+      retries: 20
+      test: ['CMD', 'curl', '-f', 'http://localhost:8086/health']
+      timeout: 10s
+    image: influxdb:${INFLUXDB_IMAGE_TAG:-2}
+    networks:
+      - scrutiny
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/scrutiny/influxdb:/var/lib/influxdb2
+
+  web:
+    container_name: scrutiny-web
+    depends_on:
+      influxdb:
+        condition: service_healthy
+    environment:
+      SCRUTINY_WEB_INFLUXDB_HOST: 'influxdb'
+    healthcheck:
+      interval: 5s
+      retries: 20
+      start_period: 10s
+      test: ['CMD', 'curl', '-f', 'http://localhost:8080/api/health']
+      timeout: 10s
+    image: ghcr.io/analogj/scrutiny:${IMAGE_TAG:-master}-web
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST}
+      homepage.icon: scrutiny.png
+      homepage.name: scrutiny
+      traefik.enable: true
+      traefik.http.routers.bitmagnet.middlewares: 'authelia@docker'
+      traefik.http.routers.scrutiny.rule: Host(`${HOST}`)
+      traefik.http.routers.scrutiny.tls.certresolver: myresolver
+      traefik.http.services.scrutiny.loadbalancer.server.port: 8080
+    networks:
+      - scrutiny
+      - ingress
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/scrutiny/config:/opt/scrutiny/config
