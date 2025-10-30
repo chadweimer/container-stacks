@@ -75,6 +75,8 @@ services:
       homepage.href: https://${HOST}
       homepage.icon: scrutiny.png
       homepage.name: Scrutiny
+      homepage.widget.type: scrutiny
+      homepage.widget.url: http://scrutiny-web:8080
       traefik.enable: true
       traefik.http.routers.scrutiny.middlewares: 'authelia@docker'
       traefik.http.routers.scrutiny.rule: Host(`${HOST}`)
