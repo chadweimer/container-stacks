@@ -49,7 +49,8 @@ services:
       - scrutiny
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/scrutiny/influxdb:/var/lib/influxdb2
+      - /mnt/pool0/containers/scrutiny/influxdb/config:/etc/influxdb2
+      - /mnt/pool0/containers/scrutiny/influxdb/data:/var/lib/influxdb2
 
   web:
     configs:

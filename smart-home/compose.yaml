@@ -175,6 +175,7 @@ services:
     user: '568:568'
     volumes:
       - /mnt/pool0/containers/mosquitto/data:/mosquitto/data
+      - /mnt/pool0/containers/mosquitto/log:/mosquitto/log
 
   zwave-js-ui:
     container_name: zwave-js-ui
