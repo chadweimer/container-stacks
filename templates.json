@@ -842,6 +842,12 @@
           "label": "InfluxDBImage Tag",
           "description": "The container image tag to use for InfluxDB.",
           "default": "2"
+        },
+        {
+          "name": "GOTIFY_TOKEN",
+          "label": "Gotify Token",
+          "description": "The token used to authenticate with Gotify.",
+          "default": "your_gotify_token"
         }
       ]
     }
