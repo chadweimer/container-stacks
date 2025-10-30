@@ -67,7 +67,7 @@ services:
       homepage.icon: scrutiny.png
       homepage.name: scrutiny
       traefik.enable: true
-      traefik.http.routers.bitmagnet.middlewares: 'authelia@docker'
+      traefik.http.routers.scrutiny.middlewares: 'authelia@docker'
       traefik.http.routers.scrutiny.rule: Host(`${HOST}`)
       traefik.http.routers.scrutiny.tls.certresolver: myresolver
       traefik.http.services.scrutiny.loadbalancer.server.port: 8080
