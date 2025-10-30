@@ -838,8 +838,20 @@
           "default": "master"
         },
         {
+          "name": "COLLECTOR_CRON_SCHEDULE",
+          "label": "Cron Schedule",
+          "description": "The cron schedule for the collector.",
+          "default": "0 0 * * *"
+        },
+        {
+          "name": "COLLECTOR_RUN_STARTUP",
+          "label": "Run Collector on Startup",
+          "description": "Whether to run the collector on startup. Defaults to true to ensure initial data collection.",
+          "default": "true"
+        },
+        {
           "name": "INFLUXDB_IMAGE_TAG",
-          "label": "InfluxDBImage Tag",
+          "label": "InfluxDB Image Tag",
           "description": "The container image tag to use for InfluxDB.",
           "default": "2"
         },

@@ -27,8 +27,9 @@ services:
       - 'c 245:* rmw' # NVMe
     environment:
       COLLECTOR_API_ENDPOINT: 'http://web:8080'
+      COLLECTOR_CRON_SCHEDULE: ${COLLECTOR_CRON_SCHEDULE:-0 0 * * *}
       COLLECTOR_HOST_ID: 'scrutiny-collector'
-      COLLECTOR_RUN_STARTUP: false
+      COLLECTOR_RUN_STARTUP: ${COLLECTOR_RUN_STARTUP:-false}
     image: ghcr.io/analogj/scrutiny:${IMAGE_TAG:-master}-collector
     networks:
       - scrutiny
