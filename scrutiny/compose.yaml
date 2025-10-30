@@ -6,6 +6,7 @@ networks:
 services:
   collector:
     cap_add:
+      - SYS_ADMIN
       - SYS_RAWIO
     container_name: scrutiny-collector
     depends_on:
