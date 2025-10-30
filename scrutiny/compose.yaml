@@ -1,7 +1,17 @@
+configs:
+  scrutiny_config:
+    content: |
+      version: 1
+
+      notify:
+        urls:
+          - "gotify://gotify:80/${GOTIFY_TOKEN}?disableTLS=yes"
+
 networks:
-  scrutiny:
   ingress:
     external: true
+  scrutiny:
+    name: scrutiny
 
 services:
   collector:
@@ -42,6 +52,9 @@ services:
       - /mnt/pool0/containers/scrutiny/influxdb:/var/lib/influxdb2
 
   web:
+    configs:
+      - source: scrutiny_config
+        target: /opt/scrutiny/config/scrutiny.yaml
     container_name: scrutiny-web
     depends_on:
       influxdb:
