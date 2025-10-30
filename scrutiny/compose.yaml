@@ -73,7 +73,7 @@ services:
       homepage.group: NAS
       homepage.href: https://${HOST}
       homepage.icon: scrutiny.png
-      homepage.name: scrutiny
+      homepage.name: Scrutiny
       traefik.enable: true
       traefik.http.routers.scrutiny.middlewares: 'authelia@docker'
       traefik.http.routers.scrutiny.rule: Host(`${HOST}`)
