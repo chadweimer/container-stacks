@@ -23,8 +23,8 @@ services:
       web:
         condition: service_healthy
     device_cgroup_rules:
-      - 'b 8:* rmw' # SATA/SCSI
-      - 'c 245:* rmw' # NVMe
+      - 'b 8:* rw' # SATA/SCSI
+      - 'c 245:* rw' # NVMe
     environment:
       COLLECTOR_API_ENDPOINT: 'http://web:8080'
       COLLECTOR_CRON_SCHEDULE: ${COLLECTOR_CRON_SCHEDULE:-0 0 * * *}
