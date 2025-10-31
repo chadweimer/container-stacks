@@ -8,7 +8,7 @@ configs:
           - "gotify://gotify:80/${GOTIFY_TOKEN}?disableTLS=yes"
 
 networks:
-  ingress:
+  public:
     external: true
   scrutiny:
     name: scrutiny
@@ -84,7 +84,7 @@ services:
       traefik.http.services.scrutiny.loadbalancer.server.port: 8080
     networks:
       - scrutiny
-      - ingress
+      - public
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/scrutiny/config:/opt/scrutiny/config

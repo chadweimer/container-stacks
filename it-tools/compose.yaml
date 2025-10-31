@@ -1,6 +1,7 @@
 networks:
-  ingress:
+  public:
     external: true
+
 services:
   app:
     container_name: it-tools
@@ -14,6 +15,6 @@ services:
       traefik.http.routers.it-tools.rule: Host(`${HOST}`)
       traefik.http.routers.it-tools.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped

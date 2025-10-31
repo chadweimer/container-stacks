@@ -14,9 +14,11 @@ configs:
             name: pool1
             config:
               defaultEnabled: true
+
 networks:
-  ingress:
+  public:
     external: true
+
 services:
   filebrowser:
     configs:
@@ -38,7 +40,7 @@ services:
       traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
       traefik.http.routers.filebrowser.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     user: '568:568'

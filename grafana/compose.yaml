@@ -29,11 +29,13 @@ configs:
       storage:
         tsdb:
           out_of_order_time_window: 1h
+
 networks:
-  ingress:
-    external: true
   observe:
     external: true
+  public:
+    external: true
+
 services:
   grafana:
     container_name: grafana
@@ -62,8 +64,8 @@ services:
       traefik.http.routers.grafana.rule: Host(`${HOST}`)
       traefik.http.routers.grafana.tls.certresolver: myresolver
     networks:
-      - ingress
       - observe
+      - public
     pull_policy: always
     restart: unless-stopped
     user: '568:568'

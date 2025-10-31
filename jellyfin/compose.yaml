@@ -1,6 +1,7 @@
 networks:
-  ingress:
+  public:
     external: true
+
 services:
   jellyfin:
     container_name: jellyfin
@@ -27,7 +28,7 @@ services:
       traefik.http.routers.jellyfin.rule: Host(`${HOST}`)
       traefik.http.routers.jellyfin.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     user: '568:568'

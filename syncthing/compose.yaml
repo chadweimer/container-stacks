@@ -1,8 +1,9 @@
 networks:
-  ingress:
-    external: true
   observe:
     external: true
+  public:
+    external: true
+
 services:
   syncthing:
     cap_add:
@@ -32,8 +33,8 @@ services:
       traefik.http.routers.syncthing.rule: Host(`${HOST}`)
       traefik.http.routers.syncthing.tls.certresolver: myresolver
     networks:
-      - ingress
       - observe
+      - public
     ports:
       - 22000:22000/tcp
       - 22000:22000/udp

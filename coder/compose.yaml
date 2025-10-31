@@ -1,6 +1,7 @@
 networks:
-  ingress:
+  public:
     external: true
+
 services:
   code-server:
     command: --auth none --disable-telemetry
@@ -16,7 +17,7 @@ services:
       traefik.http.routers.coder.rule: Host(`${HOST}`)
       traefik.http.routers.coder.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     user: '568:568'

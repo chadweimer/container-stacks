@@ -1,9 +1,10 @@
 name: arrs
 networks:
-  ingress:
-    external: true
   observe:
     external: true
+  public:
+    external: true
+
 services:
   bazarr:
     container_name: bazarr
@@ -31,7 +32,7 @@ services:
       traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST}`)
       traefik.http.routers.bazarr.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -64,7 +65,7 @@ services:
       traefik.http.routers.jellyseerr.rule: Host(`${JELLYSEERR_HOST}`)
       traefik.http.routers.jellyseerr.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -95,7 +96,7 @@ services:
       traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST}`)
       traefik.http.routers.prowlarr.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -127,7 +128,7 @@ services:
       traefik.http.routers.radarr.rule: Host(`${RADARR_HOST}`)
       traefik.http.routers.radarr.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -160,7 +161,7 @@ services:
       traefik.http.routers.sonarr.rule: Host(`${SONARR_HOST}`)
       traefik.http.routers.sonarr.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -214,7 +215,7 @@ services:
       traefik.http.routers.transmission.tls.certresolver: myresolver
       traefik.http.services.transmission.loadbalancer.server.port: 9091
     networks:
-      - ingress
+      - public
     # ports:
     #   - 9091:9091 # Transmission UI
     #   - 51413:51413 # Transmission service

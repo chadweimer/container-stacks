@@ -1,6 +1,7 @@
 networks:
-  ingress:
+  public:
     external: true
+
 services:
   wallos:
     container_name: wallos
@@ -23,7 +24,7 @@ services:
       traefik.http.routers.wallos.rule: Host(`${HOST}`)
       traefik.http.routers.wallos.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:

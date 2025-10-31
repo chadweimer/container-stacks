@@ -1,6 +1,7 @@
 networks:
-  ingress:
+  public:
     external: true
+
 services:
   kavita:
     container_name: kavita
@@ -9,18 +10,18 @@ services:
     image: ghcr.io/kareadita/kavita:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.name: Kavita (Reading)
       homepage.href: https://${HOST}
       homepage.icon: kavita.png
+      homepage.name: Kavita (Reading)
+      homepage.widget.password: ${PASSWORD}
       homepage.widget.type: kavita
       homepage.widget.url: http://kavita:5000
       homepage.widget.username: ${USERNAME}
-      homepage.widget.password: ${PASSWORD}
       traefik.enable: true
       traefik.http.routers.kavita.rule: Host(`${HOST}`)
       traefik.http.routers.kavita.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:

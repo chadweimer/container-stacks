@@ -8,8 +8,6 @@ configs:
       allow_anonymous true
 
 networks:
-  ingress:
-    external: true
   lan:
     driver: macvlan
     driver_opts:
@@ -21,6 +19,8 @@ networks:
     name: aaa_lan # Named so that it will be "first priority" network in docker
   mqtt:
     name: mqtt
+  public:
+    external: true
 
 services:
   frigate:
@@ -57,8 +57,8 @@ services:
       traefik.http.services.frigate.loadbalancer.server.port: 8971
       traefik.http.services.frigate.loadbalancer.server.scheme: https
     networks:
-      - ingress
       - mqtt
+      - public
     pull_policy: always
     restart: unless-stopped
     shm_size: '1024mb'
@@ -107,7 +107,7 @@ services:
       lan:
         ipv4_address: ${HASS_IPV4_ADDRESS}
         mac_address: ${HASS_MAC_ADDRESS}
-      ingress:
+      public:
       mqtt:
     privileged: true
     pull_policy: always
@@ -149,7 +149,7 @@ services:
       lan:
         ipv4_address: ${HOMEBRIDGE_IPV4_ADDRESS}
         mac_address: ${HOMEBRIDGE_MAC_ADDRESS}
-      ingress:
+      public:
     pull_policy: always
     restart: unless-stopped
     volumes:
@@ -202,7 +202,7 @@ services:
       traefik.http.routers.zwavejsui.tls.certresolver: myresolver
       traefik.http.services.zwavejsui.loadbalancer.server.port: 8091
     networks:
-      - ingress
+      - public
     pull_policy: always
     restart: unless-stopped
     stop_signal: SIGINT

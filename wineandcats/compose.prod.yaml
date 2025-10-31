@@ -2,8 +2,9 @@ name: wineandcats-prod
 networks:
   default:
     name: wineandcats-prod
-  ingress:
+  public:
     external: true
+
 services:
   app:
     container_name: wineandcats-prod
@@ -24,7 +25,7 @@ services:
       traefik.http.routers.wineandcats-prod.tls.certresolver: myresolver
     networks:
       - default
-      - ingress
+      - public
     restart: unless-stopped
     user: '568:568'
     volumes:

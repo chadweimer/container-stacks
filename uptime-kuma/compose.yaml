@@ -1,10 +1,11 @@
 networks:
   docker-proxy:
     external: true
-  ingress:
-    external: true
   observe:
     external: true
+  public:
+    external: true
+
 services:
   uptime-kuma:
     container_name: uptime-kuma
@@ -24,8 +25,8 @@ services:
       traefik.http.routers.uptime.tls.certresolver: myresolver
     networks:
       - docker-proxy
-      - ingress
       - observe
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:

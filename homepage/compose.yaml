@@ -1,10 +1,11 @@
 networks:
   docker-proxy:
     external: true
-  ingress:
-    external: true
   observe:
     external: true
+  public:
+    external: true
+
 services:
   homepage:
     container_name: homepage
@@ -21,8 +22,8 @@ services:
       traefik.http.routers.homepage.tls.certresolver: myresolver
     networks:
       - docker-proxy
-      - ingress
       - observe
+      - public
     pull_policy: always
     restart: unless-stopped
     volumes:

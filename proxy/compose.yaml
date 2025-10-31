@@ -13,9 +13,9 @@ configs:
 networks:
   docker-proxy:
     external: true
-  ingress:
-    external: true
   observe:
+    external: true
+  public:
     external: true
 
 secrets:
@@ -88,8 +88,8 @@ services:
       traefik.http.routers.authelia.tls.certresolver: myresolver
       traefik.http.services.authelia.loadbalancer.server.port: 9091
     networks:
-      - ingress
       - observe
+      - public
     restart: unless-stopped
     secrets:
       - AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD
@@ -145,7 +145,7 @@ services:
       traefik.http.routers.lldap.tls.certresolver: myresolver
       traefik.http.services.lldap.loadbalancer.server.port: 17170
     networks:
-      - ingress
+      - public
     secrets:
       - LLDAP_JWT_SECRET
       - LLDAP_KEY_SEED
@@ -174,7 +174,7 @@ services:
       - '--providers.docker=true'
       - '--providers.docker.endpoint=tcp://docker-proxy:2375'
       - '--providers.docker.exposedbydefault=false'
-      - '--providers.docker.network=ingress'
+      - '--providers.docker.network=public'
       - '--providers.file.directory=/app'
       - '--providers.file.watch=true'
       - '--serverstransport.insecureskipverify=true'
@@ -209,8 +209,8 @@ services:
       traefik.http.routers.api.tls.certresolver: myresolver
     networks:
       - docker-proxy
-      - ingress
       - observe
+      - public
     ports:
       - '80:80'
       - '443:443'

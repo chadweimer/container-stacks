@@ -1,5 +1,5 @@
 networks:
-  ingress:
+  public:
     external: true
 services:
   vaultwarden:
@@ -16,7 +16,7 @@ services:
       traefik.http.routers.vaultwarden.rule: Host(`${HOST}`)
       traefik.http.routers.vaultwarden.tls.certresolver: myresolver
     networks:
-      - ingress
+      - public
     restart: unless-stopped
     user: '568:568'
     volumes:

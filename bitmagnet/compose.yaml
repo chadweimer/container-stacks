@@ -8,9 +8,9 @@ networks:
           subnet: 192.168.55.0/24
       driver: default
     name: bitmagnet
-  ingress:
-    external: true
   observe:
+    external: true
+  public:
     external: true
 services:
   bitmagnet:
@@ -92,8 +92,8 @@ services:
     networks:
       bitmagnet:
         ipv4_address: 192.168.55.10
-      ingress:
       observe:
+      public:
     # ports:
     #   # The bitmagnet ports must be exposed by the gluetun container:
     #   - "3333:3333"

@@ -1,6 +1,7 @@
 networks:
-  ingress:
+  public:
     external: true
+
 services:
   portainer:
     container_name: portainer
@@ -19,7 +20,7 @@ services:
       traefik.http.routers.portainer.tls.certresolver: myresolver
       traefik.http.services.portainer.loadbalancer.server.port: 9000
     networks:
-      - ingress
+      - public
     ports:
       - 9000:9000 # For access when traefik is not up
     restart: unless-stopped

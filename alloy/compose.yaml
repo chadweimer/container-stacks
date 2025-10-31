@@ -219,9 +219,9 @@ configs:
 networks:
   docker-proxy:
     external: true
-  ingress:
-    external: true
   observe:
+    external: true
+  public:
     external: true
 services:
   alloy:
@@ -247,8 +247,8 @@ services:
       traefik.http.services.alloy.loadbalancer.server.port: 80
     networks:
       - docker-proxy
-      - ingress
       - observe
+      - public
     ports:
       - '127.0.0.1:1514:1514'
     pull_policy: always
