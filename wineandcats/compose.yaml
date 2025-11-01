@@ -7,9 +7,16 @@ networks:
 
 services:
   adminer:
-    container_name: adminer-wineandcats-${STAGE}
+    container_name: wineandcats-${STAGE}-adminer
+    healthcheck:
+      start_period: 5s
+      test: 'wget --spider -q --tries=1 http://localhost:8080'
     image: adminer:5
     labels:
+      - homepage.group=Other
+      - homepage.href=https://${HOST}/db
+      - homepage.icon=adminer.png
+      - homepage.name=Wine & Cats (${STAGE}) DB
       - traefik.enable=true
       - traefik.http.routers.db-wineandcats-${STAGE}.rule=Host(`${HOST}`) && PathPrefix(`/db`)
       - traefik.http.routers.db-wineandcats-${STAGE}.tls.certresolver=myresolver
@@ -26,10 +33,14 @@ services:
         condition: service_healthy
     environment:
       DATABASE_URL: postgres://gomp:${DB_PASSWORD}@db/gomp?sslmode=disable
-      IS_DEVELOPMENT: 1
+      IS_DEVELOPMENT: ${IS_DEVELOPMENT:-0}
       SECURE_KEY: ${SECURE_KEY}
-    image: ghcr.io/chadweimer/gomp:${IMAGE_TAG:-beta}
+    image: ghcr.io/chadweimer/gomp:${IMAGE_TAG:-latest}
     labels:
+      - homepage.group=Other
+      - homepage.href=https://${HOST}
+      - homepage.icon=https://${HOST}/static/assets/icon/icon192.png
+      - homepage.name=Wine & Cats (${STAGE})
       - traefik.enable=true
       - traefik.http.routers.wineandcats-${STAGE}.rule=Host(`${HOST}`)
       - traefik.http.routers.wineandcats-${STAGE}.tls.certresolver=myresolver

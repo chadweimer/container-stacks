@@ -418,15 +418,15 @@
     {
       "id": 14,
       "type": 3,
-      "title": "Wine & Cats (Dev Environments)",
-      "description": "Dev environment stack for Wine & Cats",
+      "title": "Wine & Cats",
+      "description": "GOMP: Go Meal Planner - Web-based recipe book.",
       "categories": [
         "app"
       ],
       "platform": "linux",
       "repository": {
         "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "wineandcats/compose.dev.yaml"
+        "stackfile": "wineandcats/compose.yaml"
       },
       "env": [
         {
@@ -449,6 +449,22 @@
           "name": "SECURE_KEY",
           "label": "Secure Key",
           "description": "The secure key to use (e.g., for JWT signing)."
+        },
+        {
+          "name": "IS_DEVELOPMENT",
+          "label": "Enable development mode",
+          "description": "Whether to enable development mode.",
+          "select": [
+            {
+              "text": "Yes",
+              "value": "1"
+            },
+            {
+              "text": "No",
+              "value": "0",
+              "default": true
+            }
+          ]
         },
         {
           "name": "STAGE",
@@ -457,57 +473,18 @@
           "select": [
             {
               "text": "Development",
-              "value": "dev",
-              "default": true
+              "value": "dev"
             },
             {
               "text": "Staging",
               "value": "staging"
+            },
+            {
+              "text": "Production",
+              "value": "prod",
+              "default": true
             }
           ]
-        },
-        {
-          "name": "PG_VERSION",
-          "label": "PostgreSQL Version",
-          "description": "The version of PostgreSQL to use.",
-          "default": "16"
-        }
-      ]
-    },
-    {
-      "id": 15,
-      "type": 3,
-      "title": "Wine & Cats (Prod)",
-      "description": "Prod environment stack for Wine & Cats",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "wineandcats/compose.prod.yaml"
-      },
-      "env": [
-        {
-          "name": "HOST",
-          "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
-        },
-        {
-          "name": "IMAGE_TAG",
-          "label": "Image Tag",
-          "description": "The container image tag to use.",
-          "default": "latest"
-        },
-        {
-          "name": "DB_PASSWORD",
-          "label": "Database Password",
-          "description": "The database password."
-        },
-        {
-          "name": "SECURE_KEY",
-          "label": "Secure Key",
-          "description": "The secure key to use (e.g., for JWT signing)."
         },
         {
           "name": "PG_VERSION",
