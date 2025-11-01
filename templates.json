@@ -824,7 +824,17 @@
           "name": "COLLECTOR_RUN_STARTUP",
           "label": "Run Collector on Startup",
           "description": "Whether to run the collector on startup. Defaults to true to ensure initial data collection.",
-          "default": "true"
+          "select": [
+            {
+              "text": "Yes",
+              "value": "true",
+              "default": true
+            },
+            {
+              "text": "No",
+              "value": "false"
+            }
+          ]
         },
         {
           "name": "INFLUXDB_IMAGE_TAG",
@@ -835,8 +845,7 @@
         {
           "name": "GOTIFY_TOKEN",
           "label": "Gotify Token",
-          "description": "The token used to authenticate with Gotify.",
-          "default": "your_gotify_token"
+          "description": "The token used to authenticate with Gotify."
         }
       ]
     }
