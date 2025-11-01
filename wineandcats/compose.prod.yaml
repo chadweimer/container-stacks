@@ -6,6 +6,23 @@ networks:
     external: true
 
 services:
+  adminer:
+    container_name: adminer-wineandcats-prod
+    image: adminer:5
+    labels:
+      homepage.group: Other
+      homepage.href: https://${HOST}/db
+      homepage.icon: adminer.png
+      homepage.name: Wine & Cats DB
+      traefik.enable: true
+      traefik.http.routers.db-wineandcats-prod.rule: Host(`${HOST}`) && PathPrefix(`/db`)
+      traefik.http.routers.db-wineandcats-prod.tls.certresolver: myresolver
+      traefik.http.services.db-wineandcats-prod.loadbalancer.server.port: 8080
+    networks:
+      - default
+      - public
+    pull_policy: always
+    restart: unless-stopped
   app:
     container_name: wineandcats-prod
     depends_on:

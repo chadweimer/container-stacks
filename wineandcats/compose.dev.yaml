@@ -6,6 +6,19 @@ networks:
     external: true
 
 services:
+  adminer:
+    container_name: adminer-wineandcats-${STAGE}
+    image: adminer:5
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.db-wineandcats-${STAGE}.rule=Host(`${HOST}`) && PathPrefix(`/db`)
+      - traefik.http.routers.db-wineandcats-${STAGE}.tls.certresolver=myresolver
+      - traefik.http.services.db-wineandcats-${STAGE}.loadbalancer.server.port=8080
+    networks:
+      - default
+      - public
+    pull_policy: always
+    restart: unless-stopped
   app:
     container_name: wineandcats-${STAGE}
     depends_on:
