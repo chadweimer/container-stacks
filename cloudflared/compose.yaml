@@ -10,9 +10,7 @@ services:
     environment:
       TUNNEL_TOKEN: ${TUNNEL_TOKEN}
     healthcheck:
-      interval: 10s
-      retries: 5
-      start_period: 10s
+      start_period: 5s
       test:
         - 'CMD'
         - 'cloudflared'
@@ -20,7 +18,6 @@ services:
         - '--metrics'
         - '127.0.0.1:60123'
         - 'ready'
-      timeout: 30s
     image: cloudflare/cloudflared:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Network

@@ -260,11 +260,8 @@ services:
   graphite:
     container_name: graphite-exporter
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 5s
       test: ['CMD', 'nc', '-z', 'localhost', '9109']
-      timeout: 10s
     image: ghcr.io/supporterino/truenas-graphite-to-prometheus:${GRAPHITE_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server
@@ -310,8 +307,8 @@ services:
   speedtest:
     container_name: speedtest-exporter
     healthcheck:
+      start_period: 5s
       test: 'wget --no-verbose --tries=1 --spider http://0.0.0.0:9798/'
-      timeout: 10s
     image: ghcr.io/miguelndecarvalho/speedtest-exporter:${SPEEDTEST_IMAGE_TAG:-latest}
     labels:
       homepage.group: Status

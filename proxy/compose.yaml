@@ -108,11 +108,8 @@ services:
       INFO: '1'
       NETWORKS: '1'
     healthcheck:
-      interval: 30s
-      retries: 5
       start_period: 5s
       test: 'wget --spider -q --tries=1 http://localhost:2375/_ping'
-      timeout: 10s
     image: ghcr.io/linuxserver/socket-proxy:${DOCKER_PROXY_IMAGE_TAG:-latest}
     networks:
       - docker-proxy
@@ -187,11 +184,8 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     healthcheck:
-      interval: 30s
-      retries: 5
       start_period: 5s
       test: 'wget --spider -q --tries=1 http://localhost:8080'
-      timeout: 10s
     image: traefik:${TRAEFIK_IMAGE_TAG:-v3}
     labels:
       homepage.group: Network

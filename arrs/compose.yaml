@@ -13,11 +13,8 @@ services:
       PUID: 568
       TZ: America/Los_Angeles
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://0.0.0.0:6767'
-      timeout: 30s
     image: ghcr.io/linuxserver/bazarr:${BAZARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -45,11 +42,8 @@ services:
       PUID: 568
       TZ: America/Los_Angeles
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://0.0.0.0:5055/status'
-      timeout: 30s
     image: ghcr.io/fallenbagel/jellyseerr:${JELLYSEERR_IMAGE_TAG:-latest}
     init: true
     labels:
@@ -77,11 +71,8 @@ services:
       PUID: 568
       TZ: America/Los_Angeles
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://0.0.0.0:9696/ping'
-      timeout: 30s
     image: ghcr.io/linuxserver/prowlarr:${PROWLARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -108,11 +99,8 @@ services:
       PUID: 568
       TZ: America/Los_Angeles
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://0.0.0.0:7878/ping'
-      timeout: 30s
     image: ghcr.io/linuxserver/radarr:${RADARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -141,11 +129,8 @@ services:
       PUID: 568
       TZ: America/Los_Angeles
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://0.0.0.0:8989/ping'
-      timeout: 30s
     image: ghcr.io/linuxserver/sonarr:${SONARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -175,11 +160,8 @@ services:
     environment:
       TZ: America/Los_Angeles
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://0.0.0.0:9091'
-      timeout: 30s
     image: ghcr.io/linuxserver/transmission:${TRANSMISSION_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media

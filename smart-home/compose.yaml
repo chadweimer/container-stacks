@@ -79,11 +79,8 @@ services:
     extra_hosts:
       - host.docker.internal:host-gateway
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://localhost:8123/'
-      timeout: 30s
     image: ghcr.io/home-assistant/home-assistant:${HASS_IMAGE_TAG:-stable}
     labels:
       homepage.group: Smart Home
@@ -125,11 +122,8 @@ services:
       PUID: 568
       TZ: America/Los_Angeles
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://localhost:8581/'
-      timeout: 30s
     image: ghcr.io/homebridge/homebridge:${HOMEBRIDGE_IMAGE_TAG:-latest}
     labels:
       homepage.group: Smart Home
@@ -162,11 +156,8 @@ services:
         target: /mosquitto/config/mosquitto.conf
     container_name: mosquitto
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 5s
       test: ['CMD', 'nc', '-z', 'localhost', '1883']
-      timeout: 10s
     image: eclipse-mosquitto:${MOSQUITTO_IMAGE_TAG:-latest}
     networks:
       - mqtt
@@ -185,11 +176,8 @@ services:
       SESSION_SECRET: ${ZWAVE_SESSION_SECRET}
       TZ: America/Los_Angeles
     healthcheck:
-      interval: 10s
-      retries: 5
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://localhost:8091/'
-      timeout: 10s
     image: ghcr.io/zwave-js/zwave-js-ui:${ZWAVE_IMAGE_TAG:-10}
     labels:
       homepage.group: Smart Home

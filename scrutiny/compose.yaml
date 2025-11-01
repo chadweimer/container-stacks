@@ -41,10 +41,8 @@ services:
   influxdb:
     container_name: scrutiny-influxdb
     healthcheck:
-      interval: 5s
-      retries: 20
+      start_period: 5s
       test: ['CMD', 'curl', '-f', 'http://localhost:8086/health']
-      timeout: 10s
     image: influxdb:${INFLUXDB_IMAGE_TAG:-2}
     networks:
       - scrutiny
@@ -64,11 +62,8 @@ services:
     environment:
       SCRUTINY_WEB_INFLUXDB_HOST: 'influxdb'
     healthcheck:
-      interval: 5s
-      retries: 20
-      start_period: 10s
+      start_period: 5s
       test: ['CMD', 'curl', '-f', 'http://localhost:8080/api/health']
-      timeout: 10s
     image: ghcr.io/analogj/scrutiny:${IMAGE_TAG:-master}-web
     labels:
       homepage.group: NAS
