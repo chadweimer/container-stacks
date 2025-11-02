@@ -14,6 +14,7 @@ services:
       TS_AUTH_ONCE: 'true'
       TS_AUTHKEY: ${TS_AUTHKEY}
       TS_ENABLE_HEALTH_CHECK: 'true'
+      TS_ENABLE_METRICS: 'true'
       TS_EXTRA_ARGS: '${TS_EXTRA_ARGS}'
       TS_HOSTNAME: ${HOSTNAME}
       TS_STATE_DIR: /var/lib/tailscale
@@ -31,6 +32,9 @@ services:
       homepage.widget.deviceid: ${DEVIDE_ID}
       homepage.widget.key: ${API_ACCESS_TOKEN}
       homepage.widget.type: tailscale
+      prometheus.label.instance: truenas-server
+      prometheus.label.tailscale_machine: truenas-server
+      prometheus.port: 9002
     network_mode: host
     pull_policy: always
     restart: unless-stopped
