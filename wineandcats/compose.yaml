@@ -14,11 +14,11 @@ services:
     image: adminer:5
     labels:
       - homepage.group=Other
-      - homepage.href=https://${HOST}/db
+      - homepage.href=https://db.${HOST}?pgsql=db&username=gomp&db=gomp
       - homepage.icon=adminer.png
       - homepage.name=Wine & Cats (${STAGE}) DB
       - traefik.enable=true
-      - traefik.http.routers.db-wineandcats-${STAGE}.rule=Host(`${HOST}`) && PathPrefix(`/db`)
+      - traefik.http.routers.db-wineandcats-${STAGE}.rule=Host(`db.${HOST}`)
       - traefik.http.routers.db-wineandcats-${STAGE}.tls.certresolver=myresolver
       - traefik.http.services.db-wineandcats-${STAGE}.loadbalancer.server.port=8080
     networks:
