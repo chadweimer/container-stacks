@@ -13,7 +13,7 @@ services:
     environment:
       TS_AUTH_ONCE: 'true'
       TS_AUTHKEY: ${TS_AUTHKEY}
-      TS_ENABLE_HEALTH_CHECK: true
+      TS_ENABLE_HEALTH_CHECK: 'true'
       TS_EXTRA_ARGS: '${TS_EXTRA_ARGS}'
       TS_HOSTNAME: ${HOSTNAME}
       TS_STATE_DIR: /var/lib/tailscale
