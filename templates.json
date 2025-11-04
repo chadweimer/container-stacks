@@ -652,10 +652,6 @@
           "label": "Home Assisant Host Address"
         },
         {
-          "name": "HASS_HOST2",
-          "label": "Home Assisant Host Address (Additional)"
-        },
-        {
           "name": "HASS_IPV4_ADDRESS",
           "label": "Home Assisant IPv4 Address"
         },

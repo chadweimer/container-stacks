@@ -99,8 +99,10 @@ services:
       homepage.widget.type: homeassistant
       homepage.widget.url: http://homeassistant:8123
       traefik.enable: true
-      traefik.http.routers.hass.rule: Host(`${HASS_HOST}`) || Host(`${HASS_HOST2}`)
+      traefik.http.routers.hass.rule: Host(`${HASS_HOST}`)
       traefik.http.routers.hass.tls.certresolver: myresolver
+      traefik.http.routers.hass.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HASS_HOST}}
+      traefik.http.routers.hass.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.hass.loadbalancer.server.port: 8123
     networks:
       lan:
