@@ -54,6 +54,8 @@ services:
       traefik.http.routers.frigate.middlewares: 'authelia@docker'
       traefik.http.routers.frigate.rule: Host(`${FRIGATE_HOST}`)
       traefik.http.routers.frigate.tls.certresolver: myresolver
+      traefik.http.routers.frigate.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${FRIGATE_HOST}}
+      traefik.http.routers.frigate.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.frigate.loadbalancer.server.port: 8971
       traefik.http.services.frigate.loadbalancer.server.scheme: https
     networks:
@@ -138,6 +140,8 @@ services:
       traefik.http.routers.homebridge.middlewares: 'authelia@docker'
       traefik.http.routers.homebridge.rule: Host(`${HOMEBRIDGE_HOST}`)
       traefik.http.routers.homebridge.tls.certresolver: myresolver
+      traefik.http.routers.homebridge.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOMEBRIDGE_HOST}}
+      traefik.http.routers.homebridge.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.homebridge.loadbalancer.server.port: 8581
     networks:
       lan:
@@ -188,6 +192,8 @@ services:
       traefik.http.routers.zwavejsui.middlewares: 'authelia@docker'
       traefik.http.routers.zwavejsui.rule: Host(`${ZWAVE_HOST}`)
       traefik.http.routers.zwavejsui.tls.certresolver: myresolver
+      traefik.http.routers.zwavejsui.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${ZWAVE_HOST}}
+      traefik.http.routers.zwavejsui.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.zwavejsui.loadbalancer.server.port: 8091
     networks:
       - public

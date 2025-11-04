@@ -39,6 +39,8 @@ services:
       traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
       traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
       traefik.http.routers.filebrowser.tls.certresolver: myresolver
+      traefik.http.routers.filebrowser.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.filebrowser.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - public
     pull_policy: always

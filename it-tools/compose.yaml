@@ -14,6 +14,8 @@ services:
       traefik.enable: true
       traefik.http.routers.it-tools.rule: Host(`${HOST}`)
       traefik.http.routers.it-tools.tls.certresolver: myresolver
+      traefik.http.routers.it-tools.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.it-tools.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - public
     pull_policy: always

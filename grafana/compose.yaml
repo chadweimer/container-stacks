@@ -61,6 +61,8 @@ services:
       traefik.enable: true
       traefik.http.routers.grafana.rule: Host(`${HOST}`)
       traefik.http.routers.grafana.tls.certresolver: myresolver
+      traefik.http.routers.grafana.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.grafana.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - observe
       - public

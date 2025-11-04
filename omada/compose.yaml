@@ -29,6 +29,8 @@ services:
       traefik.enable: true
       traefik.http.routers.omada.rule: Host(`${HOST}`)
       traefik.http.routers.omada.tls.certresolver: myresolver
+      traefik.http.routers.omada.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.omada.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.omada.loadbalancer.server.port: 8043
       traefik.http.services.omada.loadbalancer.server.scheme: https
     network_mode: host

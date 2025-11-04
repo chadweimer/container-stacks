@@ -23,6 +23,8 @@ services:
       traefik.http.routers.wallos.middlewares: 'authelia@docker'
       traefik.http.routers.wallos.rule: Host(`${HOST}`)
       traefik.http.routers.wallos.tls.certresolver: myresolver
+      traefik.http.routers.wallos.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.wallos.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - public
     pull_policy: always

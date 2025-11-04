@@ -32,6 +32,8 @@ services:
       traefik.http.routers.syncthing.middlewares: 'authelia@docker'
       traefik.http.routers.syncthing.rule: Host(`${HOST}`)
       traefik.http.routers.syncthing.tls.certresolver: myresolver
+      traefik.http.routers.syncthing.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.syncthing.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - observe
       - public

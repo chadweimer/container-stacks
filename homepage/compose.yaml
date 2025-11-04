@@ -20,6 +20,8 @@ services:
       traefik.enable: true
       traefik.http.routers.homepage.rule: Host(`${HOST}`)
       traefik.http.routers.homepage.tls.certresolver: myresolver
+      traefik.http.routers.homepage.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.homepage.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - docker-proxy
       - observe

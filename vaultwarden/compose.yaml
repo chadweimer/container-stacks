@@ -15,6 +15,8 @@ services:
       traefik.enable: true
       traefik.http.routers.vaultwarden.rule: Host(`${HOST}`)
       traefik.http.routers.vaultwarden.tls.certresolver: myresolver
+      traefik.http.routers.vaultwarden.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.vaultwarden.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - public
     restart: unless-stopped

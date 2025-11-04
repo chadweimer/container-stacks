@@ -86,6 +86,8 @@ services:
       traefik.http.routers.bitmagnet.middlewares: 'authelia@docker'
       traefik.http.routers.bitmagnet.rule: Host(`${HOST}`)
       traefik.http.routers.bitmagnet.tls.certresolver: myresolver
+      traefik.http.routers.bitmagnet.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.bitmagnet.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.bitmagnet.loadbalancer.server.port: 3333
     networks:
       bitmagnet:

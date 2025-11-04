@@ -86,6 +86,8 @@ services:
       traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: true
       traefik.http.routers.authelia.rule: Host(`${AUTHELIA_HOST}`)
       traefik.http.routers.authelia.tls.certresolver: myresolver
+      traefik.http.routers.authelia.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${AUTHELIA_HOST}}
+      traefik.http.routers.authelia.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.authelia.loadbalancer.server.port: 9091
     networks:
       - observe
@@ -140,6 +142,8 @@ services:
       traefik.enable: true
       traefik.http.routers.lldap.rule: Host(`${LLDAP_HOST}`)
       traefik.http.routers.lldap.tls.certresolver: myresolver
+      traefik.http.routers.lldap.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${LLDAP_HOST}}
+      traefik.http.routers.lldap.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.lldap.loadbalancer.server.port: 17170
     networks:
       - public
@@ -201,6 +205,8 @@ services:
       traefik.http.routers.api.rule: Host(`${TRAEFIK_HOST}`)
       traefik.http.routers.api.service: 'api@internal'
       traefik.http.routers.api.tls.certresolver: myresolver
+      traefik.http.routers.api.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${TRAEFIK_HOST}}
+      traefik.http.routers.api.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - docker-proxy
       - observe
