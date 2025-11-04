@@ -20,6 +20,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.db-wineandcats-${STAGE}.rule=Host(`db.${HOST}`)
       - traefik.http.routers.db-wineandcats-${STAGE}.tls.certresolver=myresolver
+      - traefik.http.routers.db-wineandcats-${STAGE}.tls.domains[0].main=${TLS_CERT_DOMAIN:-db.${HOST}}
+      - traefik.http.routers.db-wineandcats-${STAGE}.tls.domains[0].sans=${TLS_CERT_SANS}
       - traefik.http.services.db-wineandcats-${STAGE}.loadbalancer.server.port=8080
     networks:
       - default
@@ -44,6 +46,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.wineandcats-${STAGE}.rule=Host(`${HOST}`)
       - traefik.http.routers.wineandcats-${STAGE}.tls.certresolver=myresolver
+      - traefik.http.routers.wineandcats-${STAGE}.tls.domains[0].main=${TLS_CERT_DOMAIN:-${HOST}}
+      - traefik.http.routers.wineandcats-${STAGE}.tls.domains[0].sans=${TLS_CERT_SANS}
     networks:
       - default
       - public
