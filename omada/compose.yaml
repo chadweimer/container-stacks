@@ -3,6 +3,24 @@ networks:
     external: true
 
 services:
+  exporter:
+    container_name: omada-exporter
+    environment:
+      OMADA_HOST: https://${HOST}
+      OMADA_PASS: ${PASSWORD}
+      OMADA_SITE: Home
+      OMADA_USER: ${USERNAME}
+    healthcheck:
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://localhost:9202/metrics'
+    image: ghcr.io/charlie-haley/omada_exporter:${EXPORTER_IMAGE_TAG:-latest}
+    labels:
+      prometheus.label.instance: omada
+      prometheus.port: 9202
+    networks:
+      - observe
+    pull_policy: always
+    restart: unless-stopped
   omada:
     cap_add:
       - CHOWN
@@ -36,24 +54,10 @@ services:
     network_mode: host
     restart: unless-stopped
     stop_grace_period: 60s
+    ulimits:
+      nofile:
+        hard: 8192
+        soft: 4096
     volumes:
       - /mnt/pool0/containers/omada/data:/opt/tplink/EAPController/data
       - /mnt/pool0/containers/omada/config:/opt/tplink/EAPController/logs
-  exporter:
-    container_name: omada-exporter
-    environment:
-      OMADA_HOST: https://${HOST}
-      OMADA_PASS: ${PASSWORD}
-      OMADA_SITE: Home
-      OMADA_USER: ${USERNAME}
-    healthcheck:
-      start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:9202/metrics'
-    image: ghcr.io/charlie-haley/omada_exporter:${EXPORTER_IMAGE_TAG:-latest}
-    labels:
-      prometheus.label.instance: omada
-      prometheus.port: 9202
-    networks:
-      - observe
-    pull_policy: always
-    restart: unless-stopped
