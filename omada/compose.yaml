@@ -4,12 +4,17 @@ networks:
 
 services:
   exporter:
+    command:
+      - '/usr/bin/omada-exporter'
+      - '--insecure'
     container_name: omada-exporter
     environment:
-      OMADA_HOST: https://${HOST}
+      OMADA_HOST: https://host.docker.internal:8043
       OMADA_PASS: ${PASSWORD}
       OMADA_SITE: Home
       OMADA_USER: ${USERNAME}
+    extra_hosts:
+      - host.docker.internal:host-gateway
     healthcheck:
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://localhost:9202/metrics'
