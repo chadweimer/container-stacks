@@ -156,6 +156,32 @@ services:
       - /mnt/pool0/backups/homebridge:/backups
       - /mnt/pool0/containers/homebridge:/homebridge
 
+  matterbridge:
+    container_name: matterbridge
+    image: luligu/matterbridge:${MATTERBRIDGE_IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Smart Home
+      homepage.href: https://${MATTERBRIDGE_HOST}
+      homepage.icon: matterbridge.png
+      homepage.name: Matterbridge
+      traefik.enable: true
+      traefik.http.routers.matterbridge.middlewares: 'authelia@docker'
+      traefik.http.routers.matterbridge.rule: Host(`${MATTERBRIDGE_HOST}`)
+      traefik.http.routers.matterbridge.tls.certresolver: myresolver
+      traefik.http.routers.matterbridge.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${MATTERBRIDGE_HOST}}
+      traefik.http.routers.matterbridge.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.services.matterbridge.loadbalancer.server.port: 8283
+    networks:
+      lan:
+        ipv4_address: ${MATTERBRIDGE_IPV4_ADDRESS}
+        mac_address: ${MATTERBRIDGE_MAC_ADDRESS}
+      public:
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/matterbridge/plugins:/root/Matterbridge
+      - /mnt/pool0/containers/matterbridge/data:/root/.matterbridge
+
   mosquitto:
     configs:
       - source: mosquitto_config
