@@ -844,6 +844,43 @@
           "description": "The token used to authenticate with Gotify."
         }
       ]
+    },
+    {
+      "id": 36,
+      "type": 3,
+      "title": "Calibre Web",
+      "description": "Web app for browsing, reading and downloading eBooks stored in a Calibre database.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "calibre/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "IMAGE_TAG",
+          "label": "Image Tag",
+          "description": "The container image tag to use.",
+          "default": "latest"
+        },
+        {
+          "name": "USERNAME",
+          "label": "Homepage Widget Username",
+          "description": "The username to use for the homepage widget for this app."
+        },
+        {
+          "name": "PASSWORD",
+          "label": "Homepage Widget Password",
+          "description": "The password to use for the homepage widget for this app."
+        }
+      ]
     }
   ]
 }

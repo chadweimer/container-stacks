@@ -1,0 +1,39 @@
+networks:
+  public:
+    external: true
+
+services:
+  web:
+    container_name: calibre-web
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/Los_Angeles
+      #- DOCKER_MODS=linuxserver/mods:universal-calibre
+    healthcheck:
+      start_period: 5s
+      test: ['CMD', 'curl', '-f', 'http://localhost:8083/']
+    image: ghcr.io/linuxserver/calibre-web:${IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Media
+      homepage.href: https://${HOST}
+      homepage.icon: calibre-web.png
+      homepage.name: Calibre Web
+      homepage.widget.password: ${PASSWORD}
+      homepage.widget.type: calibreweb
+      homepage.widget.url: http://calibre-web:8083
+      homepage.widget.username: ${USERNAME}
+      traefik.enable: true
+      traefik.http.routers.calibre.middlewares: 'authelia@docker'
+      traefik.http.routers.calibre.rule: Host(`${HOST}`)
+      traefik.http.routers.calibre.tls.certresolver: myresolver
+      traefik.http.routers.calibre.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.calibre.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.services.calibre.loadbalancer.server.port: 8083
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/calibre/data:/config
+      - /mnt/pool1/media/library/calibre:/books
