@@ -171,11 +171,7 @@ services:
       traefik.http.routers.matterbridge.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${MATTERBRIDGE_HOST}}
       traefik.http.routers.matterbridge.tls.domains[0].sans: ${TLS_CERT_SANS}
       traefik.http.services.matterbridge.loadbalancer.server.port: 8283
-    networks:
-      lan:
-        ipv4_address: ${MATTERBRIDGE_IPV4_ADDRESS}
-        mac_address: ${MATTERBRIDGE_MAC_ADDRESS}
-      public:
+    network_mode: host
     pull_policy: always
     restart: unless-stopped
     volumes:
