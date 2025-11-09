@@ -9,9 +9,9 @@ services:
       - PUID=568
       - PGID=568
       - TZ=America/Los_Angeles
-      #- DOCKER_MODS=linuxserver/mods:universal-calibre
+      - DOCKER_MODS=linuxserver/mods:universal-calibre
     healthcheck:
-      start_period: 5s
+      start_period: 20s
       test: ['CMD', 'curl', '-f', 'http://localhost:8083/']
     image: ghcr.io/linuxserver/calibre-web:${IMAGE_TAG:-latest}
     labels:
