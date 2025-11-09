@@ -947,7 +947,7 @@
     {
       "id": 34,
       "type": 3,
-      "title": "FileBrowser Quantum",
+      "title": "File Browser Quantum",
       "description": "Self-hosted web-based file manager.",
       "categories": [
         "app"
@@ -959,9 +959,24 @@
       },
       "env": [
         {
-          "name": "HOST",
+          "name": "FILEBROWSER_HOST",
           "label": "Host Address",
-          "description": "The host address (domain) to expose the application."
+          "description": "The host address (domain) to expose the File Browser application."
+        },
+        {
+          "name": "FILEBROWSER_LOGOUT_URL",
+          "label": "File Browser Logout URL",
+          "description": "The URL to redirect to on logout."
+        },
+        {
+          "name": "ONLYOFFICE_HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the OnlyOffice application."
+        },
+        {
+          "name": "ONLYOFFICE_JWT_SECRET",
+          "label": "OnlyOffice JWT Secret",
+          "description": "The JWT secret to use for OnlyOffice integration."
         },
         {
           "name": "TLS_CERT_DOMAIN",

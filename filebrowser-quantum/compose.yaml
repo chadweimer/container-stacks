@@ -9,14 +9,20 @@ configs:
             createUser: true
             enabled: true
             header: 'Remote-User'
-            logoutRedirectUrl: ${LOGOUT_URL}
+            logoutRedirectUrl: ${FILEBROWSER_LOGOUT_URL}
+      integrations:
+        office:
+          url: 'https://${ONLYOFFICE_HOST}'
+          secret: ${ONLYOFFICE_JWT_SECRET}
       server:
+        externalUrl: 'https://${FILEBROWSER_HOST}'
+        internalUrl: 'http://filebrowser-quantum'
         sources:
-          - path: "/mnt/pool0"
+          - path: '/mnt/pool0'
             name: pool0
             config:
               defaultEnabled: true
-          - path: "/mnt/pool1"
+          - path: '/mnt/pool1'
             name: pool1
             config:
               defaultEnabled: true
@@ -35,17 +41,17 @@ services:
       FILEBROWSER_CONFIG: /data/config.yaml
       FILEBROWSER_DATABASE: /data/database.db
       TZ: America/Los_Angeles
-    image: ghcr.io/gtsteffaniak/filebrowser:${IMAGE_TAG:-latest}
+    image: ghcr.io/gtsteffaniak/filebrowser:${FILEBROWSER_IMAGE_TAG:-latest}
     labels:
       homepage.group: NAS
-      homepage.href: https://${HOST}
+      homepage.href: https://${FILEBROWSER_HOST}
       homepage.icon: files.png
       homepage.name: Files
       traefik.enable: true
       traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
-      traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
+      traefik.http.routers.filebrowser.rule: Host(`${FILEBROWSER_HOST}`)
       traefik.http.routers.filebrowser.tls.certresolver: myresolver
-      traefik.http.routers.filebrowser.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.filebrowser.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${FILEBROWSER_HOST}}
       traefik.http.routers.filebrowser.tls.domains[0].sans: ${TLS_CERT_SANS}
     networks:
       - public
@@ -57,3 +63,22 @@ services:
       - /mnt/pool1:/mnt/pool1
       - /mnt/pool0/containers/filebrowser-quantum:/data
       - /mnt/pool0/containers/filebrowser-quantum/tmp:/home/filebrowser/tmp
+  onlyoffice:
+    container_name: filebrowser-onlyoffice
+    environment:
+      JWT_ENABLED: true
+      JWT_SECRET: ${ONLYOFFICE_JWT_SECRET}
+    image: onlyoffice/documentserver:${ONLYOFFICE_IMAGE_TAG:-latest}
+    labels:
+      traefik.enable: true
+      traefik.http.middlewares.onlyoffice-headers.headers.accesscontrolalloworiginlist: '${FILEBROWSER_HOST},${ONLYOFFICE_HOST}'
+      traefik.http.middlewares.onlyoffice-headers.headers.customrequestheaders.X-Forwarded-Proto: 'https'
+      traefik.http.routers.onlyoffice.middlewares: onlyoffice-headers
+      traefik.http.routers.onlyoffice.rule: Host(`${ONLYOFFICE_HOST}`)
+      traefik.http.routers.onlyoffice.tls.certresolver: myresolver
+      traefik.http.routers.onlyoffice.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${ONLYOFFICE_HOST}}
+      traefik.http.routers.onlyoffice.tls.domains[0].sans: ${TLS_CERT_SANS}
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
