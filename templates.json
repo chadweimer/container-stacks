@@ -19,6 +19,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -40,6 +50,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -61,6 +81,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "USERNAME",
@@ -157,6 +187,16 @@
           "name": "OPENVPN_PASSWORD",
           "label": "VPN Password",
           "description": "The password to authenticate with the VPN service provider."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -177,12 +217,22 @@
         {
           "name": "HOST",
           "label": "Host Address",
-          "description": "The host address (domain) to expose the app."
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "API_KEY",
           "label": "API Key",
-          "description": "The API key to use for the homepage widget for the app."
+          "description": "The API key to use for the homepage widget for the application."
         }
       ]
     },
@@ -204,6 +254,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "USERNAME",
@@ -235,6 +295,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "IMAGE_TAG",
@@ -291,6 +361,16 @@
           "name": "KVM_PASSWORD",
           "label": "KVM Password",
           "description": "The password to authenticate with the NAS kvm, for scraping."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -312,6 +392,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -364,6 +454,16 @@
           "name": "LLDAP_LDAP_BASE_DN",
           "label": "LDAP Base DN",
           "description": "The base DN for the LDAP directory."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -385,6 +485,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -406,6 +516,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "IMAGE_TAG",
@@ -433,6 +553,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "IMAGE_TAG",
@@ -592,6 +722,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -613,6 +753,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "API_KEY",
@@ -709,6 +859,16 @@
           "name": "LAN_GATEWAY",
           "label": "MacVLAN Gateway",
           "default": "192.168.1.1"
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -730,6 +890,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "GOTIFY_CLIENT_TOKEN",
@@ -761,6 +931,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -782,6 +962,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         }
       ]
     },
@@ -803,6 +993,16 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "IMAGE_TAG",
@@ -863,6 +1063,26 @@
           "name": "HOST",
           "label": "Host Address",
           "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
           "name": "IMAGE_TAG",
