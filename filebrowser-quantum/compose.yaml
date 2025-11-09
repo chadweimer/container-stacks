@@ -3,7 +3,13 @@ configs:
     content: |
       auth:
         methods:
-          noauth: true
+          password:
+            enabled: false
+          proxy:
+            createUser: true
+            enabled: true
+            header: 'Remote-User'
+            logoutRedirectUrl: ${LOGOUT_URL}
       server:
         sources:
           - path: "/mnt/pool0"
