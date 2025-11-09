@@ -1075,16 +1075,6 @@
           "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
         },
         {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS Certificate Domain",
-          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS Certificate SANs",
-          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
-        },
-        {
           "name": "IMAGE_TAG",
           "label": "Image Tag",
           "description": "The container image tag to use.",
