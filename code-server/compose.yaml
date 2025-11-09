@@ -11,7 +11,7 @@ services:
       homepage.group: NAS
       homepage.href: https://${HOST}
       homepage.icon: code.png
-      homepage.name: Coder
+      homepage.name: VS Code
       traefik.enable: true
       traefik.http.routers.coder.middlewares: 'authelia@docker'
       traefik.http.routers.coder.rule: Host(`${HOST}`)
