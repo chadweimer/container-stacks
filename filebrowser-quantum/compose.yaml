@@ -47,6 +47,9 @@ services:
       - source: fb_config
         target: /data/config.yaml
     container_name: filebrowser-quantum
+    depends_on:
+      onlyoffice:
+        condition: service_healthy
     environment:
       FILEBROWSER_CONFIG: /data/config.yaml
       FILEBROWSER_DATABASE: /data/database.db
@@ -78,6 +81,9 @@ services:
     environment:
       JWT_ENABLED: true
       JWT_SECRET: ${ONLYOFFICE_JWT_SECRET}
+    healthcheck:
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://localhost/healthcheck'
     image: onlyoffice/documentserver:${ONLYOFFICE_IMAGE_TAG:-latest}
     labels:
       traefik.enable: true
