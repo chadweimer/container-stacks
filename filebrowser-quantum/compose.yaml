@@ -26,6 +26,16 @@ configs:
             name: pool1
             config:
               defaultEnabled: true
+      userDefaults:
+        permissions:
+          api: true
+          admin: true
+          modify: true
+          share: true
+          realtime: true
+          delete: true
+          create: true
+          download: true
 
 networks:
   public:
