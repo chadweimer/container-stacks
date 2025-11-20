@@ -77,9 +77,6 @@ services:
       - source: loki_config
         target: /etc/loki/config.yaml
     container_name: loki
-    healthcheck:
-      start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:3100/ready'
     image: grafana/loki:${LOKI_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server
