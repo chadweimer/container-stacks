@@ -1106,6 +1106,53 @@
           "description": "The password to use for the homepage widget for this app."
         }
       ]
+    },
+    {
+      "id": 37,
+      "type": 3,
+      "title": "Arcane",
+      "description": "Modern Docker Management, Designed for Everyone.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "arcane/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "HOST",
+          "label": "Host Address",
+          "description": "The host address (domain) to expose the application."
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS Certificate Domain",
+          "description": "(Optional) The primary domain for the TLS certificate. Leave blank to use the Host Address."
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS Certificate SANs",
+          "description": "(Optional) A comma-separated list of Subject Alternative Names (SANs) for the TLS certificate."
+        },
+        {
+          "name": "IMAGE_TAG",
+          "label": "Image Tag",
+          "description": "The container image tag to use.",
+          "default": "latest"
+        },
+        {
+          "name": "ENCRYPTION_KEY",
+          "label": "Encryption Key",
+          "description": "The encryption key used by the application."
+        },
+        {
+          "name": "JWT_SECRET",
+          "label": "JWT Secret",
+          "description": "The secret key used for signing JSON Web Tokens (JWT)."
+        }
+      ]
     }
   ]
 }

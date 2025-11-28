@@ -1,0 +1,35 @@
+networks:
+  public:
+    external: true
+
+services:
+  arcane:
+    container_name: arcane
+    environment:
+      APP_URL: https://${HOST}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
+      JWT_SECRET: ${JWT_SECRET}
+      PGID: 568
+      PUID: 568
+    image: ghcr.io/getarcaneapp/arcane:${IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST}
+      homepage.icon: arcane.png
+      homepage.name: Arcane
+      traefik.enable: true
+      traefik.http.routers.arcane.rule: Host(`${HOST}`)
+      traefik.http.routers.arcane.tls.certresolver: myresolver
+      traefik.http.routers.arcane.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
+      traefik.http.routers.arcane.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.services.arcane.loadbalancer.server.port: 3552
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - arcane-data:/app/data
+volumes:
+  arcane-data:
+    driver: local
