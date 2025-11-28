@@ -11,6 +11,14 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       PGID: 568
       PUID: 568
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_period: 15s
+      test:
+        - 'CMD-SHELL'
+        - 'curl -fsS http://localhost:3552/api/health >/dev/null || exit 1'
+      timeout: 3s
     image: ghcr.io/getarcaneapp/arcane:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
