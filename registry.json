@@ -7,97 +7,6 @@
   "url": "https://github.com/chadweimer/container-stacks",
   "templates": [
     {
-      "id": "filebrowser",
-      "name": "File Browser",
-      "description": "Web File Browser",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/filebrowser/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/filebrowser/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/filebrowser",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "homepage",
-      "name": "Homepage",
-      "description": "A modern, fully static, fast, secure fully proxied, highly customizable application dashboard",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/homepage/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/homepage/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/homepage",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "grafana",
-      "name": "Grafana",
-      "description": "Platform for data analytics and monitoring",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/grafana/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/grafana/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/grafana",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "arrs",
-      "name": "*Arrs",
-      "description": "A collection of *arr applications",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arrs/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arrs/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/arrs",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "jellyfin",
-      "name": "Jellyfin",
-      "description": "The Free Software Media System",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/jellyfin/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/jellyfin/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/jellyfin",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "kavita",
-      "name": "Kavita",
-      "description": "Kavita is a fast, feature rich, cross-platform reading server.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/kavita/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/kavita/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/kavita",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "omada",
-      "name": "Omada",
-      "description": "TP-Link Omada software controller.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/omada/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/omada/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/omada",
-      "tags": [
-        "app"
-      ]
-    },
-    {
       "id": "alloy",
       "name": "Grafana Alloy",
       "description": "Grafana Alloy and several exporters.",
@@ -105,202 +14,7 @@
       "author": "chadweimer",
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/alloy/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/alloy/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/alloy",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "syncthing",
-      "name": "Syncthing",
-      "description": "Syncthing is a continuous file synchronization program",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/syncthing/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/syncthing/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/syncthing",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "proxy",
-      "name": "Proxy",
-      "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/proxy/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/proxy/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/proxy",
-      "tags": [
-        "infra"
-      ]
-    },
-    {
-      "id": "uptime-kuma",
-      "name": "Uptime Kuma",
-      "description": "A fancy self-hosted monitoring tool",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/uptime-kuma/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/uptime-kuma/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/uptime-kuma",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "vaultwarden",
-      "name": "Vaultwarden",
-      "description": "Unofficial Bitwarden compatible server written in Rust",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/vaultwarden/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/vaultwarden/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/vaultwarden",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "wineandcats",
-      "name": "Wine & Cats",
-      "description": "GOMP: Go Meal Planner - Web-based recipe book.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wineandcats/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wineandcats/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/wineandcats",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "cloudflared",
-      "name": "Cloudflared",
-      "description": "Cloudflare Tunnel daemon",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/cloudflared/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/cloudflared/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/cloudflared",
-      "tags": [
-        "infra"
-      ]
-    },
-    {
-      "id": "tailscale",
-      "name": "Tailscale",
-      "description": "Tailscale daemon",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/tailscale/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/tailscale/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/tailscale",
-      "tags": [
-        "infra"
-      ]
-    },
-    {
-      "id": "it-tools",
-      "name": "IT-Tools",
-      "description": "Handy tools for developers",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/it-tools/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/it-tools/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/it-tools",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "wallos",
-      "name": "Wallos",
-      "description": "Open-Source Personal Subscription Tracker",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wallos/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wallos/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/wallos",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "smart-home",
-      "name": "Smart Home",
-      "description": "Home Assistant, Homebridge, Mosquitto MQTT Broker, Z-Wave JS UI, and Frigate NVR.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/smart-home/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/smart-home/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/smart-home",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "gotify",
-      "name": "Gotify",
-      "description": "A simple server for sending and receiving messages.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/gotify/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/gotify/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/gotify",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "code-server",
-      "name": "Code Server",
-      "description": "VS Code in the browser",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/code-server/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/code-server/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/code-server",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "filebrowser-quantum",
-      "name": "File Browser Quantum",
-      "description": "Self-hosted web-based file manager.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/filebrowser-quantum/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/filebrowser-quantum/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/filebrowser-quantum",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "scrutiny",
-      "name": "Scrutiny",
-      "description": "Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/scrutiny/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/scrutiny/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/scrutiny",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "calibre",
-      "name": "Calibre Web",
-      "description": "Web app for browsing, reading and downloading eBooks stored in a Calibre database.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/calibre/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/calibre/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/calibre",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/alloy/README.md",
       "tags": [
         "app"
       ]
@@ -313,7 +27,319 @@
       "author": "chadweimer",
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arcane/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arcane/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/arcane",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/arcane/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "arrs",
+      "name": "*Arrs",
+      "description": "A collection of *arr applications",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arrs/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arrs/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/arrs/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "bitmagnet",
+      "name": "bitmagnet",
+      "description": "A self-hosted BitTorrent indexer, DHT crawler, content classifier and torrent search engine with web UI, GraphQL API and Servarr stack integration.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/bitmagnet/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/bitmagnet/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/bitmagnet/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "calibre",
+      "name": "Calibre Web",
+      "description": "Web app for browsing, reading and downloading eBooks stored in a Calibre database.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/calibre/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/calibre/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/calibre/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "cloudflared",
+      "name": "Cloudflared",
+      "description": "Cloudflare Tunnel daemon",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/cloudflared/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/cloudflared/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/cloudflared/README.md",
+      "tags": [
+        "infra"
+      ]
+    },
+    {
+      "id": "code-server",
+      "name": "Code Server",
+      "description": "VS Code in the browser",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/code-server/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/code-server/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/code-server/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "filebrowser",
+      "name": "File Browser",
+      "description": "Web File Browser",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/filebrowser/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/filebrowser/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/filebrowser/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "filebrowser-quantum",
+      "name": "File Browser Quantum",
+      "description": "Self-hosted web-based file manager.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/filebrowser-quantum/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/filebrowser-quantum/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/filebrowser-quantum/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "gotify",
+      "name": "Gotify",
+      "description": "A simple server for sending and receiving messages.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/gotify/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/gotify/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/gotify/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana",
+      "description": "Platform for data analytics and monitoring",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/grafana/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/grafana/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/grafana/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "homepage",
+      "name": "Homepage",
+      "description": "A modern, fully static, fast, secure fully proxied, highly customizable application dashboard",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/homepage/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/homepage/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/homepage/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "it-tools",
+      "name": "IT-Tools",
+      "description": "Handy tools for developers",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/it-tools/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/it-tools/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/it-tools/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "jellyfin",
+      "name": "Jellyfin",
+      "description": "The Free Software Media System",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/jellyfin/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/jellyfin/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/jellyfin/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "kavita",
+      "name": "Kavita",
+      "description": "Kavita is a fast, feature rich, cross-platform reading server.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/kavita/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/kavita/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/kavita/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "omada",
+      "name": "Omada",
+      "description": "TP-Link Omada software controller.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/omada/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/omada/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/omada/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "portainer",
+      "name": "Portainer",
+      "description": "Portainer is a lightweight management UI which allows you to easily manage your Docker environments.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/portainer/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/portainer/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/portainer/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "proxy",
+      "name": "Proxy",
+      "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/proxy/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/proxy/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/proxy/README.md",
+      "tags": [
+        "infra"
+      ]
+    },
+    {
+      "id": "scrutiny",
+      "name": "Scrutiny",
+      "description": "Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/scrutiny/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/scrutiny/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/scrutiny/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "smart-home",
+      "name": "Smart Home",
+      "description": "Home Assistant, Homebridge, Mosquitto MQTT Broker, Z-Wave JS UI, and Frigate NVR.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/smart-home/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/smart-home/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/smart-home/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "syncthing",
+      "name": "Syncthing",
+      "description": "Syncthing is a continuous file synchronization program",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/syncthing/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/syncthing/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/syncthing/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "tailscale",
+      "name": "Tailscale",
+      "description": "Tailscale daemon",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/tailscale/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/tailscale/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/tailscale/README.md",
+      "tags": [
+        "infra"
+      ]
+    },
+    {
+      "id": "uptime-kuma",
+      "name": "Uptime Kuma",
+      "description": "A fancy self-hosted monitoring tool",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/uptime-kuma/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/uptime-kuma/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/uptime-kuma/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "vaultwarden",
+      "name": "Vaultwarden",
+      "description": "Unofficial Bitwarden compatible server written in Rust",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/vaultwarden/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/vaultwarden/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/vaultwarden/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "wallos",
+      "name": "Wallos",
+      "description": "Open-Source Personal Subscription Tracker",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wallos/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wallos/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/wallos/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "wineandcats",
+      "name": "Wine & Cats",
+      "description": "GOMP: Go Meal Planner - Web-based recipe book.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wineandcats/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wineandcats/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/wineandcats/README.md",
       "tags": [
         "app"
       ]
