@@ -1,0 +1,42 @@
+name: Update Templates and Registry
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  update:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y jq git
+
+      - name: Ensure scripts are executable
+        run: |
+          chmod +x ./update-templates.sh || true
+          chmod +x ./update-registry.sh || true
+
+      - name: Run update scripts
+        run: |
+          ./update-templates.sh
+          ./update-registry.sh
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git add templates.json registry.json || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: update templates.json and registry.json [skip ci]"
+          git push origin HEAD
