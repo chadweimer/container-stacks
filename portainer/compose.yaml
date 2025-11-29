@@ -7,6 +7,7 @@ services:
     container_name: portainer
     image: portainer/portainer-ee:${IMAGE_TAG:-sts}
     labels:
+      com.ofkm.arcane.updater: false
       homepage.group: Network
       homepage.href: https://${HOST}
       homepage.icon: portainer.png

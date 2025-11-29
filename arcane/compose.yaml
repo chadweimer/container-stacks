@@ -22,6 +22,7 @@ services:
       timeout: 3s
     image: ghcr.io/getarcaneapp/arcane:${IMAGE_TAG:-latest}
     labels:
+      com.ofkm.arcane.updater: false
       homepage.group: Network
       homepage.href: https://${HOST}
       homepage.icon: arcane.png
