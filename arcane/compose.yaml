@@ -9,6 +9,7 @@ services:
       APP_URL: https://${HOST}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
       JWT_SECRET: ${JWT_SECRET}
+      LOG_JSON: true
       PGID: 568
       PUID: 568
     healthcheck:
