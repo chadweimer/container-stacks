@@ -1,0 +1,8 @@
+{
+    "name": "Homepage",
+    "description": "A modern, fully static, fast, secure fully proxied, highly customizable application dashboard",
+    "version": "1.0.0",
+    "tags": [
+        "app"
+    ]
+}

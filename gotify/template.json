@@ -1,0 +1,8 @@
+{
+    "name": "Gotify",
+    "description": "A simple server for sending and receiving messages.",
+    "version": "1.0.0",
+    "tags": [
+        "app"
+    ]
+}

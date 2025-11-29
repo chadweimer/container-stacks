@@ -2,9 +2,9 @@
   "$schema": "https://registry.getarcane.app/schema.json",
   "name": "My Container Stacks",
   "description": "Collection of compose templates maintained by me.",
-  "version": "1.0.0",
   "author": "chadweimer",
   "url": "https://github.com/chadweimer/container-stacks",
+  "version": "1.0.0",
   "templates": [
     {
       "id": "alloy",

@@ -1,0 +1,8 @@
+{
+  "name": "Arcane",
+  "description": "Modern Docker Management, Designed for Everyone.",
+  "version": "1.0.0",
+  "tags": [
+    "app"
+  ]
+}

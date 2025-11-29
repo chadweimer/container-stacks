@@ -1,0 +1,8 @@
+{
+  "name": "Grafana Alloy",
+  "description": "Grafana Alloy and several exporters.",
+  "version": "1.0.0",
+  "tags": [
+    "app"
+  ]
+}

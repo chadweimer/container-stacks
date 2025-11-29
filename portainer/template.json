@@ -1,0 +1,8 @@
+{
+  "name": "Portainer",
+  "description": "Portainer is a lightweight management UI which allows you to easily manage your Docker environments.",
+  "version": "1.0.0",
+  "tags": [
+    "app"
+  ]
+}

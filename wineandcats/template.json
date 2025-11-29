@@ -1,0 +1,8 @@
+{
+    "name": "Wine & Cats",
+    "description": "GOMP: Go Meal Planner - Web-based recipe book.",
+    "version": "1.0.0",
+    "tags": [
+        "app"
+    ]
+}

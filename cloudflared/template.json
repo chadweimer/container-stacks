@@ -1,0 +1,8 @@
+{
+    "name": "Cloudflared",
+    "description": "Cloudflare Tunnel daemon",
+    "version": "1.0.0",
+    "tags": [
+        "infra"
+    ]
+}

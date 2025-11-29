@@ -34,11 +34,10 @@ services:
       traefik.http.services.arcane.loadbalancer.server.port: 3552
     networks:
       - public
+    ports:
+      - 3552:3552 # For access when traefik is not up
     pull_policy: always
     restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - arcane-data:/app/data
-volumes:
-  arcane-data:
-    driver: local
+      - /mnt/pool0/containers/arcane/data:/app/data

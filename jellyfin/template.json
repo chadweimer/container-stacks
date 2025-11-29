@@ -1,0 +1,8 @@
+{
+    "name": "Jellyfin",
+    "description": "The Free Software Media System",
+    "version": "1.0.0",
+    "tags": [
+        "app"
+    ]
+}

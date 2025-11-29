@@ -8,7 +8,7 @@ The typical way to bootstrap a system for these stacks is the following:
 
 1. Create [docker networks](#docker-networks)
 1. Follow the setup steps of the [proxy](proxy/README.md) stack
-1. Bring up [Portainer](portainer/compose.yaml), and use the exposed port to access it to proceed with the next steps
+1. Bring up [Portainer](portainer/compose.yaml) and/or [Arcane](arcane/compose.yaml), and use the exposed port to access it to proceed with the next steps
 1. Bring up the [Proxy](proxy/compose.yaml) stack
 1. Bring up any other stacks desired
 

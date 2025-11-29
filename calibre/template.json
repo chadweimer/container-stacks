@@ -1,0 +1,8 @@
+{
+  "name": "Calibre Web",
+  "description": "Web app for browsing, reading and downloading eBooks stored in a Calibre database.",
+  "version": "1.0.0",
+  "tags": [
+    "app"
+  ]
+}

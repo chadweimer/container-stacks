@@ -1,0 +1,8 @@
+{
+    "name": "Proxy",
+    "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
+    "version": "1.0.0",
+    "tags": [
+        "infra"
+    ]
+}
