@@ -1,0 +1,12 @@
+name: networks
+
+networks:
+  docker-proxy:
+    driver: bridge
+    name: docker-proxy
+  observe:
+    driver: bridge
+    name: observe
+  public:
+    driver: bridge
+    name: public

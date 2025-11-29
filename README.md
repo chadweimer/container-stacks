@@ -25,6 +25,8 @@ The following named networks are assumed to already be created outside these sta
 docker network create docker-proxy
 docker network create public
 docker network create observe
+# Alternatively, use the provided stack
+docker compose --all-resources --file networks.yaml up -d
 ```
 
 ### Variables
