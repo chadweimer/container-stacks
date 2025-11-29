@@ -171,6 +171,7 @@ services:
     restart: unless-stopped
     user: '568:568'
     volumes:
+      - /mnt/pool0/containers/mosquitto/config:/mosquitto/config
       - /mnt/pool0/containers/mosquitto/data:/mosquitto/data
       - /mnt/pool0/containers/mosquitto/log:/mosquitto/log
 

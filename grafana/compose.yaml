@@ -87,7 +87,8 @@ services:
     restart: unless-stopped
     user: '568:568'
     volumes:
-      - /mnt/pool0/containers/loki:/loki
+      - /mnt/pool0/containers/loki/config:/etc/loki
+      - /mnt/pool0/containers/loki/data:/loki
   prometheus:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -110,4 +111,5 @@ services:
     restart: unless-stopped
     user: '568:568'
     volumes:
-      - /mnt/pool0/containers/prometheus:/prometheus
+      - /mnt/pool0/containers/prometheus/config:/etc/prometheus
+      - /mnt/pool0/containers/prometheus/data:/prometheus

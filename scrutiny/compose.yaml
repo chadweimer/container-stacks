@@ -33,6 +33,7 @@ services:
     image: ghcr.io/analogj/scrutiny:${IMAGE_TAG:-master}-collector
     networks:
       - scrutiny
+    pull_policy: always
     restart: unless-stopped
     volumes:
       - '/dev:/dev'
@@ -46,6 +47,7 @@ services:
     image: influxdb:${INFLUXDB_IMAGE_TAG:-2}
     networks:
       - scrutiny
+    pull_policy: always
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/scrutiny/influxdb/config:/etc/influxdb2
@@ -82,6 +84,7 @@ services:
     networks:
       - scrutiny
       - public
+    pull_policy: always
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/scrutiny/config:/opt/scrutiny/config
