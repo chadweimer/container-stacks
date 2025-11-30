@@ -14,7 +14,6 @@ REPOSITORY_URL="${REPOSITORY_URL:-https://github.com/chadweimer/container-stacks
 PUBLIC_BASE="${PUBLIC_BASE:-https://raw.githubusercontent.com/chadweimer/container-stacks/main}"
 DOCS_BASE="${DOCS_BASE:-${REPOSITORY_URL}/tree/main}"
 SCHEMA_URL="${SCHEMA_URL:-https://registry.getarcane.app/schema.json}"
-BUMP_PART="${BUMP_PART:-minor}"
 
 REG_OUT="${REG_OUT:-registry.json}"
 TEM_OUT="${TEM_OUT:-templates.json}"
@@ -99,6 +98,8 @@ while IFS= read -r dir_name; do
   count=$((count+1))
   if [ -z "${prev_ids[$id]:-}" ]; then
     new_ids_list+=("$id")
+  else
+    unset "prev_ids[$id]"
   fi
 
   # find compose file
@@ -216,11 +217,14 @@ registry_json=$(jq -s 'sort_by(.id)' "$tmp_reg_entries")
 
 base_version="${prev_version:-0.0.0}"
 if [ "${#new_ids_list[@]}" -gt 0 ]; then
-  next_version=$(bump_semver "$base_version" "$BUMP_PART")
-  echo "Detected ${#new_ids_list[@]} new template(s): ${new_ids_list[*]} -> bumping ${BUMP_PART} to ${next_version}"
+  next_version=$(bump_semver "$base_version" "minor")
+  echo "Detected ${#new_ids_list[@]} new template(s): ${new_ids_list[*]} -> bumping registry.json minor to ${next_version}"
+elif [ "${#prev_ids[@]}" -gt 0 ]; then
+  next_version=$(bump_semver "$base_version" "major")
+  echo "Detected ${#prev_ids[@]} removed template(s): ${!prev_ids[*]} -> bumping registry.json major to ${next_version}"
 else
   next_version="$base_version"
-  echo "No new templates detected -> keeping version ${base_version}"
+  echo "No new or removed templates detected -> keeping registry.json version ${base_version}"
 fi
 
 # Build final registry JSON
