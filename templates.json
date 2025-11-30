@@ -441,6 +441,42 @@
     {
       "id": 8,
       "type": 3,
+      "title": "File Browser",
+      "description": "Web File Browser",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "filebrowser/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "IMAGE_TAG",
+          "label": "IMAGE_TAG",
+          "default": "latest"
+        },
+        {
+          "name": "HOST",
+          "label": "HOST",
+          "default": "filebrowser.example.com"
+        },
+        {
+          "name": "TLS_CERT_DOMAIN",
+          "label": "TLS_CERT_DOMAIN",
+          "default": "example.com"
+        },
+        {
+          "name": "TLS_CERT_SANS",
+          "label": "TLS_CERT_SANS",
+          "default": "*.example.com"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": 3,
       "title": "File Browser Quantum",
       "description": "Self-hosted web-based file manager.",
       "categories": [
@@ -481,42 +517,6 @@
           "name": "ONLYOFFICE_JWT_SECRET",
           "label": "ONLYOFFICE_JWT_SECRET",
           "default": "jwt_secret"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
-        }
-      ]
-    },
-    {
-      "id": 9,
-      "type": 3,
-      "title": "File Browser",
-      "description": "Web File Browser",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "filebrowser/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "filebrowser.example.com"
         },
         {
           "name": "TLS_CERT_DOMAIN",
