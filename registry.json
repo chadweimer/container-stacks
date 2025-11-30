@@ -4,7 +4,7 @@
   "description": "Collection of compose templates maintained by me.",
   "author": "chadweimer",
   "url": "https://github.com/chadweimer/container-stacks",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "templates": [
     {
       "id": "alloy",
@@ -41,19 +41,6 @@
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arrs/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arrs/example.env",
       "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/arrs/README.md",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "bitmagnet",
-      "name": "bitmagnet",
-      "description": "A self-hosted BitTorrent indexer, DHT crawler, content classifier and torrent search engine with web UI, GraphQL API and Servarr stack integration.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/bitmagnet/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/bitmagnet/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/bitmagnet/README.md",
       "tags": [
         "app"
       ]
@@ -189,19 +176,6 @@
       ]
     },
     {
-      "id": "kavita",
-      "name": "Kavita",
-      "description": "Kavita is a fast, feature rich, cross-platform reading server.",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/kavita/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/kavita/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/kavita/README.md",
-      "tags": [
-        "app"
-      ]
-    },
-    {
       "id": "omada",
       "name": "Omada",
       "description": "TP-Link Omada software controller.",
@@ -301,19 +275,6 @@
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/uptime-kuma/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/uptime-kuma/example.env",
       "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/uptime-kuma/README.md",
-      "tags": [
-        "app"
-      ]
-    },
-    {
-      "id": "vaultwarden",
-      "name": "Vaultwarden",
-      "description": "Unofficial Bitwarden compatible server written in Rust",
-      "version": "1.0.0",
-      "author": "chadweimer",
-      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/vaultwarden/compose.yaml",
-      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/vaultwarden/example.env",
-      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/vaultwarden/README.md",
       "tags": [
         "app"
       ]

@@ -252,77 +252,6 @@
     {
       "id": 4,
       "type": 3,
-      "title": "bitmagnet",
-      "description": "A self-hosted BitTorrent indexer, DHT crawler, content classifier and torrent search engine with web UI, GraphQL API and Servarr stack integration.",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "bitmagnet/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "bitmagnet.example.com"
-        },
-        {
-          "name": "TMDB_API_KEY",
-          "label": "TMDB_API_KEY",
-          "default": "your_api_key"
-        },
-        {
-          "name": "DB_PASSWORD",
-          "label": "DB_PASSWORD",
-          "default": "password"
-        },
-        {
-          "name": "PG_VERSION",
-          "label": "PG_VERSION",
-          "default": "17"
-        },
-        {
-          "name": "GLUETUN_IMAGE_TAG",
-          "label": "GLUETUN_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "VPN_SERVICE_PROVIDER",
-          "label": "VPN_SERVICE_PROVIDER",
-          "default": "provider"
-        },
-        {
-          "name": "OPENVPN_USER",
-          "label": "OPENVPN_USER",
-          "default": "user"
-        },
-        {
-          "name": "OPENVPN_PASSWORD",
-          "label": "OPENVPN_PASSWORD",
-          "default": "password"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
-        }
-      ]
-    },
-    {
-      "id": 5,
-      "type": 3,
       "title": "Calibre Web",
       "description": "Web app for browsing, reading and downloading eBooks stored in a Calibre database.",
       "categories": [
@@ -367,7 +296,7 @@
       ]
     },
     {
-      "id": 6,
+      "id": 5,
       "type": 3,
       "title": "Cloudflared",
       "description": "Cloudflare Tunnel daemon",
@@ -403,7 +332,7 @@
       ]
     },
     {
-      "id": 7,
+      "id": 6,
       "type": 3,
       "title": "Code Server",
       "description": "VS Code in the browser",
@@ -439,7 +368,7 @@
       ]
     },
     {
-      "id": 8,
+      "id": 7,
       "type": 3,
       "title": "File Browser",
       "description": "Web File Browser",
@@ -475,7 +404,7 @@
       ]
     },
     {
-      "id": 9,
+      "id": 8,
       "type": 3,
       "title": "File Browser Quantum",
       "description": "Self-hosted web-based file manager.",
@@ -531,7 +460,7 @@
       ]
     },
     {
-      "id": 10,
+      "id": 9,
       "type": 3,
       "title": "Gotify",
       "description": "A simple server for sending and receiving messages.",
@@ -572,7 +501,7 @@
       ]
     },
     {
-      "id": 11,
+      "id": 10,
       "type": 3,
       "title": "Grafana",
       "description": "Platform for data analytics and monitoring",
@@ -628,7 +557,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": 11,
       "type": 3,
       "title": "Homepage",
       "description": "A modern, fully static, fast, secure fully proxied, highly customizable application dashboard",
@@ -664,7 +593,7 @@
       ]
     },
     {
-      "id": 13,
+      "id": 12,
       "type": 3,
       "title": "IT-Tools",
       "description": "Handy tools for developers",
@@ -700,7 +629,7 @@
       ]
     },
     {
-      "id": 14,
+      "id": 13,
       "type": 3,
       "title": "Jellyfin",
       "description": "The Free Software Media System",
@@ -741,53 +670,7 @@
       ]
     },
     {
-      "id": 15,
-      "type": 3,
-      "title": "Kavita",
-      "description": "Kavita is a fast, feature rich, cross-platform reading server.",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "kavita/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "kavita.example.com"
-        },
-        {
-          "name": "USERNAME",
-          "label": "USERNAME",
-          "default": "username"
-        },
-        {
-          "name": "PASSWORD",
-          "label": "PASSWORD",
-          "default": "password"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
-        }
-      ]
-    },
-    {
-      "id": 16,
+      "id": 14,
       "type": 3,
       "title": "Omada",
       "description": "TP-Link Omada software controller.",
@@ -838,7 +721,7 @@
       ]
     },
     {
-      "id": 17,
+      "id": 15,
       "type": 3,
       "title": "Portainer",
       "description": "Portainer is a lightweight management UI which allows you to easily manage your Docker environments.",
@@ -874,7 +757,7 @@
       ]
     },
     {
-      "id": 18,
+      "id": 16,
       "type": 3,
       "title": "Proxy",
       "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
@@ -955,7 +838,7 @@
       ]
     },
     {
-      "id": 19,
+      "id": 17,
       "type": 3,
       "title": "Scrutiny",
       "description": "Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds.",
@@ -1011,7 +894,7 @@
       ]
     },
     {
-      "id": 20,
+      "id": 18,
       "type": 3,
       "title": "Smart Home",
       "description": "Home Assistant, Homebridge, Mosquitto MQTT Broker, Z-Wave JS UI, and Frigate NVR.",
@@ -1147,7 +1030,7 @@
       ]
     },
     {
-      "id": 21,
+      "id": 19,
       "type": 3,
       "title": "Syncthing",
       "description": "Syncthing is a continuous file synchronization program",
@@ -1183,7 +1066,7 @@
       ]
     },
     {
-      "id": 22,
+      "id": 20,
       "type": 3,
       "title": "Tailscale",
       "description": "Tailscale daemon",
@@ -1229,7 +1112,7 @@
       ]
     },
     {
-      "id": 23,
+      "id": 21,
       "type": 3,
       "title": "Uptime Kuma",
       "description": "A fancy self-hosted monitoring tool",
@@ -1265,43 +1148,7 @@
       ]
     },
     {
-      "id": 24,
-      "type": 3,
-      "title": "Vaultwarden",
-      "description": "Unofficial Bitwarden compatible server written in Rust",
-      "categories": [
-        "app"
-      ],
-      "platform": "linux",
-      "repository": {
-        "url": "https://github.com/chadweimer/container-stacks",
-        "stackfile": "vaultwarden/compose.yaml"
-      },
-      "env": [
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "vaultwarden.example.com"
-        },
-        {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "1.33.0"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
-        }
-      ]
-    },
-    {
-      "id": 25,
+      "id": 22,
       "type": 3,
       "title": "Wallos",
       "description": "Open-Source Personal Subscription Tracker",
@@ -1342,7 +1189,7 @@
       ]
     },
     {
-      "id": 26,
+      "id": 23,
       "type": 3,
       "title": "Wine & Cats",
       "description": "GOMP: Go Meal Planner - Web-based recipe book.",
