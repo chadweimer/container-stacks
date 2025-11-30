@@ -1,4 +1,4 @@
-name: Update Templates and Registry
+name: Update Registry
 
 on:
   push:
@@ -19,15 +19,11 @@ jobs:
           sudo apt-get update -y
           sudo apt-get install -y jq git
 
-      - name: Ensure scripts are executable
-        run: |
-          chmod +x ./update-templates.sh || true
-          chmod +x ./update-registry.sh || true
+      - name: Ensure script is executable
+        run: chmod +x ./update-registry.sh || true
 
-      - name: Run update scripts
-        run: |
-          ./update-templates.sh
-          ./update-registry.sh
+      - name: Run update script
+        run: ./update-registry.sh
 
       - name: Commit and push changes
         run: |
