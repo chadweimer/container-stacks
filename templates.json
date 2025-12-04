@@ -16,39 +16,9 @@
       },
       "env": [
         {
-          "name": "ALLOY_IMAGE_TAG",
-          "label": "ALLOY_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "ALLOY_HOST",
-          "label": "ALLOY_HOST",
-          "default": "alloy.example.com"
-        },
-        {
-          "name": "GRAPHITE_IMAGE_TAG",
-          "label": "GRAPHITE_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "NUT_IMAGE_TAG",
-          "label": "NUT_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "SPEEDTEST_IMAGE_TAG",
-          "label": "SPEEDTEST_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -67,14 +37,9 @@
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "arcane.example.com"
-        },
-        {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "ENCRYPTION_KEY",
@@ -85,16 +50,6 @@
           "name": "JWT_SECRET",
           "label": "JWT_SECRET",
           "default": "secret"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -113,14 +68,9 @@
       },
       "env": [
         {
-          "name": "BAZARR_IMAGE_TAG",
-          "label": "BAZARR_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "BAZARR_HOST",
-          "label": "BAZARR_HOST",
-          "default": "bazarr.example.com"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "BAZARR_API_KEY",
@@ -128,29 +78,9 @@
           "default": "key"
         },
         {
-          "name": "JELLYSEERR_IMAGE_TAG",
-          "label": "JELLYSEERR_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "JELLYSEERR_HOST",
-          "label": "JELLYSEERR_HOST",
-          "default": "jellyseerr.example.com"
-        },
-        {
           "name": "JELLYSEERR_API_KEY",
           "label": "JELLYSEERR_API_KEY",
           "default": "key"
-        },
-        {
-          "name": "PROWARR_IMAGE_TAG",
-          "label": "PROWARR_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "PROWLARR_HOST",
-          "label": "PROWLARR_HOST",
-          "default": "prowlarr.example.com"
         },
         {
           "name": "PROWLARR_API_KEY",
@@ -158,49 +88,14 @@
           "default": "key"
         },
         {
-          "name": "RADARR_IMAGE_TAG",
-          "label": "RADARR_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "RADARR_HOST",
-          "label": "RADARR_HOST",
-          "default": "radarr.example.com"
-        },
-        {
           "name": "RADARR_API_KEY",
           "label": "RADARR_API_KEY",
           "default": "key"
         },
         {
-          "name": "SONARR_IMAGE_TAG",
-          "label": "SONARR_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "SONARR_HOST",
-          "label": "SONARR_HOST",
-          "default": "sonarr.example.com"
-        },
-        {
           "name": "SONARR_API_KEY",
           "label": "SONARR_API_KEY",
           "default": "key"
-        },
-        {
-          "name": "TRANSMISSION_IMAGE_TAG",
-          "label": "TRANSMISSION_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "TRANSMISSION_HOST",
-          "label": "TRANSMISSION_HOST",
-          "default": "transmission.example.com"
-        },
-        {
-          "name": "GLUETUN_IMAGE_TAG",
-          "label": "GLUETUN_IMAGE_TAG",
-          "default": "latest"
         },
         {
           "name": "VPN_SERVICE_PROVIDER",
@@ -216,16 +111,6 @@
           "name": "OPENVPN_PASSWORD",
           "label": "OPENVPN_PASSWORD",
           "default": "password"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -244,14 +129,9 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "calibre.example.com"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "USERNAME",
@@ -262,16 +142,6 @@
           "name": "PASSWORD",
           "label": "PASSWORD",
           "default": "password"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -326,24 +196,9 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "coder.example.com"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -362,24 +217,9 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "filebrowser.example.com"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -398,14 +238,9 @@
       },
       "env": [
         {
-          "name": "FILEBROWSER_IMAGE_TAG",
-          "label": "FILEBROWSER_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "FILEBROWSER_HOST",
-          "label": "FILEBROWSER_HOST",
-          "default": "files.example.com"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "FILEBROWSER_LOGOUT_URL",
@@ -413,29 +248,9 @@
           "default": "https://auth.example.com/logout"
         },
         {
-          "name": "ONLYOFFICE_IMAGE_TAG",
-          "label": "ONLYOFFICE_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "ONLYOFFICE_HOST",
-          "label": "ONLYOFFICE_HOST",
-          "default": "office.example.com"
-        },
-        {
           "name": "ONLYOFFICE_JWT_SECRET",
           "label": "ONLYOFFICE_JWT_SECRET",
           "default": "jwt_secret"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -454,29 +269,14 @@
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "gotify.example.com"
-        },
-        {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "GOTIFY_CLIENT_TOKEN",
           "label": "GOTIFY_CLIENT_TOKEN",
           "default": "your_gotify_client_token"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -495,14 +295,9 @@
       },
       "env": [
         {
-          "name": "GRAFANA_IMAGE_TAG",
-          "label": "GRAFANA_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "grafana.example.com"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "USERNAME",
@@ -513,26 +308,6 @@
           "name": "PASSWORD",
           "label": "PASSWORD",
           "default": "password"
-        },
-        {
-          "name": "LOKI_IMAGE_TAG",
-          "label": "LOKI_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "PROMETHEUS_IMAGE_TAG",
-          "label": "PROMETHEUS_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -551,24 +326,9 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "homepage.example.com"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -587,24 +347,9 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "it-tools.example.com"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -623,29 +368,14 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "jellyfin.example.com"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "API_KEY",
           "label": "API_KEY",
           "default": "key"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -664,39 +394,19 @@
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "omada.example.com"
-        },
-        {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "5.15"
-        },
-        {
-          "name": "USERNAME",
-          "label": "USERNAME",
-          "default": "USERNAME"
-        },
-        {
-          "name": "PASSWORD",
-          "label": "PASSWORD",
-          "default": "password"
-        },
-        {
-          "name": "EXPORTER_IMAGE_TAG",
-          "label": "EXPORTER_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
         },
         {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
+          "name": "OMADA_USER",
+          "label": "OMADA_USER",
+          "default": "USERNAME"
+        },
+        {
+          "name": "OMADA_PASS",
+          "label": "OMADA_PASS",
+          "default": "password"
         }
       ]
     },
@@ -715,24 +425,14 @@
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "portainer.example.com"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "ACCESS_TOKEN",
           "label": "ACCESS_TOKEN",
           "default": "token"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -751,34 +451,9 @@
       },
       "env": [
         {
-          "name": "AUTHELIA_IMAGE_TAG",
-          "label": "AUTHELIA_IMAGE_TAG",
-          "default": "4"
-        },
-        {
-          "name": "AUTHELIA_HOST",
-          "label": "AUTHELIA_HOST",
-          "default": "auth.example.com"
-        },
-        {
-          "name": "AUTHELIA_COOKIE_DOMAIN",
-          "label": "AUTHELIA_COOKIE_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
-        },
-        {
-          "name": "DOCKER_PROXY_IMAGE_TAG",
-          "label": "DOCKER_PROXY_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "TRAEFIK_IMAGE_TAG",
-          "label": "TRAEFIK_IMAGE_TAG",
-          "default": "v3"
-        },
-        {
-          "name": "TRAEFIK_HOST",
-          "label": "TRAEFIK_HOST",
-          "default": "traefik.example.com"
         },
         {
           "name": "ACME_CA_SERVER",
@@ -791,29 +466,9 @@
           "default": "email@example.com"
         },
         {
-          "name": "LLDAP_HOST",
-          "label": "LLDAP_HOST",
-          "default": "lldap.example.com"
-        },
-        {
-          "name": "LLDAP_IMAGE_TAG",
-          "label": "LLDAP_IMAGE_TAG",
-          "default": "stable"
-        },
-        {
           "name": "LLDAP_LDAP_BASE_DN",
           "label": "LLDAP_LDAP_BASE_DN",
           "default": "'dc=example,dc=com'"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -832,44 +487,14 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "master"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "scrutiny.example.com"
-        },
-        {
-          "name": "COLLECTOR_CRON_SCHEDULE",
-          "label": "COLLECTOR_CRON_SCHEDULE",
-          "default": "0 0 * * *"
-        },
-        {
-          "name": "COLLECTOR_RUN_STARTUP",
-          "label": "COLLECTOR_RUN_STARTUP",
-          "default": "false"
-        },
-        {
-          "name": "INFLUXDB_IMAGE_TAG",
-          "label": "INFLUXDB_IMAGE_TAG",
-          "default": "2"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "GOTIFY_TOKEN",
           "label": "GOTIFY_TOKEN",
           "default": "token"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -888,14 +513,9 @@
       },
       "env": [
         {
-          "name": "FRIGATE_IMAGE_TAG",
-          "label": "FRIGATE_IMAGE_TAG",
-          "default": "stable"
-        },
-        {
-          "name": "FRIGATE_HOST",
-          "label": "FRIGATE_HOST",
-          "default": "frigate.example.com"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "FRIGATE_RTSP_PASSWORD",
@@ -906,16 +526,6 @@
           "name": "FRIGATE_PLUS_API_KEY",
           "label": "FRIGATE_PLUS_API_KEY",
           "default": "apikey"
-        },
-        {
-          "name": "HASS_IMAGE_TAG",
-          "label": "HASS_IMAGE_TAG",
-          "default": "stable"
-        },
-        {
-          "name": "HASS_HOST",
-          "label": "HASS_HOST",
-          "default": "homeassistant.example.com"
         },
         {
           "name": "HASS_IPV4_ADDRESS",
@@ -931,16 +541,6 @@
           "name": "HASS_ACCESS_TOKEN",
           "label": "HASS_ACCESS_TOKEN",
           "default": "token"
-        },
-        {
-          "name": "HOMEBRIDGE_IMAGE_TAG",
-          "label": "HOMEBRIDGE_IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOMEBRIDGE_HOST",
-          "label": "HOMEBRIDGE_HOST",
-          "default": "homebridge.example.com"
         },
         {
           "name": "HOMEBRIDGE_IPV4_ADDRESS",
@@ -963,16 +563,6 @@
           "default": "password"
         },
         {
-          "name": "ZWAVE_IMAGE_TAG",
-          "label": "ZWAVE_IMAGE_TAG",
-          "default": "10"
-        },
-        {
-          "name": "ZWAVE_HOST",
-          "label": "ZWAVE_HOST",
-          "default": "zwave.example.com"
-        },
-        {
           "name": "ZWAVE_SESSION_SECRET",
           "label": "ZWAVE_SESSION_SECRET",
           "default": "somesecret"
@@ -981,31 +571,6 @@
           "name": "ZWAVE_DEVICE_PATH",
           "label": "ZWAVE_DEVICE_PATH",
           "default": "/dev/some/device"
-        },
-        {
-          "name": "LAN_PARENT_NIC",
-          "label": "LAN_PARENT_NIC",
-          "default": "br1"
-        },
-        {
-          "name": "LAN_SUBNET",
-          "label": "LAN_SUBNET",
-          "default": "192.168.0.0/23"
-        },
-        {
-          "name": "LAN_GATEWAY",
-          "label": "LAN_GATEWAY",
-          "default": "192.168.1.1"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -1024,24 +589,9 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "1"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "syncthing.example.com"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -1106,24 +656,9 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "1"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "uptime-kuma.example.com"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
           "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -1142,29 +677,14 @@
       },
       "env": [
         {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
-        },
-        {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "wallos.example.com"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "API_KEY",
           "label": "API_KEY",
           "default": "your_api_key_here"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
         }
       ]
     },
@@ -1183,14 +703,9 @@
       },
       "env": [
         {
-          "name": "HOST",
-          "label": "HOST",
-          "default": "gomp.example.com"
-        },
-        {
-          "name": "IMAGE_TAG",
-          "label": "IMAGE_TAG",
-          "default": "latest"
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
         },
         {
           "name": "DB_PASSWORD",
@@ -1203,11 +718,6 @@
           "default": "key"
         },
         {
-          "name": "IS_DEVELOPMENT",
-          "label": "IS_DEVELOPMENT",
-          "default": "0"
-        },
-        {
           "name": "STAGE",
           "label": "STAGE",
           "default": "stage"
@@ -1215,17 +725,7 @@
         {
           "name": "PG_VERSION",
           "label": "PG_VERSION",
-          "default": "16"
-        },
-        {
-          "name": "TLS_CERT_DOMAIN",
-          "label": "TLS_CERT_DOMAIN",
-          "default": "example.com"
-        },
-        {
-          "name": "TLS_CERT_SANS",
-          "label": "TLS_CERT_SANS",
-          "default": "*.example.com"
+          "default": "17"
         }
       ]
     }
