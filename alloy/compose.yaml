@@ -90,35 +90,6 @@ configs:
         job_name   = "docker"
       }
 
-      prometheus.scrape "machines" {
-        targets = [{
-          __address__ = "${DESKTOP_HOST}:9100",
-          instance    = "desktop",
-        }]
-        forward_to = [prometheus.remote_write.default.receiver]
-        job_name   = "machines"
-      }
-
-      prometheus.scrape "pikvm" {
-        targets = [{
-          __address__ = "${KVM_HOST}",
-          instance    = "truenas-server",
-        }]
-        forward_to   = [prometheus.remote_write.default.receiver]
-        job_name     = "pikvm"
-        metrics_path = "/api/export/prometheus/metrics"
-        scheme       = "https"
-
-        basic_auth {
-          username = "${KVM_USERNAME}"
-          password = "${KVM_PASSWORD}"
-        }
-
-        tls_config {
-          insecure_skip_verify = true
-        }
-      }
-
       prometheus.remote_write "default" {
         endpoint {
           url  = "http://prometheus:9090/api/v1/write"
@@ -229,10 +200,10 @@ services:
       - 'run'
       - '--server.http.listen-addr=0.0.0.0:80'
       - '--storage.path=/var/lib/alloy/data'
-      - '/var/lib/alloy/config.alloy'
+      - '/etc/alloy'
     configs:
       - source: alloy_config
-        target: /var/lib/alloy/config.alloy
+        target: /etc/alloy/config.alloy
     container_name: alloy
     image: grafana/alloy:${ALLOY_IMAGE_TAG:-latest}
     labels:
@@ -258,7 +229,8 @@ services:
     volumes:
       - /:/rootfs:ro
       - /sys:/sys:ro
-      - /mnt/pool0/containers/alloy:/var/lib/alloy
+      - /mnt/pool0/containers/alloy/config:/etc/alloy
+      - /mnt/pool0/containers/alloy/data:/var/lib/alloy/data
   graphite:
     container_name: graphite-exporter
     healthcheck:
