@@ -10,7 +10,7 @@
       "id": "alloy",
       "name": "Grafana Alloy",
       "description": "Grafana Alloy and several exporters.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "chadweimer",
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/alloy/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/alloy/example.env",

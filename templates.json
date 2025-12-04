@@ -26,29 +26,9 @@
           "default": "alloy.example.com"
         },
         {
-          "name": "DESKTOP_HOST",
-          "label": "DESKTOP_HOST",
-          "default": "1.2.3.4"
-        },
-        {
           "name": "GRAPHITE_IMAGE_TAG",
           "label": "GRAPHITE_IMAGE_TAG",
           "default": "latest"
-        },
-        {
-          "name": "KVM_HOST",
-          "label": "KVM_HOST",
-          "default": "1.2.3.4"
-        },
-        {
-          "name": "KVM_USERNAME",
-          "label": "KVM_USERNAME",
-          "default": "username"
-        },
-        {
-          "name": "KVM_PASSWORD",
-          "label": "KVM_PASSWORD",
-          "default": "password"
         },
         {
           "name": "NUT_IMAGE_TAG",
