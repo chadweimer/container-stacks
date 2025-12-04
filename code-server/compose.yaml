@@ -9,15 +9,15 @@ services:
     image: ghcr.io/coder/code-server:${IMAGE_TAG:-latest}
     labels:
       homepage.group: NAS
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-coder.${BASE_DOMAIN}}
       homepage.icon: code.png
       homepage.name: VS Code
       traefik.enable: true
       traefik.http.routers.coder.middlewares: 'authelia@docker'
-      traefik.http.routers.coder.rule: Host(`${HOST}`)
+      traefik.http.routers.coder.rule: Host(`${HOST:-coder.${BASE_DOMAIN}}`)
       traefik.http.routers.coder.tls.certresolver: myresolver
-      traefik.http.routers.coder.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.coder.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.coder.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.coder.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - public
     pull_policy: always

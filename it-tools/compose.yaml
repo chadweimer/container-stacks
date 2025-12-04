@@ -8,14 +8,14 @@ services:
     image: ghcr.io/corentinth/it-tools:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Other
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-it-tools.${BASE_DOMAIN}}
       homepage.icon: it-tools.png
       homepage.name: IT-Tools
       traefik.enable: true
-      traefik.http.routers.it-tools.rule: Host(`${HOST}`)
+      traefik.http.routers.it-tools.rule: Host(`${HOST:-it-tools.${BASE_DOMAIN}}`)
       traefik.http.routers.it-tools.tls.certresolver: myresolver
-      traefik.http.routers.it-tools.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.it-tools.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.it-tools.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.it-tools.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - public
     pull_policy: always

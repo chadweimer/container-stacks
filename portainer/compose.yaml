@@ -9,7 +9,7 @@ services:
     labels:
       com.getarcaneapp.arcane.updater: false
       homepage.group: Network
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-portainer.${BASE_DOMAIN}}
       homepage.icon: portainer.png
       homepage.name: Portainer
       homepage.widget.env: '3'
@@ -17,10 +17,10 @@ services:
       homepage.widget.type: portainer
       homepage.widget.url: http://portainer:9000
       traefik.enable: true
-      traefik.http.routers.portainer.rule: Host(`${HOST}`)
+      traefik.http.routers.portainer.rule: Host(`${HOST:-portainer.${BASE_DOMAIN}}`)
       traefik.http.routers.portainer.tls.certresolver: myresolver
-      traefik.http.routers.portainer.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.portainer.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.portainer.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.portainer.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.portainer.loadbalancer.server.port: 9000
     networks:
       - public

@@ -12,7 +12,7 @@ services:
     image: ghcr.io/louislam/uptime-kuma:${IMAGE_TAG:-2}-slim
     labels:
       homepage.group: Network
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-uptime-kuma.${BASE_DOMAIN}}
       homepage.icon: uptime-kuma.png
       homepage.name: Home Status
       homepage.widget.slug: home
@@ -21,10 +21,10 @@ services:
       prometheus.port: 3001
       traefik.enable: true
       traefik.http.routers.uptime.middlewares: 'authelia@docker'
-      traefik.http.routers.uptime.rule: Host(`${HOST}`)
+      traefik.http.routers.uptime.rule: Host(`${HOST:-uptime-kuma.${BASE_DOMAIN}}`)
       traefik.http.routers.uptime.tls.certresolver: myresolver
-      traefik.http.routers.uptime.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.uptime.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.uptime.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.uptime.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - docker-proxy
       - observe

@@ -1,8 +1,8 @@
 {
-    "name": "Gotify",
-    "description": "A simple server for sending and receiving messages.",
-    "version": "1.0.0",
-    "tags": [
-        "app"
-    ]
+  "name": "Gotify",
+  "description": "A simple server for sending and receiving messages.",
+  "version": "1.1.0",
+  "tags": [
+    "app"
+  ]
 }

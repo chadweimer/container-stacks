@@ -208,15 +208,15 @@ services:
     image: grafana/alloy:${ALLOY_IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
-      homepage.href: https://${ALLOY_HOST}
+      homepage.href: https://${ALLOY_HOST:-alloy.${BASE_DOMAIN}}
       homepage.icon: alloy.png
       homepage.name: Alloy
       traefik.enable: true
       traefik.http.routers.alloy.middlewares: 'authelia@docker'
-      traefik.http.routers.alloy.rule: Host(`${ALLOY_HOST}`)
+      traefik.http.routers.alloy.rule: Host(`${ALLOY_HOST:-alloy.${BASE_DOMAIN}}`)
       traefik.http.routers.alloy.tls.certresolver: myresolver
-      traefik.http.routers.alloy.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${ALLOY_HOST}}
-      traefik.http.routers.alloy.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.alloy.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.alloy.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.alloy.loadbalancer.server.port: 80
     networks:
       - docker-proxy

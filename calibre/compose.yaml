@@ -16,7 +16,7 @@ services:
     image: ghcr.io/linuxserver/calibre-web:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-calibre.${BASE_DOMAIN}}
       homepage.icon: calibre-web.png
       homepage.name: Calibre Web
       homepage.widget.password: ${PASSWORD}
@@ -25,10 +25,10 @@ services:
       homepage.widget.username: ${USERNAME}
       traefik.enable: true
       traefik.http.routers.calibre.middlewares: 'authelia@docker'
-      traefik.http.routers.calibre.rule: Host(`${HOST}`)
+      traefik.http.routers.calibre.rule: Host(`${HOST:-calibre.${BASE_DOMAIN}}`)
       traefik.http.routers.calibre.tls.certresolver: myresolver
-      traefik.http.routers.calibre.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.calibre.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.calibre.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.calibre.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.calibre.loadbalancer.server.port: 8083
     networks:
       - public

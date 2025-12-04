@@ -1,8 +1,8 @@
 {
-    "name": "*Arrs",
-    "description": "A collection of *arr applications",
-    "version": "1.0.0",
-    "tags": [
-        "app"
-    ]
+  "name": "*Arrs",
+  "description": "A collection of *arr applications",
+  "version": "1.1.0",
+  "tags": [
+    "app"
+  ]
 }

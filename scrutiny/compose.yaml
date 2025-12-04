@@ -69,17 +69,17 @@ services:
     image: ghcr.io/analogj/scrutiny:${IMAGE_TAG:-master}-web
     labels:
       homepage.group: NAS
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-scrutiny.${BASE_DOMAIN}}
       homepage.icon: scrutiny.png
       homepage.name: Scrutiny
       homepage.widget.type: scrutiny
       homepage.widget.url: http://scrutiny-web:8080
       traefik.enable: true
       traefik.http.routers.scrutiny.middlewares: 'authelia@docker'
-      traefik.http.routers.scrutiny.rule: Host(`${HOST}`)
+      traefik.http.routers.scrutiny.rule: Host(`${HOST:-scrutiny.${BASE_DOMAIN}}`)
       traefik.http.routers.scrutiny.tls.certresolver: myresolver
-      traefik.http.routers.scrutiny.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.scrutiny.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.scrutiny.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.scrutiny.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.scrutiny.loadbalancer.server.port: 8080
     networks:
       - scrutiny

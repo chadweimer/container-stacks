@@ -10,7 +10,7 @@ services:
   homepage:
     container_name: homepage
     environment:
-      HOMEPAGE_ALLOWED_HOSTS: ${HOST}
+      HOMEPAGE_ALLOWED_HOSTS: ${HOST:-home.${BASE_DOMAIN}}
       PGID: 568
       PUID: 568
     extra_hosts:
@@ -18,10 +18,10 @@ services:
     image: ghcr.io/gethomepage/homepage:${IMAGE_TAG:-latest}
     labels:
       traefik.enable: true
-      traefik.http.routers.homepage.rule: Host(`${HOST}`)
+      traefik.http.routers.homepage.rule: Host(`${HOST:-home.${BASE_DOMAIN}}`)
       traefik.http.routers.homepage.tls.certresolver: myresolver
-      traefik.http.routers.homepage.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.homepage.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.homepage.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.homepage.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - docker-proxy
       - observe

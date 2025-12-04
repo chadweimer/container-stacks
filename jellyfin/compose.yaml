@@ -8,7 +8,7 @@ services:
     devices:
       - /dev/dri:/dev/dri
     environment:
-      JELLYFIN_PublishedServerUrl: https://${HOST}
+      JELLYFIN_PublishedServerUrl: https://${HOST:-jellyfin.${BASE_DOMAIN}}
       TZ: America/Los_Angeles
     group_add:
       - 107 # render
@@ -16,7 +16,7 @@ services:
     image: ghcr.io/jellyfin/jellyfin:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-jellyfin.${BASE_DOMAIN}}
       homepage.icon: jellyfin.png
       homepage.name: Jellyfin
       homepage.widget.enableBlocks: true
@@ -25,10 +25,10 @@ services:
       homepage.widget.type: jellyfin
       homepage.widget.url: http://jellyfin:8096
       traefik.enable: true
-      traefik.http.routers.jellyfin.rule: Host(`${HOST}`)
+      traefik.http.routers.jellyfin.rule: Host(`${HOST:-jellyfin.${BASE_DOMAIN}}`)
       traefik.http.routers.jellyfin.tls.certresolver: myresolver
-      traefik.http.routers.jellyfin.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.jellyfin.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.jellyfin.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.jellyfin.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - public
     pull_policy: always

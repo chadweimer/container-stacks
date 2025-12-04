@@ -1,8 +1,8 @@
 {
-    "name": "File Browser Quantum",
-    "description": "Self-hosted web-based file manager.",
-    "version": "1.0.0",
-    "tags": [
-        "app"
-    ]
+  "name": "File Browser Quantum",
+  "description": "Self-hosted web-based file manager.",
+  "version": "1.1.0",
+  "tags": [
+    "app"
+  ]
 }

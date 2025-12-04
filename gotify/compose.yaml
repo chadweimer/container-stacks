@@ -11,17 +11,17 @@ services:
     image: ghcr.io/gotify/server:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-gotify.${BASE_DOMAIN}}
       homepage.icon: gotify.png
       homepage.name: Gotify
       homepage.widget.key: ${GOTIFY_CLIENT_TOKEN}
       homepage.widget.type: gotify
       homepage.widget.url: http://gotify
       traefik.enable: true
-      traefik.http.routers.gotify.rule: Host(`${HOST}`)
+      traefik.http.routers.gotify.rule: Host(`${HOST:-gotify.${BASE_DOMAIN}}`)
       traefik.http.routers.gotify.tls.certresolver: myresolver
-      traefik.http.routers.gotify.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.gotify.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.gotify.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.gotify.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - public
     pull_policy: always

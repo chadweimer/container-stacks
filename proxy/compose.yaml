@@ -3,8 +3,8 @@ configs:
     content: |
       session:
         cookies:
-          - domain: '${AUTHELIA_COOKIE_DOMAIN}'
-            authelia_url: 'https://${AUTHELIA_HOST}'
+          - domain: '${AUTHELIA_COOKIE_DOMAIN:-${BASE_DOMAIN}}'
+            authelia_url: 'https://${AUTHELIA_HOST:-auth.${BASE_DOMAIN}}'
       identity_providers:
         oidc:
           jwks:
@@ -75,7 +75,7 @@ services:
     image: ghcr.io/authelia/authelia:${AUTHELIA_IMAGE_TAG:-4}
     labels:
       homepage.group: Network
-      homepage.href: https://${AUTHELIA_HOST}
+      homepage.href: https://${AUTHELIA_HOST:-auth.${BASE_DOMAIN}}
       homepage.icon: authelia.png
       homepage.name: Authelia
       prometheus.label.instance: truenas-server
@@ -84,10 +84,10 @@ services:
       traefik.http.middlewares.authelia.forwardauth.address: http://authelia:9091/api/authz/forward-auth
       traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: Remote-User,Remote-Groups,Remote-Name,Remote-Email
       traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: true
-      traefik.http.routers.authelia.rule: Host(`${AUTHELIA_HOST}`)
+      traefik.http.routers.authelia.rule: Host(`${AUTHELIA_HOST:-auth.${BASE_DOMAIN}}`)
       traefik.http.routers.authelia.tls.certresolver: myresolver
-      traefik.http.routers.authelia.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${AUTHELIA_HOST}}
-      traefik.http.routers.authelia.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.authelia.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.authelia.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.authelia.loadbalancer.server.port: 9091
     networks:
       - observe
@@ -137,14 +137,14 @@ services:
     image: ghcr.io/lldap/lldap:${LLDAP_IMAGE_TAG:-stable}
     labels:
       homepage.group: Network
-      homepage.href: https://${LLDAP_HOST}
+      homepage.href: https://${LLDAP_HOST:-lldap.${BASE_DOMAIN}}
       homepage.icon: lldap.png
       homepage.name: lldap
       traefik.enable: true
-      traefik.http.routers.lldap.rule: Host(`${LLDAP_HOST}`)
+      traefik.http.routers.lldap.rule: Host(`${LLDAP_HOST:-lldap.${BASE_DOMAIN}}`)
       traefik.http.routers.lldap.tls.certresolver: myresolver
-      traefik.http.routers.lldap.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${LLDAP_HOST}}
-      traefik.http.routers.lldap.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.lldap.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.lldap.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.lldap.loadbalancer.server.port: 17170
     networks:
       - public
@@ -196,7 +196,7 @@ services:
     image: traefik:${TRAEFIK_IMAGE_TAG:-v3}
     labels:
       homepage.group: Network
-      homepage.href: https://${TRAEFIK_HOST}
+      homepage.href: https://${TRAEFIK_HOST:-traefik.${BASE_DOMAIN}}
       homepage.icon: traefik.png
       homepage.name: Traefik
       homepage.widget.type: traefik
@@ -205,11 +205,11 @@ services:
       prometheus.port: 8080
       traefik.enable: true
       traefik.http.routers.api.middlewares: 'authelia@docker'
-      traefik.http.routers.api.rule: Host(`${TRAEFIK_HOST}`)
+      traefik.http.routers.api.rule: Host(`${TRAEFIK_HOST:-traefik.${BASE_DOMAIN}}`)
       traefik.http.routers.api.service: 'api@internal'
       traefik.http.routers.api.tls.certresolver: myresolver
-      traefik.http.routers.api.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${TRAEFIK_HOST}}
-      traefik.http.routers.api.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.api.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.api.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - docker-proxy
       - observe

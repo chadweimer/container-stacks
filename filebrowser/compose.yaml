@@ -9,15 +9,15 @@ services:
     image: filebrowser/filebrowser:${IMAGE_TAG:-latest}
     labels:
       homepage.group: NAS
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-files.${BASE_DOMAIN}}
       homepage.icon: filebrowser.png
       homepage.name: Files
       traefik.enable: true
       traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
-      traefik.http.routers.filebrowser.rule: Host(`${HOST}`)
+      traefik.http.routers.filebrowser.rule: Host(`${HOST:-files.${BASE_DOMAIN}}`)
       traefik.http.routers.filebrowser.tls.certresolver: myresolver
-      traefik.http.routers.filebrowser.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.filebrowser.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.filebrowser.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.filebrowser.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - public
     pull_policy: always

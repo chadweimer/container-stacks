@@ -6,7 +6,7 @@ services:
   arcane:
     container_name: arcane
     environment:
-      APP_URL: https://${HOST}
+      APP_URL: https://${HOST:-arcane.${BASE_DOMAIN}}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
       JWT_SECRET: ${JWT_SECRET}
       LOG_JSON: true
@@ -24,14 +24,14 @@ services:
     labels:
       com.getarcaneapp.arcane.updater: false
       homepage.group: Network
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-arcane.${BASE_DOMAIN}}
       homepage.icon: arcane.png
       homepage.name: Arcane
       traefik.enable: true
-      traefik.http.routers.arcane.rule: Host(`${HOST}`)
+      traefik.http.routers.arcane.rule: Host(`${HOST:-arcane.${BASE_DOMAIN}}`)
       traefik.http.routers.arcane.tls.certresolver: myresolver
-      traefik.http.routers.arcane.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.arcane.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.arcane.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.arcane.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.arcane.loadbalancer.server.port: 3552
     networks:
       - public

@@ -1,8 +1,8 @@
 {
-    "name": "Smart Home",
-    "description": "Home Assistant, Homebridge, Mosquitto MQTT Broker, Z-Wave JS UI, and Frigate NVR.",
-    "version": "1.0.0",
-    "tags": [
-        "app"
-    ]
+  "name": "Smart Home",
+  "description": "Home Assistant, Homebridge, Mosquitto MQTT Broker, Z-Wave JS UI, and Frigate NVR.",
+  "version": "1.1.0",
+  "tags": [
+    "app"
+  ]
 }

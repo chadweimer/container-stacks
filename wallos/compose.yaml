@@ -12,7 +12,7 @@ services:
     image: ghcr.io/ellite/wallos:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Other
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-wallos.${BASE_DOMAIN}}
       homepage.icon: wallos.png
       homepage.name: Wallos (Subscriptions)
       homepage.widget.fields: '["activeSubscriptions", "thisMonthlyCost", "nextMonthlyCost"]'
@@ -21,10 +21,10 @@ services:
       homepage.widget.url: http://wallos
       traefik.enable: true
       traefik.http.routers.wallos.middlewares: 'authelia@docker'
-      traefik.http.routers.wallos.rule: Host(`${HOST}`)
+      traefik.http.routers.wallos.rule: Host(`${HOST:-wallos.${BASE_DOMAIN}}`)
       traefik.http.routers.wallos.tls.certresolver: myresolver
-      traefik.http.routers.wallos.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.wallos.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.wallos.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.wallos.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - public
     pull_policy: always

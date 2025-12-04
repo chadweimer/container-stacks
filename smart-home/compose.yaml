@@ -42,7 +42,7 @@ services:
     image: ghcr.io/blakeblackshear/frigate:${FRIGATE_IMAGE_TAG:-stable}
     labels:
       homepage.group: Smart Home
-      homepage.href: https://${FRIGATE_HOST}
+      homepage.href: https://${FRIGATE_HOST:-frigate.${BASE_DOMAIN}}
       homepage.icon: frigate.png
       homepage.name: Frigate
       homepage.widget.type: frigate
@@ -52,10 +52,10 @@ services:
       prometheus.port: 5000
       traefik.enable: true
       traefik.http.routers.frigate.middlewares: 'authelia@docker'
-      traefik.http.routers.frigate.rule: Host(`${FRIGATE_HOST}`)
+      traefik.http.routers.frigate.rule: Host(`${FRIGATE_HOST:-frigate.${BASE_DOMAIN}}`)
       traefik.http.routers.frigate.tls.certresolver: myresolver
-      traefik.http.routers.frigate.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${FRIGATE_HOST}}
-      traefik.http.routers.frigate.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.frigate.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.frigate.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.frigate.loadbalancer.server.port: 8971
       traefik.http.services.frigate.loadbalancer.server.scheme: https
     networks:
@@ -86,7 +86,7 @@ services:
     image: ghcr.io/home-assistant/home-assistant:${HASS_IMAGE_TAG:-stable}
     labels:
       homepage.group: Smart Home
-      homepage.href: https://${HASS_HOST}
+      homepage.href: https://${HASS_HOST:-homeassistant.${BASE_DOMAIN}}
       homepage.icon: home-assistant.png
       homepage.name: Home Assistant
       homepage.widget.custom[0].label: doors locked
@@ -99,10 +99,10 @@ services:
       homepage.widget.type: homeassistant
       homepage.widget.url: http://homeassistant:8123
       traefik.enable: true
-      traefik.http.routers.hass.rule: Host(`${HASS_HOST}`)
+      traefik.http.routers.hass.rule: Host(`${HASS_HOST:-homeassistant.${BASE_DOMAIN}}`)
       traefik.http.routers.hass.tls.certresolver: myresolver
-      traefik.http.routers.hass.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HASS_HOST}}
-      traefik.http.routers.hass.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.hass.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.hass.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.hass.loadbalancer.server.port: 8123
     networks:
       lan:
@@ -131,7 +131,7 @@ services:
     image: ghcr.io/homebridge/homebridge:${HOMEBRIDGE_IMAGE_TAG:-latest}
     labels:
       homepage.group: Smart Home
-      homepage.href: https://${HOMEBRIDGE_HOST}
+      homepage.href: https://${HOMEBRIDGE_HOST:-homebridge.${BASE_DOMAIN}}
       homepage.icon: homebridge.png
       homepage.name: Homebridge
       homepage.widget.password: ${HOMEBRIDGE_PASSWORD}
@@ -140,10 +140,10 @@ services:
       homepage.widget.username: ${HOMEBRIDGE_USERNAME}
       traefik.enable: true
       traefik.http.routers.homebridge.middlewares: 'authelia@docker'
-      traefik.http.routers.homebridge.rule: Host(`${HOMEBRIDGE_HOST}`)
+      traefik.http.routers.homebridge.rule: Host(`${HOMEBRIDGE_HOST:-homebridge.${BASE_DOMAIN}}`)
       traefik.http.routers.homebridge.tls.certresolver: myresolver
-      traefik.http.routers.homebridge.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOMEBRIDGE_HOST}}
-      traefik.http.routers.homebridge.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.homebridge.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.homebridge.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.homebridge.loadbalancer.server.port: 8581
     networks:
       lan:
@@ -188,15 +188,15 @@ services:
     image: ghcr.io/zwave-js/zwave-js-ui:${ZWAVE_IMAGE_TAG:-10}
     labels:
       homepage.group: Smart Home
-      homepage.href: https://${ZWAVE_HOST}
+      homepage.href: https://${ZWAVE_HOST:-zwave.${BASE_DOMAIN}}
       homepage.icon: z-wave-js-ui.png
       homepage.name: Z-Wave JS UI
       traefik.enable: true
       traefik.http.routers.zwavejsui.middlewares: 'authelia@docker'
-      traefik.http.routers.zwavejsui.rule: Host(`${ZWAVE_HOST}`)
+      traefik.http.routers.zwavejsui.rule: Host(`${ZWAVE_HOST:-zwave.${BASE_DOMAIN}}`)
       traefik.http.routers.zwavejsui.tls.certresolver: myresolver
-      traefik.http.routers.zwavejsui.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${ZWAVE_HOST}}
-      traefik.http.routers.zwavejsui.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.zwavejsui.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.zwavejsui.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.zwavejsui.loadbalancer.server.port: 8091
     networks:
       - public

@@ -42,7 +42,7 @@ services:
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: true
       GF_SECURITY_ALLOW_EMBEDDING: true
-      GF_SERVER_ROOT_URL: https://${HOST}
+      GF_SERVER_ROOT_URL: https://${HOST:-grafana.${BASE_DOMAIN}}
     healthcheck:
       start_period: 10s
       test: 'wget --spider -q --tries=1 http://localhost:3000'
@@ -50,7 +50,7 @@ services:
     image: grafana/grafana-oss:${GRAFANA_IMAGE_TAG:-latest}
     labels:
       homepage.group: Network
-      homepage.href: https://${HOST}
+      homepage.href: https://${HOST:-grafana.${BASE_DOMAIN}}
       homepage.icon: grafana.png
       homepage.name: Grafana
       homepage.widget.password: ${PASSWORD}
@@ -59,10 +59,10 @@ services:
       homepage.widget.username: ${USERNAME}
       homepage.widget.version: 2
       traefik.enable: true
-      traefik.http.routers.grafana.rule: Host(`${HOST}`)
+      traefik.http.routers.grafana.rule: Host(`${HOST:-grafana.${BASE_DOMAIN}}`)
       traefik.http.routers.grafana.tls.certresolver: myresolver
-      traefik.http.routers.grafana.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${HOST}}
-      traefik.http.routers.grafana.tls.domains[0].sans: ${TLS_CERT_SANS}
+      traefik.http.routers.grafana.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.grafana.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
     networks:
       - observe
       - public
