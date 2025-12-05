@@ -13,6 +13,7 @@ services:
         condition: service_healthy
     environment:
       OMADA_HOST: https://host.docker.internal:8043
+      OMADA_INSECURE: true
       OMADA_PASS: ${OMADA_PASS}
       OMADA_SITE: Home
       OMADA_USER: ${OMADA_USER}
