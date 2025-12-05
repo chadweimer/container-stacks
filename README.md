@@ -34,12 +34,14 @@ docker compose --all-resources --file networks.yaml up -d
 These stacks are designed to be used with supplied environment variables (e.g., `.env` files).
 Refer to the `example.env` file in each directory for the list of environment variables that are expected.
 
-### Arcane Templates
+## Templates
+
+### Arcane
 
 The [registry.json](registry.json) file provides [Arcane](https://getarcane.app/) [Templates](https://getarcane.app/docs/templates/registries) that can be used to deploy these stacks, supplying the necessary values to variables.
 Configure the Arcane instance to point to <https://raw.githubusercontent.com/chadweimer/container-stacks/refs/heads/main/registry.json> to use them.
 
-### Portainer Templates
+### Portainer
 
 The [templates.json](templates.json) file provides [Portainer](https://www.portainer.io) [Templates](https://docs.portainer.io/advanced/app-templates/format) that can be used to deploy these stacks, supplying the necessary values to variables.
 Configure the Portainer instance to point to <https://raw.githubusercontent.com/chadweimer/container-stacks/refs/heads/main/templates.json> to use them.
