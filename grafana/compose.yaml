@@ -15,6 +15,13 @@ configs:
         ring:
           kvstore:
             store: inmemory
+      compactor:
+        working_directory: /loki/retention
+        retention_enabled: true
+        retention_delete_delay: 2h
+        delete_request_store: filesystem
+      limits_config:
+        retention_period: 30d
       schema_config:
         configs:
           - from: 2020-01-01
@@ -29,6 +36,8 @@ configs:
       storage:
         tsdb:
           out_of_order_time_window: 1h
+          retention:
+            time: 30d
 
 networks:
   observe:
