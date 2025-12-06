@@ -4,9 +4,6 @@ networks:
 
 services:
   exporter:
-    command:
-      - '/usr/bin/omada-exporter'
-      - '--insecure'
     container_name: omada-exporter
     depends_on:
       omada:
@@ -48,11 +45,11 @@ services:
       homepage.href: https://${HOST:-omada.${BASE_DOMAIN}}
       homepage.icon: omada.png
       homepage.name: Omada Controller
-      homepage.widget.password: ${PASSWORD}
+      homepage.widget.password: ${OMADA_PASS}
       homepage.widget.site: Home
       homepage.widget.type: omada
       homepage.widget.url: https://host.docker.internal:8043
-      homepage.widget.username: ${USERNAME}
+      homepage.widget.username: ${OMADA_USER}
       traefik.enable: true
       traefik.http.routers.omada.rule: Host(`${HOST:-omada.${BASE_DOMAIN}}`)
       traefik.http.routers.omada.tls.certresolver: myresolver
