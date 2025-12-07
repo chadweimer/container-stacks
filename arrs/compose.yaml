@@ -37,6 +37,34 @@ services:
     volumes:
       - /mnt/pool0/containers/bazarr:/config
       - /mnt/pool1/media:/data
+  cleanuparr:
+    container_name: cleanuparr
+    environment:
+      - PUID=568
+      - PGID=568
+      - TZ=America/Los_Angeles
+    healthcheck:
+      start_period: 10s
+      test: ['CMD', 'curl', '-f', 'http://localhost:11011/health']
+    image: ghcr.io/cleanuparr/cleanuparr:${CLEANUPARR_IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Media
+      homepage.href: https://${CLEANUPARR_HOST:-cleanuparr.${BASE_DOMAIN}}
+      homepage.icon: cleanuperr.png
+      homepage.name: Cleanuparr
+      traefik.enable: true
+      traefik.http.routers.cleanuparr.middlewares: 'authelia@docker'
+      traefik.http.routers.cleanuparr.rule: Host(`${CLEANUPARR_HOST:-cleanuparr.${BASE_DOMAIN}}`)
+      traefik.http.routers.cleanuparr.tls.certresolver: myresolver
+      traefik.http.routers.cleanuparr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.cleanuparr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.services.cleanuparr.loadbalancer.server.port: 11011
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/cleanuparr/config:/config
   jellyseerr:
     container_name: jellyseerr
     environment:
@@ -52,7 +80,7 @@ services:
       homepage.group: Media
       homepage.href: https://${JELLYSEERR_HOST:-jellyseerr.${BASE_DOMAIN}}
       homepage.icon: jellyseerr.png
-      homepage.name: Jellyseerr (Requests)
+      homepage.name: Jellyseerr
       homepage.widget.key: ${JELLYSEERR_API_KEY}
       homepage.widget.type: jellyseerr
       homepage.widget.url: http://jellyseerr:5055
