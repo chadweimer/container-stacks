@@ -47,4 +47,5 @@ Create the `./config/oidc_clients.yml` file in the authelia config mount, and po
 ### lldap
 
 1. Define a user named "authelia" with the same password as used for the `LDAP_PASSWORD` secret
+1. If necessary, define a user named "portainer" and log into Portainer to generate an API Key for usage as the Homepage key
 1. Define any desired users to use to log in to other services
