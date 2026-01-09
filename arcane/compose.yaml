@@ -42,3 +42,4 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /mnt/pool0/containers/arcane/data:/app/data
+      - /mnt/pool0/containers/arcane/data/projects:/mnt/pool0/containers/arcane/data/projects
