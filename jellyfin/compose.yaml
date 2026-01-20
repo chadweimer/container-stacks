@@ -19,11 +19,6 @@ services:
       homepage.href: https://${HOST:-jellyfin.${BASE_DOMAIN}}
       homepage.icon: jellyfin.png
       homepage.name: Jellyfin
-      homepage.widget.enableBlocks: true
-      homepage.widget.enableNowPlaying: false
-      homepage.widget.key: ${API_KEY}
-      homepage.widget.type: jellyfin
-      homepage.widget.url: http://jellyfin:8096
       traefik.enable: true
       traefik.http.routers.jellyfin.rule: Host(`${HOST:-jellyfin.${BASE_DOMAIN}}`)
       traefik.http.routers.jellyfin.tls.certresolver: myresolver

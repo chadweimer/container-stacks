@@ -11,7 +11,7 @@ services:
     container_name: uptime-kuma
     image: ghcr.io/louislam/uptime-kuma:${IMAGE_TAG:-2}-slim
     labels:
-      homepage.group: Network
+      homepage.group: Status
       homepage.href: https://${HOST:-uptime-kuma.${BASE_DOMAIN}}
       homepage.icon: uptime-kuma.png
       homepage.name: Home Status

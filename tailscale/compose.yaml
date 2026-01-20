@@ -24,9 +24,6 @@ services:
       homepage.href: https://login.tailscale.com
       homepage.icon: tailscale.png
       homepage.name: Tailscale
-      homepage.widget.deviceid: ${DEVIDE_ID}
-      homepage.widget.key: ${API_ACCESS_TOKEN}
-      homepage.widget.type: tailscale
       prometheus.label.instance: truenas-server
       prometheus.label.tailscale_machine: truenas-server
       prometheus.port: 9002

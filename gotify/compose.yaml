@@ -10,7 +10,7 @@ services:
       TZ: America/Los_Angeles
     image: ghcr.io/gotify/server:${IMAGE_TAG:-latest}
     labels:
-      homepage.group: Network
+      homepage.group: Status
       homepage.href: https://${HOST:-gotify.${BASE_DOMAIN}}
       homepage.icon: gotify.png
       homepage.name: Gotify

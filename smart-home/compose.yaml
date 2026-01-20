@@ -45,8 +45,6 @@ services:
       homepage.href: https://${FRIGATE_HOST:-frigate.${BASE_DOMAIN}}
       homepage.icon: frigate.png
       homepage.name: Frigate
-      homepage.widget.type: frigate
-      homepage.widget.url: http://frigate:5000
       prometheus.label.__metrics_path__: /api/metrics
       prometheus.label.instance: truenas-server
       prometheus.port: 5000

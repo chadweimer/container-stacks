@@ -19,10 +19,6 @@ services:
       homepage.href: https://${HOST:-calibre.${BASE_DOMAIN}}
       homepage.icon: calibre-web.png
       homepage.name: Calibre Web
-      homepage.widget.password: ${PASSWORD}
-      homepage.widget.type: calibreweb
-      homepage.widget.url: http://calibre-web:8083
-      homepage.widget.username: ${USERNAME}
       traefik.enable: true
       traefik.http.routers.calibre.middlewares: 'authelia@docker'
       traefik.http.routers.calibre.rule: Host(`${HOST:-calibre.${BASE_DOMAIN}}`)

@@ -21,9 +21,6 @@ services:
       homepage.href: https://${BAZARR_HOST:-bazarr.${BASE_DOMAIN}}
       homepage.icon: bazarr.png
       homepage.name: Bazarr (Subtitles)
-      homepage.widget.key: ${BAZARR_API_KEY}
-      homepage.widget.type: bazarr
-      homepage.widget.url: http://bazarr:6767
       traefik.enable: true
       traefik.http.routers.bazarr.middlewares: 'authelia@docker'
       traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST:-bazarr.${BASE_DOMAIN}}`)
@@ -81,9 +78,6 @@ services:
       homepage.href: https://${JELLYSEERR_HOST:-jellyseerr.${BASE_DOMAIN}}
       homepage.icon: jellyseerr.png
       homepage.name: Jellyseerr
-      homepage.widget.key: ${JELLYSEERR_API_KEY}
-      homepage.widget.type: jellyseerr
-      homepage.widget.url: http://jellyseerr:5055
       traefik.enable: true
       traefik.http.routers.jellyseerr.middlewares: 'authelia@docker'
       traefik.http.routers.jellyseerr.rule: Host(`${JELLYSEERR_HOST:-jellyseerr.${BASE_DOMAIN}}`)
@@ -111,9 +105,6 @@ services:
       homepage.href: https://${PROWLARR_HOST:-prowlarr.${BASE_DOMAIN}}
       homepage.icon: prowlarr.png
       homepage.name: Prowlarr (Indexers)
-      homepage.widget.key: ${PROWLARR_API_KEY}
-      homepage.widget.type: prowlarr
-      homepage.widget.url: http://prowlarr:9696
       traefik.enable: true
       traefik.http.routers.prowlarr.middlewares: 'authelia@docker'
       traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST:-prowlarr.${BASE_DOMAIN}}`)

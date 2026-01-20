@@ -199,8 +199,6 @@ services:
       homepage.href: https://${TRAEFIK_HOST:-traefik.${BASE_DOMAIN}}
       homepage.icon: traefik.png
       homepage.name: Traefik
-      homepage.widget.type: traefik
-      homepage.widget.url: http://traefik:8080
       prometheus.label.instance: truenas-server
       prometheus.port: 8080
       traefik.enable: true

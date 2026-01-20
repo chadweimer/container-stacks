@@ -58,7 +58,7 @@ services:
       timeout: 5s
     image: grafana/grafana-oss:${GRAFANA_IMAGE_TAG:-latest}
     labels:
-      homepage.group: Network
+      homepage.group: Status
       homepage.href: https://${HOST:-grafana.${BASE_DOMAIN}}
       homepage.icon: grafana.png
       homepage.name: Grafana

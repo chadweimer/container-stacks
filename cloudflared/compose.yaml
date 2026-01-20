@@ -23,11 +23,7 @@ services:
       homepage.group: Network
       homepage.href: https://one.dash.cloudflare.com
       homepage.icon: cloudflare.png
-      homepage.name: Cloudflare Tunnel
-      homepage.widget.accountid: ${ACCOUNT_ID}
-      homepage.widget.key: ${API_TOKEN}
-      homepage.widget.tunnelid: ${TUNNEL_ID}
-      homepage.widget.type: cloudflared
+      homepage.name: Cloudflare Tunne
       prometheus.label.instance: truenas-server
       prometheus.port: 60123
     network_mode: host
