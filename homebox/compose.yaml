@@ -1,0 +1,36 @@
+networks:
+  public:
+    external: true
+
+services:
+  homebox:
+    container_name: homebox
+    environment:
+      HBOX_LOG_FORMAT: json
+      HBOX_LOG_LEVEL: debug
+      HBOX_OIDC_ALLOWED_GROUPS: users
+      HBOX_OIDC_CLIENT_ID: ${HBOX_OIDC_CLIENT_ID}
+      HBOX_OIDC_CLIENT_SECRET: ${HBOX_OIDC_CLIENT_SECRET}
+      HBOX_OIDC_ENABLED: true
+      HBOX_OIDC_ISSUER_URL: ${HBOX_OIDC_ISSUER_URL}
+      HBOX_OIDC_SCOPE: openid profile email groups
+      HBOX_OPTIONS_TRUST_PROXY: true
+    image: ghcr.io/sysadminsmedia/homebox:${IMAGE_TAG:-latest}
+    #   image: ghcr.io/sysadminsmedia/homebox:latest-rootless
+    labels:
+      homepage.group: Other
+      homepage.href: https://${HOST:-homebox.${BASE_DOMAIN}}
+      homepage.icon: homebox.png
+      homepage.name: Homebox
+      traefik.enable: true
+      traefik.http.routers.homebox.rule: Host(`${HOST:-homebox.${BASE_DOMAIN}}`)
+      traefik.http.routers.homebox.tls.certresolver: myresolver
+      traefik.http.routers.homebox.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.homebox.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.services.homebox.loadbalancer.server.port: 7745
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/homebox/data:/data
