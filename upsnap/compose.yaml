@@ -1,0 +1,23 @@
+services:
+  upsnap:
+    container_name: upsnap
+    environment:
+      TZ: America/Los_Angeles
+      UPSNAP_SCAN_RANGE: 192.168.0.0/23
+    image: ghcr.io/seriousm4x/upsnap:${IMAGE_TAG:-5}
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST:-upsnap.${BASE_DOMAIN}}
+      homepage.icon: upsnap.png
+      homepage.name: UpSnap
+      traefik.enable: true
+      traefik.http.routers.upsnap.rule: Host(`${HOST:-upsnap.${BASE_DOMAIN}}`)
+      traefik.http.routers.upsnap.tls.certresolver: myresolver
+      traefik.http.routers.upsnap.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.upsnap.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.services.upsnap.loadbalancer.server.port: 8090
+    network_mode: host
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/upsnap/data:/app/pb_data
