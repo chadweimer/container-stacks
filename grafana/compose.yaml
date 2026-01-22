@@ -36,8 +36,6 @@ configs:
       storage:
         tsdb:
           out_of_order_time_window: 1h
-          retention:
-            time: 30d
 
 networks:
   observe:
@@ -102,6 +100,7 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
       - '--web.enable-remote-write-receiver'
     configs:
       - source: prometheus_config
