@@ -1,4 +1,6 @@
 networks:
+  arcane:
+    name: arcane
   public:
     external: true
 
@@ -7,6 +9,7 @@ services:
     container_name: arcane
     environment:
       APP_URL: https://${HOST:-arcane.${BASE_DOMAIN}}
+      DOCKER_HOST: tcp://arcane-proxy:2375
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
       JWT_SECRET: ${JWT_SECRET}
       LOG_JSON: true
@@ -34,12 +37,38 @@ services:
       traefik.http.routers.arcane.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.arcane.loadbalancer.server.port: 3552
     networks:
+      - arcane
       - public
     ports:
       - 3552:3552 # For access when traefik is not up
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
       - /mnt/pool0/containers/arcane/data:/app/data
       - /mnt/pool0/containers/arcane/data/projects:/app/data/projects
+  arcane-proxy:
+    container_name: arcane-proxy
+    environment:
+      CONTAINERS: '1'
+      EVENTS: '1'
+      EXEC: '1'
+      IMAGES: '1'
+      INFO: '1'
+      NETWORKS: '1'
+      PING: '1'
+      POST: '1'
+      VERSION: '1'
+      VOLUMES: '1'
+    healthcheck:
+      start_period: 5s
+      test: 'wget --spider -q --tries=1 http://localhost:2375/_ping'
+    image: ghcr.io/linuxserver/socket-proxy:${DOCKER_PROXY_IMAGE_TAG:-latest}
+    networks:
+      - arcane
+    pull_policy: always
+    read_only: true
+    restart: unless-stopped
+    tmpfs:
+      - /run
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
