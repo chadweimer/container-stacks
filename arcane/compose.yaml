@@ -65,6 +65,8 @@ services:
       start_period: 5s
       test: 'wget --spider -q --tries=1 http://localhost:2375/_ping'
     image: ghcr.io/linuxserver/socket-proxy:${DOCKER_PROXY_IMAGE_TAG:-latest}
+    labels:
+      com.getarcaneapp.arcane.updater: false
     networks:
       - arcane
     pull_policy: always
