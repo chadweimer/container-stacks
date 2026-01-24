@@ -1,13 +1,24 @@
 networks:
+  portainer:
+    name: portainer
   public:
     external: true
 
 services:
+  agent:
+    container_name: portainer_agent
+    image: portainer/agent:${IMAGE_TAG:-sts}
+    networks:
+      - portainer
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - '/mnt/.ix-apps/docker/volumes:/var/lib/docker/volumes'
+      - '/var/run/docker.sock:/var/run/docker.sock'
   portainer:
     container_name: portainer
     image: portainer/portainer-ee:${IMAGE_TAG:-sts}
     labels:
-      com.getarcaneapp.arcane.updater: false
       homepage.group: Network
       homepage.href: https://${HOST:-portainer.${BASE_DOMAIN}}
       homepage.icon: portainer.png
@@ -19,10 +30,11 @@ services:
       traefik.http.routers.portainer.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
       traefik.http.services.portainer.loadbalancer.server.port: 9000
     networks:
+      - portainer
       - public
     ports:
       - 9000:9000 # For access when traefik is not up
+    pull_policy: always
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/portainer:/data
-      - /var/run/docker.sock:/var/run/docker.sock
