@@ -7,6 +7,9 @@ configs:
             authelia_url: 'https://${AUTHELIA_HOST:-auth.${BASE_DOMAIN}}'
       identity_providers:
         oidc:
+          claims_policies:
+            with_email:
+              id_token: ['email', 'email_verified', 'alt_emails', 'preferred_username', 'name']
           jwks:
             - key: {{ secret "/run/secrets/AUTHELIA_OIDC_JWK_KEY" | mindent 10 "|" | msquote }}
 

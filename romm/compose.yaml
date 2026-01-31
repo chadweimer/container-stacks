@@ -1,0 +1,80 @@
+networks:
+  public:
+    external: true
+  romm:
+    name: romm
+
+services:
+  app:
+    container_name: romm
+    depends_on:
+      db:
+        condition: service_healthy
+        restart: true
+    environment:
+      DB_HOST: db
+      DB_NAME: romm
+      DB_PASSWD: ${DB_USER_PASSWORD}
+      DB_USER: romm
+      HASHEOUS_API_ENABLED: true
+      IGDB_CLIENT_ID: ${IGDB_CLIENT_ID}
+      IGDB_CLIENT_SECRET: ${IGDB_CLIENT_SECRET}
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
+      OIDC_ENABLED: true
+      OIDC_PROVIDER: authelia
+      OIDC_REDIRECT_URI: https://${HOST:-romm.${BASE_DOMAIN}}/api/oauth/openid
+      OIDC_SERVER_APPLICATION_URL: ${OIDC_SERVER_APPLICATION_URL}
+      RETROACHIEVEMENTS_API_KEY: ${RETROACHIEVEMENTS_API_KEY}
+      ROMM_AUTH_SECRET_KEY: ${AUTH_SECRET_KEY}
+      SCREENSCRAPER_PASSWORD: ${SCREENSCRAPER_PASSWORD}
+      SCREENSCRAPER_USER: ${SCREENSCRAPER_USER}
+      STEAMGRIDDB_API_KEY: ${STEAMGRIDDB_API_KEY}
+    healthcheck:
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://localhost:8080'
+    image: rommapp/romm:${IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Media
+      homepage.href: https://${HOST:-romm.${BASE_DOMAIN}}
+      homepage.icon: romm.png
+      homepage.name: RomM
+      traefik.enable: true
+      traefik.http.routers.romm.rule: Host(`${HOST:-romm.${BASE_DOMAIN}}`)
+      traefik.http.routers.romm.tls.certresolver: myresolver
+      traefik.http.routers.romm.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.romm.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.services.romm.loadbalancer.server.port: 8080
+    networks:
+      - public
+      - romm
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/romm/assets:/romm/assets
+      - /mnt/pool0/containers/romm/config:/romm/config
+      - /mnt/pool0/containers/romm/redis/data:/redis-data
+      - /mnt/pool0/containers/romm/resources:/romm/resources
+      - /mnt/pool1/media/library/games:/romm/library # Your game library. Check https://docs.romm.app/latest/Getting-Started/Folder-Structure/ for more details.
+
+  db:
+    container_name: romm-db
+    environment:
+      MARIADB_DATABASE: romm
+      MARIADB_PASSWORD: ${DB_USER_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_USER: romm
+    healthcheck:
+      interval: 10s
+      retries: 5
+      start_interval: 10s
+      start_period: 30s
+      test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
+      timeout: 5s
+    image: mariadb:${MARIADB_VERSION:-12}
+    networks:
+      - romm
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/romm/mysql/data:/var/lib/mysql
