@@ -1,0 +1,8 @@
+{
+  "name": "UpSnap",
+  "description": "A simple wake on lan web app written with SvelteKit, Go and PocketBase.",
+  "version": "1.0.0",
+  "tags": [
+    "app"
+  ]
+}

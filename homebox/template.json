@@ -1,0 +1,8 @@
+{
+  "name": "HomeBox",
+  "description": "A simple home inventory management software.",
+  "version": "1.0.0",
+  "tags": [
+    "app"
+  ]
+}
