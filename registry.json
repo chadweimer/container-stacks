@@ -4,7 +4,7 @@
   "description": "Collection of compose templates maintained by me.",
   "author": "chadweimer",
   "url": "https://github.com/chadweimer/container-stacks",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "templates": [
     {
       "id": "alloy",
@@ -137,6 +137,19 @@
       ]
     },
     {
+      "id": "homebox",
+      "name": "HomeBox",
+      "description": "A simple home inventory management software.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/homebox/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/homebox/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/homebox/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
       "id": "homepage",
       "name": "Homepage",
       "description": "A modern, fully static, fast, secure fully proxied, highly customizable application dashboard",
@@ -215,6 +228,19 @@
       ]
     },
     {
+      "id": "romm",
+      "name": "RomM",
+      "description": "The most powerful all-in-one app for managing your game collection.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/romm/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/romm/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/romm/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
       "id": "scrutiny",
       "name": "Scrutiny",
       "description": "Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds.",
@@ -264,6 +290,19 @@
       "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/tailscale/README.md",
       "tags": [
         "infra"
+      ]
+    },
+    {
+      "id": "upsnap",
+      "name": "UpSnap",
+      "description": "A simple wake on lan web app written with SvelteKit, Go and PocketBase.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/upsnap/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/upsnap/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/upsnap/README.md",
+      "tags": [
+        "app"
       ]
     },
     {

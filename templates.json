@@ -274,6 +274,42 @@
     {
       "id": 11,
       "type": 3,
+      "title": "HomeBox",
+      "description": "A simple home inventory management software.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "homebox/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
+        },
+        {
+          "name": "HBOX_OIDC_CLIENT_ID",
+          "label": "HBOX_OIDC_CLIENT_ID",
+          "default": "your_oidc_client_id"
+        },
+        {
+          "name": "HBOX_OIDC_CLIENT_SECRET",
+          "label": "HBOX_OIDC_CLIENT_SECRET",
+          "default": "your_oidc_client_secret"
+        },
+        {
+          "name": "HBOX_OIDC_ISSUER_URL",
+          "label": "HBOX_OIDC_ISSUER_URL",
+          "default": "https://your-oidc-provider.com/"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": 3,
       "title": "Homepage",
       "description": "A modern, fully static, fast, secure fully proxied, highly customizable application dashboard",
       "categories": [
@@ -293,7 +329,7 @@
       ]
     },
     {
-      "id": 12,
+      "id": 13,
       "type": 3,
       "title": "IT-Tools",
       "description": "Handy tools for developers",
@@ -314,7 +350,7 @@
       ]
     },
     {
-      "id": 13,
+      "id": 14,
       "type": 3,
       "title": "Jellyfin",
       "description": "The Free Software Media System",
@@ -335,7 +371,7 @@
       ]
     },
     {
-      "id": 14,
+      "id": 15,
       "type": 3,
       "title": "Omada",
       "description": "TP-Link Omada software controller.",
@@ -366,7 +402,7 @@
       ]
     },
     {
-      "id": 15,
+      "id": 16,
       "type": 3,
       "title": "Portainer",
       "description": "Portainer is a lightweight management UI which allows you to easily manage your Docker environments.",
@@ -387,7 +423,7 @@
       ]
     },
     {
-      "id": 16,
+      "id": 17,
       "type": 3,
       "title": "Proxy",
       "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
@@ -423,7 +459,58 @@
       ]
     },
     {
-      "id": 17,
+      "id": 18,
+      "type": 3,
+      "title": "RomM",
+      "description": "The most powerful all-in-one app for managing your game collection.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "romm/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
+        },
+        {
+          "name": "AUTH_SECRET_KEY",
+          "label": "AUTH_SECRET_KEY",
+          "default": "secret-key"
+        },
+        {
+          "name": "DB_ROOT_PASSWORD",
+          "label": "DB_ROOT_PASSWORD",
+          "default": "rootpassword"
+        },
+        {
+          "name": "DB_USER_PASSWORD",
+          "label": "DB_USER_PASSWORD",
+          "default": "password"
+        },
+        {
+          "name": "OIDC_CLIENT_ID",
+          "label": "OIDC_CLIENT_ID",
+          "default": "client-id"
+        },
+        {
+          "name": "OIDC_CLIENT_SECRET",
+          "label": "OIDC_CLIENT_SECRET",
+          "default": "client-secret"
+        },
+        {
+          "name": "OIDC_SERVER_APPLICATION_URL",
+          "label": "OIDC_SERVER_APPLICATION_URL",
+          "default": "https://auth.example.com"
+        }
+      ]
+    },
+    {
+      "id": 19,
       "type": 3,
       "title": "Scrutiny",
       "description": "Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds.",
@@ -449,7 +536,7 @@
       ]
     },
     {
-      "id": 18,
+      "id": 20,
       "type": 3,
       "title": "Smart Home",
       "description": "Home Assistant, Homebridge, Mosquitto MQTT Broker, Z-Wave JS UI, and Frigate NVR.",
@@ -525,7 +612,7 @@
       ]
     },
     {
-      "id": 19,
+      "id": 21,
       "type": 3,
       "title": "Syncthing",
       "description": "Syncthing is a continuous file synchronization program",
@@ -546,7 +633,7 @@
       ]
     },
     {
-      "id": 20,
+      "id": 22,
       "type": 3,
       "title": "Tailscale",
       "description": "Tailscale daemon",
@@ -582,7 +669,28 @@
       ]
     },
     {
-      "id": 21,
+      "id": 23,
+      "type": 3,
+      "title": "UpSnap",
+      "description": "A simple wake on lan web app written with SvelteKit, Go and PocketBase.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "upsnap/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
+        }
+      ]
+    },
+    {
+      "id": 24,
       "type": 3,
       "title": "Uptime Kuma",
       "description": "A fancy self-hosted monitoring tool",
@@ -603,7 +711,7 @@
       ]
     },
     {
-      "id": 22,
+      "id": 25,
       "type": 3,
       "title": "Wallos",
       "description": "Open-Source Personal Subscription Tracker",
@@ -629,7 +737,7 @@
       ]
     },
     {
-      "id": 23,
+      "id": 26,
       "type": 3,
       "title": "Wine & Cats",
       "description": "GOMP: Go Meal Planner - Web-based recipe book.",
