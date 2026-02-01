@@ -117,30 +117,6 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/prowlarr:/config
-  questarr:
-    container_name: questarr
-    healthcheck:
-      start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:5000'
-    image: ghcr.io/doezer/questarr:${QUESTARR_IMAGE_TAG:-latest}
-    labels:
-      homepage.group: Media
-      homepage.href: https://${QUESTARR_HOST:-questarr.${BASE_DOMAIN}}
-      homepage.icon: questarr.png
-      homepage.name: Questarr (Games)
-      traefik.enable: true
-      #traefik.http.routers.questarr.middlewares: 'authelia@docker'
-      traefik.http.routers.questarr.rule: Host(`${QUESTARR_HOST:-questarr.${BASE_DOMAIN}}`)
-      traefik.http.routers.questarr.tls.certresolver: myresolver
-      traefik.http.routers.questarr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.questarr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
-      traefik.http.services.questarr.loadbalancer.server.port: 5000
-    networks:
-      - public
-    pull_policy: always
-    restart: unless-stopped
-    volumes:
-      - /mnt/pool0/containers/questarr/data:/app/data
   radarr:
     container_name: radarr
     environment:
