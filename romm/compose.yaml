@@ -50,6 +50,7 @@ services:
       - romm
     pull_policy: always
     restart: unless-stopped
+    user: 568:568
     volumes:
       - /mnt/pool0/containers/romm/assets:/romm/assets
       - /mnt/pool0/containers/romm/config:/romm/config
