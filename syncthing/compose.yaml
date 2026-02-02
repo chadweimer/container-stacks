@@ -43,6 +43,7 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/backups:/mnt/backups
-      - /mnt/pool1/share/sync:/mnt/tmp/sync
       - /mnt/pool0/containers/syncthing:/var/syncthing
+      - /mnt/pool0/backups:/mnt/backups
+      - /mnt/pool1/media/library:/mnt/media
+      - /mnt/pool1/share/sync:/mnt/tmp/sync
