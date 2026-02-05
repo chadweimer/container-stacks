@@ -96,6 +96,11 @@
           "name": "OPENVPN_PASSWORD",
           "label": "OPENVPN_PASSWORD",
           "default": "password"
+        },
+        {
+          "name": "GLUETUN_AUTH_API_KEY",
+          "label": "GLUETUN_AUTH_API_KEY",
+          "default": "key"
         }
       ]
     },
