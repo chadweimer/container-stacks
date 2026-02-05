@@ -88,14 +88,9 @@
           "default": "provider"
         },
         {
-          "name": "OPENVPN_USER",
-          "label": "OPENVPN_USER",
-          "default": "user"
-        },
-        {
-          "name": "OPENVPN_PASSWORD",
-          "label": "OPENVPN_PASSWORD",
-          "default": "password"
+          "name": "WIREGUARD_PRIVATE_KEY",
+          "label": "WIREGUARD_PRIVATE_KEY",
+          "default": "key"
         },
         {
           "name": "GLUETUN_AUTH_API_KEY",
