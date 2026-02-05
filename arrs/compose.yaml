@@ -187,6 +187,9 @@ services:
       transmission-vpn:
         condition: service_healthy
     environment:
+      DOCKER_MODS: ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update
+      GLUETUN_AUTH_API_KEY: ${GLUETUN_AUTH_API_KEY}
+      GLUETUN_AUTH_TYPE: apikey
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
@@ -212,10 +215,13 @@ services:
     devices:
       - /dev/net/tun:/dev/net/tun
     environment:
+      HTTP_CONTROL_SERVER_AUTH_DEFAULT_ROLE: '{"auth":"apikey","apikey":"${GLUETUN_AUTH_API_KEY}"}'
       OPENVPN_PASSWORD: ${OPENVPN_PASSWORD}
       OPENVPN_USER: ${OPENVPN_USER}
+      PORT_FORWARD_ONLY: 'on'
       SERVER_COUNTRIES: United States
       TZ: America/Los_Angeles
+      VPN_PORT_FORWARDING: 'on'
       VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
       VPN_TYPE: openvpn
     image: ghcr.io/qdm12/gluetun:${GLUETUN_IMAGE_TAG:-latest}
