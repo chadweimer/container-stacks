@@ -187,7 +187,7 @@ services:
       transmission-vpn:
         condition: service_healthy
     environment:
-      DOCKER_MODS: ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update
+      DOCKER_MODS: ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update|ghcr.io/linuxserver/mods:transmission-floodui
       GLUETUN_AUTH_API_KEY: ${GLUETUN_AUTH_API_KEY}
       GLUETUN_AUTH_TYPE: apikey
       TZ: America/Los_Angeles
