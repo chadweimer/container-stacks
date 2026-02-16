@@ -62,34 +62,6 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/cleanuparr/config:/config
-  jellyseerr:
-    container_name: jellyseerr
-    environment:
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
-    healthcheck:
-      start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:5055/status'
-    image: ghcr.io/fallenbagel/jellyseerr:${JELLYSEERR_IMAGE_TAG:-latest}
-    init: true
-    labels:
-      homepage.group: Media
-      homepage.href: https://${JELLYSEERR_HOST:-jellyseerr.${BASE_DOMAIN}}
-      homepage.icon: jellyseerr.png
-      homepage.name: Jellyseerr
-      traefik.enable: true
-      traefik.http.routers.jellyseerr.middlewares: 'authelia@docker'
-      traefik.http.routers.jellyseerr.rule: Host(`${JELLYSEERR_HOST:-jellyseerr.${BASE_DOMAIN}}`)
-      traefik.http.routers.jellyseerr.tls.certresolver: myresolver
-      traefik.http.routers.jellyseerr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.jellyseerr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
-    networks:
-      - public
-    pull_policy: always
-    restart: unless-stopped
-    volumes:
-      - /mnt/pool0/containers/jellyseerr:/app/config
   prowlarr:
     container_name: prowlarr
     environment:
@@ -149,6 +121,32 @@ services:
     volumes:
       - /mnt/pool0/containers/radarr:/config
       - /mnt/pool1/media:/data
+  seerr:
+    container_name: seerr
+    environment:
+      TZ: America/Los_Angeles
+    healthcheck:
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://0.0.0.0:5055/status'
+    image: ghcr.io/seerr-team/seerr:${SEERR_IMAGE_TAG:-latest}
+    init: true
+    labels:
+      homepage.group: Media
+      homepage.href: https://${SEERR_HOST:-seerr.${BASE_DOMAIN}}
+      homepage.icon: overseerr.png
+      homepage.name: Seerr
+      traefik.enable: true
+      traefik.http.routers.seerr.middlewares: 'authelia@docker'
+      traefik.http.routers.seerr.rule: Host(`${SEERR_HOST:-seerr.${BASE_DOMAIN}}`)
+      traefik.http.routers.seerr.tls.certresolver: myresolver
+      traefik.http.routers.seerr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.seerr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/jellyseerr:/app/config
   sonarr:
     container_name: sonarr
     environment:
