@@ -4,7 +4,7 @@
   "description": "Collection of compose templates maintained by me.",
   "author": "chadweimer",
   "url": "https://github.com/chadweimer/container-stacks",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "templates": [
     {
       "id": "alloy",
@@ -314,6 +314,19 @@
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/uptime-kuma/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/uptime-kuma/example.env",
       "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/uptime-kuma/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "vikunja",
+      "name": "Vikunja",
+      "description": "The to-do app to organize your life. ",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/vikunja/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/vikunja/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/vikunja/README.md",
       "tags": [
         "app"
       ]
