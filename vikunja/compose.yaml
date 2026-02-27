@@ -1,0 +1,37 @@
+networks:
+  public:
+    external: true
+
+services:
+  vikunja:
+    container_name: vikunja
+    environment:
+      VIKUNJA_AUTH_LOCAL_ENABLED: false
+      VIKUNJA_AUTH_OPENID_ENABLED: true
+      VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_AUTHURL: ${OIDC_AUTH_URL}
+      VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_CLIENTID: ${OIDC_CLIENT_ID}
+      VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_CLIENTSECRET: ${OIDC_CLIENT_SECRET}
+      VIKUNJA_AUTH_OPENID_PROVIDERS_AUTHELIA_NAME: Authelia
+      VIKUNJA_SERVICE_ENABLEREGISTRATION: false
+      VIKUNJA_SERVICE_JWTSECRET: ${VIKUNJA_SERVICE_JWTSECRET}
+      VIKUNJA_SERVICE_PUBLICURL: https://${HOST:-vikunja.${BASE_DOMAIN}}/
+    image: vikunja/vikunja:${IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Other
+      homepage.href: https://${HOST:-vikunja.${BASE_DOMAIN}}
+      homepage.icon: vikunja.png
+      homepage.name: Vikunja
+      traefik.enable: true
+      traefik.http.routers.vikunja.rule: Host(`${HOST:-vikunja.${BASE_DOMAIN}}`)
+      traefik.http.routers.vikunja.tls.certresolver: myresolver
+      traefik.http.routers.vikunja.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.vikunja.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/pool0/containers/vikunja/cache:/.cache
+      - /mnt/pool0/containers/vikunja/db:/db
+      - /mnt/pool0/containers/vikunja/files:/app/vikunja/files
