@@ -179,6 +179,44 @@ services:
     volumes:
       - /mnt/pool0/containers/sonarr:/config
       - /mnt/pool1/media:/data
+  tdarr:
+    container_name: tdarr
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      inContainer: true
+      internalNode: true
+      nodeName: MyInternalNode
+      PGID: 568
+      PUID: 568
+      TZ: America/Los_Angeles
+      UMASK_SET: 002
+    group_add:
+      - 107 # render
+      - 44 # video
+    image: ghcr.io/haveagitgat/tdarr:${TDARR_IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Media
+      homepage.href: https://${TDARR_HOST:-tdarr.${BASE_DOMAIN}}
+      homepage.icon: tdarr.png
+      homepage.name: Tdarr (Transcoding)
+      traefik.enable: true
+      traefik.http.routers.tdarr.middlewares: 'authelia@docker'
+      traefik.http.routers.tdarr.rule: Host(`${TDARR_HOST:-tdarr.${BASE_DOMAIN}}`)
+      traefik.http.routers.tdarr.tls.certresolver: myresolver
+      traefik.http.routers.tdarr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.tdarr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.services.tdarr.loadbalancer.server.port: 8265
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - /mnt/pool0/containers/tdarr/server:/app/server
+      - /mnt/pool0/containers/tdarr/configs:/app/configs
+      - /mnt/pool0/containers/tdarr/logs:/app/logs
+      - /mnt/pool0/containers/tdarr/transcode_cache:/temp
+      - /mnt/pool1/media/library:/media
   transmission:
     container_name: transmission
     depends_on:
