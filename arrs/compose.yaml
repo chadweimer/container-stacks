@@ -215,7 +215,6 @@ services:
       - /mnt/pool0/containers/tdarr/server:/app/server
       - /mnt/pool0/containers/tdarr/configs:/app/configs
       - /mnt/pool0/containers/tdarr/logs:/app/logs
-      - /mnt/pool0/containers/tdarr/transcode_cache:/temp
       - /mnt/pool1/media/library:/media
   transmission:
     container_name: transmission
