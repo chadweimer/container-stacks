@@ -37,6 +37,7 @@ services:
       DATABASE_URL: postgres://gomp:${DB_PASSWORD}@db/gomp?sslmode=disable
       IS_DEVELOPMENT: ${IS_DEVELOPMENT:-0}
       SECURE_KEY: ${SECURE_KEY}
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES}
     image: ghcr.io/chadweimer/gomp:${IMAGE_TAG:-latest}
     labels:
       - homepage.group=Other
