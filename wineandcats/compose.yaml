@@ -64,11 +64,15 @@ services:
       POSTGRES_USER: gomp
     healthcheck:
       start_period: 5s
-      test: ['CMD', 'pg_isready', '-d', 'gomp']
+      test: [ 'CMD', 'pg_isready', '-d', 'gomp' ]
     image: postgres:${PG_VERSION}
     networks:
       - default
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/wineandcats-${STAGE}/pg${PG_VERSION}/data:/var/lib/postgresql/data
+      # Before PostgreSQL 18
+      # - /mnt/pool0/containers/wineandcats-${STAGE}/pg${PG_VERSION}/data:/var/lib/postgresql/data
+      # Starting with PostgreSQL 18, the data directory is no longer /var/lib/postgresql/data but /var/lib/postgresql
+      # and the image will automatically create a subdirectory for the data based on version
+      - /mnt/pool0/containers/wineandcats-${STAGE}/db:/var/lib/postgresql
