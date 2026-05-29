@@ -62,6 +62,18 @@ services:
     restart: unless-stopped
     volumes:
       - /mnt/pool0/containers/cleanuparr/config:/config
+  flaresolverr:
+    container_name: flaresolverr
+    environment:
+      LOG_LEVEL: info
+    healthcheck:
+      start_period: 10s
+      test: ['CMD', 'curl', '-f', 'http://localhost:8191/']
+    image: ghcr.io/flaresolverr/flaresolverr:${FLARESOLVERR_IMAGE_TAG:-latest}
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
   prowlarr:
     container_name: prowlarr
     environment:
