@@ -74,6 +74,33 @@ services:
       - public
     pull_policy: always
     restart: unless-stopped
+  maintainerr:
+    container_name: maintainerr
+    environment:
+      TZ: America/Los_Angeles
+    healthcheck:
+      start_period: 10s
+      test: 'wget --spider -q --tries=1 http://0.0.0.0:6246'
+    image: ghcr.io/maintainerr/maintainerr:${MAINTAINERR_IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Media
+      homepage.href: https://${MAINTAINERR_HOST:-maintainerr.${BASE_DOMAIN}}
+      homepage.icon: maintainerr.png
+      homepage.name: Maintainerr
+      traefik.enable: true
+      traefik.http.routers.maintainerr.middlewares: 'authelia@docker'
+      traefik.http.routers.maintainerr.rule: Host(`${MAINTAINERR_HOST:-maintainerr.${BASE_DOMAIN}}`)
+      traefik.http.routers.maintainerr.tls.certresolver: myresolver
+      traefik.http.routers.maintainerr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.maintainerr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.services.maintainerr.loadbalancer.server.port: 6246
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    user: 568:568
+    volumes:
+      - /mnt/pool0/containers/maintainerr/data:/opt/data
   prowlarr:
     container_name: prowlarr
     environment:
