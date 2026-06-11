@@ -116,7 +116,13 @@ services:
       NETWORKS: '1'
     healthcheck:
       start_period: 5s
-      test: 'wget --spider -q --tries=1 http://localhost:2375/_ping'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:2375/_ping'
     image: ghcr.io/linuxserver/socket-proxy:${DOCKER_PROXY_IMAGE_TAG:-latest}
     networks:
       - docker-proxy
@@ -200,7 +206,13 @@ services:
       - host.docker.internal:host-gateway
     healthcheck:
       start_period: 5s
-      test: 'wget --spider -q --tries=1 http://localhost:8080'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:8080'
     image: traefik:${TRAEFIK_IMAGE_TAG:-v3}
     labels:
       homepage.group: Network

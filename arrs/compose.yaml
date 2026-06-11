@@ -14,7 +14,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:6767'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://0.0.0.0:6767'
     image: ghcr.io/linuxserver/bazarr:${BAZARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -42,7 +48,11 @@ services:
       - TZ=America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: ['CMD', 'curl', '-f', 'http://localhost:11011/health']
+      test:
+        - 'CMD'
+        - 'curl'
+        - '-f'
+        - 'http://localhost:11011/health'
     image: ghcr.io/cleanuparr/cleanuparr:${CLEANUPARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -68,7 +78,11 @@ services:
       LOG_LEVEL: info
     healthcheck:
       start_period: 10s
-      test: ['CMD', 'curl', '-f', 'http://localhost:8191/']
+      test:
+        - 'CMD'
+        - 'curl'
+        - '-f'
+        - 'http://localhost:8191/'
     image: ghcr.io/flaresolverr/flaresolverr:${FLARESOLVERR_IMAGE_TAG:-latest}
     networks:
       - public
@@ -80,7 +94,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:6246'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://0.0.0.0:6246'
     image: ghcr.io/maintainerr/maintainerr:${MAINTAINERR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -109,7 +129,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:9696/ping'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://0.0.0.0:9696/ping'
     image: ghcr.io/linuxserver/prowlarr:${PROWLARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -136,7 +162,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:7878/ping'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://0.0.0.0:7878/ping'
     image: ghcr.io/linuxserver/radarr:${RADARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -166,7 +198,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:5055/status'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://0.0.0.0:5055/status'
     image: ghcr.io/seerr-team/seerr:${SEERR_IMAGE_TAG:-latest}
     init: true
     labels:
@@ -194,7 +232,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:8989/ping'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://0.0.0.0:8989/ping'
     image: ghcr.io/linuxserver/sonarr:${SONARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -267,7 +311,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://0.0.0.0:9091'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://0.0.0.0:9091'
     image: ghcr.io/linuxserver/transmission:${TRANSMISSION_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media

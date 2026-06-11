@@ -32,7 +32,13 @@ services:
       STEAMGRIDDB_API_KEY: ${STEAMGRIDDB_API_KEY}
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:8080'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:8080'
     image: rommapp/romm:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -70,7 +76,11 @@ services:
       retries: 5
       start_interval: 10s
       start_period: 30s
-      test: ['CMD', 'healthcheck.sh', '--connect', '--innodb_initialized']
+      test:
+        - 'CMD'
+        - 'healthcheck.sh'
+        - '--connect'
+        - '--innodb_initialized'
       timeout: 5s
     image: mariadb:${MARIADB_VERSION:-12}
     networks:

@@ -17,7 +17,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://127.0.0.1:9002/healthz'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://127.0.0.1:9002/healthz'
     image: ghcr.io/tailscale/tailscale:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Network

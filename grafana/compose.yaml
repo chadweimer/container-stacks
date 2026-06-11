@@ -52,7 +52,13 @@ services:
       GF_SERVER_ROOT_URL: https://${HOST:-grafana.${BASE_DOMAIN}}
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:3000'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:3000'
       timeout: 5s
     image: grafana/grafana-oss:${GRAFANA_IMAGE_TAG:-latest}
     labels:
@@ -108,7 +114,13 @@ services:
     container_name: prometheus
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:9090/-/ready'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:9090/-/ready'
     image: prom/prometheus:${PROMETHEUS_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: truenas-server

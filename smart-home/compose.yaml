@@ -80,7 +80,13 @@ services:
       - host.docker.internal:host-gateway
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:8123/'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:8123/'
     image: ghcr.io/home-assistant/home-assistant:${HASS_IMAGE_TAG:-stable}
     labels:
       homepage.group: Smart Home
@@ -125,7 +131,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:8581/'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:8581/'
     image: ghcr.io/homebridge/homebridge:${HOMEBRIDGE_IMAGE_TAG:-latest}
     labels:
       homepage.group: Smart Home
@@ -161,7 +173,12 @@ services:
     container_name: mosquitto
     healthcheck:
       start_period: 5s
-      test: ['CMD', 'nc', '-z', 'localhost', '1883']
+      test:
+        - 'CMD'
+        - 'nc'
+        - '-z'
+        - 'localhost'
+        - '1883'
     image: eclipse-mosquitto:${MOSQUITTO_IMAGE_TAG:-latest}
     networks:
       - mqtt
@@ -182,7 +199,13 @@ services:
       TZ: America/Los_Angeles
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:8091/'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:8091/'
     image: ghcr.io/zwave-js/zwave-js-ui:${ZWAVE_IMAGE_TAG:-10}
     labels:
       homepage.group: Smart Home

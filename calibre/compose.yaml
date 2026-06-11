@@ -12,7 +12,11 @@ services:
       - DOCKER_MODS=linuxserver/mods:universal-calibre
     healthcheck:
       start_period: 20s
-      test: ['CMD', 'curl', '-f', 'http://localhost:8083/']
+      test:
+        - 'CMD'
+        - 'curl'
+        - '-f'
+        - 'http://localhost:8083/'
     image: ghcr.io/linuxserver/calibre-web:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Media

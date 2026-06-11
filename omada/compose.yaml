@@ -18,7 +18,13 @@ services:
       - host.docker.internal:host-gateway
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost:9202/metrics'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:9202/metrics'
     image: ghcr.io/charlie-haley/omada_exporter:${EXPORTER_IMAGE_TAG:-latest}
     labels:
       prometheus.label.instance: omada

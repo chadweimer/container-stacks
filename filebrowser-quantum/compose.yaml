@@ -83,7 +83,13 @@ services:
       JWT_SECRET: ${ONLYOFFICE_JWT_SECRET}
     healthcheck:
       start_period: 10s
-      test: 'wget --spider -q --tries=1 http://localhost/healthcheck'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost/healthcheck'
     image: onlyoffice/documentserver:${ONLYOFFICE_IMAGE_TAG:-latest}
     labels:
       traefik.enable: true

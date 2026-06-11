@@ -10,7 +10,13 @@ services:
     container_name: wineandcats-${STAGE}-adminer
     healthcheck:
       start_period: 5s
-      test: 'wget --spider -q --tries=1 http://localhost:8080'
+      test:
+        - 'CMD'
+        - 'wget'
+        - '--spider'
+        - '-q'
+        - '--tries=1'
+        - 'http://localhost:8080'
     image: adminer:5
     labels:
       - homepage.group=Other
@@ -64,7 +70,11 @@ services:
       POSTGRES_USER: gomp
     healthcheck:
       start_period: 5s
-      test: [ 'CMD', 'pg_isready', '-d', 'gomp' ]
+      test:
+        - 'CMD'
+        - 'pg_isready'
+        - '-d'
+        - 'gomp'
     image: postgres:${PG_VERSION}
     networks:
       - default
