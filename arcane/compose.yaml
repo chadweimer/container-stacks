@@ -20,8 +20,10 @@ services:
       retries: 5
       start_period: 15s
       test:
-        - 'CMD-SHELL'
-        - 'curl -fsS http://localhost:3552/api/health >/dev/null || exit 1'
+        - CMD
+        - curl
+        - -fsS
+        - http://localhost:3552/api/health
       timeout: 3s
     image: ghcr.io/getarcaneapp/arcane:${IMAGE_TAG:-latest}
     labels:
