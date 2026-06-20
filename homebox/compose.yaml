@@ -6,6 +6,7 @@ services:
   homebox:
     container_name: homebox
     environment:
+      HBOX_AUTH_API_KEY_PEPPER: ${HBOX_AUTH_API_KEY_PEPPER}
       HBOX_LOG_FORMAT: json
       HBOX_LOG_LEVEL: debug
       HBOX_OIDC_ALLOWED_GROUPS: users
