@@ -291,6 +291,11 @@
           "default": "example.com"
         },
         {
+          "name": "HBOX_AUTH_API_KEY_PEPPER",
+          "label": "HBOX_AUTH_API_KEY_PEPPER",
+          "default": "your_random_pepper_value"
+        },
+        {
           "name": "HBOX_OIDC_CLIENT_ID",
           "label": "HBOX_OIDC_CLIENT_ID",
           "default": "your_oidc_client_id"

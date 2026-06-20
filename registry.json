@@ -140,7 +140,7 @@
       "id": "homebox",
       "name": "HomeBox",
       "description": "A simple home inventory management software.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "chadweimer",
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/homebox/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/homebox/example.env",
