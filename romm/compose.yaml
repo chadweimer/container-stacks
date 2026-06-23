@@ -30,6 +30,9 @@ services:
       SCREENSCRAPER_PASSWORD: ${SCREENSCRAPER_PASSWORD}
       SCREENSCRAPER_USER: ${SCREENSCRAPER_USER}
       STEAMGRIDDB_API_KEY: ${STEAMGRIDDB_API_KEY}
+    extra_hosts:
+      # Workaround for OIDC server hostname resolution without ipv6 support
+      - '${OIDC_SERVER_HOST}:${OIDC_SERVER_IP}'
     healthcheck:
       start_period: 10s
       test:
