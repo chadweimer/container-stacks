@@ -231,7 +231,7 @@
       "id": "romm",
       "name": "RomM",
       "description": "The most powerful all-in-one app for managing your game collection.",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "author": "chadweimer",
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/romm/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/romm/example.env",

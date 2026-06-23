@@ -511,6 +511,16 @@
           "name": "OIDC_SERVER_APPLICATION_URL",
           "label": "OIDC_SERVER_APPLICATION_URL",
           "default": "https://auth.example.com"
+        },
+        {
+          "name": "OIDC_SERVER_HOST",
+          "label": "OIDC_SERVER_HOST",
+          "default": "auth.example.com"
+        },
+        {
+          "name": "OIDC_SERVER_IP",
+          "label": "OIDC_SERVER_IP",
+          "default": "127.0.0.2"
         }
       ]
     },
