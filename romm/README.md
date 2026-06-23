@@ -1,6 +1,6 @@
-# Jellyfin
+# RomM
 
-## Post Bring-up
+## Initial Setup
 
 ### Authelia
 
