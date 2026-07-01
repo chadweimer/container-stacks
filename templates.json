@@ -378,6 +378,32 @@
     {
       "id": 15,
       "type": 3,
+      "title": "Ollama",
+      "description": "Ollama and Open WebUI for self-hosting LLMs.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "ollama/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
+        },
+        {
+          "name": "WEBUI_SECRET_KEY",
+          "label": "WEBUI_SECRET_KEY",
+          "default": "your-secret-key"
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": 3,
       "title": "Omada",
       "description": "TP-Link Omada software controller.",
       "categories": [
@@ -407,7 +433,7 @@
       ]
     },
     {
-      "id": 16,
+      "id": 17,
       "type": 3,
       "title": "Portainer",
       "description": "Portainer is a lightweight management UI which allows you to easily manage your Docker environments.",
@@ -428,7 +454,7 @@
       ]
     },
     {
-      "id": 17,
+      "id": 18,
       "type": 3,
       "title": "Proxy",
       "description": "Traefik proxy with configurable ACME CA server, Authelia for authentication, and docker-proxy for exposing the docker socket in a more secure way.",
@@ -464,7 +490,7 @@
       ]
     },
     {
-      "id": 18,
+      "id": 19,
       "type": 3,
       "title": "RomM",
       "description": "The most powerful all-in-one app for managing your game collection.",
@@ -525,7 +551,7 @@
       ]
     },
     {
-      "id": 19,
+      "id": 20,
       "type": 3,
       "title": "Scrutiny",
       "description": "Hard Drive S.M.A.R.T Monitoring, Historical Trends & Real World Failure Thresholds.",
@@ -551,7 +577,7 @@
       ]
     },
     {
-      "id": 20,
+      "id": 21,
       "type": 3,
       "title": "Smart Home",
       "description": "Home Assistant, Homebridge, Mosquitto MQTT Broker, Z-Wave JS UI, and Frigate NVR.",
@@ -627,7 +653,7 @@
       ]
     },
     {
-      "id": 21,
+      "id": 22,
       "type": 3,
       "title": "Syncthing",
       "description": "Syncthing is a continuous file synchronization program",
@@ -648,7 +674,7 @@
       ]
     },
     {
-      "id": 22,
+      "id": 23,
       "type": 3,
       "title": "Tailscale",
       "description": "Tailscale daemon",
@@ -684,7 +710,7 @@
       ]
     },
     {
-      "id": 23,
+      "id": 24,
       "type": 3,
       "title": "UpSnap",
       "description": "A simple wake on lan web app written with SvelteKit, Go and PocketBase.",
@@ -705,7 +731,7 @@
       ]
     },
     {
-      "id": 24,
+      "id": 25,
       "type": 3,
       "title": "Uptime Kuma",
       "description": "A fancy self-hosted monitoring tool",
@@ -726,7 +752,7 @@
       ]
     },
     {
-      "id": 25,
+      "id": 26,
       "type": 3,
       "title": "Vikunja",
       "description": "The to-do app to organize your life. ",
@@ -767,7 +793,7 @@
       ]
     },
     {
-      "id": 26,
+      "id": 27,
       "type": 3,
       "title": "Wallos",
       "description": "Open-Source Personal Subscription Tracker",
@@ -793,7 +819,7 @@
       ]
     },
     {
-      "id": 27,
+      "id": 28,
       "type": 3,
       "title": "Wine & Cats",
       "description": "GOMP: Go Meal Planner - Web-based recipe book.",

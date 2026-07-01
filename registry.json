@@ -4,7 +4,7 @@
   "description": "Collection of compose templates maintained by me.",
   "author": "chadweimer",
   "url": "https://github.com/chadweimer/container-stacks",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "templates": [
     {
       "id": "alloy",
@@ -184,6 +184,19 @@
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/jellyfin/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/jellyfin/example.env",
       "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/jellyfin/README.md",
+      "tags": [
+        "app"
+      ]
+    },
+    {
+      "id": "ollama",
+      "name": "Ollama",
+      "description": "Ollama and Open WebUI for self-hosting LLMs.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/ollama/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/ollama/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/ollama/README.md",
       "tags": [
         "app"
       ]
