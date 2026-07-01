@@ -1,0 +1,56 @@
+networks:
+  ollama:
+    name: ollama
+  public:
+    external: true
+
+services:
+  ollama:
+    container_name: ollama
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      OLLAMA_IGPU_ENABLE: 1
+    group_add:
+      - 107 # render
+    image: ollama/ollama:${OLLAMA_IMAGE_TAG:-latest}
+    labels:
+      traefik.enable: true
+      traefik.http.routers.ollama.rule: Host(`${OLLAMA_HOST:-ollama.${BASE_DOMAIN}}`)
+      traefik.http.routers.ollama.tls.certresolver: myresolver
+      traefik.http.routers.ollama.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.ollama.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+    networks:
+      - ollama
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/pool0/containers/ollama:/.ollama
+  open-webui:
+    container_name: open-webui
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      WEBUI_AUTH: false
+      WEBUI_SECRET_KEY: ${WEBUI_SECRET_KEY}
+    image: ghcr.io/open-webui/open-webui:${OPENWEBUI_IMAGE_TAG:-main-slim}
+    labels:
+      homepage.group: Other
+      homepage.href: https://${OPENWEBUI_HOST:-open-webui.${BASE_DOMAIN}}
+      homepage.icon: open-webui.png
+      homepage.name: Open WebUI
+      traefik.enable: true
+      traefik.http.routers.open-webui.middlewares: 'authelia@docker'
+      traefik.http.routers.open-webui.rule: Host(`${OPENWEBUI_HOST:-open-webui.${BASE_DOMAIN}}`)
+      traefik.http.routers.open-webui.tls.certresolver: myresolver
+      traefik.http.routers.open-webui.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
+      traefik.http.routers.open-webui.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+    networks:
+      - ollama
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    user: '568:568'
+    volumes:
+      - /mnt/pool0/containers/open-webui:/app/backend/data
