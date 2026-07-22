@@ -4,7 +4,7 @@
   "description": "Collection of compose templates maintained by me.",
   "author": "chadweimer",
   "url": "https://github.com/chadweimer/container-stacks",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "templates": [
     {
       "id": "alloy",
@@ -30,6 +30,19 @@
       "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/arcane/README.md",
       "tags": [
         "app"
+      ]
+    },
+    {
+      "id": "arcane-agent",
+      "name": "Arcane Agent",
+      "description": "Modern Docker Management, Designed for Everyone.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arcane-agent/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/arcane-agent/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/arcane-agent/README.md",
+      "tags": [
+        "infra"
       ]
     },
     {
