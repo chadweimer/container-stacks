@@ -374,7 +374,7 @@
       "id": "wineandcats",
       "name": "Wine & Cats",
       "description": "GOMP: Go Meal Planner - Web-based recipe book.",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "author": "chadweimer",
       "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wineandcats/compose.yaml",
       "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/wineandcats/example.env",
