@@ -111,6 +111,7 @@ services:
   docker-proxy:
     container_name: docker-proxy
     environment:
+      ALLOW_LOGS: '1'
       CONTAINERS: '1'
       INFO: '1'
       NETWORKS: '1'
