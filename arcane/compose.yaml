@@ -60,6 +60,7 @@ services:
       AUTH: '1'
       CONFIGS: '1'
       CONTAINERS: '1'
+      DISTRIBUTION: '1'
       EVENTS: '1'
       EXEC: '1'
       IMAGES: '1'
