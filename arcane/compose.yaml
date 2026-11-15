@@ -8,11 +8,10 @@ services:
   arcane:
     container_name: arcane
     environment:
-      APP_URL: https://${HOST:-arcane.${BASE_DOMAIN}}
+      ARCANE_APP_URL: https://${HOST:-arcane.${BASE_DOMAIN}}
+      ARCANE_ENCRYPTION_KEY: ${ARCANE_ENCRYPTION_KEY}
+      ARCANE_LOG_JSON: true
       DOCKER_HOST: tcp://arcane-proxy:2375
-      ENCRYPTION_KEY: ${ENCRYPTION_KEY}
-      JWT_SECRET: ${JWT_SECRET}
-      LOG_JSON: true
       PGID: 568
       PUID: 568
     healthcheck:
@@ -25,7 +24,7 @@ services:
         - '-fsS'
         - 'http://localhost:3552/api/health'
       timeout: 3s
-    image: ghcr.io/getarcaneapp/arcane:${IMAGE_TAG:-latest}
+    image: ghcr.io/getarcaneapp/manager:${IMAGE_TAG:-latest}
     labels:
       com.getarcaneapp.arcane.updater: false
       homepage.group: Network
@@ -68,6 +67,7 @@ services:
       PING: '1'
       POST: '1'
       SECRETS: '1'
+      SYSTEM: '1'
       VERSION: '1'
       VOLUMES: '1'
     healthcheck:

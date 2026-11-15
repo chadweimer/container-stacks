@@ -4,7 +4,7 @@
 
 ### Secrets
 
-Per the [Arcane documentation](https://getarcane.app/docs/setup/installation#docker-compose-recommended), you can generate the values for the `ENCRYPTION_KEY` and `JWT_SECRET` via `openssl rand -hex 32`.
+Per the [Arcane documentation](https://getarcane.app/docs/get-started/installation#install-with-docker-compose), you can generate the values for the `ARCANE_ENCRYPTION_KEY` via `openssl rand -hex 32`.
 
 ## Post Bring-up
 

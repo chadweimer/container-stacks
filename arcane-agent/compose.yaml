@@ -4,10 +4,10 @@ services:
   arcane-agent:
     container_name: arcane-agent
     environment:
-      - AGENT_MODE=true
-      - AGENT_TOKEN=${AGENT_TOKEN}
-      - MANAGER_API_URL=${MANAGER_API_URL}
-    image: ghcr.io/getarcaneapp/arcane-headless:latest
+      - ARCANE_AGENT=true
+      - ARCANE_AGENT_TOKEN=${ARCANE_AGENT_TOKEN}
+      - ARCANE_MANAGER_API_URL=${ARCANE_MANAGER_API_URL}
+    image: ghcr.io/getarcaneapp/agent:${IMAGE_TAG:-latest}
     ports:
       - '3553:3553'
     pull_policy: always
