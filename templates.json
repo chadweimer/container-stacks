@@ -42,14 +42,9 @@
           "default": "example.com"
         },
         {
-          "name": "ENCRYPTION_KEY",
-          "label": "ENCRYPTION_KEY",
+          "name": "ARCANE_ENCRYPTION_KEY",
+          "label": "ARCANE_ENCRYPTION_KEY",
           "default": "key"
-        },
-        {
-          "name": "JWT_SECRET",
-          "label": "JWT_SECRET",
-          "default": "secret"
         }
       ]
     },
@@ -68,12 +63,12 @@
       },
       "env": [
         {
-          "name": "AGENT_TOKEN",
-          "label": "AGENT_TOKEN"
+          "name": "ARCANE_AGENT_TOKEN",
+          "label": "ARCANE_AGENT_TOKEN"
         },
         {
-          "name": "MANAGER_API_URL",
-          "label": "MANAGER_API_URL",
+          "name": "ARCANE_MANAGER_API_URL",
+          "label": "ARCANE_MANAGER_API_URL",
           "default": "https://arcane.example.com"
         }
       ]
