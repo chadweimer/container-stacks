@@ -28,7 +28,7 @@ slugify() {
 
 bump_semver() {
   local v="$1" part="$2"
-  if ! [[ $v =~ ^([1-9]+)\.([0-9]+)\.([0-9]+) ]]; then
+  if ! [[ $v =~ ^([0-9]+)\.([0-9]+)\.([0-9]+) ]]; then
     echo "1.0.0"
     return
   fi
@@ -58,10 +58,8 @@ if [ -f "$REG_OUT" ]; then
 fi
 
 tmp_reg_entries=$(mktemp)
-trap 'rm -f "$tmp_reg_entries"' EXIT
-
 tmp_tem_entries=$(mktemp)
-trap 'rm -f "$tmp_tem_entries"' EXIT
+trap 'rm -f "$tmp_reg_entries" "$tmp_tem_entries"' EXIT
 
 if [ ! -d "$TEMPLATES_DIR" ]; then
   echo "Templates directory '$TEMPLATES_DIR' not found" >&2
@@ -179,6 +177,8 @@ while IFS= read -r dir_name; do
     # split on first '='
     name_k=$(printf '%s' "$line_trim" | sed -E 's/=.*$//')
     value_v=$(printf '%s' "$line_trim" | sed -E 's/^[^=]*=//')
+    # strip matching outer quotes if present
+    value_v=$(printf '%s' "$value_v" | sed -E "s/^['\"](.*)['\"]$/\1/")
     # escape double quotes in value
     value_v_esc=$(printf '%s' "$value_v" | sed -E 's/"/\\\"/g')
     if [ -z "$value_v" ]; then
@@ -222,9 +222,12 @@ if [ "${#new_ids_list[@]}" -gt 0 ]; then
 elif [ "${#prev_ids[@]}" -gt 0 ]; then
   next_version=$(bump_semver "$base_version" "major")
   echo "Detected ${#prev_ids[@]} removed template(s): ${!prev_ids[*]} -> bumping registry.json major to ${next_version}"
+elif [ -f "$REG_OUT" ] && ! jq -e --argjson old "$(jq -c '.templates' "$REG_OUT")" --argjson new "$registry_json" -n '$old == $new' >/dev/null 2>&1; then
+  next_version=$(bump_semver "$base_version" "patch")
+  echo "Detected modifications to existing template(s) -> bumping registry.json patch to ${next_version}"
 else
   next_version="$base_version"
-  echo "No new or removed templates detected -> keeping registry.json version ${base_version}"
+  echo "No new, removed, or modified templates detected -> keeping registry.json version ${base_version}"
 fi
 
 # Build final registry JSON

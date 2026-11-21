@@ -505,7 +505,7 @@
         {
           "name": "LLDAP_LDAP_BASE_DN",
           "label": "LLDAP_LDAP_BASE_DN",
-          "default": "'dc=example,dc=com'"
+          "default": "dc=example,dc=com"
         }
       ]
     },
