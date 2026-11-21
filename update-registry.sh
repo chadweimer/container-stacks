@@ -120,7 +120,7 @@ while IFS= read -r dir_name; do
   if [ -f "$tdir/example.env" ]; then
     env_example="$tdir/example.env"
   elif [ -f "$tdir/.env.example" ]; then
-    env_example="$tdr/.env.example"
+    env_example="$tdir/.env.example"
   fi
   if [ -z "$env_example" ] || [ ! -f "$env_example" ]; then
     echo "Missing example.env or .env.example in ${tdir#${ROOT}/}." >&2
