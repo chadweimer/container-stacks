@@ -38,7 +38,7 @@ services:
     environment:
       FRIGATE_RTSP_PASSWORD: ${FRIGATE_RTSP_PASSWORD}
       PLUS_API_KEY: ${FRIGATE_PLUS_API_KEY}
-      TZ: America/Los_Angeles
+      TZ: ${TZ:-America/Los_Angeles}
     image: ghcr.io/blakeblackshear/frigate:${FRIGATE_IMAGE_TAG:-stable}
     labels:
       homepage.group: Smart Home
@@ -46,14 +46,12 @@ services:
       homepage.icon: frigate.png
       homepage.name: Frigate
       prometheus.label.__metrics_path__: /api/metrics
-      prometheus.label.instance: truenas-server
+      prometheus.label.instance: ${PROMETHEUS_INSTANCE:-truenas-server}
       prometheus.port: 5000
       traefik.enable: true
       traefik.http.routers.frigate.middlewares: 'authelia@docker'
       traefik.http.routers.frigate.rule: Host(`${FRIGATE_HOST:-frigate.${BASE_DOMAIN}}`)
-      traefik.http.routers.frigate.tls.certresolver: myresolver
-      traefik.http.routers.frigate.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.frigate.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.frigate.tls: true
       traefik.http.services.frigate.loadbalancer.server.port: 8971
       traefik.http.services.frigate.loadbalancer.server.scheme: https
     networks:
@@ -64,8 +62,8 @@ services:
     shm_size: '1024mb'
     stop_grace_period: 30s
     volumes:
-      - /mnt/pool0/containers/frigate/config:/config
-      - /mnt/pool1/media/nvr:/media/frigate
+      - ${DATA_DIR:-/mnt/pool0/containers}/frigate/config:/config
+      - ${MEDIA_DIR:-/mnt/pool1/media}/nvr:/media/frigate
       - target: /tmp/cache
         tmpfs:
           size: 1000000000
@@ -104,9 +102,7 @@ services:
       homepage.widget.url: http://homeassistant:8123
       traefik.enable: true
       traefik.http.routers.hass.rule: Host(`${HASS_HOST:-homeassistant.${BASE_DOMAIN}}`)
-      traefik.http.routers.hass.tls.certresolver: myresolver
-      traefik.http.routers.hass.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.hass.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.hass.tls: true
       traefik.http.services.hass.loadbalancer.server.port: 8123
     networks:
       lan:
@@ -118,17 +114,17 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/homeassistant:/config
-      - /mnt/pool0/backups/home-assistant:/config/backups
+      - ${DATA_DIR:-/mnt/pool0/containers}/homeassistant:/config
+      - ${BACKUP_DIR:-/mnt/pool0/backups}/home-assistant:/config/backups
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
 
   homebridge:
     container_name: homebridge
     environment:
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -151,9 +147,7 @@ services:
       traefik.enable: true
       traefik.http.routers.homebridge.middlewares: 'authelia@docker'
       traefik.http.routers.homebridge.rule: Host(`${HOMEBRIDGE_HOST:-homebridge.${BASE_DOMAIN}}`)
-      traefik.http.routers.homebridge.tls.certresolver: myresolver
-      traefik.http.routers.homebridge.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.homebridge.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.homebridge.tls: true
       traefik.http.services.homebridge.loadbalancer.server.port: 8581
     networks:
       lan:
@@ -163,8 +157,8 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/backups/homebridge:/backups
-      - /mnt/pool0/containers/homebridge:/homebridge
+      - ${BACKUP_DIR:-/mnt/pool0/backups}/homebridge:/backups
+      - ${DATA_DIR:-/mnt/pool0/containers}/homebridge:/homebridge
 
   mosquitto:
     configs:
@@ -184,11 +178,11 @@ services:
       - mqtt
     pull_policy: always
     restart: unless-stopped
-    user: '568:568'
+    user: '${PUID:-568}:${PGID:-568}'
     volumes:
-      - /mnt/pool0/containers/mosquitto/config:/mosquitto/config
-      - /mnt/pool0/containers/mosquitto/data:/mosquitto/data
-      - /mnt/pool0/containers/mosquitto/log:/mosquitto/log
+      - ${DATA_DIR:-/mnt/pool0/containers}/mosquitto/config:/mosquitto/config
+      - ${DATA_DIR:-/mnt/pool0/containers}/mosquitto/data:/mosquitto/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/mosquitto/log:/mosquitto/log
 
   zwave-js-ui:
     container_name: zwave-js-ui
@@ -196,7 +190,7 @@ services:
       - ${ZWAVE_DEVICE_PATH}:/dev/zwave
     environment:
       SESSION_SECRET: ${ZWAVE_SESSION_SECRET}
-      TZ: America/Los_Angeles
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -215,9 +209,7 @@ services:
       traefik.enable: true
       traefik.http.routers.zwavejsui.middlewares: 'authelia@docker'
       traefik.http.routers.zwavejsui.rule: Host(`${ZWAVE_HOST:-zwave.${BASE_DOMAIN}}`)
-      traefik.http.routers.zwavejsui.tls.certresolver: myresolver
-      traefik.http.routers.zwavejsui.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.zwavejsui.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.zwavejsui.tls: true
       traefik.http.services.zwavejsui.loadbalancer.server.port: 8091
     networks:
       - public
@@ -226,4 +218,4 @@ services:
     stop_signal: SIGINT
     tty: true
     volumes:
-      - /mnt/pool0/containers/zwave-js-ui:/usr/src/app/store
+      - ${DATA_DIR:-/mnt/pool0/containers}/zwave-js-ui:/usr/src/app/store

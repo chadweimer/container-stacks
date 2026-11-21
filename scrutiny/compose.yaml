@@ -54,8 +54,8 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/scrutiny/influxdb/config:/etc/influxdb2
-      - /mnt/pool0/containers/scrutiny/influxdb/data:/var/lib/influxdb2
+      - ${DATA_DIR:-/mnt/pool0/containers}/scrutiny/influxdb/config:/etc/influxdb2
+      - ${DATA_DIR:-/mnt/pool0/containers}/scrutiny/influxdb/data:/var/lib/influxdb2
 
   web:
     configs:
@@ -85,9 +85,7 @@ services:
       traefik.enable: true
       traefik.http.routers.scrutiny.middlewares: 'authelia@docker'
       traefik.http.routers.scrutiny.rule: Host(`${HOST:-scrutiny.${BASE_DOMAIN}}`)
-      traefik.http.routers.scrutiny.tls.certresolver: myresolver
-      traefik.http.routers.scrutiny.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.scrutiny.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.scrutiny.tls: true
       traefik.http.services.scrutiny.loadbalancer.server.port: 8080
     networks:
       - scrutiny
@@ -95,4 +93,4 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/scrutiny/config:/opt/scrutiny/config
+      - ${DATA_DIR:-/mnt/pool0/containers}/scrutiny/config:/opt/scrutiny/config

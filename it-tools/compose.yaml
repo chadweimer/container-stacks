@@ -13,9 +13,7 @@ services:
       homepage.name: IT-Tools
       traefik.enable: true
       traefik.http.routers.it-tools.rule: Host(`${HOST:-it-tools.${BASE_DOMAIN}}`)
-      traefik.http.routers.it-tools.tls.certresolver: myresolver
-      traefik.http.routers.it-tools.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.it-tools.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.it-tools.tls: true
     networks:
       - public
     pull_policy: always

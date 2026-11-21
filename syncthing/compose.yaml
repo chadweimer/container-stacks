@@ -17,8 +17,8 @@ services:
       - SYS_ADMIN
     container_name: syncthing
     environment:
-      PGID: '1000'
-      PUID: '1000'
+      PGID: '${PGID:-1000}'
+      PUID: '${PUID:-1000}'
       STNOUPGRADE: 'true'
     image: ghcr.io/syncthing/syncthing:${IMAGE_TAG:-latest}
     labels:
@@ -26,14 +26,12 @@ services:
       homepage.href: https://${HOST:-syncthing.${BASE_DOMAIN}}
       homepage.icon: syncthing.png
       homepage.name: Syncthing
-      prometheus.label.instance: truenas-server
+      prometheus.label.instance: ${PROMETHEUS_INSTANCE:-truenas-server}
       prometheus.port: 8384
       traefik.enable: true
       traefik.http.routers.syncthing.middlewares: 'authelia@docker'
       traefik.http.routers.syncthing.rule: Host(`${HOST:-syncthing.${BASE_DOMAIN}}`)
-      traefik.http.routers.syncthing.tls.certresolver: myresolver
-      traefik.http.routers.syncthing.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.syncthing.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.syncthing.tls: true
     networks:
       - observe
       - public
@@ -43,7 +41,7 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/syncthing:/var/syncthing
-      - /mnt/pool0/backups:/mnt/backups
-      - /mnt/pool1/media/library:/mnt/media
+      - ${DATA_DIR:-/mnt/pool0/containers}/syncthing:/var/syncthing
+      - ${BACKUP_DIR:-/mnt/pool0/backups}:/mnt/backups
+      - ${MEDIA_DIR:-/mnt/pool1/media}/library:/mnt/media
       - /mnt/pool1/share/sync:/mnt/tmp/sync

@@ -12,8 +12,8 @@ services:
       ARCANE_ENCRYPTION_KEY: ${ARCANE_ENCRYPTION_KEY}
       ARCANE_LOG_JSON: true
       DOCKER_HOST: tcp://arcane-proxy:2375
-      PGID: 568
-      PUID: 568
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
     healthcheck:
       interval: 10s
       retries: 5
@@ -33,9 +33,7 @@ services:
       homepage.name: Arcane
       traefik.enable: true
       traefik.http.routers.arcane.rule: Host(`${HOST:-arcane.${BASE_DOMAIN}}`)
-      traefik.http.routers.arcane.tls.certresolver: myresolver
-      traefik.http.routers.arcane.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.arcane.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.arcane.tls: true
       traefik.http.services.arcane.loadbalancer.server.port: 3552
     networks:
       - arcane
@@ -45,8 +43,8 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/arcane/data:/app/data
-      - /mnt/pool0/containers/arcane/data/projects:/app/data/projects
+      - ${DATA_DIR:-/mnt/pool0/containers}/arcane/data:/app/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/arcane/data/projects:/app/data/projects
   arcane-proxy:
     container_name: arcane-proxy
     environment:

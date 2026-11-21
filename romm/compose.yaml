@@ -50,22 +50,20 @@ services:
       homepage.name: RomM
       traefik.enable: true
       traefik.http.routers.romm.rule: Host(`${HOST:-romm.${BASE_DOMAIN}}`)
-      traefik.http.routers.romm.tls.certresolver: myresolver
-      traefik.http.routers.romm.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.romm.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.romm.tls: true
       traefik.http.services.romm.loadbalancer.server.port: 8080
     networks:
       - public
       - romm
     pull_policy: always
     restart: unless-stopped
-    user: 568:568
+    user: '${PUID:-568}:${PGID:-568}'
     volumes:
-      - /mnt/pool0/containers/romm/assets:/romm/assets
-      - /mnt/pool0/containers/romm/config:/romm/config
-      - /mnt/pool0/containers/romm/redis/data:/redis-data
-      - /mnt/pool0/containers/romm/resources:/romm/resources
-      - /mnt/pool1/media/library/games:/romm/library # Your game library. Check https://docs.romm.app/latest/Getting-Started/Folder-Structure/ for more details.
+      - ${DATA_DIR:-/mnt/pool0/containers}/romm/assets:/romm/assets
+      - ${DATA_DIR:-/mnt/pool0/containers}/romm/config:/romm/config
+      - ${DATA_DIR:-/mnt/pool0/containers}/romm/redis/data:/redis-data
+      - ${DATA_DIR:-/mnt/pool0/containers}/romm/resources:/romm/resources
+      - ${MEDIA_DIR:-/mnt/pool1/media}/library/games:/romm/library # Your game library. Check https://docs.romm.app/latest/Getting-Started/Folder-Structure/ for more details.
 
   db:
     container_name: romm-db
@@ -91,4 +89,4 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/romm/mysql/data:/var/lib/mysql
+      - ${DATA_DIR:-/mnt/pool0/containers}/romm/mysql/data:/var/lib/mysql

@@ -23,29 +23,29 @@ networks:
 
 secrets:
   ACME_EAB_HMAC:
-    file: /mnt/pool0/containers/traefik/secrets/ACME_EAB_HMAC
+    file: ${DATA_DIR:-/mnt/pool0/containers}/traefik/secrets/ACME_EAB_HMAC
   ACME_EAB_KID:
-    file: /mnt/pool0/containers/traefik/secrets/ACME_EAB_KID
+    file: ${DATA_DIR:-/mnt/pool0/containers}/traefik/secrets/ACME_EAB_KID
   AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD:
-    file: /mnt/pool0/containers/authelia/secrets/LDAP_PASSWORD
+    file: ${DATA_DIR:-/mnt/pool0/containers}/authelia/secrets/LDAP_PASSWORD
   AUTHELIA_JWT_SECRET:
-    file: /mnt/pool0/containers/authelia/secrets/JWT_SECRET
+    file: ${DATA_DIR:-/mnt/pool0/containers}/authelia/secrets/JWT_SECRET
   AUTHELIA_OIDC_HMAC_SECRET:
-    file: /mnt/pool0/containers/authelia/secrets/OIDC_HMAC_SECRET
+    file: ${DATA_DIR:-/mnt/pool0/containers}/authelia/secrets/OIDC_HMAC_SECRET
   AUTHELIA_OIDC_JWK_KEY:
-    file: /mnt/pool0/containers/authelia/secrets/oidc.jwks.rsa.2048.pem
+    file: ${DATA_DIR:-/mnt/pool0/containers}/authelia/secrets/oidc.jwks.rsa.2048.pem
   AUTHELIA_SESSION_SECRET:
-    file: /mnt/pool0/containers/authelia/secrets/SESSION_SECRET
+    file: ${DATA_DIR:-/mnt/pool0/containers}/authelia/secrets/SESSION_SECRET
   AUTHELIA_STORAGE_ENCRYPTION_KEY:
-    file: /mnt/pool0/containers/authelia/secrets/STORAGE_ENCRYPTION_KEY
+    file: ${DATA_DIR:-/mnt/pool0/containers}/authelia/secrets/STORAGE_ENCRYPTION_KEY
   CF_DNS_API_TOKEN:
-    file: /mnt/pool0/containers/traefik/secrets/CF_DNS_API_TOKEN
+    file: ${DATA_DIR:-/mnt/pool0/containers}/traefik/secrets/CF_DNS_API_TOKEN
   LLDAP_JWT_SECRET:
-    file: /mnt/pool0/containers/lldap/secrets/LLDAP_JWT_SECRET
+    file: ${DATA_DIR:-/mnt/pool0/containers}/lldap/secrets/LLDAP_JWT_SECRET
   LLDAP_KEY_SEED:
-    file: /mnt/pool0/containers/lldap/secrets/LLDAP_KEY_SEED
+    file: ${DATA_DIR:-/mnt/pool0/containers}/lldap/secrets/LLDAP_KEY_SEED
   LLDAP_LDAP_USER_PASS:
-    file: /mnt/pool0/containers/lldap/secrets/LLDAP_LDAP_USER_PASS
+    file: ${DATA_DIR:-/mnt/pool0/containers}/lldap/secrets/LLDAP_LDAP_USER_PASS
 
 services:
   authelia:
@@ -71,9 +71,9 @@ services:
       AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: /run/secrets/AUTHELIA_STORAGE_ENCRYPTION_KEY
       AUTHELIA_STORAGE_LOCAL_PATH: /config/db.sqlite3
       AUTHELIA_TELEMETRY_METRICS_ENABLED: true
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
       X_AUTHELIA_CONFIG: /config/configuration.yml,/config/oidc_clients.yml
       X_AUTHELIA_CONFIG_FILTERS: template
     image: ghcr.io/authelia/authelia:${AUTHELIA_IMAGE_TAG:-4}
@@ -82,16 +82,14 @@ services:
       homepage.href: https://${AUTHELIA_HOST:-auth.${BASE_DOMAIN}}
       homepage.icon: authelia.png
       homepage.name: Authelia
-      prometheus.label.instance: truenas-server
+      prometheus.label.instance: ${PROMETHEUS_INSTANCE:-truenas-server}
       prometheus.port: 9959
       traefik.enable: true
       traefik.http.middlewares.authelia.forwardauth.address: http://authelia:9091/api/authz/forward-auth
       traefik.http.middlewares.authelia.forwardauth.authResponseHeaders: Remote-User,Remote-Groups,Remote-Name,Remote-Email
       traefik.http.middlewares.authelia.forwardauth.trustForwardHeader: true
       traefik.http.routers.authelia.rule: Host(`${AUTHELIA_HOST:-auth.${BASE_DOMAIN}}`)
-      traefik.http.routers.authelia.tls.certresolver: myresolver
-      traefik.http.routers.authelia.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.authelia.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.authelia.tls: true
       traefik.http.services.authelia.loadbalancer.server.port: 9091
     networks:
       - observe
@@ -106,7 +104,7 @@ services:
       - AUTHELIA_SESSION_SECRET
       - AUTHELIA_STORAGE_ENCRYPTION_KEY
     volumes:
-      - /mnt/pool0/containers/authelia/config:/config
+      - ${DATA_DIR:-/mnt/pool0/containers}/authelia/config:/config
 
   docker-proxy:
     container_name: docker-proxy
@@ -138,13 +136,13 @@ services:
   lldap:
     container_name: lldap
     environment:
-      GID: 568
+      GID: ${PGID:-568}
       LLDAP_JWT_SECRET_FILE: /run/secrets/LLDAP_JWT_SECRET
       LLDAP_KEY_SEED_FILE: /run/secrets/LLDAP_KEY_SEED
       LLDAP_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN}
       LLDAP_LDAP_USER_PASS_FILE: /run/secrets/LLDAP_LDAP_USER_PASS
-      TZ: America/Los_Angeles
-      UID: 568
+      TZ: ${TZ:-America/Los_Angeles}
+      UID: ${PUID:-568}
     image: ghcr.io/lldap/lldap:${LLDAP_IMAGE_TAG:-stable}
     labels:
       homepage.group: Network
@@ -153,9 +151,7 @@ services:
       homepage.name: lldap
       traefik.enable: true
       traefik.http.routers.lldap.rule: Host(`${LLDAP_HOST:-lldap.${BASE_DOMAIN}}`)
-      traefik.http.routers.lldap.tls.certresolver: myresolver
-      traefik.http.routers.lldap.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.lldap.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.lldap.tls: true
       traefik.http.services.lldap.loadbalancer.server.port: 17170
     networks:
       - public
@@ -166,7 +162,7 @@ services:
       - LLDAP_KEY_SEED
       - LLDAP_LDAP_USER_PASS
     volumes:
-      - /mnt/pool0/containers/lldap/data:/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/lldap/data:/data
 
   traefik:
     command:
@@ -185,6 +181,9 @@ services:
       - '--entryPoints.web.forwardedHeaders.trustedIPs=${TRAEFIK_TRUSTED_IPS:-127.0.0.1}'
       - '--entryPoints.websecure.address=:443'
       - '--entryPoints.websecure.forwardedHeaders.trustedIPs=${TRAEFIK_TRUSTED_IPS:-127.0.0.1}'
+      - '--entryPoints.websecure.http.tls.certresolver=myresolver'
+      - '--entryPoints.websecure.http.tls.domains[0].main=${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}'
+      - '--entryPoints.websecure.http.tls.domains[0].sans=${TLS_CERT_SANS:-*.${BASE_DOMAIN}}'
       - '--log.format=json'
       - '--log.level=${TRAEFIK_LOG_LEVEL:-INFO}'
       - '--accesslog=${TRAEFIK_ACCESS_LOG:-false}'
@@ -220,15 +219,13 @@ services:
       homepage.href: https://${TRAEFIK_HOST:-traefik.${BASE_DOMAIN}}
       homepage.icon: traefik.png
       homepage.name: Traefik
-      prometheus.label.instance: truenas-server
+      prometheus.label.instance: ${PROMETHEUS_INSTANCE:-truenas-server}
       prometheus.port: 8080
       traefik.enable: true
       traefik.http.routers.api.middlewares: 'authelia@docker'
       traefik.http.routers.api.rule: Host(`${TRAEFIK_HOST:-traefik.${BASE_DOMAIN}}`)
       traefik.http.routers.api.service: 'api@internal'
-      traefik.http.routers.api.tls.certresolver: myresolver
-      traefik.http.routers.api.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.api.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.api.tls: true
     networks:
       - docker-proxy
       - observe
@@ -242,7 +239,7 @@ services:
       - ACME_EAB_KID
       - ACME_EAB_HMAC
       - CF_DNS_API_TOKEN
-    user: '568:568'
+    user: '${PUID:-568}:${PGID:-568}'
     volumes:
-      - /mnt/pool0/containers/traefik/config:/app
-      - /mnt/pool0/containers/traefik/le:/letsencrypt
+      - ${DATA_DIR:-/mnt/pool0/containers}/traefik/config:/app
+      - ${DATA_DIR:-/mnt/pool0/containers}/traefik/le:/letsencrypt

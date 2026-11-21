@@ -25,13 +25,11 @@ services:
       homepage.name: Homebox
       traefik.enable: true
       traefik.http.routers.homebox.rule: Host(`${HOST:-homebox.${BASE_DOMAIN}}`)
-      traefik.http.routers.homebox.tls.certresolver: myresolver
-      traefik.http.routers.homebox.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.homebox.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.homebox.tls: true
       traefik.http.services.homebox.loadbalancer.server.port: 7745
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/homebox/data:/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/homebox/data:/data

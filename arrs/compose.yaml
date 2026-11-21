@@ -9,9 +9,9 @@ services:
   bazarr:
     container_name: bazarr
     environment:
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -30,22 +30,20 @@ services:
       traefik.enable: true
       traefik.http.routers.bazarr.middlewares: 'authelia@docker'
       traefik.http.routers.bazarr.rule: Host(`${BAZARR_HOST:-bazarr.${BASE_DOMAIN}}`)
-      traefik.http.routers.bazarr.tls.certresolver: myresolver
-      traefik.http.routers.bazarr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.bazarr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.bazarr.tls: true
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/bazarr:/config
-      - /mnt/pool1/media:/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/bazarr:/config
+      - ${MEDIA_DIR:-/mnt/pool1/media}:/data
   cleanuparr:
     container_name: cleanuparr
     environment:
-      - PUID=568
-      - PGID=568
-      - TZ=America/Los_Angeles
+      - PUID=${PUID:-568}
+      - PGID=${PGID:-568}
+      - TZ=${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -62,16 +60,14 @@ services:
       traefik.enable: true
       traefik.http.routers.cleanuparr.middlewares: 'authelia@docker'
       traefik.http.routers.cleanuparr.rule: Host(`${CLEANUPARR_HOST:-cleanuparr.${BASE_DOMAIN}}`)
-      traefik.http.routers.cleanuparr.tls.certresolver: myresolver
-      traefik.http.routers.cleanuparr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.cleanuparr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.cleanuparr.tls: true
       traefik.http.services.cleanuparr.loadbalancer.server.port: 11011
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/cleanuparr/config:/config
+      - ${DATA_DIR:-/mnt/pool0/containers}/cleanuparr/config:/config
   flaresolverr:
     container_name: flaresolverr
     environment:
@@ -91,7 +87,7 @@ services:
   maintainerr:
     container_name: maintainerr
     environment:
-      TZ: America/Los_Angeles
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -110,23 +106,21 @@ services:
       traefik.enable: true
       traefik.http.routers.maintainerr.middlewares: 'authelia@docker'
       traefik.http.routers.maintainerr.rule: Host(`${MAINTAINERR_HOST:-maintainerr.${BASE_DOMAIN}}`)
-      traefik.http.routers.maintainerr.tls.certresolver: myresolver
-      traefik.http.routers.maintainerr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.maintainerr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.maintainerr.tls: true
       traefik.http.services.maintainerr.loadbalancer.server.port: 6246
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
-    user: 568:568
+    user: '${PUID:-568}:${PGID:-568}'
     volumes:
-      - /mnt/pool0/containers/maintainerr/data:/opt/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/maintainerr/data:/opt/data
   prowlarr:
     container_name: prowlarr
     environment:
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -145,21 +139,19 @@ services:
       traefik.enable: true
       traefik.http.routers.prowlarr.middlewares: 'authelia@docker'
       traefik.http.routers.prowlarr.rule: Host(`${PROWLARR_HOST:-prowlarr.${BASE_DOMAIN}}`)
-      traefik.http.routers.prowlarr.tls.certresolver: myresolver
-      traefik.http.routers.prowlarr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.prowlarr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.prowlarr.tls: true
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/prowlarr:/config
+      - ${DATA_DIR:-/mnt/pool0/containers}/prowlarr:/config
   radarr:
     container_name: radarr
     environment:
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -182,20 +174,18 @@ services:
       traefik.enable: true
       traefik.http.routers.radarr.middlewares: 'authelia@docker'
       traefik.http.routers.radarr.rule: Host(`${RADARR_HOST:-radarr.${BASE_DOMAIN}}`)
-      traefik.http.routers.radarr.tls.certresolver: myresolver
-      traefik.http.routers.radarr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.radarr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.radarr.tls: true
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/radarr:/config
-      - /mnt/pool1/media:/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/radarr:/config
+      - ${MEDIA_DIR:-/mnt/pool1/media}:/data
   seerr:
     container_name: seerr
     environment:
-      TZ: America/Los_Angeles
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -215,21 +205,19 @@ services:
       traefik.enable: true
       traefik.http.routers.seerr.middlewares: 'authelia@docker'
       traefik.http.routers.seerr.rule: Host(`${SEERR_HOST:-seerr.${BASE_DOMAIN}}`)
-      traefik.http.routers.seerr.tls.certresolver: myresolver
-      traefik.http.routers.seerr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.seerr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.seerr.tls: true
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/jellyseerr:/app/config
+      - ${DATA_DIR:-/mnt/pool0/containers}/jellyseerr:/app/config
   sonarr:
     container_name: sonarr
     environment:
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -252,16 +240,14 @@ services:
       traefik.enable: true
       traefik.http.routers.sonarr.middlewares: 'authelia@docker'
       traefik.http.routers.sonarr.rule: Host(`${SONARR_HOST:-sonarr.${BASE_DOMAIN}}`)
-      traefik.http.routers.sonarr.tls.certresolver: myresolver
-      traefik.http.routers.sonarr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.sonarr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.sonarr.tls: true
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/sonarr:/config
-      - /mnt/pool1/media:/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/sonarr:/config
+      - ${MEDIA_DIR:-/mnt/pool1/media}:/data
   tdarr:
     container_name: tdarr
     devices:
@@ -270,9 +256,9 @@ services:
       inContainer: true
       internalNode: true
       nodeName: MyInternalNode
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
       UMASK_SET: 002
     group_add:
       - 107 # render
@@ -286,19 +272,17 @@ services:
       traefik.enable: true
       traefik.http.routers.tdarr.middlewares: 'authelia@docker'
       traefik.http.routers.tdarr.rule: Host(`${TDARR_HOST:-tdarr.${BASE_DOMAIN}}`)
-      traefik.http.routers.tdarr.tls.certresolver: myresolver
-      traefik.http.routers.tdarr.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.tdarr.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.tdarr.tls: true
       traefik.http.services.tdarr.loadbalancer.server.port: 8265
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/tdarr/server:/app/server
-      - /mnt/pool0/containers/tdarr/configs:/app/configs
-      - /mnt/pool0/containers/tdarr/logs:/app/logs
-      - /mnt/pool1/media/library:/media
+      - ${DATA_DIR:-/mnt/pool0/containers}/tdarr/server:/app/server
+      - ${DATA_DIR:-/mnt/pool0/containers}/tdarr/configs:/app/configs
+      - ${DATA_DIR:-/mnt/pool0/containers}/tdarr/logs:/app/logs
+      - ${MEDIA_DIR:-/mnt/pool1/media}/library:/media
   transmission:
     container_name: transmission
     depends_on:
@@ -308,7 +292,7 @@ services:
       DOCKER_MODS: ghcr.io/michsior14/docker-mods:transmission-gluetun-port-update|ghcr.io/linuxserver/mods:transmission-floodui
       GLUETUN_AUTH_API_KEY: ${GLUETUN_AUTH_API_KEY}
       GLUETUN_AUTH_TYPE: apikey
-      TZ: America/Los_Angeles
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -330,8 +314,8 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/transmission/config:/config
-      - /mnt/pool1/media/torrents:/data/torrents
+      - ${DATA_DIR:-/mnt/pool0/containers}/transmission/config:/config
+      - ${MEDIA_DIR:-/mnt/pool1/media}/torrents:/data/torrents
   transmission-vpn:
     cap_add:
       - NET_ADMIN
@@ -345,7 +329,7 @@ services:
       PORT_FORWARD_ONLY: 'on'
       SERVER_CITIES: Los Angeles
       SERVER_COUNTRIES: United States
-      TZ: America/Los_Angeles
+      TZ: ${TZ:-America/Los_Angeles}
       VPN_PORT_FORWARDING: 'on'
       VPN_SERVICE_PROVIDER: ${VPN_SERVICE_PROVIDER}
       VPN_TYPE: ${VPN_TYPE:-wireguard}
@@ -355,9 +339,7 @@ services:
       traefik.enable: true
       traefik.http.routers.transmission.middlewares: 'authelia@docker'
       traefik.http.routers.transmission.rule: Host(`${TRANSMISSION_HOST:-transmission.${BASE_DOMAIN}}`)
-      traefik.http.routers.transmission.tls.certresolver: myresolver
-      traefik.http.routers.transmission.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.transmission.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.transmission.tls: true
       traefik.http.services.transmission.loadbalancer.server.port: 9091
     networks:
       - public
@@ -368,4 +350,4 @@ services:
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/transmission/gluetun:/gluetun
+      - ${DATA_DIR:-/mnt/pool0/containers}/transmission/gluetun:/gluetun

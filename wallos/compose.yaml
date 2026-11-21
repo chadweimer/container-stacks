@@ -6,9 +6,9 @@ services:
   wallos:
     container_name: wallos
     environment:
-      PGID: 568
-      PUID: 568
-      TZ: America/Los_Angeles
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
     image: ghcr.io/ellite/wallos:${IMAGE_TAG:-latest}
     labels:
       homepage.group: Other
@@ -22,13 +22,11 @@ services:
       traefik.enable: true
       traefik.http.routers.wallos.middlewares: 'authelia@docker'
       traefik.http.routers.wallos.rule: Host(`${HOST:-wallos.${BASE_DOMAIN}}`)
-      traefik.http.routers.wallos.tls.certresolver: myresolver
-      traefik.http.routers.wallos.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.wallos.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.wallos.tls: true
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/wallos/db:/var/www/html/db
-      - /mnt/pool0/containers/wallos/logos:/var/www/html/images/uploads/logos
+      - ${DATA_DIR:-/mnt/pool0/containers}/wallos/db:/var/www/html/db
+      - ${DATA_DIR:-/mnt/pool0/containers}/wallos/logos:/var/www/html/images/uploads/logos

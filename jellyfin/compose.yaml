@@ -9,7 +9,7 @@ services:
       - /dev/dri:/dev/dri
     environment:
       JELLYFIN_PublishedServerUrl: https://${HOST:-jellyfin.${BASE_DOMAIN}}
-      TZ: America/Los_Angeles
+      TZ: ${TZ:-America/Los_Angeles}
     group_add:
       - 107 # render
       - 44 # video
@@ -21,15 +21,13 @@ services:
       homepage.name: Jellyfin
       traefik.enable: true
       traefik.http.routers.jellyfin.rule: Host(`${HOST:-jellyfin.${BASE_DOMAIN}}`)
-      traefik.http.routers.jellyfin.tls.certresolver: myresolver
-      traefik.http.routers.jellyfin.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.jellyfin.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.jellyfin.tls: true
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
-    user: '568:568'
+    user: '${PUID:-568}:${PGID:-568}'
     volumes:
-      - /mnt/pool1/media/library:/data/library
-      - /mnt/pool0/containers/jellyfin/cache:/cache
-      - /mnt/pool0/containers/jellyfin:/config
+      - ${MEDIA_DIR:-/mnt/pool1/media}/library:/data/library
+      - ${DATA_DIR:-/mnt/pool0/containers}/jellyfin/cache:/cache
+      - ${DATA_DIR:-/mnt/pool0/containers}/jellyfin:/config

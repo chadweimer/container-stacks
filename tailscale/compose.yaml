@@ -14,7 +14,7 @@ services:
       TS_HOSTNAME: ${HOSTNAME}
       TS_STATE_DIR: /var/lib/tailscale
       TS_USERSPACE: 'false'
-      TZ: America/Los_Angeles
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
@@ -30,11 +30,11 @@ services:
       homepage.href: https://login.tailscale.com
       homepage.icon: tailscale.png
       homepage.name: Tailscale
-      prometheus.label.instance: truenas-server
-      prometheus.label.tailscale_machine: truenas-server
+      prometheus.label.instance: ${PROMETHEUS_INSTANCE:-truenas-server}
+      prometheus.label.tailscale_machine: ${PROMETHEUS_INSTANCE:-truenas-server}
       prometheus.port: 9002
     network_mode: host
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/tailscale:/var/lib/tailscale
+      - ${DATA_DIR:-/mnt/pool0/containers}/tailscale:/var/lib/tailscale

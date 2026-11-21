@@ -6,9 +6,9 @@ services:
   web:
     container_name: calibre-web
     environment:
-      - PUID=568
-      - PGID=568
-      - TZ=America/Los_Angeles
+      - PUID=${PUID:-568}
+      - PGID=${PGID:-568}
+      - TZ=${TZ:-America/Los_Angeles}
       - DOCKER_MODS=linuxserver/mods:universal-calibre
     healthcheck:
       start_period: 20s
@@ -26,14 +26,12 @@ services:
       traefik.enable: true
       traefik.http.routers.calibre.middlewares: 'authelia@docker'
       traefik.http.routers.calibre.rule: Host(`${HOST:-calibre.${BASE_DOMAIN}}`)
-      traefik.http.routers.calibre.tls.certresolver: myresolver
-      traefik.http.routers.calibre.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.calibre.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.calibre.tls: true
       traefik.http.services.calibre.loadbalancer.server.port: 8083
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
     volumes:
-      - /mnt/pool0/containers/calibre/data:/config
-      - /mnt/pool1/media/library/calibre:/books
+      - ${DATA_DIR:-/mnt/pool0/containers}/calibre/data:/config
+      - ${MEDIA_DIR:-/mnt/pool1/media}/library/calibre:/books

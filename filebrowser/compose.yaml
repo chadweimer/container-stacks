@@ -15,16 +15,14 @@ services:
       traefik.enable: true
       traefik.http.routers.filebrowser.middlewares: 'authelia@docker'
       traefik.http.routers.filebrowser.rule: Host(`${HOST:-files.${BASE_DOMAIN}}`)
-      traefik.http.routers.filebrowser.tls.certresolver: myresolver
-      traefik.http.routers.filebrowser.tls.domains[0].main: ${TLS_CERT_DOMAIN:-${BASE_DOMAIN}}
-      traefik.http.routers.filebrowser.tls.domains[0].sans: ${TLS_CERT_SANS:-*.${BASE_DOMAIN}}
+      traefik.http.routers.filebrowser.tls: true
     networks:
       - public
     pull_policy: always
     restart: unless-stopped
-    user: '568:568'
+    user: '${PUID:-568}:${PGID:-568}'
     volumes:
-      - /mnt/pool0/containers/filebrowser:/config
-      - /mnt/pool0/containers/filebrowser:/database
+      - ${DATA_DIR:-/mnt/pool0/containers}/filebrowser:/config
+      - ${DATA_DIR:-/mnt/pool0/containers}/filebrowser:/database
       - /mnt/pool0:/srv/pool0
       - /mnt/pool1:/srv/pool1

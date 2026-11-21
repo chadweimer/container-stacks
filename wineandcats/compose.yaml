@@ -25,9 +25,7 @@ services:
       - homepage.name=Wine & Cats (${STAGE}) DB
       - traefik.enable=true
       - traefik.http.routers.db-wineandcats-${STAGE}.rule=Host(`db.${HOST:-${STAGE}.${BASE_DOMAIN}}`)
-      - traefik.http.routers.db-wineandcats-${STAGE}.tls.certresolver=myresolver
-      - traefik.http.routers.db-wineandcats-${STAGE}.tls.domains[0].main=${TLS_CERT_DOMAIN:-${STAGE}.${BASE_DOMAIN}}
-      - traefik.http.routers.db-wineandcats-${STAGE}.tls.domains[0].sans=${TLS_CERT_SANS:-*.${STAGE}.${BASE_DOMAIN}}
+      - traefik.http.routers.db-wineandcats-${STAGE}.tls=true
       - traefik.http.services.db-wineandcats-${STAGE}.loadbalancer.server.port=8080
     networks:
       - default
@@ -52,17 +50,15 @@ services:
       - homepage.name=Wine & Cats (${STAGE})
       - traefik.enable=true
       - traefik.http.routers.wineandcats-${STAGE}.rule=Host(`${HOST:-${STAGE}.${BASE_DOMAIN}}`)
-      - traefik.http.routers.wineandcats-${STAGE}.tls.certresolver=myresolver
-      - traefik.http.routers.wineandcats-${STAGE}.tls.domains[0].main=${TLS_CERT_DOMAIN:-${STAGE}.${BASE_DOMAIN}}
-      - traefik.http.routers.wineandcats-${STAGE}.tls.domains[0].sans=${TLS_CERT_SANS:-*.${STAGE}.${BASE_DOMAIN}}
+      - traefik.http.routers.wineandcats-${STAGE}.tls=true
     networks:
       - default
       - public
     pull_policy: always
     restart: unless-stopped
-    user: '568:568'
+    user: '${PUID:-568}:${PGID:-568}'
     volumes:
-      - /mnt/pool0/containers/wineandcats-${STAGE}/app:/var/app/gomp/data
+      - ${DATA_DIR:-/mnt/pool0/containers}/wineandcats-${STAGE}/app:/var/app/gomp/data
   db:
     container_name: wineandcats-${STAGE}-db
     environment:
@@ -82,7 +78,7 @@ services:
     restart: unless-stopped
     volumes:
       # Before PostgreSQL 18
-      # - /mnt/pool0/containers/wineandcats-${STAGE}/pg${PG_VERSION}/data:/var/lib/postgresql/data
+      # - ${DATA_DIR:-/mnt/pool0/containers}/wineandcats-${STAGE}/pg${PG_VERSION}/data:/var/lib/postgresql/data
       # Starting with PostgreSQL 18, the data directory is no longer /var/lib/postgresql/data but /var/lib/postgresql
       # and the image will automatically create a subdirectory for the data based on version
-      - /mnt/pool0/containers/wineandcats-${STAGE}/db:/var/lib/postgresql
+      - ${DATA_DIR:-/mnt/pool0/containers}/wineandcats-${STAGE}/db:/var/lib/postgresql
