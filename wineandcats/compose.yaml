@@ -25,7 +25,8 @@ services:
       - homepage.name=Wine & Cats (${STAGE}) DB
       - traefik.enable=true
       - traefik.http.routers.db-wineandcats-${STAGE}.rule=Host(`db.${HOST:-${STAGE}.${BASE_DOMAIN}}`)
-      - traefik.http.routers.db-wineandcats-${STAGE}.tls=true
+      - traefik.http.routers.db-wineandcats-${STAGE}.tls.domains[0].main=${TLS_CERT_DOMAIN:-${STAGE}.${BASE_DOMAIN}}
+      - traefik.http.routers.db-wineandcats-${STAGE}.tls.domains[0].sans=${TLS_CERT_SANS:-*.${STAGE}.${BASE_DOMAIN}}
       - traefik.http.services.db-wineandcats-${STAGE}.loadbalancer.server.port=8080
     networks:
       - default
@@ -50,7 +51,8 @@ services:
       - homepage.name=Wine & Cats (${STAGE})
       - traefik.enable=true
       - traefik.http.routers.wineandcats-${STAGE}.rule=Host(`${HOST:-${STAGE}.${BASE_DOMAIN}}`)
-      - traefik.http.routers.wineandcats-${STAGE}.tls=true
+      - traefik.http.routers.wineandcats-${STAGE}.tls.domains[0].main=${TLS_CERT_DOMAIN:-${STAGE}.${BASE_DOMAIN}}
+      - traefik.http.routers.wineandcats-${STAGE}.tls.domains[0].sans=${TLS_CERT_SANS:-*.${STAGE}.${BASE_DOMAIN}}
     networks:
       - default
       - public
