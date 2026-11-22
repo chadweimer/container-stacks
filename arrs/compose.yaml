@@ -129,7 +129,7 @@ services:
         - '--spider'
         - '-q'
         - '--tries=1'
-        - 'http://0.0.0.0:9696/ping'
+        - 'http://localhost:9696/ping'
     image: ghcr.io/linuxserver/prowlarr:${PROWLARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -160,7 +160,7 @@ services:
         - '--spider'
         - '-q'
         - '--tries=1'
-        - 'http://0.0.0.0:7878/ping'
+        - 'http://localhost:7878/ping'
     image: ghcr.io/linuxserver/radarr:${RADARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
@@ -194,7 +194,7 @@ services:
         - '--spider'
         - '-q'
         - '--tries=1'
-        - 'http://0.0.0.0:5055/status'
+        - 'http://localhost:5055/status'
     image: ghcr.io/seerr-team/seerr:${SEERR_IMAGE_TAG:-latest}
     init: true
     labels:
@@ -226,7 +226,7 @@ services:
         - '--spider'
         - '-q'
         - '--tries=1'
-        - 'http://0.0.0.0:8989/ping'
+        - 'http://localhost:8989/ping'
     image: ghcr.io/linuxserver/sonarr:${SONARR_IMAGE_TAG:-latest}
     labels:
       homepage.group: Media
