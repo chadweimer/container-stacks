@@ -14,6 +14,7 @@ services:
       DOCKER_HOST: tcp://arcane-proxy:2375
       PGID: ${PGID:-568}
       PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       interval: 10s
       retries: 5
