@@ -26,6 +26,9 @@ services:
       homepage.href: https://${HOST:-syncthing.${BASE_DOMAIN}}
       homepage.icon: syncthing.png
       homepage.name: Syncthing
+      homepage.widget.key: ${API_KEY}
+      homepage.widget.type: syncthing
+      homepage.widget.url: http://syncthing:8384
       prometheus.label.instance: ${PROMETHEUS_INSTANCE:-truenas-server}
       prometheus.port: 8384
       traefik.enable: true
