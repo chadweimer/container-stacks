@@ -41,9 +41,9 @@ services:
   cleanuparr:
     container_name: cleanuparr
     environment:
-      - PUID=${PUID:-568}
-      - PGID=${PGID:-568}
-      - TZ=${TZ:-America/Los_Angeles}
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TZ: ${TZ:-America/Los_Angeles}
     healthcheck:
       start_period: 10s
       test:
