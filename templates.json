@@ -690,6 +690,11 @@
           "name": "BASE_DOMAIN",
           "label": "BASE_DOMAIN",
           "default": "example.com"
+        },
+        {
+          "name": "API_KEY",
+          "label": "API_KEY",
+          "default": "your_api_key_here"
         }
       ]
     },
