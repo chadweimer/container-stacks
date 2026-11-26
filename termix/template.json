@@ -1,0 +1,8 @@
+{
+  "name": "Termix",
+  "description": "Self-hosted web-based server and SSH management platform.",
+  "version": "1.0.0",
+  "tags": [
+    "app"
+  ]
+}

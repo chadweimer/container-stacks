@@ -1,0 +1,27 @@
+networks:
+  public:
+    external: true
+
+services:
+  termix:
+    container_name: termix
+    environment:
+      PGID: ${PGID:-568}
+      PUID: ${PUID:-568}
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:-'192.168.1.0/24,172.16.0.0/12'}
+      TZ: ${TZ:-America/Los_Angeles}
+    image: ghcr.io/termix-ssh/termix:${IMAGE_TAG:-latest}
+    labels:
+      homepage.group: Network
+      homepage.href: https://${HOST:-termix.${BASE_DOMAIN}}
+      homepage.icon: termix.png
+      homepage.name: Termix
+      traefik.enable: true
+      traefik.http.routers.termix.rule: Host(`${HOST:-termix.${BASE_DOMAIN}}`)
+      traefik.http.routers.termix.tls: true
+    networks:
+      - public
+    pull_policy: always
+    restart: unless-stopped
+    volumes:
+      - ${DATA_DIR:-/mnt/pool0/containers}/termix:/app/data
