@@ -4,7 +4,7 @@
   "description": "Collection of compose templates maintained by me.",
   "author": "chadweimer",
   "url": "https://github.com/chadweimer/container-stacks",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "templates": [
     {
       "id": "alloy",
@@ -316,6 +316,19 @@
       "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/tailscale/README.md",
       "tags": [
         "infra"
+      ]
+    },
+    {
+      "id": "termix",
+      "name": "Termix",
+      "description": "Self-hosted web-based server and SSH management platform.",
+      "version": "1.0.0",
+      "author": "chadweimer",
+      "compose_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/termix/compose.yaml",
+      "env_url": "https://raw.githubusercontent.com/chadweimer/container-stacks/main/termix/example.env",
+      "documentation_url": "https://github.com/chadweimer/container-stacks/tree/main/termix/README.md",
+      "tags": [
+        "app"
       ]
     },
     {

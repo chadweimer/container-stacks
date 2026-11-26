@@ -737,6 +737,27 @@
     {
       "id": 25,
       "type": 3,
+      "title": "Termix",
+      "description": "Self-hosted web-based server and SSH management platform.",
+      "categories": [
+        "app"
+      ],
+      "platform": "linux",
+      "repository": {
+        "url": "https://github.com/chadweimer/container-stacks",
+        "stackfile": "termix/compose.yaml"
+      },
+      "env": [
+        {
+          "name": "BASE_DOMAIN",
+          "label": "BASE_DOMAIN",
+          "default": "example.com"
+        }
+      ]
+    },
+    {
+      "id": 26,
+      "type": 3,
       "title": "UpSnap",
       "description": "A simple wake on lan web app written with SvelteKit, Go and PocketBase.",
       "categories": [
@@ -756,7 +777,7 @@
       ]
     },
     {
-      "id": 26,
+      "id": 27,
       "type": 3,
       "title": "Uptime Kuma",
       "description": "A fancy self-hosted monitoring tool",
@@ -777,7 +798,7 @@
       ]
     },
     {
-      "id": 27,
+      "id": 28,
       "type": 3,
       "title": "Vikunja",
       "description": "The to-do app to organize your life. ",
@@ -818,7 +839,7 @@
       ]
     },
     {
-      "id": 28,
+      "id": 29,
       "type": 3,
       "title": "Wallos",
       "description": "Open-Source Personal Subscription Tracker",
@@ -844,7 +865,7 @@
       ]
     },
     {
-      "id": 29,
+      "id": 30,
       "type": 3,
       "title": "Wine & Cats",
       "description": "GOMP: Go Meal Planner - Web-based recipe book.",
